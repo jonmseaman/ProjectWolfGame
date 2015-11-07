@@ -57,7 +57,7 @@ void Inventory::deleteItem(int slotIndex)
 {
   assert ( slotIndex>=0 && slotIndex<slots.size() );
   delete slots.at(slotIndex);
-  slots.at(slotIndex) == nullptr;
+  slots.at(slotIndex) = nullptr;
 }
 
 std::string Inventory::getName()

@@ -69,7 +69,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>C:\prog\boost_1_59_0\include\boost-1_59;C:\Users\js\prog\ProjectWolfGame\ProjectWolfGame\include\Enums;C:\Users\js\prog\ProjectWolfGame\ProjectWolfGame\include\GActors;C:\Users\js\prog\ProjectWolfGame\ProjectWolfGame\include\GMaps;C:\Users\js\prog\ProjectWolfGame\ProjectWolfGame\include\GObjects;C:\Users\js\prog\ProjectWolfGame\ProjectWolfGame\include\GTiles;C:\Users\js\prog\ProjectWolfGame\ProjectWolfGame\include\Map;C:\Users\js\prog\ProjectWolfGame\ProjectWolfGame\include\Objects;C:\Users\js\prog\ProjectWolfGame\ProjectWolfGame\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\prog\boost_1_59_0\include\boost-1_59;include\Enums;include\GActors;include\GMaps;include\GObjects;include\GTiles;include\Map;include\Objects;include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\prog\boost_1_59_0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
