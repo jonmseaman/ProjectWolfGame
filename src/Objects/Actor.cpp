@@ -22,21 +22,26 @@ bool Actor::onInteractedWith()
   return 0;
 }
 
-bool Actor::takeTurn()
+/**
+ * Allows the actor to take a turn. Default behavior is defined
+ * for derived classes which do not override takeTurn()
+ */
+void Actor::takeTurn()
 {
   dLog << "Actor takes turn" << std::endl;
-  if ( targetPtr == nullptr ) { actorPData->giveTarget(this); }
-  if ( targetPtr->getIsLiving() ) // Only attack if the target is not dead
-  {
+  if (targetPtr == nullptr || !targetPtr->getIsLiving()) {
+    actorPData->giveTarget(this);
+    if (targetPtr != nullptr) {
+      onAttack();
+    }
+  } else if (targetPtr->getIsLiving()) {
     onAttack();
   }
-  else
-  {
-    actorPData->giveTarget(this);
-  }
-  return 0;
 }
 
+/**
+ * @return The direction that the actor should move
+ */
 int Actor::getMoveDir()
 {
   return moveDir;

@@ -17,7 +17,7 @@ class Actor : public Creature
     bool dropItem(int slotNumber); // Drops item to node inventory. slotNumber is index+1 in inventory
     void dropAllItems(); // Drops all items in inventory to node inventory.
     virtual bool onInteractedWith(); // Allows the interaction
-    virtual bool takeTurn(); // Allows the player to take actions. Uses turn
+    virtual void takeTurn(); // Allows the player to take actions. Uses turn
     virtual void onEndTurn(); // Whatever needs to be done at the end of a turn. Default is flagging the turn as used.
     virtual void onMove(); // TODO: Moving should make other creatures stop targeting you.
     int getMoveDir();

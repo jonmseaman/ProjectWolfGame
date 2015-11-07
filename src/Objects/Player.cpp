@@ -41,7 +41,7 @@ void Player::combatMenu()
     break;
   }
 }
-bool Player::takeTurn()
+void Player::takeTurn()
 {
   flagTurnUsed(false);
   if ( getIsLiving() )
@@ -65,7 +65,6 @@ bool Player::takeTurn()
       std::exit(1);
     }
   }
-  return true;
 }
 
 void Player::takeTurnMenu()

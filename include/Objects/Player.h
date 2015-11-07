@@ -10,7 +10,7 @@ class Player : public Actor
     Player();
     virtual ~Player();
     void showHUD(); // Shows information on the player and the player's target
-    bool takeTurn();
+    void takeTurn();
   protected:
     void combatMenu(); // Menu for attacking enemies
     void moveMenu(); // Menu for entering and leaving nodes

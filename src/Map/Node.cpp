@@ -92,9 +92,8 @@ namespace Maps
 		    actor.setMoveData(nodeLinks[dir]);
 			auto actorToMove = it;
 			it++;
-			// Moves 
+			// Moves
 			otherList.splice(otherList.begin(), actorPtrList, actorToMove);
-			
 		  }
 		  else {
 			  it++;
