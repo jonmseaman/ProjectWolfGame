@@ -1,8 +1,10 @@
 #include <iostream>
 #include <assert.h>
+#include <string>
 #include "Player.h"
 #include "utils.h"
 #include "dLog.h"
+#include <conio.h>
 
 Player::Player()
 {
@@ -41,13 +43,30 @@ void Player::combatMenu()
     break;
   }
 }
+
+int Player::direction(char dir) {
+  int intDir = 0;
+  if (dir == 'w') {
+    intDir = Maps::North;
+  } else if (dir == 'a') {
+    intDir = Maps::West;
+  } else if (dir == 's') {
+    intDir = Maps::South;
+  } else if (dir == 'd') {
+    intDir = Maps::East;
+  } else if (dir == 'q') {
+    intDir = Maps::Down;
+  } else if (dir == 'e') {
+    intDir = Maps::Up;
+  }
+  return intDir;
+}
+
 void Player::takeTurn()
 {
   flagTurnUsed(false);
-  if ( getIsLiving() )
-  {
-    while ( !getIsTurnUsed() && getIsLiving() )
-    {
+  if (getIsLiving()) {
+    while (!getIsTurnUsed() && getIsLiving()) {
       takeTurnMenu();
     }
     if (getIsTurnUsed())
@@ -55,14 +74,11 @@ void Player::takeTurn()
       // the turn.
       std::cout << getName() << " has ended their turn." << std::endl;
     }
-  }
-  else
-  {
+  } else {
     std::cout << getName() << " is dead. Continue? ";
     int choice = getInteger();
-    if ( choice == 0 )
-    {
-      std::exit(1);
+    if (choice == 0) {
+      std::exit(0);
     }
   }
 }
@@ -71,19 +87,17 @@ void Player::takeTurnMenu()
 {
   START:
   showHUD();
-  int choice(0);
-  if ( getIsInCombat() )
-  {
-    choice = 2; // Defaults to combat menu
-  }
-  else
-  {
+  //int choice(0);
+  char choice = '0';
+  if (getIsInCombat()) {
+    choice = '2'; // Defaults to combat menu
+  } else {
     dispList({"Move", "Combat", "Targets", "Inventory", "Search"});
-    choice = getInteger(0,5);
+    choice = getInput("wasdqe 012345");
   }
   switch (choice)
   {
-  case 0:
+  case '0':
     std::cout << "Are you sure you want to exit? [0, 1]" << std::endl;
     choice = getInteger(0,1);
     if ( choice == 0 )
@@ -91,20 +105,28 @@ void Player::takeTurnMenu()
     kill();
     std::exit(0);
     break;
-  case 1 :
+  case '1' :
     moveMenu();
     break;
-  case 2 :
+  case '2' :
     combatMenu();
     break;
-  case 3:
+  case '3':
     targetMenu();
     break;
-  case 4:
+  case '4':
     inventoryMenu(inventory);
     break;
-  case 5:
+  case '5':
     searchMenu(*(actorPData->getInventory()));
+    break;
+  case 'w':
+  case 'a':
+  case 's':
+  case 'd':
+  case 'q':
+  case 'e':
+    moveMenu(direction(choice));
     break;
   default:
     std::cout << "Could not find menu item " << choice << std::endl;
@@ -112,13 +134,21 @@ void Player::takeTurnMenu()
   }
 }
 
-void Player::moveMenu()
+/**
+ * The moveMenu for the player. Allows the player to move to different
+ * nodes.
+ * @param dir If called with a non-zero dir, the player will move in
+ * that direction without having to enter a direction.
+ */
+void Player::moveMenu(int dir)
 {
-  // Show choices
-  actorPData->showData();
-  // Get direction
-  std::cout << "Enter direction: ";
-  int dir = getInteger(0,Maps::numDirs-1);
+  if (dir == 0) {
+    // Show choices
+    actorPData->showData();
+    // Get direction
+    std::cout << "Enter direction: ";
+    dir = getInteger(0,Maps::numDirs-1);
+  }
   // TODO: Make sure that the player enters a possible direction
   dLog << "Player entered " << dir << " for Player::moveMenu() choice" << std::endl;
   // set flags. Movedir && turnUsed
@@ -160,6 +190,18 @@ void Player::showHUD()
   {
     std::cout << "No target" << std::endl;
   }
+}
+
+/**
+ * Gets input from the player. Takes char input
+ * @return int(char)
+ */
+char Player::getInput(const std::string &validInput) {
+  int input = _getch();
+  while (validInput.find(char(input)) == -1) {
+    input = _getch();
+  }
+  return char(input);
 }
 
 void Player::inventoryMenu(Inventory &inv)

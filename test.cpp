@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "dLog.h"
 #include "House_2Story.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -11,14 +12,11 @@ using namespace std;
 
 int main()
 {
-  dLog.open("DebugLog.txt", std::fstream::out);
-  Maps::Node* node = new House_2Story;
-  node->addPlayer();
-  while(true)
-  {
-    node->activate();
+  int input = 0;
+  Player p;
+  while (true) {
+    cout << p.getInput() << endl;
   }
-  dLog.close();
   return 0;
 }
 // Extra todos

@@ -5,40 +5,39 @@
 #include <string>
 
 /**
- * Prints headText followed by a list starting at one 
+ * Prints a numbered list starting at one.
  * each list item is a string from textList
  */
-void dispList(std::string headText, std::vector<std::string> listItems)
+void dispList(const std::vector<std::string> &listItems)
 {
-  std::cout << headText << std::endl;
   for (int i(0); i<listItems.size(); i++)
   {
-    std::cout << std::setw(3) << std::right << i+1 << ": " << listItems.at(i) << std::endl;
+    std::cout << std::setw(COLUMN_PADDING) << std::right << i+1 << ": " << listItems.at(i) << std::endl;
   }
 }
 
 /**
- * Prints a numbered list starting at one.
+ * Prints headText followed by a list starting at one
  * each list item is a string from textList
  */
-void dispList(std::vector<std::string> listItems)
+void dispList(const std::string headText, const std::vector<std::string> &listItems)
 {
-  for (int i(0); i<listItems.size(); i++)
-  {
-    std::cout << std::setw(3) << std::right << i+1 << ": " << listItems.at(i) << std::endl;
-  }
+  std::cout << headText << std::endl;
+  dispList(listItems);
 }
+
 
 int getInteger()
 {
   int input;
   std::cout <<  " >> ";
   std::cin >> input;
-  if (std::cin.fail())
+  while (std::cin.fail())
   {
     std::cin.clear();
     std::cin.ignore(36,'\n');
-    return -1;
+    std::cout << " >> ";
+    std::cin >> input;
   }
   return input;
 }
@@ -48,9 +47,9 @@ int getInteger(int minVal, int maxVal)
   int input;
   std::cout << " >> ";
   std::cin >> input;
-  while ( (input < minVal) || (input > maxVal) )
-  {
-    while ( std::cin.fail() )
+  while (input < minVal || input > maxVal) {
+    input = getInteger();
+    while (std::cin.fail())
     {
       std::cin.clear();
       std::cin.ignore(36,'\n');

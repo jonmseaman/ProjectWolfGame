@@ -116,7 +116,7 @@ namespace Maps
     int i(0);
     for (std::list<Actor*>::iterator it = actorPtrList.begin(); it != actorPtrList.end(); ++it)
     {
-      std::cout << std::setw(columnPadding) << std::left << ++i << ": ";
+      std::cout << std::setw(COLUMN_PADDING) << std::left << ++i << ": ";
         if (!(*it)->getIsLiving()) { std::cout << "<Dead> "; }
         std::cout << (*it)->getName() << " "
         << (*it)->stats.getHealth() << "/" << (*it)->stats.getMaxHealth() << std::endl;
