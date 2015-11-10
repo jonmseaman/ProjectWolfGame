@@ -4,27 +4,29 @@
 #include "Player.h"
 #include "utils.h"
 #include "dLog.h"
-#include <conio.h>
 
-Player::Player()
-{
+Player::Player() {
   setMaxHealth(100);
   setStrength(10);
   setName("Jon");
+  inventory = Inventory{"Jon's Inventory", 10};
   isPlayer = true;
 }
 
-Player::~Player()
-{
-  //dtor
+Player::~Player() {
 }
 
-void Player::combatMenu()
-{
-  dispList({"Attack", "Targets", "Inventory"});
-  int choice = getInteger(0,3);
-  switch (choice)
-  {
+/**
+ * This menu should allow access to all things that the player needs
+ * during combat.
+ */
+void Player::combatMenu(int choice) {
+  if (choice == 0) {
+    dispList("====Combat====", {"Attack", "Targets", "Inventory"});
+    choice = getDigit(0, 3);
+  }
+  //TODO: cout << "Moving " dir << endl;
+  switch (choice) {
   case 0:
     flagInCombat(false);
     break;
@@ -44,7 +46,10 @@ void Player::combatMenu()
   }
 }
 
-int Player::direction(char dir) {
+/**
+ * Converts a char of wasdqe to the corresponding travel direction
+ */
+int Player::charToDir(char dir) {
   int intDir = 0;
   if (dir == 'w') {
     intDir = Maps::North;
@@ -69,14 +74,12 @@ void Player::takeTurn()
     while (!getIsTurnUsed() && getIsLiving()) {
       takeTurnMenu();
     }
-    if (getIsTurnUsed())
-    { // Don't display the turn end text when we don't actually take
-      // the turn.
+    if (getIsTurnUsed()) {
       std::cout << getName() << " has ended their turn." << std::endl;
     }
   } else {
     std::cout << getName() << " is dead. Continue? ";
-    int choice = getInteger();
+    int choice = getDigit();
     if (choice == 0) {
       std::exit(0);
     }
@@ -92,14 +95,14 @@ void Player::takeTurnMenu()
   if (getIsInCombat()) {
     choice = '2'; // Defaults to combat menu
   } else {
-    dispList({"Move", "Combat", "Targets", "Inventory", "Search"});
+    dispList("==============", {"Move", "Combat", "Targets", "Inventory", "Search"});
     choice = getInput("wasdqe 012345");
   }
   switch (choice)
   {
   case '0':
     std::cout << "Are you sure you want to exit? [0, 1]" << std::endl;
-    choice = getInteger(0,1);
+    choice = getDigit(0,1);
     if ( choice == 0 )
     { goto START; }
     kill();
@@ -126,7 +129,10 @@ void Player::takeTurnMenu()
   case 'd':
   case 'q':
   case 'e':
-    moveMenu(direction(choice));
+    moveMenu(charToDir(choice));
+    break;
+  case ' ':
+    combatMenu(1); // TODO: Bad form, hardcoding
     break;
   default:
     std::cout << "Could not find menu item " << choice << std::endl;
@@ -147,14 +153,14 @@ void Player::moveMenu(int dir)
     actorPData->showData();
     // Get direction
     std::cout << "Enter direction: ";
-    dir = getInteger(0,Maps::numDirs-1);
+    dir = getDigit(0,Maps::numDirs-1);
   }
   // TODO: Make sure that the player enters a possible direction
   dLog << "Player entered " << dir << " for Player::moveMenu() choice" << std::endl;
   // set flags. Movedir && turnUsed
-  if ( dir != 0 )
+  if (dir != 0)
   {
-    flagForMove( dir );
+    flagForMove(dir);
     flagTurnUsed(true);
   }
 }
@@ -169,10 +175,11 @@ void Player::targetMenu()
 {
   actorPData->showActors();
   int choice = getInteger();
-  if (choice==0)
-  { setTarget(nullptr);
-    return; }
-  setTarget(actorPData->getActorPtr(--choice));
+  if (choice == 0) {
+    setTarget(nullptr);
+  } else {
+    setTarget(actorPData->getActorPtr(--choice));
+  }
 }
 
 void Player::showHUD()
@@ -192,26 +199,14 @@ void Player::showHUD()
   }
 }
 
-/**
- * Gets input from the player. Takes char input
- * @return int(char)
- */
-char Player::getInput(const std::string &validInput) {
-  int input = _getch();
-  while (validInput.find(char(input)) == -1) {
-    input = _getch();
-  }
-  return char(input);
-}
-
 void Player::inventoryMenu(Inventory &inv)
 {
   // Show inventory
     inv.show();
   // Let player choose item
     std::cout << "Select an item: ";
-    int itemNumber = getInteger(0, inv.getSlots());
-    if ( itemNumber == 0 ) return;
+    int itemIndex = getInteger(0, inv.getSlots());
+	itemIndex--;
   // Let player choose action for item
     dispList({"Use","Examine", "Drop"});
     int actionNumber = getInteger(0,3);
@@ -219,25 +214,23 @@ void Player::inventoryMenu(Inventory &inv)
     {
     case 0:
       return;
+      break;
     case 1: // Use
-      if (inv.useItem(--itemNumber, this)) // -- because this function takes the index
-      {
+      if (inv.useItem(itemIndex, this)) {
         onEndTurn();
-      }
-      else
-      {
+      } else {
         std::cout << "Couldn't use item. \n";
       }
       break;
     case 2: // Examine
-      std::cout << "No Implement. item number: " << itemNumber << std::endl;
+      std::cout << "No Implement. item number: " << itemIndex << std::endl;
       break;
     case 3:
       std::cout << "Dropping item.\n";
-      dropItem(itemNumber-1);
+      dropItem(itemIndex);
       break;
     default:
-      std::cout << "No case for action " << actionNumber << " for item " << itemNumber << std::endl;
+      std::cout << "No case for action " << actionNumber << " for item " << itemIndex << std::endl;
       break;
     }
 }
@@ -258,13 +251,10 @@ void Player::searchMenu(Inventory &inv)
     return;
   case 1:
     // Add item to player's inventory
-    if ( inventory.addItem( inv.getItem(itemIndex) ) )
-    {
+    if (inventory.addItem(inv.getItem(itemIndex))) {
       std::cout << "Trying to remove item. Choice: " << choice << std::endl;
       inv.removeItem(itemIndex);
-    }
-    else
-    {
+    } else {
       std::cout << "Could not pick up item.\n";
     }
     break;

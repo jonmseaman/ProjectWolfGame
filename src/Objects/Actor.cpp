@@ -78,6 +78,7 @@ bool Actor::getIsPlayer()
 
 void Actor::onMove()
 {
+  moveDir = 0; // Reset move dir.
   combatStop();
 }
 

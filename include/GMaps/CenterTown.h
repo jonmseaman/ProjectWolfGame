@@ -2,7 +2,7 @@
 #define CENTERTOWN_H
 
 #include "Map.h"
-const int CENTER_TOWN_WIDTH{15};
+const int CENTER_TOWN_WIDTH{5};
 
 class CenterTown : public Maps::Map
 {

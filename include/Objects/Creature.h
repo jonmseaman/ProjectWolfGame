@@ -32,6 +32,9 @@ class Creature : public Creature_Interface
     void setTarget(Creature* creature);
     void setStrength(int strength);
     void useItemFromInventory(int itemNumber);
+    // Inventory
+    //TODO: Add equipment
+    Equipment equipment;
     Inventory inventory;
 
     Stats stats;
@@ -40,9 +43,6 @@ class Creature : public Creature_Interface
     void setName(std::string name); // sets that name of the creature
     // Targets
     Creature* targetPtr;
-    // Inventory
-    //TODO: Add equipment
-    Equipment equipment;
   private:
     std::string name;
     // Utility vars

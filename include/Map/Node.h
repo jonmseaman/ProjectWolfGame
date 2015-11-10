@@ -21,7 +21,6 @@ namespace Maps
       void giveTarget(Creature* creature);
       virtual void activate();
       bool addActor(Actor *actor);
-      void addPlayer();
       void moveActors(); // Tries to move all actors which have a move flag
       bool removeActor(int index);
       std::string getName();

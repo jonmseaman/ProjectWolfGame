@@ -16,7 +16,7 @@ int main()
 
   mainMenu:
   dispList("WolfGame", {"New Game", "Load*", "Options*", "Exit"});
-  choice = getInteger(1,4);
+  choice = getDigit(1, 4);
   switch (choice)
   {
     case 1: // New Game

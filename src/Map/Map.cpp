@@ -10,11 +10,9 @@ namespace Maps
     for (auto &i: grid) { i = new Node; }
     buildMoveData();
     populate();
-    addPlayer(0,0);
   }
 
-  Map::Map(int mapSize): isPlayerAdded{false}
-  , grid{mapSize*mapSize, nullptr}
+  Map::Map(int mapSize): grid{mapSize*mapSize, nullptr}
   , mapSize{mapSize}
   {
     // Map ctor
@@ -90,13 +88,6 @@ namespace Maps
       }
     }
     return false;
-  }
-
-  void Map::addPlayer(int x, int y)
-  {
-    assert( isPlayerAdded == false );
-    getNode(x,y)->addPlayer();
-    isPlayerAdded = true;
   }
 
   void Map::initializeGrid()

@@ -23,13 +23,11 @@ namespace Maps
       int getMapSize();
       Maps::Node* getNode(int xInd, int yInd);
     protected:
-      void addPlayer(int x, int y); // Tries to put a player in node specified by x,y
       void buildMoveData(); // Fills node's moveData
       bool populate(); // Puts actors/ entities in
       std::vector<Node*> grid; // The array of nodes that the player sees [y*size + x]
     private:
       const int DEFAULT_MAP_SIZE { 5 };
-      bool isPlayerAdded;
       int mapSize; // The width & height of the square grid of nodes
   };
 }

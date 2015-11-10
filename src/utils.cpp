@@ -3,6 +3,12 @@
 #include <iomanip>
 #include <sstream>
 #include <string>
+#include <conio.h>
+#include <assert.h>
+
+/**
+ * Miscellaneous functions
+ */
 
 /**
  * Prints a numbered list starting at one.
@@ -26,6 +32,34 @@ void dispList(const std::string headText, const std::vector<std::string> &listIt
   dispList(listItems);
 }
 
+/**
+ * @return int in [min, max]
+ * @pre min, max in [0, 9]
+ */
+int getDigit(int min, int max) {
+  assert (min >= 0 && max <= 9);
+  std::string digits = "0123456789";
+  int input = _getch();
+  int pos = digits.find(char(input));
+  while (pos < min || pos > max) {
+    input = _getch();
+    pos = digits.find(char(input));
+  }
+  return pos;
+}
+
+/**
+ * Gets input from the player. Takes char input
+ * @param validInput A string containing the allowed chars
+ * @return a char in validInput
+ */
+char getInput(const std::string &validInput) {
+  int input = _getch();
+  while (validInput.find(char(input)) == -1) {
+    input = _getch();
+  }
+  return char(input);
+}
 
 int getInteger()
 {

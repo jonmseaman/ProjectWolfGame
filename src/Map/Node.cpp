@@ -71,13 +71,6 @@ namespace Maps
     return true;
   }
 
-  void Node::addPlayer()
-  {
-    Actor *player = new Player;
-    player->setMoveData(this);
-    actorPtrList.insert(actorPtrList.begin(), player );
-  }
-
   void Node::moveActors()
   {
 	auto it = actorPtrList.begin();
