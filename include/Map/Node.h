@@ -3,11 +3,11 @@
 #include <list>
 #include <string>
 #include "Inventory.h"
-#include "Actor.h"
-#include "NodeData.h"
+#include "Dir.h"
+class Actor;
 namespace Maps
 {
-  class Node : public NodeData
+  class Node /*: public NodeData*/
   {
     friend std::ostream &operator<<(std::ostream &os, const Maps::Node &node);
     friend std::istream &operator>>(std::istream &is, Maps::Node &node);

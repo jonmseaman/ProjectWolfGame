@@ -6,7 +6,7 @@
 // Maps
 #include "CenterTown.h"
 // Objects
-#include "Item_BasicSword.h"
+#include "BasicSword.h"
 // Tiles
 #include "House_2Story.h"
 

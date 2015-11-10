@@ -2,7 +2,7 @@
 #include "Rat.h"
 #include "Swordsmen.h"
 #include "Player.h"
-#include "Item_BasicSword.h"
+#include "BasicSword.h"
 
 CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH)
 {
@@ -10,10 +10,10 @@ CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH)
   buildMoveData();
   populate();
   Actor* player = new Player{};
-  player->inventory.addItem(new Item_BasicSword);
-  player->inventory.addItem(new Item_BasicSword);
-  player->inventory.addItem(new Item_BasicSword);
-  player->inventory.addItem(new Item_BasicSword);
+  player->inventory.addItem(new BasicSword);
+  player->inventory.addItem(new BasicSword);
+  player->inventory.addItem(new BasicSword);
+  player->inventory.addItem(new BasicSword);
   getNode(0,0)->addActor(player);
   getNode(0,1)->addActor(new Rat);
   getNode(0,1)->addActor(new Rat);

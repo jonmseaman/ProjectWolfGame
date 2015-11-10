@@ -126,7 +126,7 @@
     <ClCompile Include="src\GActors\Rat.cpp" />
     <ClCompile Include="src\GActors\Swordsmen.cpp" />
     <ClCompile Include="src\GMaps\CenterTown.cpp" />
-    <ClCompile Include="src\GObjects\Item_BasicSword.cpp" />
+    <ClCompile Include="src\GObjects\BasicSword.cpp" />
     <ClCompile Include="src\GTiles\House_2Story.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map\Map.cpp" />
@@ -157,7 +157,7 @@
     <ClInclude Include="include\GMaps\CenterTown.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="include\GObjects\Item_BasicSword.h" />
+    <ClInclude Include="include\GObjects\BasicSword.h" />
     <ClInclude Include="include\GTiles\House_2Story.h" />
     <ClInclude Include="include\Map\Map.h" />
     <ClInclude Include="include\Map\MapManager.h" />

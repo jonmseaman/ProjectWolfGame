@@ -66,10 +66,10 @@ namespace Maps
   { // TODO: Is there a better way to interface with nodes?
   }
 
-  Creature* NodeData::getActorPtr(int index)
-  {
-    return nullptr;
-  }
+  //Creature* NodeData::getActorPtr(int index)
+  //{
+  //  return nullptr;
+  //}
 
   void NodeData::giveTarget(Creature* creature)
   {

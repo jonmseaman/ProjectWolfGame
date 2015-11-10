@@ -1,5 +1,5 @@
 #include "Swordsmen.h"
-#include "Item_BasicSword.h"
+#include "BasicSword.h"
 Swordsmen::Swordsmen(): Actor()
 {
   setName("Swordsmen");
@@ -8,7 +8,7 @@ Swordsmen::Swordsmen(): Actor()
   setStrength(15);
 
   inventory = Inventory{ "Backpack", 10 };
-  inventory.addNewItem(new Item_BasicSword);
+  inventory.addNewItem(new BasicSword);
   //ctor
 }
 

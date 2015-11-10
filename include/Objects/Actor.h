@@ -3,12 +3,15 @@
 #include "Dir.h"
 #include "NodeData.h"
 #include "Creature.h"
-#include "Actor.h"
+#include "Node.h"
+
+
+/**
+ * The actor class is a creature which with behavior.
+ * This should be generalized into Players, Mobs, Bosses etc
+ */
 class Actor : public Creature
 {
-    // The actor class is a creature which can take actions,
-    // it is a creature with a way to control the creature.
-    // This should be generalized into Players, Mobs, Bosses etc
   public:
     Actor();
     virtual ~Actor();
@@ -23,9 +26,10 @@ class Actor : public Creature
     int getMoveDir();
     bool getIsTurnUsed();
     bool getIsPlayer();
-    void setMoveData(Maps::NodeData* ptrMoveData);
+    void setMoveData(Maps::Node* ptrMoveData);
   protected:
-    Maps::NodeData* actorPData;
+    //Maps::NodeData* actorPData;
+	Maps::Node *actorPData;
     // Tries to flag the actor for movement so that the map will move the
     // actor when it can
     void flagForMove( int dir );

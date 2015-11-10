@@ -1,6 +1,5 @@
 #include <iostream>
 #include <assert.h>
-#include <string>
 #include "Player.h"
 #include "utils.h"
 #include "dLog.h"
@@ -185,18 +184,25 @@ void Player::targetMenu()
 void Player::showHUD()
 {
   //TODO: Update this to show equipped weapons
-  if ( !this->getIsLiving() ) { std::cout << "<Dead> "; }
+  // Information on player
+  if ( !getIsLiving() ) {
+    std::cout << "<Dead> ";
+  }
+  // TODO: Function for this <Dead> Name: <hp/max> stuff
   std::cout << getName() << ": " << stats.getHealth() << "/" << stats.getMaxHealth() << std::endl;
+  // Information on target
   if (targetPtr != nullptr)
   {
-    if ( !targetPtr->getIsLiving() ) { std::cout << "<Dead> "; }
+    if (!targetPtr->getIsLiving()) {
+      std::cout << "<Dead> ";
+    }
     std::cout << targetPtr->getName() << ": " << targetPtr->stats.getHealth()
     << "/" << targetPtr->stats.getMaxHealth() << std::endl;
-  }
-  else
-  {
+  } else {
     std::cout << "No target" << std::endl;
   }
+  // Location
+  //std::cout << "Location: " << actorPDate->
 }
 
 void Player::inventoryMenu(Inventory &inv)

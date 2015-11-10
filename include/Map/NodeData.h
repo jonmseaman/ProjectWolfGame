@@ -10,7 +10,7 @@ namespace Maps
     // TODO: There should be no need for moveLinks[] after a virtualization
     public:
       NodeData();
-      virtual Creature* getActorPtr(int index);
+      //virtual Creature* getActorPtr(int index);
       virtual Inventory* getInventory();
       virtual void giveTarget(Creature *creature);
       void setMoveData(int dir, const std::string &text, NodeData* link);

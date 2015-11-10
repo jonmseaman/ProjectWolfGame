@@ -47,7 +47,7 @@ int Actor::getMoveDir()
   return moveDir;
 }
 
-void Actor::setMoveData(Maps::NodeData* ptrMoveData)
+void Actor::setMoveData(Maps::Node* ptrMoveData)
 {
   this->actorPData = ptrMoveData;
 }

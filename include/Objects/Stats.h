@@ -26,8 +26,9 @@ private:
   int intellect; // Boosts spell damage
   int level; // Creatures level
   int experience; // Experience earned this level
+  int requiredExperience; // Experience required to level up
 
-  // Derived stats
+  // Calculated stats
   int health;
   int maxHealth;
 

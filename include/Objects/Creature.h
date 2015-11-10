@@ -4,6 +4,10 @@
 #include "Stats.h"
 #include "Inventory.h"
 #include "Equipment.h"
+
+/**
+ * This class should store all functions for defining what a creature is.
+ */
 class Creature : public Creature_Interface
 {
     // The data structure for the creatures.
@@ -27,13 +31,11 @@ class Creature : public Creature_Interface
 
     void setHealth(int health);
     void setMaxHealth(int maxHealth); // Set max hp, also sets hp
-    //void setInventory(const Inventory& inventory); // Sets inventory. Deletes old inv
     void setIsLiving(bool isLiving); // Can be used to kill a creature
     void setTarget(Creature* creature);
     void setStrength(int strength);
     void useItemFromInventory(int itemNumber);
-    // Inventory
-    //TODO: Add equipment
+
     Equipment equipment;
     Inventory inventory;
 
