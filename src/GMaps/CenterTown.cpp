@@ -4,8 +4,7 @@
 #include "Player.h"
 #include "BasicSword.h"
 
-CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH)
-{
+CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH) {
   for (auto &i : grid ) { i = new Maps::Node; }
   buildMoveData();
   populate();

@@ -7,18 +7,15 @@
 Actor::Actor(): isPlayer(false)
   , isTurnUsed(false)
   , moveDir(Maps::Dir::Stop)
-  , actorPData(nullptr)
-{
+  , actorPData(nullptr) {
   dLog << "Actor ctor called" << std::endl;
 }
 
-Actor::~Actor()
-{
+Actor::~Actor() {
   dLog << "Actor dtor called" << std::endl;
 }
 
-bool Actor::onInteractedWith()
-{
+bool Actor::onInteractedWith() {
   return 0;
 }
 
@@ -26,8 +23,7 @@ bool Actor::onInteractedWith()
  * Allows the actor to take a turn. Default behavior is defined
  * for derived classes which do not override takeTurn()
  */
-void Actor::takeTurn()
-{
+void Actor::takeTurn() {
   dLog << "Actor takes turn" << std::endl;
   if (targetPtr == nullptr || !targetPtr->getIsLiving()) {
     actorPData->giveTarget(this);
@@ -42,51 +38,41 @@ void Actor::takeTurn()
 /**
  * @return The direction that the actor should move
  */
-int Actor::getMoveDir()
-{
+int Actor::getMoveDir() {
   return moveDir;
 }
 
-void Actor::setMoveData(Maps::Node* ptrMoveData)
-{
+void Actor::setMoveData(Maps::Node* ptrMoveData) {
   this->actorPData = ptrMoveData;
 }
 
-void Actor::flagForMove(int dir)
-{
+void Actor::flagForMove(int dir) {
   moveDir = dir;
 }
 
-void Actor::flagTurnUsed()
-{
+void Actor::flagTurnUsed() {
   isTurnUsed = true;
 }
-void Actor::flagTurnUsed(bool val)
-{
+void Actor::flagTurnUsed(bool val) {
   this->isTurnUsed = val;
 }
 
-bool Actor::getIsTurnUsed()
-{
+bool Actor::getIsTurnUsed() {
   return isTurnUsed;
 }
 
-bool Actor::getIsPlayer()
-{
+bool Actor::getIsPlayer() {
   return isPlayer;
 }
 
-void Actor::onMove()
-{
+void Actor::onMove() {
   moveDir = 0; // Reset move dir.
   combatStop();
 }
 
-bool Actor::dropItem(int slotIndex)
-{
+bool Actor::dropItem(int slotIndex) {
   assert ( slotIndex >= 0 && slotIndex <= inventory.getSlots() );
-  if (!actorPData->getInventory()->hasOpenSlot())
-  {
+  if (!actorPData->getInventory()->hasOpenSlot()) {
     inventory.deleteItem(slotIndex);
   }
   else
@@ -97,15 +83,12 @@ bool Actor::dropItem(int slotIndex)
   return true;
 }
 
-void Actor::dropAllItems()
-{
-  for (int i(0); i < inventory.getSlots(); i++ )
-  {
+void Actor::dropAllItems() {
+  for (int i(0); i < inventory.getSlots(); i++ ) {
     dropItem(i);
   }
 }
 
-void Actor::onEndTurn()
-{
+void Actor::onEndTurn() {
   flagTurnUsed(true);
 }

@@ -66,8 +66,7 @@ int Player::charToDir(char dir) {
   return intDir;
 }
 
-void Player::takeTurn()
-{
+void Player::takeTurn() {
   flagTurnUsed(false);
   if (getIsLiving()) {
     while (!getIsTurnUsed() && getIsLiving()) {
@@ -85,8 +84,7 @@ void Player::takeTurn()
   }
 }
 
-void Player::takeTurnMenu()
-{
+void Player::takeTurnMenu() {
   START:
   showHUD();
   //int choice(0);
@@ -97,13 +95,11 @@ void Player::takeTurnMenu()
     dispList("==============", {"Move", "Combat", "Targets", "Inventory", "Search"});
     choice = getInput("wasdqe 012345");
   }
-  switch (choice)
-  {
+  switch (choice) {
   case '0':
     std::cout << "Are you sure you want to exit? [0, 1]" << std::endl;
     choice = getDigit(0,1);
-    if ( choice == 0 )
-    { goto START; }
+    if ( choice == 0 ) { goto START; }
     kill();
     std::exit(0);
     break;
@@ -145,8 +141,7 @@ void Player::takeTurnMenu()
  * @param dir If called with a non-zero dir, the player will move in
  * that direction without having to enter a direction.
  */
-void Player::moveMenu(int dir)
-{
+void Player::moveMenu(int dir) {
   if (dir == 0) {
     // Show choices
     actorPData->showData();
@@ -157,21 +152,18 @@ void Player::moveMenu(int dir)
   // TODO: Make sure that the player enters a possible direction
   dLog << "Player entered " << dir << " for Player::moveMenu() choice" << std::endl;
   // set flags. Movedir && turnUsed
-  if (dir != 0)
-  {
+  if (dir != 0) {
     flagForMove(dir);
     flagTurnUsed(true);
   }
 }
 
-void Player::onMove()
-{
+void Player::onMove() {
   Actor::onMove();
   std::cout << "You leave" << std::endl;
 }
 
-void Player::targetMenu()
-{
+void Player::targetMenu() {
   actorPData->showActors();
   int choice = getInteger();
   if (choice == 0) {
@@ -181,8 +173,7 @@ void Player::targetMenu()
   }
 }
 
-void Player::showHUD()
-{
+void Player::showHUD() {
   //TODO: Update this to show equipped weapons
   // Information on player
   if ( !getIsLiving() ) {
@@ -191,8 +182,7 @@ void Player::showHUD()
   // TODO: Function for this <Dead> Name: <hp/max> stuff
   std::cout << getName() << ": " << stats.getHealth() << "/" << stats.getMaxHealth() << std::endl;
   // Information on target
-  if (targetPtr != nullptr)
-  {
+  if (targetPtr != nullptr) {
     if (!targetPtr->getIsLiving()) {
       std::cout << "<Dead> ";
     }
@@ -205,8 +195,7 @@ void Player::showHUD()
   //std::cout << "Location: " << actorPDate->
 }
 
-void Player::inventoryMenu(Inventory &inv)
-{
+void Player::inventoryMenu(Inventory &inv) {
   // Show inventory
     inv.show();
   // Let player choose item
@@ -216,8 +205,7 @@ void Player::inventoryMenu(Inventory &inv)
   // Let player choose action for item
     dispList({"Use","Examine", "Drop"});
     int actionNumber = getInteger(0,3);
-    switch (actionNumber)
-    {
+    switch (actionNumber) {
     case 0:
       return;
       break;
@@ -241,8 +229,7 @@ void Player::inventoryMenu(Inventory &inv)
     }
 }
 
-void Player::searchMenu(Inventory &inv)
-{
+void Player::searchMenu(Inventory &inv) {
   ITEM_SELECT:
   inv.show();
   int choice = getInteger(0, inv.getSlots());
@@ -250,8 +237,7 @@ void Player::searchMenu(Inventory &inv)
   if (choice == 0) { return; }
   dispList({"Pick up", "Examine"});
   choice = getInteger(0, 2);
-  switch (choice)
-  {
+  switch (choice) {
   case 0: // Cancel menu
     goto ITEM_SELECT;
     return;

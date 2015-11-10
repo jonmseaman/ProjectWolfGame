@@ -8,8 +8,7 @@
 #include "File.h"
 using namespace std;
 
-int main()
-{
+int main() {
   dLog.open("DebugLog.txt", std::fstream::out);
   MapManager game;
   int choice;
@@ -17,8 +16,7 @@ int main()
   mainMenu:
   dispList("WolfGame", {"New Game", "Load*", "Options*", "Exit"});
   choice = getDigit(1, 4);
-  switch (choice)
-  {
+  switch (choice) {
     case 1: // New Game
       game.openMap(Maps::CENTER_TOWN); // Opens town
       game.play(); // starts playing

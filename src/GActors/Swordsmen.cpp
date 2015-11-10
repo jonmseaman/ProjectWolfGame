@@ -1,7 +1,6 @@
 #include "Swordsmen.h"
 #include "BasicSword.h"
-Swordsmen::Swordsmen(): Actor()
-{
+Swordsmen::Swordsmen(): Actor() {
   setName("Swordsmen");
   setHealth(50);
   setMaxHealth(50);
@@ -12,7 +11,6 @@ Swordsmen::Swordsmen(): Actor()
   //ctor
 }
 
-Swordsmen::~Swordsmen()
-{
+Swordsmen::~Swordsmen() {
   //dtor
 }

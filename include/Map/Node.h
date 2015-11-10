@@ -15,6 +15,7 @@ namespace Maps
       static int nodeCount;
       Node();
       virtual ~Node();
+      
       Actor* getActorPtr( int index ); // For getting targets
       Inventory *getInventory(); // Returns a pointer to the nodes inventory
       Actor* getPlayerPtr();
@@ -26,6 +27,7 @@ namespace Maps
       std::string getName();
       void setNodeLink(int dir, Node* node);
       void showActors(); // Shows a list of actors
+      void showNavigationInfo();
     protected:
       Inventory *inventory;
       Node* nodeLinks[numDirs];
