@@ -8,27 +8,47 @@ namespace Maps
   Map::Map(): Map(DEFAULT_MAP_SIZE) {
     for (auto &i: grid) { i = new Node; }
     buildMoveData();
-    populate();
   }
 
+  /**
+   * Creates a map with size mapSize
+   * Nodes are initialized to nullptrs
+   */
   Map::Map(int mapSize): grid{mapSize*mapSize, nullptr}
-  , mapSize{mapSize}
-  {
-    // Map ctor
+  , mapSize{mapSize} {
   }
 
   Map::~Map() {
     deleteGrid();
   }
 
-  bool Map::activate() {
+  /**
+   * Activates all nodes in the map.
+   */
+  void Map::activate() {
     dLog << "Map activated." << std::endl;
     for ( auto &node : grid ) {
       node->activate();
     }
-    return 0;
   }
 
+  /**
+   * Allows the nodes to be replaced.
+   * @post The node at xInd, yInd = #node
+   */
+  void Map::setNode(int xInd, int yInd, Node* node) {
+    Node *&alreadyThere = grid.at(yInd*mapSize + xInd);
+    if (alreadyThere != nullptr) {
+      delete alreadyThere;
+    }
+    alreadyThere = node;
+   }
+
+  /**
+   * Connects the nodes to each other.
+   * @pre Elements of grid are not nullptrs
+   * @post Nodes will know
+   */
   void Map::buildMoveData() { // TODO: Have buildMoveData() ignore nullptrs in the grid.
     for ( int yIndex( 0 ); yIndex < mapSize; yIndex++ ) {
       for ( int xIndex( 0 ); xIndex < mapSize; xIndex++ ) {
@@ -55,29 +75,23 @@ namespace Maps
     }
   }
 
+  /**
+   * Allows access to nodes in the map.
+   * @pre xInd, yInd < mapSize
+   * @return Pointer to node at xInd, yInd
+   */
   Node* Map::getNode(int xInd, int yInd) {
-    assert(grid.at(yInd*mapSize + xInd)!=nullptr);
+    assert(xInd < mapSize && yInd < mapSize);
+    assert(grid.at(yInd*mapSize + xInd) != nullptr);
     return grid.at(yInd*mapSize + xInd);
   }
 
-  void Map::populate() {
-    for ( int yIndex( 0 ); yIndex < mapSize; yIndex++ ) {
-      for ( int xIndex( 0 ); xIndex < mapSize; xIndex++ ) {
-        // TODO: fill the node
-        dLog << "Trying to fill node y: " << yIndex
-                  << " x: " << xIndex << std::endl;
-      }
-    }
-  }
-
-  void Map::initializeGrid() {
-    for (auto &i : grid ) {
-      i = nullptr;
-    }
-  }
-
+  /**
+   * Deletes all elements of the grid.
+   * For use by the dtor
+   */
   void Map::deleteGrid() {
-    for (int i(0); i<grid.size(); ++i) {
+    for (int i(0); i < grid.size(); ++i) {
       delete grid.at(i);
     }
   }

@@ -3,11 +3,12 @@
 #include "Swordsmen.h"
 #include "Player.h"
 #include "BasicSword.h"
+#include "House_2Story.h"
 
 CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH) {
   for (auto &i : grid ) { i = new Maps::Node; }
+  setNode(1, 0, new House_2Story{});
   buildMoveData();
-  populate();
   Actor* player = new Player{};
   player->inventory.addItem(new BasicSword);
   player->inventory.addItem(new BasicSword);
