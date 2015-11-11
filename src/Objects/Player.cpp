@@ -49,6 +49,7 @@ void Player::combatMenu(int choice) {
  * Converts a char of wasdqe to the corresponding travel direction
  */
 int Player::charToDir(char dir) {
+	// TODO: A better place for this function?
   int intDir = 0;
   if (dir == 'w') {
     intDir = Maps::North;

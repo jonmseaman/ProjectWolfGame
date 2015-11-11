@@ -17,10 +17,13 @@ namespace Maps
       virtual ~Node();
 
       // Data Access
-      Actor* getActorPtr( int index ); // For getting targets
+      Actor* getActorPtr(int index); // For getting targets
       Inventory &getInventory() { return inventory; }
       std::string getName();
-      void setNodeLink(int dir, bool moveInDir, Node* link);
+      void setName(std::string name) { this->name = name; }
+      void setNodeLink(int dir, Node* link);
+      void setEntranceDir(int dir, bool isEntrance);
+      Inventory inventory;
 
       // Navigation
       virtual bool isWall() { return false; }
@@ -30,17 +33,17 @@ namespace Maps
       virtual void activate();
       void addActor(Actor *actor);
       void moveActors(); // Tries to move all actors which have a move flag
-      bool removeActor(int index);
+      void removeActor(int index);
       void showActors(); // Shows a list of actors
 
     protected:
-      Inventory inventory;
       Node* nodeLinks[numDirs];
-      bool canMoveInDir[numDirs];
+      /// The directions from which this node can be entered
+      bool entranceDirs[numDirs];
       std::list<Actor*> actorPtrList;
       int getNumActors();
-    private:
       std::string name;
+    private:
   };
 }
 

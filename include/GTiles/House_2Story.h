@@ -10,7 +10,7 @@ class House_2Story : public Maps::Node
     void activate();
   protected:
   private:
-    Node StoryTwo{};
+    Node secondFloor{};
 };
 
 #endif // HOUSE_2STORY_H

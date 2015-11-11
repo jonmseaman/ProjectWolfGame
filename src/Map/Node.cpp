@@ -1,21 +1,22 @@
-#include <iostream>
+#include <assert.h>
 #include <iomanip>
+#include <iostream>
 #include "Node.h"
 #include "Actor.h"
 #include "Player.h"
 #include "Dir.h"
 #include "utils.h"
 #include "dLog.h"
-#include <assert.h>
 int Maps::Node::nodeCount = 1;
 namespace Maps {
-  Node::Node(): canMoveInDir{0,0,0,0,0,0,0}
-    , inventory(Inventory{ "Location Inventory", 8 })
+  Node::Node(): inventory(Inventory{ "Location Inventory", 8 })
     , nodeLinks{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
     , actorPtrList{}
     , name("Node") {
-    dLog << "Maps::Node::Node() called, no def." << std::endl;
-    name = "Node";
+    for (int i = 0; i < Maps::numDirs; i++) {
+      entranceDirs[i] = true;
+    }
+    entranceDirs[Dir::Down] = false; // Entrances in all dirs != down
     name += to_string(nodeCount);
     nodeCount++;
   }
@@ -53,50 +54,48 @@ namespace Maps {
         (*it)->dropAllItems();
       }
     }
-    moveActors();
+    moveActors(); // TODO: The map should call this after activating all nodes in map
   }
 
   void Node::showNavigationInfo() {
     bool noDirs{true};
-    if ( canMoveInDir[Dir::North] && nodeLinks[Dir::North] != nullptr) {
+    if (entranceDirs[Dir::North] && nodeLinks[Dir::North] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::North
       << ": " << "North to " << nodeLinks[Dir::North]->getName() << std::endl;
       noDirs = false;
     }
-    if ( canMoveInDir[Dir::East] && nodeLinks[Dir::East] != nullptr) {
+    if (entranceDirs[Dir::East] && nodeLinks[Dir::East] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::East
       << ": " << "East to " << nodeLinks[Dir::East]->getName() << std::endl;
       noDirs = false;
     }
-    if ( canMoveInDir[Dir::West] && nodeLinks[Dir::West] != nullptr) {
+    if (entranceDirs[Dir::West] && nodeLinks[Dir::West] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::West
       << ": " << "West to " << nodeLinks[Dir::West]->getName() << std::endl;
       noDirs = false;
     }
-    if ( canMoveInDir[Dir::South] && nodeLinks[Dir::South] != nullptr) {
+    if (entranceDirs[Dir::South] && nodeLinks[Dir::South] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::South
       << ": " << "South to " << nodeLinks[Dir::South]->getName() << std::endl;
       noDirs = false;
     }
-    if ( canMoveInDir[Dir::Up] && nodeLinks[Dir::Up] != nullptr) {
+    if (entranceDirs[Dir::Up] && nodeLinks[Dir::Up] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::Up
       << ": " << "Up to " << nodeLinks[Dir::Up]->getName() << std::endl;
       noDirs = false;
     }
-    if (canMoveInDir[Dir::Down] && nodeLinks[Dir::Down] != nullptr) {
+    if (entranceDirs[Dir::Down] && nodeLinks[Dir::Down] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::Down
       << ": " << "Down to " << nodeLinks[Dir::Down]->getName() << std::endl;
       noDirs = false;
     }
-    if ( noDirs == true ) {
+    if (noDirs == true) {
       std::cout << "You cannot leave this area." << std::endl;
     }
   }
 
-  void Node::setNodeLink(int dir, bool moveInDir, Node* link) {
-    this->nodeLinks[dir] = link;
-	this->canMoveInDir[dir] = moveInDir;
-    this->canMoveInDir[dir] = moveInDir;
+  void Node::setNodeLink(int dir, Node* link) {
+	  this->nodeLinks[dir] = link;
   }
 
   void Node::addActor(Actor *actor) {
@@ -113,15 +112,14 @@ namespace Maps {
 		  int dir = actor.getMoveDir();
 		  std::list<Actor*> &otherList = nodeLinks[dir]->actorPtrList;
 		  // TODO: Make canMoveInDir(DIR) function
-		  if ( (dir != Maps::Stop) && (nodeLinks[dir] != nullptr) ) {
+		  if ((dir != Maps::Stop) && (nodeLinks[dir] != nullptr) && !nodeLinks[dir]->isWall()) {
 		    actor.onMove(); // Moving actor
 		    actor.setCurrentNode(nodeLinks[dir]);
 			auto actorToMove = it;
 			it++;
 			// Moves
 			otherList.splice(otherList.begin(), actorPtrList, actorToMove);
-		  }
-		  else {
+		  } else {
 			  it++;
 		  }
 	}
@@ -143,5 +141,16 @@ namespace Maps {
 
   int Node::getNumActors() {
     return actorPtrList.size();
+  }
+
+  /**
+   * Allows setting entrance direction for nodes. Nodes can be entered and
+   * exited from entrance directions.
+   * @pre 0 < dir < Maps::numDirs
+   * @post The node will have an entrance in dir if(isEntrance)
+   */
+  void Node::setEntranceDir(int dir, bool isEntrance) {
+    assert(0 < dir && dir < Maps::numDirs);
+    entranceDirs[dir] = isEntrance;
   }
 }

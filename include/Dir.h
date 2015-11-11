@@ -3,11 +3,12 @@
 namespace Maps
 {
   static const int numDirs = 7; // Stopped == 0, and 6 dirs
-// Possible directions for movement
+  /**
+   * Directions. Used by nodes and maps.
+   */
   enum Dir
   {
-    // Possible directions for movement.
-    Stop = 0, /* For use with maps and nodes */
+    Stop = 0,
     North,
     East,
     West,
