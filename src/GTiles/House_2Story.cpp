@@ -6,8 +6,8 @@ House_2Story::House_2Story() {
   setNodeLink(Maps::Up, &secondFloor);
   secondFloor.setNodeLink(Maps::Down, this);
   // Add names to each floor
-  name = "First Floor";
-  secondFloor.setName("Second Floor");
+  name = "House: First Floor";
+  secondFloor.setName("House: Second Floor");
   // Set possible entrancesDirs
   for (int i = 0; i < Maps::numDirs; i++) {
 	  setEntranceDir(i, true);
