@@ -7,7 +7,7 @@
 class Actor;
 namespace Maps
 {
-  class Node /*: public NodeData*/
+  class Node
   {
     friend std::ostream &operator<<(std::ostream &os, const Maps::Node &node);
     friend std::istream &operator>>(std::istream &is, Maps::Node &node);
@@ -15,26 +15,31 @@ namespace Maps
       static int nodeCount;
       Node();
       virtual ~Node();
-      
+
+      // Data Access
       Actor* getActorPtr( int index ); // For getting targets
-      Inventory *getInventory(); // Returns a pointer to the nodes inventory
-      Actor* getPlayerPtr();
-      void giveTarget(Creature* creature);
+      Inventory &getInventory() { return inventory; }
+      std::string getName();
+      void setNodeLink(int dir, bool moveInDir, Node* link);
+
+      // Navigation
+      virtual bool isWall() { return false; }
+      void showNavigationInfo();
+
+      // Use
       virtual void activate();
-      bool addActor(Actor *actor);
+      void addActor(Actor *actor);
       void moveActors(); // Tries to move all actors which have a move flag
       bool removeActor(int index);
-      std::string getName();
-      void setNodeLink(int dir, Node* node);
       void showActors(); // Shows a list of actors
-      void showNavigationInfo();
+
     protected:
-      Inventory *inventory;
+      Inventory inventory;
       Node* nodeLinks[numDirs];
-      int getNumActors();
-      void updatePlayerPos(int dir);
-    private:
+      bool canMoveInDir[numDirs];
       std::list<Actor*> actorPtrList;
+      int getNumActors();
+    private:
       std::string name;
   };
 }

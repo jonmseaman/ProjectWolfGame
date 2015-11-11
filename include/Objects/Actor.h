@@ -1,7 +1,6 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 #include "Dir.h"
-#include "NodeData.h"
 #include "Creature.h"
 #include "Node.h"
 
@@ -26,10 +25,9 @@ class Actor : public Creature
     int getMoveDir();
     bool getIsTurnUsed();
     bool getIsPlayer();
-    void setMoveData(Maps::Node* ptrMoveData);
+    void setCurrentNode(Maps::Node *node);
   protected:
-    //Maps::NodeData* actorPData;
-	Maps::Node *actorPData;
+    Maps::Node *currentNode;
     // Tries to flag the actor for movement so that the map will move the
     // actor when it can
     void flagForMove( int dir );

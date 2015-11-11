@@ -42,9 +42,6 @@
     <ClCompile Include="src\Map\Node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Map\NodeData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Objects\Actor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,9 +108,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Map\Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Map\NodeData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Objects\Actor.h">

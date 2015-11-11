@@ -99,6 +99,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -132,7 +133,6 @@
     <ClCompile Include="src\Map\Map.cpp" />
     <ClCompile Include="src\Map\MapManager.cpp" />
     <ClCompile Include="src\Map\Node.cpp" />
-    <ClCompile Include="src\Map\NodeData.cpp" />
     <ClCompile Include="src\Objects\Actor.cpp" />
     <ClCompile Include="src\Objects\Creature.cpp" />
     <ClCompile Include="src\Objects\Equipment.cpp" />
@@ -162,7 +162,6 @@
     <ClInclude Include="include\Map\Map.h" />
     <ClInclude Include="include\Map\MapManager.h" />
     <ClInclude Include="include\Map\Node.h" />
-    <ClInclude Include="include\Map\NodeData.h" />
     <ClInclude Include="include\Objects\Actor.h" />
     <ClInclude Include="include\Objects\Creature.h" />
     <ClInclude Include="include\Objects\Creature_Interface.h" />

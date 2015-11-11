@@ -116,7 +116,7 @@ void Player::takeTurnMenu() {
     inventoryMenu(inventory);
     break;
   case '5':
-    searchMenu(*(actorPData->getInventory()));
+    searchMenu(currentNode->getInventory());
     break;
   case 'w':
   case 'a':
@@ -144,7 +144,7 @@ void Player::takeTurnMenu() {
 void Player::moveMenu(int dir) {
   if (dir == 0) {
     // Show choices
-    actorPData->showData();
+    currentNode->showNavigationInfo();
     // Get direction
     std::cout << "Enter direction: ";
     dir = getDigit(0,Maps::numDirs-1);
@@ -164,12 +164,12 @@ void Player::onMove() {
 }
 
 void Player::targetMenu() {
-  actorPData->showActors();
+  currentNode->showActors();
   int choice = getInteger();
   if (choice == 0) {
     setTarget(nullptr);
   } else {
-    setTarget(actorPData->getActorPtr(--choice));
+    setTarget(currentNode->getActorPtr(--choice));
   }
 }
 
@@ -192,7 +192,7 @@ void Player::showHUD() {
     std::cout << "No target" << std::endl;
   }
   // Location
-  //std::cout << "Location: " << actorPDate->
+  std::cout << "Location: " << currentNode->getName() << std::endl;
 }
 
 void Player::inventoryMenu(Inventory &inv) {

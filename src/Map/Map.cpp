@@ -30,30 +30,25 @@ namespace Maps
   }
 
   void Map::buildMoveData() { // TODO: Have buildMoveData() ignore nullptrs in the grid.
-    dLog << "Maps::Map::buildMoveData() called" << std::endl;
     for ( int yIndex( 0 ); yIndex < mapSize; yIndex++ ) {
       for ( int xIndex( 0 ); xIndex < mapSize; xIndex++ ) {
-        dLog << "\tTrying to build moveData for x: " << xIndex
-                  << " y: " << yIndex << std::endl;
+        dLog << "\tsetNodeLinks: " << xIndex << ", " << yIndex << std::endl;
+        Node &currentNode = *getNode(xIndex, yIndex);
         if ( yIndex < mapSize-1 ) { // Build north
-          getNode(xIndex, yIndex)->setMoveData(Dir::North, getNode(xIndex, yIndex+1)->getName(), getNode(xIndex, yIndex+1) );
-          getNode(xIndex, yIndex)->setNodeLink(Dir::North, getNode(xIndex, yIndex+1) );
-          // TODO: Make the second line here not necessary.
-          // setNodeLink is giving the node a pointer to the node it connects to.
-          // MoveData has the same pointers, but the node can't really use them because the node needs access to more
-          // of the nodes than MoveData allows access to.
+          Node *north = getNode(xIndex, yIndex+1);
+          currentNode.setNodeLink(Dir::North, north->isWall(), north);
         }
         if ( xIndex < mapSize-1 ) { // build east
-          getNode(xIndex, yIndex)->setMoveData(Dir::East, getNode(xIndex+1, yIndex)->getName(), getNode(xIndex+1, yIndex) );
-          getNode(xIndex, yIndex)->setNodeLink(Dir::East, getNode(xIndex+1, yIndex) );
+          Node *east = getNode(xIndex+1, yIndex);
+          currentNode.setNodeLink(Dir::East, east->isWall(), east);
         }
         if ( xIndex > 0 ) { // build west
-          getNode(xIndex, yIndex)->setMoveData(Dir::West, getNode(xIndex-1, yIndex)->getName(), getNode(xIndex-1, yIndex) );
-          getNode(xIndex, yIndex)->setNodeLink(Dir::West, getNode(xIndex-1, yIndex) );
+          Node *west = getNode(xIndex-1, yIndex);
+          currentNode.setNodeLink(Dir::West, west->isWall(), west);
         }
         if ( yIndex > 0 ) { // build south
-          getNode(xIndex, yIndex)->setMoveData(Dir::South, getNode(xIndex, yIndex-1)->getName(), getNode(xIndex, yIndex-1) );
-          getNode(xIndex, yIndex)->setNodeLink(Dir::South, getNode(xIndex, yIndex-1) );
+          Node *south = getNode(xIndex, yIndex-1);
+          currentNode.setNodeLink(Dir::South, south->isWall(), south);
         }
       }
     }
@@ -64,7 +59,7 @@ namespace Maps
     return grid.at(yInd*mapSize + xInd);
   }
 
-  bool Map::populate() {
+  void Map::populate() {
     for ( int yIndex( 0 ); yIndex < mapSize; yIndex++ ) {
       for ( int xIndex( 0 ); xIndex < mapSize; xIndex++ ) {
         // TODO: fill the node
@@ -72,7 +67,6 @@ namespace Maps
                   << " x: " << xIndex << std::endl;
       }
     }
-    return false;
   }
 
   void Map::initializeGrid() {

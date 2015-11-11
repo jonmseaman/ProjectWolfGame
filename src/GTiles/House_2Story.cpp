@@ -4,10 +4,8 @@
 House_2Story::House_2Story() {
   std::string upText{"Second Floor"};
   std::string downText{"First Floor"};
-  setMoveData(Maps::Up, upText, &StoryTwo );
-  setNodeLink(Maps::Up, &StoryTwo );
-  StoryTwo.setMoveData(Maps::Down, downText, this);
-  StoryTwo.setNodeLink(Maps::Down, this);
+  setNodeLink(Maps::Up, true, &StoryTwo);
+  StoryTwo.setNodeLink(Maps::Down, true, this);
 }
 
 House_2Story::~House_2Story() {

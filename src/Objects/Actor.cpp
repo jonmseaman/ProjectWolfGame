@@ -6,8 +6,7 @@
 
 Actor::Actor(): isPlayer(false)
   , isTurnUsed(false)
-  , moveDir(Maps::Dir::Stop)
-  , actorPData(nullptr) {
+  , moveDir(Maps::Dir::Stop) {
   dLog << "Actor ctor called" << std::endl;
 }
 
@@ -26,7 +25,7 @@ bool Actor::onInteractedWith() {
 void Actor::takeTurn() {
   dLog << "Actor takes turn" << std::endl;
   if (targetPtr == nullptr || !targetPtr->getIsLiving()) {
-    actorPData->giveTarget(this);
+    // TODO: Get a target
     if (targetPtr != nullptr) {
       onAttack();
     }
@@ -42,8 +41,8 @@ int Actor::getMoveDir() {
   return moveDir;
 }
 
-void Actor::setMoveData(Maps::Node* ptrMoveData) {
-  this->actorPData = ptrMoveData;
+void Actor::setCurrentNode(Maps::Node *node) {
+  this->currentNode = node;
 }
 
 void Actor::flagForMove(int dir) {
@@ -72,12 +71,12 @@ void Actor::onMove() {
 
 bool Actor::dropItem(int slotIndex) {
   assert ( slotIndex >= 0 && slotIndex <= inventory.getSlots() );
-  if (!actorPData->getInventory()->hasOpenSlot()) {
+  if (!currentNode->getInventory().hasOpenSlot()) {
     inventory.deleteItem(slotIndex);
   }
   else
   {
-    actorPData->getInventory()->addItem( inventory.getItem(slotIndex) );
+    currentNode->getInventory().addItem(inventory.getItem(slotIndex));
     inventory.removeItem( slotIndex );
   }
   return true;

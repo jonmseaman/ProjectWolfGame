@@ -8,9 +8,9 @@
 #include "dLog.h"
 #include <assert.h>
 int Maps::Node::nodeCount = 1;
-namespace Maps
-{
-  Node::Node(): inventory(new Inventory{ "Location Inventory", 8 })
+namespace Maps {
+  Node::Node(): canMoveInDir{0,0,0,0,0,0,0}
+    , inventory(Inventory{ "Location Inventory", 8 })
     , nodeLinks{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
     , actorPtrList{}
     , name("Node") {
@@ -22,16 +22,16 @@ namespace Maps
 
   Node::~Node() {
     dLog << "Maps::Node::~Node() called for Node: " << name << std::endl;
-    for (std::list<Actor*>::iterator it = actorPtrList.begin(); it != actorPtrList.end(); ++it ) { // This loop deletes all actors
+	// Delete all the actors
+    for (auto it = actorPtrList.begin(); it != actorPtrList.end(); ++it ) {
       dLog << "Deleting actor: " << (*it) << " from actor list in node: " << name << std::endl;
       delete (*it);
     }
-    delete inventory; // Delete inventory
   }
 
   Actor* Node::getActorPtr( int index ) {
     assert ( ((index) <= actorPtrList.size()) && (index >= 0) );
-    std::list<Actor*>::iterator it = actorPtrList.begin();
+    auto it = actorPtrList.begin();
     if ( index >= actorPtrList.size() ) {
       index = actorPtrList.size();
     }
@@ -41,7 +41,7 @@ namespace Maps
 
   void Node::activate() {
     dLog << "Node: " << name << " activated" << std::endl;
-    for (std::list<Actor*>::iterator it = actorPtrList.begin(); it != actorPtrList.end(); ++it ) { // Going through list of actors
+    for (auto it = actorPtrList.begin(); it != actorPtrList.end(); ++it ) { // Going through list of actors
       dLog << "Taking turn for " << (*it)->getName() << std::endl;
       if ( (*it)->getIsLiving() || (*it)->getIsPlayer() ) // getIsPlayer() allows special behavior for players
       {
@@ -58,49 +58,55 @@ namespace Maps
 
   void Node::showNavigationInfo() {
     bool noDirs{true};
-    if ( canMoveInDir[Dir::North] ) {
+    if ( canMoveInDir[Dir::North] && nodeLinks[Dir::North] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::North
-      << ": " << "North to " << arrMoveText[Dir::North] << std::endl;
+      << ": " << "North to " << nodeLinks[Dir::North]->getName() << std::endl;
       noDirs = false;
     }
-    if ( canMoveInDir[Dir::East] ) {
+    if ( canMoveInDir[Dir::East] && nodeLinks[Dir::East] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::East
-      << ": " << "East to " << arrMoveText[Dir::East] << std::endl;
+      << ": " << "East to " << nodeLinks[Dir::East]->getName() << std::endl;
       noDirs = false;
     }
-    if ( canMoveInDir[Dir::West] ) {
+    if ( canMoveInDir[Dir::West] && nodeLinks[Dir::West] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::West
-      << ": " << "West to " << arrMoveText[Dir::West] << std::endl;
+      << ": " << "West to " << nodeLinks[Dir::West]->getName() << std::endl;
       noDirs = false;
     }
-    if ( canMoveInDir[Dir::South] ) {
+    if ( canMoveInDir[Dir::South] && nodeLinks[Dir::South] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::South
-      << ": " << "South to " << arrMoveText[Dir::South] << std::endl;
+      << ": " << "South to " << nodeLinks[Dir::South]->getName() << std::endl;
       noDirs = false;
     }
-    if ( canMoveInDir[Dir::Up] ) {
+    if ( canMoveInDir[Dir::Up] && nodeLinks[Dir::Up] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::Up
-      << ": " << "Up to " << arrMoveText[Dir::Up] << std::endl;
+      << ": " << "Up to " << nodeLinks[Dir::Up]->getName() << std::endl;
       noDirs = false;
     }
-    if ( canMoveInDir[Dir::Down] ) {
+    if (canMoveInDir[Dir::Down] && nodeLinks[Dir::Down] != nullptr) {
       std::cout << std::setw(3) << std::right << Dir::Down
-      << ": " << "Down to " << arrMoveText[Dir::Down] << std::endl;
+      << ": " << "Down to " << nodeLinks[Dir::Down]->getName() << std::endl;
       noDirs = false;
     }
     if ( noDirs == true ) {
-      std::cout << arrMoveText[Dir::Stop] << std::endl;
+      std::cout << "You cannot leave this area." << std::endl;
     }
   }
 
-  bool Node::addActor(Actor *actor) {
-    actorPtrList.insert(actorPtrList.end(), actor);
-    // Set move data for added actor
-    (*(--actorPtrList.end() ))->setMoveData(this);
-    return true;
+  void Node::setNodeLink(int dir, bool moveInDir, Node* link) {
+    this->nodeLinks[dir] = link;
+	this->canMoveInDir[dir] = moveInDir;
+    this->canMoveInDir[dir] = moveInDir;
   }
 
-  void Node::moveActors(\)\s\{
+  void Node::addActor(Actor *actor) {
+	actor->setCurrentNode(this);
+    actorPtrList.insert(actorPtrList.end(), actor);
+    // Set move data for added actor
+    // TODO: ?Need this? :(*(--actorPtrList.end() ))->setMoveData(this);
+  }
+
+  void Node::moveActors() {
 	auto it = actorPtrList.begin();
 	while (it != actorPtrList.end()) {
 		  Actor &actor = **it;
@@ -109,7 +115,7 @@ namespace Maps
 		  // TODO: Make canMoveInDir(DIR) function
 		  if ( (dir != Maps::Stop) && (nodeLinks[dir] != nullptr) ) {
 		    actor.onMove(); // Moving actor
-		    actor.setMoveData(nodeLinks[dir]);
+		    actor.setCurrentNode(nodeLinks[dir]);
 			auto actorToMove = it;
 			it++;
 			// Moves
@@ -125,10 +131,6 @@ namespace Maps
     return name;
   }
 
-  void Node::setNodeLink(int dir, Node* node) {
-    nodeLinks[dir] = node;
-  }
-
   void Node::showActors() {
     int i(0);
     for (std::list<Actor*>::iterator it = actorPtrList.begin(); it != actorPtrList.end(); ++it) {
@@ -141,26 +143,5 @@ namespace Maps
 
   int Node::getNumActors() {
     return actorPtrList.size();
-  }
-
-  void Node::giveTarget(Creature *creature) { // TODO: Update this. We want actors to be able to search the list of
-    // TODO: and decide what kind of target they want
-    // if there is only one creature in the node, just give the creature a null target
-    if ( actorPtrList.size() == 1 ) {
-      creature->setTarget(nullptr);
-      return;
-    }
-    for (auto it = actorPtrList.begin(); it != actorPtrList.end(); ++it ) {
-      // Make sure we don't give the creature itself as a target
-      if ( (*it) != creature ) {
-        creature->setTarget((*it));
-        return;
-      }
-    }
-  }
-
-  Inventory* Node::getInventory() {
-    assert(inventory != nullptr);
-    return inventory;
   }
 }

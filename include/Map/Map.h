@@ -24,7 +24,7 @@ namespace Maps
       Maps::Node* getNode(int xInd, int yInd);
     protected:
       void buildMoveData(); // Fills node's moveData
-      bool populate(); // Puts actors/ entities in
+      void populate(); // Puts actors/ entities in
       std::vector<Node*> grid; // The array of nodes that the player sees [y*size + x]
     private:
       const int DEFAULT_MAP_SIZE { 5 };
