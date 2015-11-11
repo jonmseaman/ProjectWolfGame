@@ -150,7 +150,7 @@ namespace Maps {
    * @post The node will have an entrance in dir if(isEntrance)
    */
   void Node::setEntranceDir(int dir, bool isEntrance) {
-    assert(0 < dir && dir < Maps::numDirs);
+    assert(0 <= dir && dir < Maps::numDirs);
     entranceDirs[dir] = isEntrance;
   }
 }
