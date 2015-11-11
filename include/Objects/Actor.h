@@ -16,6 +16,7 @@ class Actor : public Creature
     virtual ~Actor();
     friend std::ostream &operator<<(std::ostream &os, const Creature &creature);
     friend std::istream &operator>>(std::istream &is, Creature &creature);
+
     bool dropItem(int slotNumber); // Drops item to node inventory. slotNumber is index+1 in inventory
     void dropAllItems(); // Drops all items in inventory to node inventory.
     virtual bool onInteractedWith(); // Allows the interaction
@@ -27,6 +28,10 @@ class Actor : public Creature
     bool getIsPlayer();
     void setCurrentNode(Maps::Node *node);
   protected:
+    /**
+     * The node that the actor is currently in.
+     * Used for movement, targetting, awareness...
+     */
     Maps::Node *currentNode;
     // Tries to flag the actor for movement so that the map will move the
     // actor when it can

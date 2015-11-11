@@ -18,23 +18,29 @@ class Creature
     virtual ~Creature();
     void combatStop(); // Takes creature out of combat and removes targets
 
+    // Data Access
     std::string getName() { return name; }
-    bool getIsInCombat() { return isInCombat; } // returns true if the creature is in combat.
-    bool getIsLiving() { return isLiving; } // Returns true if the creature is still alive
+    bool getIsInCombat() { return isInCombat; }
+    bool getIsLiving() { return isLiving; }
     Creature *getTarget() { return targetPtr; } // returns target of creature
-    void kill(); // Reduces creature health to zero. Sets isLiving to false
-    int onAttack();
-    void onAssistDamage(int dmg); // Tries to damage this creature's target
-    void onAssistHeal(int heal); // Tries to heal this creature's target
-    int onDamage(int dmg); // Returns damage taken
-    int onHeal(int heal); // Returns health gained
-
     void setHealth(int health);
     void setMaxHealth(int maxHealth); // Set max hp, also sets hp
     void setIsLiving(bool isLiving); // Can be used to kill a creature
     void setTarget(Creature* creature);
     void setStrength(int strength);
+
+    // Creature stuff
     void useItemFromInventory(int itemNumber);
+    int onAttack();
+    void onAssistDamage(int dmg); // Tries to damage this creature's target
+    void onAssistHeal(int heal); // Tries to heal this creature's target
+    int onDamage(int dmg); // Returns damage taken
+    int onHeal(int heal); // Returns health gained
+    void kill(); // Reduces creature health to zero. Sets isLiving to false
+
+    // Display
+    void displayHUDLine();
+
 
     Equipment equipment;
     Inventory inventory;

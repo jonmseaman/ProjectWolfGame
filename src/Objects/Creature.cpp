@@ -118,3 +118,11 @@ void Creature::onAssistHeal(int heal) {
 void Creature::useItemFromInventory(int itemNumber) {
   inventory.useItem(itemNumber, this);
 }
+
+void Creature::displayHUDLine() {
+  if (!isLiving) {
+    std::cout << "<Dead> ";
+  }
+  std::cout << name << ": " << stats.getHealth() << "/"
+    << stats.getMaxHealth();
+}

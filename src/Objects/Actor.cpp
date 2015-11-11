@@ -18,10 +18,7 @@ bool Actor::onInteractedWith() {
   return 0;
 }
 
-/**
- * Allows the actor to take a turn. Default behavior is defined
- * for derived classes which do not override takeTurn()
- */
+
 void Actor::takeTurn() {
   dLog << "Actor takes turn" << std::endl;
   if (targetPtr == nullptr || !targetPtr->getIsLiving()) {
@@ -73,9 +70,7 @@ bool Actor::dropItem(int slotIndex) {
   assert ( slotIndex >= 0 && slotIndex <= inventory.getSlots() );
   if (!currentNode->getInventory().hasOpenSlot()) {
     inventory.deleteItem(slotIndex);
-  }
-  else
-  {
+  } else {
     currentNode->getInventory().addItem(inventory.getItem(slotIndex));
     inventory.removeItem( slotIndex );
   }

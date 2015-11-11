@@ -15,10 +15,6 @@ Player::Player() {
 Player::~Player() {
 }
 
-/**
- * This menu should allow access to all things that the player needs
- * during combat.
- */
 void Player::combatMenu(int choice) {
   if (choice == 0) {
     dispList("====Combat====", {"Attack", "Targets", "Inventory"});
@@ -45,9 +41,6 @@ void Player::combatMenu(int choice) {
   }
 }
 
-/**
- * Converts a char of wasdqe to the corresponding travel direction
- */
 int Player::charToDir(char dir) {
 	// TODO: A better place for this function?
   int intDir = 0;
@@ -136,12 +129,6 @@ void Player::takeTurnMenu() {
   }
 }
 
-/**
- * The moveMenu for the player. Allows the player to move to different
- * nodes.
- * @param dir If called with a non-zero dir, the player will move in
- * that direction without having to enter a direction.
- */
 void Player::moveMenu(int dir) {
   if (dir == 0) {
     // Show choices
@@ -177,18 +164,12 @@ void Player::targetMenu() {
 void Player::showHUD() {
   //TODO: Update this to show equipped weapons
   // Information on player
-  if ( !getIsLiving() ) {
-    std::cout << "<Dead> ";
-  }
-  // TODO: Function for this <Dead> Name: <hp/max> stuff
-  std::cout << getName() << ": " << stats.getHealth() << "/" << stats.getMaxHealth() << std::endl;
+  displayHUDLine();
+  std::cout << std::endl;
   // Information on target
   if (targetPtr != nullptr) {
-    if (!targetPtr->getIsLiving()) {
-      std::cout << "<Dead> ";
-    }
-    std::cout << targetPtr->getName() << ": " << targetPtr->stats.getHealth()
-    << "/" << targetPtr->stats.getMaxHealth() << std::endl;
+    targetPtr->displayHUDLine();
+    std::cout << std::endl;
   } else {
     std::cout << "No target" << std::endl;
   }
@@ -198,15 +179,15 @@ void Player::showHUD() {
 
 void Player::inventoryMenu(Inventory &inv) {
   // Show inventory
-    inv.show();
+  inv.show();
   // Let player choose item
-    std::cout << "Select an item: ";
-    int itemIndex = getInteger(0, inv.getSlots());
+  std::cout << "Select an item: ";
+  int itemIndex = getInteger(0, inv.getSlots());
 	itemIndex--;
   // Let player choose action for item
-    dispList({"Use","Examine", "Drop"});
-    int actionNumber = getInteger(0,3);
-    switch (actionNumber) {
+  dispList({"Use","Examine", "Drop"});
+  int actionNumber = getInteger(0,3);
+  switch (actionNumber) {
     case 0:
       return;
       break;
@@ -235,7 +216,7 @@ void Player::searchMenu(Inventory &inv) {
   inv.show();
   int choice = getInteger(0, inv.getSlots());
   int itemIndex = choice-1;
-  if (choice == 0) { return; }
+  if (choice == 0) { return; } // Exit menu
   dispList({"Pick up", "Examine"});
   choice = getInteger(0, 2);
   switch (choice) {

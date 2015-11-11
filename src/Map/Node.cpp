@@ -131,11 +131,12 @@ namespace Maps {
 
   void Node::showActors() {
     int i(0);
-    for (std::list<Actor*>::iterator it = actorPtrList.begin(); it != actorPtrList.end(); ++it) {
+    for (auto it = actorPtrList.begin(); it != actorPtrList.end(); ++it) {
+      // Number the list
       std::cout << std::setw(COLUMN_PADDING) << std::left << ++i << ": ";
-        if (!(*it)->getIsLiving()) { std::cout << "<Dead> "; }
-        std::cout << (*it)->getName() << " "
-        << (*it)->stats.getHealth() << "/" << (*it)->stats.getMaxHealth() << std::endl;
+      // Display information about the creature.
+      (*it)->displayHUDLine();
+      std::cout << std::endl;
     }
   }
 
