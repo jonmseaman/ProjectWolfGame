@@ -29,10 +29,6 @@ class Player : public Actor
      */
     void combatMenu(int choice = 0); // Menu for attacking enemies
     /**
-     * Converts a char of wasdqe to the corresponding travel direction
-     */
-    int charToDir(char charDir);
-    /**
      * The moveMenu for the player. Allows the player to move to different
      * nodes.
      * @param dir If called with a non-zero dir, the player will move in

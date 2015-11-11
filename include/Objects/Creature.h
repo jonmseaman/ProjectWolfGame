@@ -41,7 +41,6 @@ class Creature
     // Display
     void displayHUDLine();
 
-
     Equipment equipment;
     Inventory inventory;
 

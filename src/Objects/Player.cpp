@@ -41,25 +41,6 @@ void Player::combatMenu(int choice) {
   }
 }
 
-int Player::charToDir(char dir) {
-	// TODO: A better place for this function?
-  int intDir = 0;
-  if (dir == 'w') {
-    intDir = Maps::North;
-  } else if (dir == 'a') {
-    intDir = Maps::West;
-  } else if (dir == 's') {
-    intDir = Maps::South;
-  } else if (dir == 'd') {
-    intDir = Maps::East;
-  } else if (dir == 'q') {
-    intDir = Maps::Down;
-  } else if (dir == 'e') {
-    intDir = Maps::Up;
-  }
-  return intDir;
-}
-
 void Player::takeTurn() {
   flagTurnUsed(false);
   if (getIsLiving()) {
@@ -118,7 +99,7 @@ void Player::takeTurnMenu() {
   case 'd':
   case 'q':
   case 'e':
-    moveMenu(charToDir(choice));
+    moveMenu(Maps::wasdqeToDir(choice));
     break;
   case ' ':
     combatMenu(1); // TODO: Bad form, hardcoding
