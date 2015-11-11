@@ -89,7 +89,7 @@ void Inventory::show() {
   }
 }
 
-bool Inventory::useItem(int itemIndex, Creature_Interface* user) {
+bool Inventory::useItem(int itemIndex, Creature* user) {
   assert ( (slots.size() > itemIndex) && (itemIndex >= 0));
   if ( slots.at(itemIndex) != nullptr ) {
     slots.at(itemIndex)->onUse(user);

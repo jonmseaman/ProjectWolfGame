@@ -1,4 +1,5 @@
 #include "Item.h"
+#include "Creature.h"
 #include <iostream>
 
 Item::Item(): damage(0)
@@ -39,7 +40,7 @@ std::string Item::getName() {
   return name;
 }
 
-void Item::onUse(Creature_Interface* user) {
+void Item::onUse(Creature* user) {
   user->onAssistDamage(damage);
   user->onHeal(heal);
 }

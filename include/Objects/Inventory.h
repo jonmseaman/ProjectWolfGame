@@ -21,7 +21,7 @@ class Inventory
     bool hasOpenSlot();
     int firstEmpty();
     void show();
-    bool useItem(int itemIndex, Creature_Interface* user);
+    bool useItem(int itemIndex, Creature* user);
   protected:
     std::string name;
     std::vector<Item*> slots;

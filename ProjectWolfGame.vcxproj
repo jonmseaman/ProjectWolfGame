@@ -164,7 +164,6 @@
     <ClInclude Include="include\Map\Node.h" />
     <ClInclude Include="include\Objects\Actor.h" />
     <ClInclude Include="include\Objects\Creature.h" />
-    <ClInclude Include="include\Objects\Creature_Interface.h" />
     <ClInclude Include="include\Objects\Equipment.h" />
     <ClInclude Include="include\Objects\Inventory.h" />
     <ClInclude Include="include\Objects\Item.h" />

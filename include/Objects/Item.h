@@ -2,7 +2,7 @@
 #define ITEM_H
 #include <string>
 #include <iostream>
-#include "Creature_Interface.h"
+class Creature;
 
 /**
  * This is an item.
@@ -41,7 +41,7 @@ class Item
      * Returns the name of the item
      */
     std::string getName();
-    virtual void onUse(Creature_Interface* user);
+    virtual void onUse(Creature* user);
   protected:
     int damage; /// The damage that the item deals when used
     int heal;

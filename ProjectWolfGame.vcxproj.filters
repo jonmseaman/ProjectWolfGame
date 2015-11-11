@@ -116,9 +116,6 @@
     <ClInclude Include="include\Objects\Creature.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Objects\Creature_Interface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Objects\Equipment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
