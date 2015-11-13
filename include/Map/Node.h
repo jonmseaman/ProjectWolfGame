@@ -23,11 +23,13 @@ namespace Maps
       void setName(std::string name) { this->name = name; }
       void setNodeLink(int dir, Node* link);
       void setEntranceDir(int dir, bool isEntrance);
+      bool getEntranceDir(int dir);
       Inventory inventory;
 
       // Navigation
       virtual bool isWall() { return false; }
       void showNavigationInfo();
+      void showNavigationInfoForNode(int dir);
 
       // Use
       virtual void activate();

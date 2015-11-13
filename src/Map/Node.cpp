@@ -23,7 +23,7 @@ namespace Maps {
 
   Node::~Node() {
     dLog << "Maps::Node::~Node() called for Node: " << name << std::endl;
-	// Delete all the actors
+	  // Delete all the actors
     for (auto it = actorPtrList.begin(); it != actorPtrList.end(); ++it ) {
       dLog << "Deleting actor: " << (*it) << " from actor list in node: " << name << std::endl;
       delete (*it);
@@ -60,37 +60,48 @@ namespace Maps {
   void Node::showNavigationInfo() {
     bool noDirs{true};
     if (entranceDirs[Dir::North] && nodeLinks[Dir::North] != nullptr) {
-      std::cout << std::setw(3) << std::right << Dir::North
-      << ": " << "North to " << nodeLinks[Dir::North]->getName() << std::endl;
+      showNavigationInfoForNode(Dir::North);
+      std::cout << std::endl;
       noDirs = false;
     }
     if (entranceDirs[Dir::East] && nodeLinks[Dir::East] != nullptr) {
-      std::cout << std::setw(3) << std::right << Dir::East
-      << ": " << "East to " << nodeLinks[Dir::East]->getName() << std::endl;
+      showNavigationInfoForNode(Dir::East);
+      std::cout << std::endl;
       noDirs = false;
     }
     if (entranceDirs[Dir::West] && nodeLinks[Dir::West] != nullptr) {
-      std::cout << std::setw(3) << std::right << Dir::West
-      << ": " << "West to " << nodeLinks[Dir::West]->getName() << std::endl;
+      showNavigationInfoForNode(Dir::West);
+      std::cout << std::endl;
       noDirs = false;
     }
     if (entranceDirs[Dir::South] && nodeLinks[Dir::South] != nullptr) {
-      std::cout << std::setw(3) << std::right << Dir::South
-      << ": " << "South to " << nodeLinks[Dir::South]->getName() << std::endl;
+      showNavigationInfoForNode(Dir::South);
+      std::cout << std::endl;
       noDirs = false;
     }
     if (entranceDirs[Dir::Up] && nodeLinks[Dir::Up] != nullptr) {
-      std::cout << std::setw(3) << std::right << Dir::Up
-      << ": " << "Up to " << nodeLinks[Dir::Up]->getName() << std::endl;
+      showNavigationInfoForNode(Dir::Up);
+      std::cout << std::endl;
       noDirs = false;
     }
     if (entranceDirs[Dir::Down] && nodeLinks[Dir::Down] != nullptr) {
-      std::cout << std::setw(3) << std::right << Dir::Down
-      << ": " << "Down to " << nodeLinks[Dir::Down]->getName() << std::endl;
+      showNavigationInfoForNode(Dir::Down);
+	  std::cout << std::endl;
       noDirs = false;
     }
     if (noDirs == true) {
       std::cout << "You cannot leave this area." << std::endl;
+    }
+  }
+
+  void Node::showNavigationInfoForNode(int dir) {
+    assert(0 < dir && dir < numDirs);
+    std::cout << std::setw(COLUMN_PADDING) << std::right << dir << ": ";
+    std::cout << Maps::dirName(dir) << " to " << nodeLinks[dir]->getName();
+    // Check to see if the node can accept entry from this direction
+    bool canGoInDir = nodeLinks[dir]->getEntranceDir(oppositeDir(dir));
+    if (!canGoInDir) {
+      std::cout << " <Inaccessible>";
     }
   }
 
@@ -154,4 +165,15 @@ namespace Maps {
     assert(0 <= dir && dir < Maps::numDirs);
     entranceDirs[dir] = isEntrance;
   }
+
+  /**
+   * Allows retrieval of entrance directions on nodes.
+   * @param dir The direction being checked.
+   * @pre 0 <= dir < numDirs
+   * @return True if the node has an entrance in direction dir.
+   */
+   bool Node::getEntranceDir(int dir) {
+     assert(0 <= dir < numDirs);
+     return entranceDirs[dir];
+   }
 }

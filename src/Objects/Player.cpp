@@ -112,6 +112,7 @@ void Player::takeTurnMenu() {
 
 void Player::moveMenu(int dir) {
   if (dir == 0) {
+    std::cout << "=====Move=====" << std::endl;
     // Show choices
     currentNode->showNavigationInfo();
     // Get direction
@@ -222,5 +223,7 @@ void Player::searchMenu(Inventory &inv) {
     break;
   }
 }
+
+
 
 //TODO: Equipment menu

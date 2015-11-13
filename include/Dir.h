@@ -31,7 +31,7 @@ namespace Maps
    * @pre dir is a valid element of enum Dir
    * @return The name of the direction corresponding to dir
    */
-  std::string intDirToString(int dir);
+  std::string dirName(int dir);
   /**
    * Converts a direction to its reverse direction (ie: N-->S)
    * @param dir The dir being converted

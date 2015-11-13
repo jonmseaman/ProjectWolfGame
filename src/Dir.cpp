@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <string>
 #include "Dir.h"
 
 namespace Maps {
@@ -26,7 +27,7 @@ int wasdqeToDir(char dir) {
 	return intDir;
 }
 
-std::string intDirToString(int dir) {
+std::string dirName(int dir) {
 	assert(0 <= dir && dir < numDirs);
 
 	std::string dirName;
@@ -51,9 +52,9 @@ std::string intDirToString(int dir) {
 int oppositeDir(int dir) {
 	assert(0 <= dir && dir < numDirs);
 
-	int revDir;
+	int revDir; // The reverse directoin
 	if (dir == Dir::Stop) {
-		revDir = 0;
+		revDir = Dir::Stop;
 	} else if (dir == Dir::North) {
 		revDir = Dir::South;
 	} else if (dir == Dir::East) {

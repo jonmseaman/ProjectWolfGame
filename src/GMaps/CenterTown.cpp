@@ -8,6 +8,7 @@
 CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH) {
   for (auto &i : grid ) { i = new Maps::Node; }
   setNode(1, 0, new House_2Story{});
+  setNode(2, 0, new House_2Story{});
   buildMoveData();
   Actor* player = new Player{};
   player->inventory.addItem(new BasicSword);
