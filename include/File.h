@@ -6,6 +6,9 @@
 namespace fs = boost::filesystem;
 namespace File
 {
+  /**
+   * The folder in which saves will go.
+   */
   const fs::path savePath{"./Saves"};
   extern fs::fstream file;
   extern fs::path filePath;
