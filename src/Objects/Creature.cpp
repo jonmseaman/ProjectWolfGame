@@ -110,13 +110,9 @@ void Creature::onAssistHeal(int heal) {
   }
 }
 
-//void Creature::setInventory(const Inventory &inventory)
-//{
-//  this->inventory = inventory;
-//}
-
-void Creature::useItemFromInventory(int itemNumber) {
-  inventory.useItem(itemNumber, this);
+void Creature::useItem(Item &item, Creature &creature) {
+  // TODO: Implement
+  item.onUse(&creature);
 }
 
 void Creature::displayHUDLine() {

@@ -3,7 +3,6 @@
 
 #include "Actor.h"
 
-
 class Player : public Actor
 {
   public:
@@ -59,6 +58,14 @@ class Player : public Actor
      * This menu allows selection of targets.
      */
     void targetMenu();
+    /**
+     * This function runs a command corresponding to user input.
+     * If key is not a valid input
+     * @param key The button that the user pressed.
+     * @return Returns true if key had a corresponding command that was runs,
+     * false if there was not a corresponding command.
+     */
+    bool processUserInput(char key);
   private:
 };
 

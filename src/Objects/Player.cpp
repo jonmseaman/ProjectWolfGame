@@ -1,6 +1,7 @@
 #include <iostream>
 #include <assert.h>
 #include "Player.h"
+#include "Dir.h"
 #include "utils.h"
 #include "dLog.h"
 
@@ -26,8 +27,8 @@ void Player::combatMenu(int choice) {
     flagInCombat(false);
     break;
   case 1:
-    onAttack();
-    flagTurnUsed(true);
+    onAttack(); // TODO: Make sure that onAttack() uses a turn if there is a target
+    setIsTurnUsed(true);
     break;
   case 2:
     targetMenu();
@@ -42,7 +43,7 @@ void Player::combatMenu(int choice) {
 }
 
 void Player::takeTurn() {
-  flagTurnUsed(false);
+  setIsTurnUsed(false);
   if (getIsLiving()) {
     while (!getIsTurnUsed() && getIsLiving()) {
       takeTurnMenu();
@@ -52,8 +53,8 @@ void Player::takeTurn() {
     }
   } else {
     std::cout << getName() << " is dead. Continue? ";
-    int choice = getDigit();
-    if (choice == 0) {
+    char choice = getInput();
+    if (choice == '0' || choice == 'n' || choice == 'N') {
       std::exit(0);
     }
   }
@@ -64,12 +65,9 @@ void Player::takeTurnMenu() {
   showHUD();
   //int choice(0);
   char choice = '0';
-  if (getIsInCombat()) {
-    choice = '2'; // Defaults to combat menu
-  } else {
-    dispList("==============", {"Move", "Combat", "Targets", "Inventory", "Search"});
-    choice = getInput("wasdqe 012345");
-  }
+  dispList("==============", {"Move", "Combat", "Targets", "Inventory", "Search"});
+  choice = getInput("wasdqe 012345");
+
   switch (choice) {
   case '0':
     std::cout << "Are you sure you want to exit? [0, 1]" << std::endl;
@@ -123,8 +121,7 @@ void Player::moveMenu(int dir) {
   dLog << "Player entered " << dir << " for Player::moveMenu() choice" << std::endl;
   // set flags. Movedir && turnUsed
   if (dir != 0) {
-    flagForMove(dir);
-    flagTurnUsed(true);
+    setMoveDir(dir);
   }
 }
 
@@ -161,41 +158,39 @@ void Player::showHUD() {
 
 void Player::inventoryMenu(Inventory &inv) {
   // Show inventory
-  inv.show();
+  inv.showListOfItems();
   // Let player choose item
   std::cout << "Select an item: ";
   int itemIndex = getInteger(0, inv.getSlots());
 	itemIndex--;
-  // Let player choose action for item
-  dispList({"Use","Examine", "Drop"});
-  int actionNumber = getInteger(0,3);
-  switch (actionNumber) {
-    case 0:
-      return;
-      break;
-    case 1: // Use
-      if (inv.useItem(itemIndex, this)) {
-        onEndTurn();
-      } else {
-        std::cout << "Couldn't use item. \n";
+
+  if (itemIndex >= 0) {
+    // Get the item,
+    Item *item = inventory.getItem(itemIndex);
+    // Show them menu for that item.
+    dispList({"Use","Examine", "Drop"});
+    int actionNumber = getDigit(0,3);
+    switch (actionNumber) {
+      case 1: // Use
+        item->onUse(this);
+        endTurn();
+        break;
+      case 2: // Examine
+        item->showInfo();
+        break;
+      case 3:
+        std::cout << "Dropping item.\n";
+        dropItem(itemIndex);
+        break;
+      default:
+        break;
       }
-      break;
-    case 2: // Examine
-      std::cout << "No Implement. item number: " << itemIndex << std::endl;
-      break;
-    case 3:
-      std::cout << "Dropping item.\n";
-      dropItem(itemIndex);
-      break;
-    default:
-      std::cout << "No case for action " << actionNumber << " for item " << itemIndex << std::endl;
-      break;
-    }
+  }
 }
 
 void Player::searchMenu(Inventory &inv) {
   ITEM_SELECT:
-  inv.show();
+  inv.showListOfItems();
   int choice = getInteger(0, inv.getSlots());
   int itemIndex = choice-1;
   if (choice == 0) { return; } // Exit menu
@@ -221,6 +216,53 @@ void Player::searchMenu(Inventory &inv) {
   default:
     std::cout << "Invalid choice " << choice << std::endl;
     break;
+  }
+}
+
+bool Player::processUserInput(char key) {
+  bool inputProcessed = true;
+  switch (key) {
+    // Menus
+    case '~':
+      takeTurnMenu();
+      break;
+    case '1':
+      moveMenu();
+      break;
+    case '2':
+      combatMenu();
+      break;
+    case '3':
+      targetMenu();
+      break;
+    case '4':
+    case 'i':
+      inventoryMenu(inventory);
+      break;
+    case '5':
+      searchMenu(currentNode->getInventory());
+      break;
+    // Movement
+    case 'w':
+    case 'a':
+    case 's':
+    case 'd':
+    case 'q':
+    case 'e':
+      setMoveDir(Maps::wasdqeToDir(key));
+      break;
+    // Attack
+    case ' ':
+      onAttack();
+      break;
+    case 't':
+      //TODO: cycleTarget();
+      break;
+    default:
+      inputProcessed = false;
+      break;
+
+    return inputProcessed;
   }
 }
 

@@ -21,7 +21,7 @@ class Actor : public Creature
     void dropAllItems(); // Drops all items in inventory to node inventory.
     virtual bool onInteractedWith(); // Allows the interaction
     virtual void takeTurn(); // Allows the player to take actions. Uses turn
-    virtual void onEndTurn(); // Whatever needs to be done at the end of a turn. Default is flagging the turn as used.
+    virtual void endTurn(); // Whatever needs to be done at the end of a turn. Default is flagging the turn as used.
     virtual void onMove(); // TODO: Moving should make other creatures stop targeting you.
     int getMoveDir();
     bool getIsTurnUsed();
@@ -35,9 +35,8 @@ class Actor : public Creature
     Maps::Node *currentNode;
     // Tries to flag the actor for movement so that the map will move the
     // actor when it can
-    void flagForMove( int dir );
-    void flagTurnUsed();
-    void flagTurnUsed(bool val);
+    void setMoveDir( int dir );
+    void setIsTurnUsed(bool val = true);
     bool isPlayer = false;
   private:
     bool isTurnUsed; // Should stop allowing actions when this is true.
