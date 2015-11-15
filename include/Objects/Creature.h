@@ -30,7 +30,7 @@ class Creature
     void setStrength(int strength);
 
     // Creature stuff
-    
+
     /**
      * Uses an item. Applys effects to this if the item is 'defensive'
      * or applies the effects to the target if offensive

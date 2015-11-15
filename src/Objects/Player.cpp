@@ -66,49 +66,14 @@ void Player::takeTurnMenu() {
   //int choice(0);
   char choice = '0';
   dispList("==============", {"Move", "Combat", "Targets", "Inventory", "Search"});
-  choice = getInput("wasdqe 012345");
-
-  switch (choice) {
-  case '0':
-    std::cout << "Are you sure you want to exit? [0, 1]" << std::endl;
-    choice = getDigit(0,1);
-    if ( choice == 0 ) { goto START; }
-    kill();
-    std::exit(0);
-    break;
-  case '1' :
-    moveMenu();
-    break;
-  case '2' :
-    combatMenu();
-    break;
-  case '3':
-    targetMenu();
-    break;
-  case '4':
-    inventoryMenu(inventory);
-    break;
-  case '5':
-    searchMenu(currentNode->getInventory());
-    break;
-  case 'w':
-  case 'a':
-  case 's':
-  case 'd':
-  case 'q':
-  case 'e':
-    moveMenu(Maps::wasdqeToDir(choice));
-    break;
-  case ' ':
-    combatMenu(1); // TODO: Bad form, hardcoding
-    break;
-  default:
-    std::cout << "Could not find menu item " << choice << std::endl;
-    break;
+  choice = getInput(PROCESSABLE_INPUT);
+  if(!processUserInput(choice)) {
+    exitMenu();
   }
 }
 
 void Player::moveMenu(int dir) {
+  assert(currentNode != nullptr);
   if (dir == 0) {
     std::cout << "=====Move=====" << std::endl;
     // Show choices
@@ -118,10 +83,13 @@ void Player::moveMenu(int dir) {
     dir = getDigit(0,Maps::numDirs-1);
   }
   // TODO: Make sure that the player enters a possible direction
+
   dLog << "Player entered " << dir << " for Player::moveMenu() choice" << std::endl;
   // set flags. Movedir && turnUsed
-  if (dir != 0) {
+  if (dir != 0 && currentNode->canMoveInDir(dir)) {
     setMoveDir(dir);
+  } else {
+	std::cout << "Can't move in that direction." << std::endl;
   }
 }
 
@@ -223,7 +191,7 @@ bool Player::processUserInput(char key) {
   bool inputProcessed = true;
   switch (key) {
     // Menus
-    case '~':
+    case '`':
       takeTurnMenu();
       break;
     case '1':
@@ -257,12 +225,22 @@ bool Player::processUserInput(char key) {
       break;
     case 't':
       //TODO: cycleTarget();
+      inputProcessed = false;
       break;
     default:
       inputProcessed = false;
       break;
+  }
 
     return inputProcessed;
+}
+
+void Player::exitMenu() {
+  std::cout << "Press 1 to exit." << std::endl;
+  char choice = getInput();
+  if (choice == '1') {
+    kill();
+    std::exit(0);
   }
 }
 

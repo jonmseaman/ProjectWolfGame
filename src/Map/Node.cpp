@@ -166,12 +166,20 @@ namespace Maps {
     entranceDirs[dir] = isEntrance;
   }
 
-  /**
-   * Allows retrieval of entrance directions on nodes.
-   * @param dir The direction being checked.
-   * @pre 0 <= dir < numDirs
-   * @return True if the node has an entrance in direction dir.
-   */
+  bool Node::canMoveInDir(int dir) {
+    assert(0 <= dir < numDirs);
+    bool nodeInDirExists = nodeLinks[dir] != nullptr;
+    bool entrancesExist = false;
+    if (nodeInDirExists) {
+      entrancesExist = getEntranceDir(dir) &&
+        nodeLinks[dir]->getEntranceDir(Maps::oppositeDir(dir));
+    }
+
+    return entrancesExist;
+  }
+
+
+
    bool Node::getEntranceDir(int dir) {
      assert(0 <= dir < numDirs);
      return entranceDirs[dir];
