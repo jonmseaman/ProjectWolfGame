@@ -9,7 +9,7 @@ Player::Player() {
   setMaxHealth(100);
   setStrength(10);
   setName("Jon");
-  inventory = Inventory{"Jon's Inventory", 10};
+  inventory = Inventory{"Jon's Inventory", 8};
   isPlayer = true;
 }
 
@@ -21,7 +21,6 @@ void Player::combatMenu(int choice) {
     dispList("====Combat====", {"Attack", "Targets", "Inventory"});
     choice = getDigit(0, 3);
   }
-  //TODO: cout << "Moving " dir << endl;
   switch (choice) {
   case 0:
     flagInCombat(false);
@@ -61,7 +60,6 @@ void Player::takeTurn() {
 }
 
 void Player::takeTurnMenu() {
-  START:
   showHUD();
   //int choice(0);
   char choice = '0';
@@ -140,7 +138,11 @@ void Player::inventoryMenu(Inventory &inv) {
     int actionNumber = getDigit(0,3);
     switch (actionNumber) {
       case 1: // Use
-        item->onUse(this);
+        if (targetPtr != nullptr) {
+          item->onUse(this);
+        } else {
+          std::cout << "You don't have a target." << std::endl;
+        }
         endTurn();
         break;
       case 2: // Examine
@@ -168,8 +170,12 @@ void Player::searchMenu(Inventory &inv) {
   case 0: // Cancel menu
     goto ITEM_SELECT;
     return;
-  case 1:
-    // Add item to player's inventory
+  case 1: // Add item to player's inventory
+    if (inv.isSlotEmpty(itemIndex)) {
+      std::cout << "That slot is empty. Could not pick up item." << std::endl;
+    } else if (!inventory.hasOpenSlot()) {
+      std::cout << "Your inventory is full." << std::endl;
+    } else
     if (inventory.addItem(inv.getItem(itemIndex))) {
       std::cout << "Trying to remove item. Choice: " << choice << std::endl;
       inv.removeItem(itemIndex);
