@@ -5,13 +5,12 @@ class Stats
 {
   friend Creature;
 public:
-  Stats();
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
-//  virtual ~Stats();
 
   int getStamina() { return stamina; }
   int getStrength() { return strength; }
   int getIntellect() { return intellect; }
+  void setStamina(int stam) { stamina = stam; }
 
   /**
    * Shows a list of stats and their values

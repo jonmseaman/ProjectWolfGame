@@ -8,23 +8,24 @@ Item::Item():
 	//TODO: Add stats
 }
 
+Item::Item(std::string name, Stats stats) {
+	Item(name, "", stats);
+}
+
 Item::Item(std::string name, std::string description, Stats stats):
   name(name)
   , description(description)
   , stats(stats)
 {
+	baseDamage = 1;
+	baseHeal = 0;
 }
 
 Item::~Item() {
 }
 
-void Item::useOn(Creature* creature) {
-  assert(creature != nullptr);
-  //TODO: Implement this
-	// Changes stats of creature.
-  // Update the creatures stats
-  // creature->stats.addStats(stats) ?
-  // Do damage or healing
+void Item::use(const Creature &usedBy, Creature &usedOn) {
+	// TODO: Implement this
 }
 
 void Item::showInfo() {

@@ -18,7 +18,7 @@ Creature::~Creature() {
   dLog << "Creature dtor called" << std::endl;
 }
 
-int Creature::onAttack() // TODO: Update for stats class
+void Creature::onAttack() // TODO: Update for stats class
 { // TODO: Update for weapons
   assert( targetPtr != nullptr );
   int damage = stats.getStrength();
@@ -27,39 +27,41 @@ int Creature::onAttack() // TODO: Update for stats class
   // TODO: Update combat text
   // TODO: No weapon equipped --> fists
   std::cout << getName() << " swings for " << damage << ". " << std::endl;
-  return targetPtr->onDamage( damage );
+  targetPtr->onDamage( damage );
 }
 
 /** This function handles creatures being damaged
  *
  * @param dmg The amount of damage that this creature
  */
-int Creature::onDamage(int dmg) { // Should return damage taken
+void Creature::onDamage(int dmg) { // Should return damage taken
   // TODO: Update this for armor
   // modify dmg value based on armor
   if ( getIsLiving() ) {
     std::cout << getName() << " is hit for " << dmg << ". ";
     flagInCombat(true);
   }
-  stats.health -= dmg;
-  if ( stats.health <= 0 ) {
-    stats.health = 0;
-    isLiving = 0;
+  health -= dmg;
+  if ( health <= 0 ) {
+    health = 0;
+    isLiving = false;
   }
-  if (!getIsLiving()) { std::cout << getName() << " is dead. "; }
+  if (!getIsLiving()) { 
+    std::cout << getName() << " has been killed. "; 
+  }
   std::cout << std::endl;
-  return dmg;
 }
 
-int Creature::onHeal(int heal) {
+void Creature::onHeal(int heal) {
   // TODO: Modify heal with abilities/ items
-  stats.health += heal;
-  if (stats.health > stats.maxHealth) stats.health = stats.maxHealth;
-  return heal; // FIXME: make this return the amount healed
+  health += heal;
+  if (health > maxHealth) {
+    health = maxHealth;
+  }
 }
 
 void Creature::setHealth(int health) {
-  stats.health = health;
+  this->health = health;
   if (health > 0 ) {
     isLiving = true;
   }
@@ -93,29 +95,18 @@ void Creature::setName(std::string name) {
 }
 
 void Creature::kill() {
-  onDamage( stats.getHealth() );
+  onDamage( health );
 }
 
-void Creature::onAssistDamage(int dmg) {
-  assert( targetPtr != nullptr );
-  targetPtr->onDamage(dmg);
-}
-
-void Creature::onAssistHeal(int heal) {
-  if ( targetPtr != nullptr ) {
-    targetPtr->onHeal(heal);
-  }
-}
-
-void Creature::useItem(Item &item, Creature &creature) {
+void Creature::useItem(Item &item, Creature &usedOn) {
   // TODO: Implement
-  item.onUse(&creature);
+  item.use(*this, usedOn);
 }
 
 void Creature::displayHUDLine() {
   if (!isLiving) {
     std::cout << "<Dead> ";
   }
-  std::cout << name << ": " << stats.getHealth() << "/"
-    << stats.getMaxHealth();
+  std::cout << name << ": " << health << "/"
+    << maxHealth;
 }

@@ -12,7 +12,7 @@
 #include "House_2Story.h"
 
 // Static Initialization
-Factory::playerPtr = nullptr;
+Actor *Factory::playerPtr = nullptr;
 
 Factory::Factory()
 {

@@ -38,14 +38,12 @@ class Creature
      * Uses an item. Applys effects to this if the item is 'defensive'
      * or applies the effects to the target if offensive
      * @param item The item being used.
-     * @param creature The creature that the item is being used on.
+     * @param usedOn The creature that the item is being used on.
      */
-    void useItem(Item &item, Creature &creature);
-    int onAttack();
-    void onAssistDamage(int dmg); // Tries to damage this creature's target
-    void onAssistHeal(int heal); // Tries to heal this creature's target
-    int onDamage(int dmg); // Returns damage taken
-    int onHeal(int heal); // Returns health gained
+    void useItem(Item &item, Creature &usedOn);
+    void onAttack();
+    void onDamage(int dmg);
+    void onHeal(int heal);
     void kill(); // Reduces creature health to zero. Sets isLiving to false
 
     // Display

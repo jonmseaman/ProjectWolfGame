@@ -1,12 +1,6 @@
 #include <iostream>
 #include "Stats.h"
 
-Stats::Stats() {
-	stamina = 0;
-	strength = 0;
-	intellect = 0;
-}
-
 Stats::Stats(int stamina, int strength, int intellect) {
 	this->stamina = stamina;
 	this->strength = strength;
