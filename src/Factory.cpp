@@ -11,6 +11,8 @@
 // Tiles
 #include "House_2Story.h"
 
+// Static Initialization
+Factory::playerPtr = nullptr;
 
 Factory::Factory()
 {
@@ -70,4 +72,11 @@ Maps::Map* Factory::newMap(int map) {
       break;
   }
   return mapCreated;
+}
+
+Actor* Factory::getPlayer() {
+  if (playerPtr == nullptr) {
+    playerPtr = new Player{};
+  }
+  return playerPtr;
 }

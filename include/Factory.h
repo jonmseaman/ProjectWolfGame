@@ -19,9 +19,13 @@ public:
 	static Maps::Map* newMap(int map);
 	/**
 	 * This function returns a pointer to the player.
+	 * If the player does not exist, creates the player.
 	 * @return Pointer to player.
 	 */
 	static Actor* getPlayer();
+
+private:
+	static Actor* playerPtr;
 };
 
 // Enums for items, actors, nodes, maps

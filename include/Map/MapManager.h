@@ -15,7 +15,7 @@ class MapManager
     MapManager();
     void closeMap();
     void openMap(std::string mapName);
-    void openMap(int map);
+    void openMap(int mapNum);
     void play(); // Starts game loop
   protected:
   private:

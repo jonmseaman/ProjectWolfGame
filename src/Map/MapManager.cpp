@@ -6,10 +6,9 @@
 // directory
 MapManager::MapManager(): map(nullptr) {}
 
-void MapManager::openMap(int map) {
+void MapManager::openMap(int mapNum) {
   using namespace Maps;
-  Map* loadMap{ nullptr };
-  loadMap = Factory::newMap(map);
+  Map* loadMap = Factory::newMap(mapNum);
   setMap( loadMap );
 }
 
@@ -20,6 +19,11 @@ void MapManager::setMap(Maps::Map* map) {
   this->map = map;
 }
 
+/**
+ * Starts the game loop for the opened map.
+ * @pre There is a map open. (map != nullptr)
+ * @post The game loop will be started.
+ */
 void MapManager::play() {
   assert( map != nullptr );
   while ( true ) // TODO: Make variable for this
