@@ -16,6 +16,8 @@ class Item
     Item(int damage, int heal, bool isDepletedOnUse, int stackSize, std::string name);
     virtual ~Item();
 
+    void showInfo();
+
     /**
      * Returns the amount of damage stat of the item.
      * Equivalent to the amount of damage done in one hit

@@ -6,9 +6,9 @@
 
 Inventory::Inventory():Inventory("Inventory", 2) {}
 
-Inventory::Inventory(std::string name, int inventorySize): name(name)
-  , slots{inventorySize, nullptr}
-  , inventorySize(inventorySize) {}
+Inventory::Inventory(std::string name, int size): name(name)
+  , slots{ size, nullptr}
+  , size(size) {}
 
 Inventory::~Inventory() {
   for (int i(0); i<slots.size(); ++i) {
@@ -76,14 +76,12 @@ int Inventory::firstEmpty() {
   return 0;
 }
 
-void Inventory::show() {
+void Inventory::showListOfItems() {
   std::cout << getName() << std::endl;
   for (int i(0); i<slots.size(); i++) {
     if (slots.at(i) == nullptr ) {
       std::cout << std::setw(3) << std::right << i+1 << ": " << "Empty Slot\n";
-    }
-    else
-    {
+    } else {
       std::cout << std::setw(3) << std::right << i+1 << ": " << slots.at(i)->getName() << std::endl;
     }
   }
@@ -91,19 +89,21 @@ void Inventory::show() {
 
 bool Inventory::useItem(int itemIndex, Creature* user) {
   assert ( (slots.size() > itemIndex) && (itemIndex >= 0));
-  if ( slots.at(itemIndex) != nullptr ) {
+  if ( slots.at(itemIndex) == nullptr ) {
     slots.at(itemIndex)->onUse(user);
     return true;
-  }
-  else
-  {
+  } else {
     return false;
   }
 }
 
-Item* Inventory::getItem(int slotIndex) {
-  if (slotIndex>=0 && slotIndex<slots.size()) {
-    return slots.at(slotIndex);
-  }
-  return nullptr;
+Item *Inventory::getItem(int slotIndex) {
+  assert(slots.at(slotIndex) != nullptr);
+  assert(0 <= slotIndex && slotIndex < slots.size());
+  return slots.at(slotIndex);
+}
+
+bool Inventory::isSlotEmpty(int slotIndex) {
+  assert(0 <= slotIndex && slotIndex < size);
+  return !(slots.at(slotIndex) == nullptr);
 }

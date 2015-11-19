@@ -56,3 +56,7 @@ int Item::getHeal() {
 int Item::getStackSize() {
   return stackSize;
 }
+
+void Item::showInfo() {
+  // TODO: Implement this
+}

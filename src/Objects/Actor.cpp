@@ -42,14 +42,12 @@ void Actor::setCurrentNode(Maps::Node *node) {
   this->currentNode = node;
 }
 
-void Actor::flagForMove(int dir) {
+void Actor::setMoveDir(int dir) {
   moveDir = dir;
+  setIsTurnUsed();
 }
 
-void Actor::flagTurnUsed() {
-  isTurnUsed = true;
-}
-void Actor::flagTurnUsed(bool val) {
+void Actor::setIsTurnUsed(bool val) {
   this->isTurnUsed = val;
 }
 
@@ -83,6 +81,6 @@ void Actor::dropAllItems() {
   }
 }
 
-void Actor::onEndTurn() {
-  flagTurnUsed(true);
+void Actor::endTurn() {
+  setIsTurnUsed(true);
 }

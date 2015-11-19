@@ -30,7 +30,14 @@ class Creature
     void setStrength(int strength);
 
     // Creature stuff
-    void useItemFromInventory(int itemNumber);
+    
+    /**
+     * Uses an item. Applys effects to this if the item is 'defensive'
+     * or applies the effects to the target if offensive
+     * @param item The item being used.
+     * @param creature The creature that the item is being used on.
+     */
+    void useItem(Item &item, Creature &creature);
     int onAttack();
     void onAssistDamage(int dmg); // Tries to damage this creature's target
     void onAssistHeal(int heal); // Tries to heal this creature's target
