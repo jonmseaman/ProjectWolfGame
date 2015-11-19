@@ -257,13 +257,14 @@ bool Player::processUserInput(char key) {
       break;
     case 't':
       //TODO: cycleTarget();
+      inputProcessed = false;
       break;
     default:
       inputProcessed = false;
       break;
 
-    return inputProcessed;
-  }
+  } // End switch for input processing
+  return inputProcessed;
 }
 
 
