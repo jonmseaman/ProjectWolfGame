@@ -1,7 +1,9 @@
 #ifndef ITEM_H
 #define ITEM_H
-#include <string>
+#include <assert.h>
 #include <iostream>
+#include <string>
+#include "Stats.h"
 class Creature;
 
 /**
@@ -9,53 +11,43 @@ class Creature;
  */
 class Item
 {
-  friend std::ostream &operator<<(std::ostream &os, const Item &item);
-  friend std::istream &operator>>(std::istream &is, Item &item);
   public:
     Item();
-    Item(int damage, int heal, bool isDepletedOnUse, int stackSize, std::string name);
+	Item(std::string name, std::string description, Stats stats);
+	Item(std::string name, Stats stats);
     virtual ~Item();
 
+    /**
+     * Shows information about the item on std::cout
+     * Shows name, description, stats.
+     */
     void showInfo();
 
     /**
-     * Returns the amount of damage stat of the item.
-     * Equivalent to the amount of damage done in one hit
+     * Returns the name of the item.
      */
-    int getDamage();
+    std::string getName() { return name; }
+    /**
+     * Returns the description of the item.
+     */
+    std::string getDescription() { return description; }
+
+	void setDescription(const std::string &description) { this->description = description; }
 
     /**
-     * Returns the amount of healing the item does
+     * @param creature The creature being affected by the item
+     * @pre creature != nullptr
      */
-    int getHeal();
+    virtual void useOn(Creature* creature);
 
-    /**
-     * Returns true if the quantity of the item decreases when
-     * the item is used
-     */
-    bool getIsDepletedOnUse();
-
-    /**
-     * Returns the maximum amount of the item that can be stacked
-     */
-    int getStackSize();
-    /**
-     * Returns the name of the item
-     */
-    std::string getName();
-    virtual void onUse(Creature* user);
+    Stats stats;
   protected:
-    int damage; /// The damage that the item deals when used
-    int heal;
-    bool isDepletedOnUse;
     std::string name;
-    int stackSize;
+    std::string description;
+
+	int damage;
   private:
 
 };
-
-// Operators
-std::ostream &operator<<(std::ostream &os, const Item &item);
-std::istream &operator>>(std::istream &is, Item &item);
 
 #endif // ITEM_H

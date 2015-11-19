@@ -9,8 +9,7 @@ class Inventory
     Inventory();
     Inventory(std::string name, int inventorySize);
     virtual ~Inventory();
-    friend std::ostream &operator<<(std::ostream &os, const Inventory &inventory);
-    friend std::istream &operator>>(std::istream &is, Inventory &inventory);
+
     bool addItem(Item* item);
     bool addNewItem(Item* item);
     void deleteItem(int slotIndex); // Deletes item
@@ -32,16 +31,11 @@ class Inventory
     bool hasOpenSlot();
     int firstEmpty();
     void showListOfItems();
-    bool useItem(int itemIndex, Creature* user);
   protected:
     std::string name;
     std::vector<Item*> slots;
     int size;
   private:
 };
-
-// Operators
-std::ostream &operator<<(std::ostream &os, const Inventory &inventory);
-std::istream &operator>>(std::istream &is, Inventory &inventory);
 
 #endif // INVENTORY_H

@@ -7,9 +7,8 @@
 
 Player::Player() {
   setMaxHealth(100);
-  setStrength(10);
   setName("Jon");
-  inventory = Inventory{"Jon's Inventory", 10};
+  inventory = Inventory{"Jon's Inventory", 8};
   isPlayer = true;
 }
 
@@ -172,7 +171,7 @@ void Player::inventoryMenu(Inventory &inv) {
     int actionNumber = getDigit(0,3);
     switch (actionNumber) {
       case 1: // Use
-        item->onUse(this);
+        //item->onUse(this); // TODO: fixme. onUse --> useOn
         endTurn();
         break;
       case 2: // Examine

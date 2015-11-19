@@ -2,9 +2,8 @@
 #include "BasicSword.h"
 Swordsmen::Swordsmen(): Actor() {
   setName("Swordsmen");
-  setHealth(50);
   setMaxHealth(50);
-  setStrength(15);
+  stats = Stats{5, 3, 0};
 
   inventory = Inventory{ "Backpack", 10 };
   inventory.addNewItem(new BasicSword);

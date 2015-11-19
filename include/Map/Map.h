@@ -9,8 +9,6 @@ namespace Maps
 {
   class Map
   {
-    friend std::ostream &operator<<(std::ostream &os, const Maps::Map &map);
-    friend std::istream &operator>>(std::istream &is, Maps::Map &map);
     public:
       Map(); // Default constructor. Creates empty map with blank nodes
       Map(int mapSize); // Makes a map of specific size. Does not make any nodes
@@ -32,9 +30,5 @@ namespace Maps
       int mapSize; // The width & height of the square grid of nodes
   };
 }
-
-// Operators
-std::ostream &operator<<(std::ostream &os, const Maps::Map &map);
-std::istream &operator>>(std::istream &is, Maps::Map &map);
 
 #endif

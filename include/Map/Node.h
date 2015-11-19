@@ -9,8 +9,6 @@ namespace Maps
 {
   class Node
   {
-    friend std::ostream &operator<<(std::ostream &os, const Maps::Node &node);
-    friend std::istream &operator>>(std::istream &is, Maps::Node &node);
     public:
       static int nodeCount;
       Node();
@@ -48,9 +46,5 @@ namespace Maps
     private:
   };
 }
-
-// Operators
-std::ostream &operator<<(std::ostream &os, const Maps::Node &node);
-std::istream &operator>>(std::istream &is, Maps::Node &node);
 
 #endif

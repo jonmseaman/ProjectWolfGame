@@ -27,10 +27,13 @@ class Creature
     void setMaxHealth(int maxHealth); // Set max hp, also sets hp
     void setIsLiving(bool isLiving); // Can be used to kill a creature
     void setTarget(Creature* creature);
-    void setStrength(int strength);
+    // Experience
+    void levelUp();
+    int experienceToNextLevel();
+    void addExperience(int xp);
 
     // Creature stuff
-    
+
     /**
      * Uses an item. Applys effects to this if the item is 'defensive'
      * or applies the effects to the target if offensive
@@ -51,7 +54,10 @@ class Creature
     Equipment equipment;
     Inventory inventory;
 
+    // Stats
     Stats stats;
+
+
   protected:
     void flagInCombat(bool val); // sets combat status
     void setName(std::string name); // sets that name of the creature
@@ -62,6 +68,14 @@ class Creature
     // Utility vars
     bool isLiving; // TODO: Remove this variable
     bool isInCombat;
+
+    // XP Variables
+    int level; // Creatures level
+    int experience; // Experience earned this level
+
+    // Derived stats
+    int health;
+    int maxHealth; // This should be calculated.
 };
 
 #endif // CREATURE_H

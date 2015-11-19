@@ -70,7 +70,7 @@ void Creature::setHealth(int health) {
 }
 
 void Creature::setMaxHealth(int maxHealth) {
-  stats.maxHealth = maxHealth;
+  this->maxHealth = maxHealth;
   setHealth(maxHealth);
 }
 
@@ -78,9 +78,6 @@ void Creature::setTarget(Creature* creature) {
   targetPtr = creature;
 }
 
-void Creature::setStrength(int strength) {
-  stats.strength = strength;
-}
 
 void Creature::combatStop() { // Takes creature out of combat and removes targets
   flagInCombat(false);

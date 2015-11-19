@@ -14,8 +14,6 @@ class Actor : public Creature
   public:
     Actor();
     virtual ~Actor();
-    friend std::ostream &operator<<(std::ostream &os, const Creature &creature);
-    friend std::istream &operator>>(std::istream &is, Creature &creature);
 
     bool dropItem(int slotNumber); // Drops item to node inventory. slotNumber is index+1 in inventory
     void dropAllItems(); // Drops all items in inventory to node inventory.
@@ -42,9 +40,5 @@ class Actor : public Creature
     bool isTurnUsed; // Should stop allowing actions when this is true.
     int moveDir; // The direction that the map will move the player
 };
-
-// Operators
-std::ostream &operator<<(std::ostream &os, const Creature &creature);
-std::istream &operator>>(std::istream &is, Creature &creature);
 
 #endif // ACTOR_H

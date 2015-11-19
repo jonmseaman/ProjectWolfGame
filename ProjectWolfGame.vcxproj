@@ -141,6 +141,7 @@
     <ClCompile Include="src\Objects\Inventory.cpp" />
     <ClCompile Include="src\Objects\Item.cpp" />
     <ClCompile Include="src\Objects\Player.cpp" />
+    <ClCompile Include="src\Objects\Stats.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
