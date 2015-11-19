@@ -2,7 +2,7 @@
 #define MAPMANAGER_H
 #include <string>
 #include "Map.h"
-#include "MapEnum.h"
+#include "Factory.h"
 
 /* The purpose of this class is to make it easier to manager maps.
  * Eventually, MapManager will be able to handle multiple open maps and
@@ -15,12 +15,12 @@ class MapManager
     MapManager();
     void closeMap();
     void openMap(std::string mapName);
-    void openMap(MapType mapType);
+    void openMap(int map);
     void play(); // Starts game loop
   protected:
   private:
     Maps::Map* map;
-    void setMap(Maps::Map* _map);
+    void setMap(Maps::Map* map);
 };
 
 #endif // MAPMANAGER_H

@@ -1,33 +1,23 @@
 #include <assert.h>
 #include "MapManager.h"
-#include "MapEnum.h"
 #include "utils.h"
-#include "GameFiles.h"
+#include "Factory.h"
 // TODO: Add filesystem support. ie, support opening save files from a
 // directory
 MapManager::MapManager(): map(nullptr) {}
 
-void MapManager::openMap(MapType mapType) {
+void MapManager::openMap(int map) {
   using namespace Maps;
   Map* loadMap{ nullptr };
-  switch (mapType) {
-    case DEFAULT :
-      loadMap = new Map{};
-      break;
-    case CENTER_TOWN :
-      loadMap = new CenterTown{};
-      break;
-
-
-  }
+  loadMap = Factory::newMap(map);
   setMap( loadMap );
 }
 
-void MapManager::setMap(Maps::Map* _map) {
-  if (map != nullptr) {
+void MapManager::setMap(Maps::Map* map) {
+  if (this->map != nullptr) {
     delete map;
   }
-  map = _map;
+  this->map = map;
 }
 
 void MapManager::play() {
