@@ -8,15 +8,14 @@ Item::Item():
 	//TODO: Add stats
 }
 
-Item::Item(std::string name, Stats stats) {
-	Item(name, "", stats);
+Item::Item(std::string name, Stats stats) : Item(name, "", stats) {
+
 }
 
-Item::Item(std::string name, std::string description, Stats stats):
-  name(name)
-  , description(description)
-  , stats(stats)
-{
+Item::Item(std::string name, std::string description, Stats stats) {
+	this->name = name;
+	this->description = description;
+	this->stats = stats;
 	baseDamage = 1;
 	baseHeal = 0;
 }
