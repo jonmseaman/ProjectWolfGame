@@ -1,6 +1,7 @@
 #include <iostream>
 #include <assert.h>
 #include "Actor.h"
+#include "Dir.h"
 #include "utils.h"
 #include "dLog.h"
 
@@ -39,6 +40,7 @@ void Actor::setCurrentNode(Maps::Node *node) {
 
 void Actor::setMoveDir(int dir) {
   assert(currentNode != nullptr);
+  assert(0 <= dir && dir < Maps::numDirs);
   moveDir = dir;
   if (currentNode->canMoveInDir(dir)) {
     setIsTurnUsed();

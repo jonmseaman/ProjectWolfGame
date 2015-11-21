@@ -47,8 +47,13 @@ class Actor : public Creature
      */
     Maps::Node *currentNode;
     Actor* targetPtr;
-    // Tries to flag the actor for movement so that the map will move the
-    // actor when it can
+    /**
+     * Tries to set movement for the actor.
+     * If it is possible to move in direction dir, then the turn is used.
+     * @pre 0 <= dir < numDirs
+     * @post Turn is used if it is possible to move in direction
+     * @post Actor will be set to move after turns
+     */
     void setMoveDir( int dir );
     void setIsTurnUsed(bool val = true);
     bool isPlayer = false;

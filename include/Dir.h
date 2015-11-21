@@ -15,7 +15,7 @@ namespace Maps
     West,
     South,
     Up,
-    Down
+    Down,
   };
 
   /**
