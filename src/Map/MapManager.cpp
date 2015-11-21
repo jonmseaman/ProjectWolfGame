@@ -19,11 +19,6 @@ void MapManager::setMap(Maps::Map* map) {
   this->map = map;
 }
 
-/**
- * Starts the game loop for the opened map.
- * @pre There is a map open. (map != nullptr)
- * @post The game loop will be started.
- */
 void MapManager::play() {
   assert( map != nullptr );
   while ( true ) // TODO: Make variable for this

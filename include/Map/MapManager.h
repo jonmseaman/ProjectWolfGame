@@ -16,7 +16,12 @@ class MapManager
     void closeMap();
     void openMap(std::string mapName);
     void openMap(int mapNum);
-    void play(); // Starts game loop
+    /**
+     * Starts the game loop for the opened map.
+     * @pre There is a map open. (map != nullptr)
+     * @post The game loop will be started.
+     */
+    void play();
   protected:
   private:
     Maps::Map* map;

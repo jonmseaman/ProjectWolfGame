@@ -27,9 +27,6 @@ void Actor::takeTurn() {
   }
 }
 
-/**
- * @return The direction that the actor should move
- */
 int Actor::getMoveDir() {
   return moveDir;
 }

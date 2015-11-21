@@ -36,6 +36,11 @@ class Actor : public Creature
 
     // Movement
     virtual void onMove(); // TODO: Moving should make other creatures stop targeting you.
+    /**
+     * @usage Used by node to figure out which direction the
+     * actor should be moved.
+     * @return The direction that the actor should move
+     */
     int getMoveDir();
     void setCurrentNode(Maps::Node *node);
     // Special

@@ -21,6 +21,12 @@ namespace Maps
       std::string getName();
       void setName(std::string name) { this->name = name; }
       void setNodeLink(int dir, Node* link);
+      /**
+       * Allows setting entrance direction for nodes. Nodes can be entered and
+       * exited from entrance directions.
+       * @pre 0 < dir < Maps::numDirs
+       * @post The node will have an entrance in dir if(isEntrance)
+       */
       void setEntranceDir(int dir, bool isEntrance);
       Inventory inventory;
 

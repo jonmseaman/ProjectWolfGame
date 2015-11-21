@@ -155,12 +155,6 @@ namespace Maps {
     return actorPtrList.size();
   }
 
-  /**
-   * Allows setting entrance direction for nodes. Nodes can be entered and
-   * exited from entrance directions.
-   * @pre 0 < dir < Maps::numDirs
-   * @post The node will have an entrance in dir if(isEntrance)
-   */
   void Node::setEntranceDir(int dir, bool isEntrance) {
     assert(0 <= dir && dir < Maps::numDirs);
     entranceDirs[dir] = isEntrance;
