@@ -43,6 +43,7 @@ enum EActors {
 };
 
 enum ENodes{
+	NODE_DEFAULT = 0,
 	NODE_HOUSE_2STORY,
 	NODE_TYPE_COUNT,
 };
