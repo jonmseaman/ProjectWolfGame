@@ -26,8 +26,7 @@ void Player::combatMenu(int choice) {
     flagInCombat(false);
     break;
   case 1:
-    onAttack(); // TODO: Make sure that onAttack() uses a turn if there is a target
-    setIsTurnUsed(true);
+    processUserInput(' '); // Attack key
     break;
   case 2:
     targetMenu();
@@ -54,7 +53,7 @@ void Player::takeTurn() {
     std::cout << getName() << " is dead. Continue? ";
     char choice = getInput();
     if (choice == '0' || choice == 'n' || choice == 'N') {
-      std::exit(0);
+      std::exit(0); // TODO: Make a global variable wanting to quit
     }
   }
 }
@@ -233,7 +232,6 @@ bool Player::processUserInput(char key) {
       } else {
         std::cout << "You don't have a target." << std::endl;
       }
-      onAttack();
       break;
     case 't':
       //TODO: cycleTarget();
