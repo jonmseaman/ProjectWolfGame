@@ -21,6 +21,8 @@ class Player : public Actor
      * for derived classes which do not override takeTurn()
      */
     void takeTurn();
+
+	const std::string PROCESSABLE_INPUT = "wasdqe it012345`";
   protected:
     /**
      * This menu should allow access to all things that the player needs
@@ -37,6 +39,7 @@ class Player : public Actor
     /**
      * Displays a message about the player leaving.
      * Also, see Actor::onMove()
+     * @pre currentNode != nullptr
      */
     void onMove();
     /**
@@ -66,6 +69,10 @@ class Player : public Actor
      * false if there was not a corresponding command.
      */
     bool processUserInput(char key);
+    /**
+     * Menu for exiting the game. Asks the user to press 0 to exit.
+     */
+     void exitMenu();
   private:
 };
 

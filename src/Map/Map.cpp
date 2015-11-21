@@ -4,12 +4,11 @@
 #include "stdlib.h"
 #include <assert.h>
 namespace Maps
-{ //TODO: Allow for rectangular maps
+{
   Map::Map(): Map(DEFAULT_MAP_SIZE) {
     for (auto &i: grid) { i = new Node; }
     buildMoveData();
   }
-
 
   Map::Map(int mapSize): grid{mapSize*mapSize, nullptr}
   , mapSize{mapSize} {
@@ -26,7 +25,6 @@ namespace Maps
     }
   }
 
-
   void Map::setNode(int xInd, int yInd, Node* node) {
     // Reference to node ptr being replaced
     Node *&alreadyThere = grid.at(yInd*mapSize + xInd);
@@ -35,7 +33,7 @@ namespace Maps
    }
 
 
-  void Map::buildMoveData() { // TODO: Have buildMoveData() ignore nullptrs in the grid.
+  void Map::buildMoveData() {
     for ( int yIndex( 0 ); yIndex < mapSize; yIndex++ ) {
       for ( int xIndex( 0 ); xIndex < mapSize; xIndex++ ) {
         dLog << "\tsetNodeLinks: " << xIndex << ", " << yIndex << std::endl;
