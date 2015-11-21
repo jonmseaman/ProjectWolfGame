@@ -112,7 +112,7 @@ void Player::showHUD() {
   displayHUDLine();
   std::cout << std::endl;
   // Information on target
-  if (targetPtr != nullptr) {
+  if (hasValidTarget()) {
     targetPtr->displayHUDLine();
     std::cout << std::endl;
   } else {
@@ -139,7 +139,7 @@ void Player::inventoryMenu(Inventory &inv) {
     switch (actionNumber) {
       case 1: // Use
         //item->onUse(this); // TODO: fixme. onUse --> useOn
-        if (targetPtr != nullptr) {
+        if (hasValidTarget()) {
           item->use(*this, *targetPtr);
         } else {
           std::cout << "You don't have a target." << std::endl;
@@ -228,7 +228,7 @@ bool Player::processUserInput(char key) {
       break;
     // Attack
     case ' ':
-      if (hasTarget()) {
+      if (hasValidTarget()) {
         onAttack();
       } else {
         std::cout << "You don't have a target." << std::endl;
@@ -247,14 +247,12 @@ bool Player::processUserInput(char key) {
 }
 
 void Player::exitMenu() {
-  std::cout << "Press 1 to exit." << std::endl;
+  std::cout << "Press 1 to exit, or something else to continue." << std::endl;
   char choice = getInput();
   if (choice == '1') {
     kill();
     std::exit(0);
   }
 }
-
-
 
 //TODO: Equipment menu

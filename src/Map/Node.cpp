@@ -178,10 +178,17 @@ namespace Maps {
     return entrancesExist;
   }
 
-
-
    bool Node::getEntranceDir(int dir) {
      assert(0 <= dir < numDirs);
      return entranceDirs[dir];
+   }
+
+   bool Node::contains(Actor* actor) {
+     bool actorFound = false;
+     for (auto i = actorPtrList.begin();
+      i != actorPtrList.end() && !actorFound; i++) {
+        actorFound = actor == *i;
+     }
+     return actorFound;
    }
 }

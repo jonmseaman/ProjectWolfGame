@@ -20,14 +20,12 @@ class Creature
 
     // Data Access
     std::string getName() { return name; }
+    void setName(std::string name); // sets that name of the creature
     bool getIsInCombat() { return isInCombat; }
     bool getIsLiving() { return isLiving; }
-    Creature *getTarget() { return targetPtr; } // returns target of creature
     void setHealth(int health);
     void setMaxHealth(int maxHealth); // Set max hp, also sets hp
     void setIsLiving(bool isLiving); // Can be used to kill a creature
-    void setTarget(Creature* creature);
-    bool hasTarget() { return targetPtr != nullptr; }
     // Experience
     void levelUp();
     int experienceToNextLevel();
@@ -42,7 +40,11 @@ class Creature
      * @param usedOn The creature that the item is being used on.
      */
     void useItem(Item &item, Creature &usedOn);
-    void onAttack();
+    /**
+     * This function handles creatures being damaged
+     * Kills the creature if the damage is sufficient
+     * @param dmg The amount of damage that this creature
+     */
     void onDamage(int dmg);
     void onHeal(int heal);
     void kill(); // Reduces creature health to zero. Sets isLiving to false
@@ -59,9 +61,6 @@ class Creature
 
   protected:
     void flagInCombat(bool val); // sets combat status
-    void setName(std::string name); // sets that name of the creature
-    // Targets
-    Creature* targetPtr;
   private:
     std::string name;
     // Utility vars

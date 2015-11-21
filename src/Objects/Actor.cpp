@@ -14,16 +14,11 @@ Actor::~Actor() {
   dLog << "Actor dtor called" << std::endl;
 }
 
-bool Actor::onInteractedWith() {
-  return 0;
-}
-
-
 void Actor::takeTurn() {
   dLog << "Actor takes turn" << std::endl;
-  if (targetPtr == nullptr || !targetPtr->getIsLiving()) {
+  if (!hasValidTarget() || !targetPtr->getIsLiving()) {
     // TODO: Get a target
-    if (targetPtr != nullptr) {
+    if (hasValidTarget()) {
       onAttack();
     }
   } else if (targetPtr->getIsLiving()) {
@@ -83,4 +78,30 @@ void Actor::dropAllItems() {
 
 void Actor::endTurn() {
   setIsTurnUsed(true);
+}
+
+bool Actor::hasValidTarget() {
+  bool targetValid = (targetPtr != nullptr)
+    && (currentNode->contains(targetPtr));
+  if (!targetValid) {
+    // If the target is not valid, remove it.
+    targetPtr = nullptr;
+  }
+  return targetValid;
+}
+
+void Actor::onAttack() // TODO: Update for stats class
+{ // TODO: Update for weapons
+  assert( targetPtr != nullptr );
+  int damage = stats.getStrength();
+  // damage += damage from weapon
+  // TODO: Update this for items.
+  // TODO: Update combat text
+  // TODO: No weapon equipped --> fists
+  std::cout << getName() << " swings for " << damage << ". " << std::endl;
+  targetPtr->onDamage( damage );
+}
+
+void Actor::setTarget(Actor* actor) {
+  targetPtr = actor;
 }

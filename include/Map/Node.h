@@ -15,6 +15,7 @@ namespace Maps
       virtual ~Node();
 
       // Data Access
+      bool contains(Actor* actor);
       Actor* getActorPtr(int index); // For getting targets
       Inventory &getInventory() { return inventory; }
       std::string getName();
