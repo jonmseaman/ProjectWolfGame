@@ -10,10 +10,7 @@ namespace Maps
     buildMoveData();
   }
 
-  /**
-   * Creates a map with size mapSize
-   * Nodes are initialized to nullptrs
-   */
+
   Map::Map(int mapSize): grid{mapSize*mapSize, nullptr}
   , mapSize{mapSize} {
   }
@@ -22,9 +19,6 @@ namespace Maps
     deleteGrid();
   }
 
-  /**
-   * Activates all nodes in the map.
-   */
   void Map::activate() {
     dLog << "Map activated." << std::endl;
     for ( auto &node : grid ) {
@@ -32,23 +26,15 @@ namespace Maps
     }
   }
 
-  /**
-   * Allows the nodes to be replaced.
-   * @post The node at xInd, yInd = #node
-   */
+
   void Map::setNode(int xInd, int yInd, Node* node) {
+    // Reference to node ptr being replaced
     Node *&alreadyThere = grid.at(yInd*mapSize + xInd);
-    if (alreadyThere != nullptr) {
-      delete alreadyThere;
-    }
+    delete alreadyThere; // Deletes the node that might be there
     alreadyThere = node;
    }
 
-  /**
-   * Connects the nodes to each other.
-   * @pre Elements of grid are not nullptrs
-   * @post Nodes will know
-   */
+
   void Map::buildMoveData() { // TODO: Have buildMoveData() ignore nullptrs in the grid.
     for ( int yIndex( 0 ); yIndex < mapSize; yIndex++ ) {
       for ( int xIndex( 0 ); xIndex < mapSize; xIndex++ ) {
@@ -75,21 +61,12 @@ namespace Maps
     }
   }
 
-  /**
-   * Allows access to nodes in the map.
-   * @pre xInd, yInd < mapSize
-   * @return Pointer to node at xInd, yInd
-   */
   Node* Map::getNode(int xInd, int yInd) {
     assert(xInd < mapSize && yInd < mapSize);
     assert(grid.at(yInd*mapSize + xInd) != nullptr);
     return grid.at(yInd*mapSize + xInd);
   }
 
-  /**
-   * Deletes all elements of the grid.
-   * For use by the dtor
-   */
   void Map::deleteGrid() {
     for (int i(0); i < grid.size(); ++i) {
       delete grid.at(i);

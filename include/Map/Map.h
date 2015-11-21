@@ -15,16 +15,42 @@ namespace Maps
       virtual ~Map(); // Deletes nodes.
 
       // Data Acess
+
+      /**
+       * Creates a map with size mapSize
+       * Nodes are initialized to nullptrs
+       */
       int getMapSize();
+      /**
+       * Allows access to nodes in the map.
+       * @pre xInd, yInd < mapSize
+       * @return Pointer to node at xInd, yInd
+       */
       Maps::Node* getNode(int xInd, int yInd);
+      /**
+       * Allows the nodes to be replaced.
+       * Deletes the node being replaced.
+       * @post The node at xInd, yInd = #node
+       */
       void setNode(int xInd, int yInd, Node* node);
-      // Use
-      void activate(); // Activates each node in the map once.
+      /**
+       * Activates all nodes in the map.
+       */
+      void activate();
     protected:
-      void buildMoveData(); // Fills node's moveData
+      /**
+       * Connects the nodes to each other.
+       * @pre Elements of grid are not nullptrs
+       * @post Nodes will be linked together
+       */
+      void buildMoveData();
       std::vector<Node*> grid; // The array of nodes that the player sees [y*size + x]
     private:
-      void deleteGrid(); // Deletes all elements of the grid.
+      /**
+       * Deletes all elements of the grid.
+       * For use by the dtor
+       */
+      void deleteGrid();
       // Vars
       const int DEFAULT_MAP_SIZE { 5 };
       int mapSize; // The width & height of the square grid of nodes
