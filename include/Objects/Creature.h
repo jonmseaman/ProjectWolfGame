@@ -27,6 +27,7 @@ class Creature
     void setMaxHealth(int maxHealth); // Set max hp, also sets hp
     void setIsLiving(bool isLiving); // Can be used to kill a creature
     void setTarget(Creature* creature);
+    bool hasTarget() { return targetPtr != nullptr; }
     // Experience
     void levelUp();
     int experienceToNextLevel();

@@ -54,8 +54,9 @@ Actor* Factory::newActor(int actor) {
 Maps::Node* Factory::newNode(int node) {
   Maps::Node* nodeCreated = nullptr;
   switch (node) {
-    //case ENodes::Default:
-    //  break;
+    case NODE_HOUSE_2STORY:
+      nodeCreated = new House_2Story();
+      break;
     default:
       nodeCreated = new Maps::Node{};
       break;

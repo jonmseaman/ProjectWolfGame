@@ -1,5 +1,6 @@
-#include <iostream>
 #include <assert.h>
+#include <iostream>
+#include <string>
 #include "Player.h"
 #include "Dir.h"
 #include "utils.h"
@@ -137,15 +138,12 @@ void Player::inventoryMenu(Inventory &inv) {
     int actionNumber = getDigit(0,3);
     switch (actionNumber) {
       case 1: // Use
-<<<<<<< HEAD
         //item->onUse(this); // TODO: fixme. onUse --> useOn
-=======
         if (targetPtr != nullptr) {
-          item->onUse(this);
+          item->use(*this, *targetPtr);
         } else {
           std::cout << "You don't have a target." << std::endl;
         }
->>>>>>> refs/remotes/origin/master
         endTurn();
         break;
       case 2: // Examine
@@ -230,6 +228,11 @@ bool Player::processUserInput(char key) {
       break;
     // Attack
     case ' ':
+      if (hasTarget()) {
+        onAttack();
+      } else {
+        std::cout << "You don't have a target." << std::endl;
+      }
       onAttack();
       break;
     case 't':
@@ -239,13 +242,8 @@ bool Player::processUserInput(char key) {
     default:
       inputProcessed = false;
       break;
-  }
-
-<<<<<<< HEAD
   } // End switch for input processing
   return inputProcessed;
-=======
-    return inputProcessed;
 }
 
 void Player::exitMenu() {
@@ -255,7 +253,6 @@ void Player::exitMenu() {
     kill();
     std::exit(0);
   }
->>>>>>> refs/remotes/origin/master
 }
 
 
