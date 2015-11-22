@@ -5,6 +5,7 @@
 #include "Actor.h"
 #include "Node.h"
 #include "Map.h"
+#include "Factory_Enums.h"
 
 class Factory
 {
@@ -26,32 +27,6 @@ public:
 
 private:
 	static Actor* playerPtr;
-};
-
-// Enums for items, actors, nodes, maps
-
-enum EItems {
-	ITEM_BASIC_SWORD,
-	ITEM_TYPE_COUNT,
-};
-
-enum EActors {
-	ACTOR_RAT = 0,
-	ACTOR_SWORDSMEN,
-	ACTOR_TYPE_COUNT,
-
-};
-
-enum ENodes{
-	NODE_DEFAULT = 0,
-	NODE_HOUSE_2STORY,
-	NODE_TYPE_COUNT,
-};
-
-enum EMaps{
-  MAP_DEFAULT = 0,
-  MAP_CENTER_TOWN,
-	MAP_TYPE_COUNT,
 };
 
 #endif FACTORY_H

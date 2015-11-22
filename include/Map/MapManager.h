@@ -3,6 +3,7 @@
 #include <string>
 #include "Map.h"
 #include "Factory.h"
+#include "Factory_Enums.h"
 
 /* The purpose of this class is to make it easier to manager maps.
  * Eventually, MapManager will be able to handle multiple open maps and

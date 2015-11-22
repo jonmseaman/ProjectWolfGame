@@ -149,5 +149,8 @@
     <ClInclude Include="include\Factory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Factory_Enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

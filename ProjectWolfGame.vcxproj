@@ -152,6 +152,7 @@
     </ClInclude>
     <ClInclude Include="include\Enums\MapEnum.h" />
     <ClInclude Include="include\Enums\NodeEnum.h" />
+    <ClInclude Include="include\Factory_Enums.h" />
     <ClInclude Include="include\File.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
