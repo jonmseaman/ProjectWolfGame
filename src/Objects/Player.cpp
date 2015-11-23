@@ -9,6 +9,7 @@
 Player::Player() {
   setMaxHealth(100);
   setName("Jon");
+  stats = Stats{5,5,5};
   inventory = Inventory{"Jon's Inventory", 8};
   isPlayer = true;
 }
@@ -50,7 +51,7 @@ void Player::takeTurn() {
       std::cout << getName() << " has ended their turn." << std::endl;
     }
   } else {
-    std::cout << getName() << " is dead. Continue? ";
+    std::cout << getName() << " is dead. Continue?\n";
     char choice = getInput();
     if (choice == '0' || choice == 'n' || choice == 'N') {
       std::exit(0); // TODO: Make a global variable wanting to quit
