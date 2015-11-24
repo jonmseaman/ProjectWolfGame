@@ -185,6 +185,7 @@ namespace Maps {
    }
 
    Actor* Node::getNextActor(Actor* actor) {
+     assert(actorPtrList.size() > 0);
      Actor* nextActor = nullptr;
      bool actorFound = false;
 

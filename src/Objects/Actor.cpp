@@ -17,12 +17,13 @@ Actor::~Actor() {
 
 void Actor::takeTurn() {
   dLog << "Actor takes turn" << std::endl;
-  if (!hasValidTarget() || !targetPtr->getIsLiving()) {
+  // Aggressive, attacks whatever isn't itself.
+  if (!hasValidTarget() || !targetPtr->getIsLiving() || targetPtr == this) {
     cycleTarget();
-    if (hasValidTarget()) {
+    if (hasValidTarget() && targetPtr != this) {
       onAttack();
     }
-  } else if (targetPtr->getIsLiving()) {
+  } else if (targetPtr->getIsLiving() && targetPtr != this) {
     onAttack();
   }
 }
@@ -83,8 +84,7 @@ void Actor::endTurn() {
 }
 
 bool Actor::hasValidTarget() {
-  bool targetValid = (targetPtr != nullptr)
-    && (currentNode->containsActor(targetPtr));
+  bool targetValid = targetPtr != nullptr && currentNode->containsActor(targetPtr);
   if (!targetValid) {
     // If the target is not valid, remove it.
     targetPtr = nullptr;
