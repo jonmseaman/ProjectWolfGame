@@ -31,7 +31,7 @@ namespace Maps {
   }
 
   Actor* Node::getActorPtr( int index ) {
-    assert ( ((index) <= actorPtrList.size()) && (index >= 0) );
+    assert(0 <= index && index <= actorPtrList.size());
     auto it = actorPtrList.begin();
     if ( index >= actorPtrList.size() ) {
       index = actorPtrList.size();
@@ -86,10 +86,10 @@ namespace Maps {
     }
     if (entranceDirs[Dir::Down] && nodeLinks[Dir::Down] != nullptr) {
       showNavigationInfoForNode(Dir::Down);
-	  std::cout << std::endl;
+      std::cout << std::endl;
       noDirs = false;
     }
-    if (noDirs == true) {
+    if (noDirs) {
       std::cout << "You cannot leave this area." << std::endl;
     }
   }
@@ -110,10 +110,8 @@ namespace Maps {
   }
 
   void Node::addActor(Actor *actor) {
-	actor->setCurrentNode(this);
+    actor->setCurrentNode(this);
     actorPtrList.insert(actorPtrList.end(), actor);
-    // Set move data for added actor
-    // TODO: ?Need this? :(*(--actorPtrList.end() ))->setMoveData(this);
   }
 
   void Node::moveActors() {
@@ -155,12 +153,6 @@ namespace Maps {
     return actorPtrList.size();
   }
 
-  /**
-   * Allows setting entrance direction for nodes. Nodes can be entered and
-   * exited from entrance directions.
-   * @pre 0 < dir < Maps::numDirs
-   * @post The node will have an entrance in dir if(isEntrance)
-   */
   void Node::setEntranceDir(int dir, bool isEntrance) {
     assert(0 <= dir && dir < Maps::numDirs);
     entranceDirs[dir] = isEntrance;
@@ -178,10 +170,36 @@ namespace Maps {
     return entrancesExist;
   }
 
-
-
    bool Node::getEntranceDir(int dir) {
      assert(0 <= dir < numDirs);
      return entranceDirs[dir];
+   }
+
+   bool Node::containsActor(Actor* actor) {
+     bool actorFound = false;
+     for (auto i = actorPtrList.begin();
+      i != actorPtrList.end() && !actorFound; i++) {
+        actorFound = actor == *i;
+     }
+     return actorFound;
+   }
+
+   Actor* Node::getNextActor(Actor* actor) {
+     assert(actorPtrList.size() > 0);
+     Actor* nextActor = nullptr;
+     bool actorFound = false;
+
+     // If the actorPtrList is of size one, return actor
+     actorFound = actorPtrList.size() == 1;
+
+     // Iterate to actor
+     auto i = actorPtrList.begin();
+     while (i != actorPtrList.end() && !actorFound && (actor != nullptr)) {
+       actorFound = *i == actor;
+       i++;
+     }
+     nextActor = i == actorPtrList.end() ? *actorPtrList.begin() : *i;
+
+     return nextActor;
    }
 }

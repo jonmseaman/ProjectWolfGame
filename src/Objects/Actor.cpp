@@ -1,6 +1,7 @@
 #include <iostream>
 #include <assert.h>
 #include "Actor.h"
+#include "Dir.h"
 #include "utils.h"
 #include "dLog.h"
 
@@ -14,26 +15,19 @@ Actor::~Actor() {
   dLog << "Actor dtor called" << std::endl;
 }
 
-bool Actor::onInteractedWith() {
-  return 0;
-}
-
-
 void Actor::takeTurn() {
   dLog << "Actor takes turn" << std::endl;
-  if (targetPtr == nullptr || !targetPtr->getIsLiving()) {
-    // TODO: Get a target
-    if (targetPtr != nullptr) {
+  // Aggressive, attacks whatever isn't itself.
+  if (!hasValidTarget() || !targetPtr->getIsLiving() || targetPtr == this) {
+    cycleTarget();
+    if (hasValidTarget() && targetPtr != this) {
       onAttack();
     }
-  } else if (targetPtr->getIsLiving()) {
+  } else if (targetPtr->getIsLiving() && targetPtr != this) {
     onAttack();
   }
 }
 
-/**
- * @return The direction that the actor should move
- */
 int Actor::getMoveDir() {
   return moveDir;
 }
@@ -43,8 +37,12 @@ void Actor::setCurrentNode(Maps::Node *node) {
 }
 
 void Actor::setMoveDir(int dir) {
+  assert(currentNode != nullptr);
+  assert(0 <= dir && dir < Maps::numDirs);
   moveDir = dir;
-  setIsTurnUsed();
+  if (currentNode->canMoveInDir(dir)) {
+    setIsTurnUsed();
+  }
 }
 
 void Actor::setIsTurnUsed(bool val) {
@@ -66,10 +64,10 @@ void Actor::onMove() {
 
 bool Actor::dropItem(int slotIndex) {
   assert ( slotIndex >= 0 && slotIndex <= inventory.getSlots() );
-  if (!currentNode->getInventory().hasOpenSlot()) {
+  if (!currentNode->inventory.hasOpenSlot()) {
     inventory.deleteItem(slotIndex);
   } else {
-    currentNode->getInventory().addItem(inventory.getItem(slotIndex));
+    currentNode->inventory.addItem(inventory.getItem(slotIndex));
     inventory.removeItem( slotIndex );
   }
   return true;
@@ -83,4 +81,33 @@ void Actor::dropAllItems() {
 
 void Actor::endTurn() {
   setIsTurnUsed(true);
+}
+
+bool Actor::hasValidTarget() {
+  bool targetValid = targetPtr != nullptr && currentNode->containsActor(targetPtr);
+  if (!targetValid) {
+    // If the target is not valid, remove it.
+    targetPtr = nullptr;
+  }
+  return targetValid;
+}
+
+void Actor::onAttack() // TODO: Update for stats class
+{ // TODO: Update for weapons
+  assert( targetPtr != nullptr );
+  int damage = stats.getStrength();
+  // damage += damage from weapon
+  // TODO: Update this for items.
+  // TODO: Update combat text
+  // TODO: No weapon equipped --> fists
+  std::cout << getName() << " swings for " << damage << ". " << std::endl;
+  targetPtr->onDamage( damage );
+}
+
+void Actor::setTarget(Actor* actor) {
+  targetPtr = actor;
+}
+
+void Actor::cycleTarget() {
+  targetPtr = currentNode->getNextActor(targetPtr);
 }

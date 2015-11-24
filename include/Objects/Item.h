@@ -1,7 +1,9 @@
 #ifndef ITEM_H
 #define ITEM_H
-#include <string>
+#include <assert.h>
 #include <iostream>
+#include <string>
+#include "Stats.h"
 class Creature;
 
 /**
@@ -9,53 +11,54 @@ class Creature;
  */
 class Item
 {
-  friend std::ostream &operator<<(std::ostream &os, const Item &item);
-  friend std::istream &operator>>(std::istream &is, Item &item);
   public:
     Item();
-    Item(int damage, int heal, bool isDepletedOnUse, int stackSize, std::string name);
+	  Item(std::string name, std::string description, Stats stats);
+    Item(std::string name, Stats stats);
     virtual ~Item();
 
+    /**
+     * Shows information about the item on std::cout
+     * Shows name, description, stats.
+     */
     void showInfo();
 
     /**
-     * Returns the amount of damage stat of the item.
-     * Equivalent to the amount of damage done in one hit
+     * Returns the name of the item.
      */
-    int getDamage();
+    std::string getName() { return name; }
+    /**
+     * Returns the description of the item.
+     */
+    std::string getDescription() { return description; }
+
+    void setDescription(const std::string &description) { this->description = description; }
+
+    int getDamage() { return baseDamage; }
+    int getHeal() { return baseHeal; }
+    void setDamage(int damage) { baseDamage = damage; }
+    void setHeal(int heal) { baseHeal = heal; }
 
     /**
-     * Returns the amount of healing the item does
+     * This function allows the this to be used. Stats are gathered from usedBy
+     * then the damage or healing to actually deal is computed and sent to
+     * usedOn so that usedOn may receive damage or healing.
+     *
+     * @param usedBy The creature using the item. Stats are used from this
+     * creature to compute the damage to deal.
+     * @param usedOn The creature the item is actually affecting.
+     * @post usedOn will have been affected by the item.
      */
-    int getHeal();
-
-    /**
-     * Returns true if the quantity of the item decreases when
-     * the item is used
-     */
-    bool getIsDepletedOnUse();
-
-    /**
-     * Returns the maximum amount of the item that can be stacked
-     */
-    int getStackSize();
-    /**
-     * Returns the name of the item
-     */
-    std::string getName();
-    virtual void onUse(Creature* user);
+     virtual void use(const Creature &usedBy, Creature &usedOn);
+    Stats stats;
   protected:
-    int damage; /// The damage that the item deals when used
-    int heal;
-    bool isDepletedOnUse;
     std::string name;
-    int stackSize;
+    std::string description;
+	  int baseDamage;
+    int baseHeal;
+
   private:
 
 };
-
-// Operators
-std::ostream &operator<<(std::ostream &os, const Item &item);
-std::istream &operator>>(std::istream &is, Item &item);
 
 #endif // ITEM_H

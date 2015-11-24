@@ -1,5 +1,6 @@
-#include <iostream>
 #include <assert.h>
+#include <iostream>
+#include <string>
 #include "Player.h"
 #include "Dir.h"
 #include "utils.h"
@@ -7,8 +8,8 @@
 
 Player::Player() {
   setMaxHealth(100);
-  setStrength(10);
   setName("Jon");
+  stats = Stats{5,5,5};
   inventory = Inventory{"Jon's Inventory", 8};
   isPlayer = true;
 }
@@ -26,8 +27,7 @@ void Player::combatMenu(int choice) {
     flagInCombat(false);
     break;
   case 1:
-    onAttack(); // TODO: Make sure that onAttack() uses a turn if there is a target
-    setIsTurnUsed(true);
+    processUserInput(' '); // Attack key
     break;
   case 2:
     targetMenu();
@@ -51,10 +51,10 @@ void Player::takeTurn() {
       std::cout << getName() << " has ended their turn." << std::endl;
     }
   } else {
-    std::cout << getName() << " is dead. Continue? ";
+    std::cout << getName() << " is dead. Continue?\n";
     char choice = getInput();
     if (choice == '0' || choice == 'n' || choice == 'N') {
-      std::exit(0);
+      std::exit(0); // TODO: Make a global variable wanting to quit
     }
   }
 }
@@ -112,7 +112,7 @@ void Player::showHUD() {
   displayHUDLine();
   std::cout << std::endl;
   // Information on target
-  if (targetPtr != nullptr) {
+  if (hasValidTarget()) {
     targetPtr->displayHUDLine();
     std::cout << std::endl;
   } else {
@@ -138,8 +138,9 @@ void Player::inventoryMenu(Inventory &inv) {
     int actionNumber = getDigit(0,3);
     switch (actionNumber) {
       case 1: // Use
-        if (targetPtr != nullptr) {
-          item->onUse(this);
+        //item->onUse(this); // TODO: fixme. onUse --> useOn
+        if (hasValidTarget()) {
+          item->use(*this, *targetPtr);
         } else {
           std::cout << "You don't have a target." << std::endl;
         }
@@ -214,7 +215,7 @@ bool Player::processUserInput(char key) {
       inventoryMenu(inventory);
       break;
     case '5':
-      searchMenu(currentNode->getInventory());
+      searchMenu(currentNode->inventory);
       break;
     // Movement
     case 'w':
@@ -227,29 +228,29 @@ bool Player::processUserInput(char key) {
       break;
     // Attack
     case ' ':
-      onAttack();
+      if (hasValidTarget()) {
+        onAttack();
+      } else {
+        std::cout << "You don't have a target." << std::endl;
+      }
       break;
     case 't':
-      //TODO: cycleTarget();
-      inputProcessed = false;
+      cycleTarget();
       break;
     default:
       inputProcessed = false;
       break;
-  }
-
-    return inputProcessed;
+  } // End switch for input processing
+  return inputProcessed;
 }
 
 void Player::exitMenu() {
-  std::cout << "Press 1 to exit." << std::endl;
+  std::cout << "Press 1 to exit, or something else to continue." << std::endl;
   char choice = getInput();
   if (choice == '1') {
     kill();
     std::exit(0);
   }
 }
-
-
 
 //TODO: Equipment menu

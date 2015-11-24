@@ -122,6 +122,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Factory.cpp" />
     <ClCompile Include="src\Dir.cpp" />
     <ClCompile Include="src\dLog.cpp" />
     <ClCompile Include="src\File.cpp" />
@@ -140,15 +141,18 @@
     <ClCompile Include="src\Objects\Inventory.cpp" />
     <ClCompile Include="src\Objects\Item.cpp" />
     <ClCompile Include="src\Objects\Player.cpp" />
+    <ClCompile Include="src\Objects\Stats.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Factory.h" />
     <ClInclude Include="include\Dir.h" />
     <ClInclude Include="include\dLog.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="include\Enums\MapEnum.h" />
     <ClInclude Include="include\Enums\NodeEnum.h" />
+    <ClInclude Include="include\Factory_Enums.h" />
     <ClInclude Include="include\File.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>

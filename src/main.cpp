@@ -18,7 +18,7 @@ int main() {
   choice = getDigit(1, 4);
   switch (choice) {
     case 1: // New Game
-      game.openMap(Maps::CENTER_TOWN); // Opens town
+      game.openMap(EMaps::MAP_CENTER_TOWN); // Opens town
       game.play(); // starts playing
       break;
     case 2: // Load
@@ -39,5 +39,3 @@ int main() {
   dLog.close();
   return 0;
 }
-
-// TODO: Use more references instead of pointers in this program.

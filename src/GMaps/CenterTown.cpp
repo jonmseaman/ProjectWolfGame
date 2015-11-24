@@ -1,22 +1,18 @@
 #include "CenterTown.h"
-#include "Rat.h"
-#include "Swordsmen.h"
-#include "Player.h"
-#include "BasicSword.h"
-#include "House_2Story.h"
+#include "Factory.h"
 
 CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH) {
   for (auto &i : grid ) { i = new Maps::Node; }
-  setNode(1, 0, new House_2Story{});
-  setNode(2, 0, new House_2Story{});
+  setNode(1, 0, Factory::newNode(NODE_HOUSE_2STORY));
+  setNode(2, 0, Factory::newNode(NODE_HOUSE_2STORY));
   buildMoveData();
-  Actor* player = new Player{};
-  player->inventory.addItem(new BasicSword);
-  player->inventory.addItem(new BasicSword);
-  player->inventory.addItem(new BasicSword);
-  player->inventory.addItem(new BasicSword);
+  Actor* player = Factory::getPlayer();
+  player->inventory.addItem(Factory::newItem(ITEM_BASIC_SWORD));
+  player->inventory.addItem(Factory::newItem(ITEM_BASIC_SWORD));
+  player->inventory.addItem(Factory::newItem(ITEM_BASIC_SWORD));
+  player->inventory.addItem(Factory::newItem(ITEM_BASIC_SWORD));
   getNode(0,0)->addActor(player);
-  getNode(0,1)->addActor(new Rat);
-  getNode(0,1)->addActor(new Rat);
-  getNode(0, 2)->addActor(new Swordsmen);
+  getNode(0,1)->addActor(Factory::newActor(ACTOR_RAT));
+  getNode(0,1)->addActor(Factory::newActor(ACTOR_RAT));
+  getNode(0, 2)->addActor(Factory::newActor(ACTOR_RAT));
 }
