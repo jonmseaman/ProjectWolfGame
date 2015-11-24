@@ -31,7 +31,7 @@ namespace Maps {
   }
 
   Actor* Node::getActorPtr( int index ) {
-    assert ( ((index) <= actorPtrList.size()) && (index >= 0) );
+    assert(0 <= index && index <= actorPtrList.size());
     auto it = actorPtrList.begin();
     if ( index >= actorPtrList.size() ) {
       index = actorPtrList.size();
@@ -86,10 +86,10 @@ namespace Maps {
     }
     if (entranceDirs[Dir::Down] && nodeLinks[Dir::Down] != nullptr) {
       showNavigationInfoForNode(Dir::Down);
-	  std::cout << std::endl;
+      std::cout << std::endl;
       noDirs = false;
     }
-    if (noDirs == true) {
+    if (noDirs) {
       std::cout << "You cannot leave this area." << std::endl;
     }
   }
@@ -110,10 +110,8 @@ namespace Maps {
   }
 
   void Node::addActor(Actor *actor) {
-	actor->setCurrentNode(this);
+    actor->setCurrentNode(this);
     actorPtrList.insert(actorPtrList.end(), actor);
-    // Set move data for added actor
-    // TODO: ?Need this? :(*(--actorPtrList.end() ))->setMoveData(this);
   }
 
   void Node::moveActors() {

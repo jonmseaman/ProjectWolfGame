@@ -63,10 +63,10 @@ void Actor::onMove() {
 
 bool Actor::dropItem(int slotIndex) {
   assert ( slotIndex >= 0 && slotIndex <= inventory.getSlots() );
-  if (!currentNode->getInventory().hasOpenSlot()) {
+  if (!currentNode->inventory.hasOpenSlot()) {
     inventory.deleteItem(slotIndex);
   } else {
-    currentNode->getInventory().addItem(inventory.getItem(slotIndex));
+    currentNode->inventory.addItem(inventory.getItem(slotIndex));
     inventory.removeItem( slotIndex );
   }
   return true;

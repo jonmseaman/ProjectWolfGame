@@ -215,7 +215,7 @@ bool Player::processUserInput(char key) {
       inventoryMenu(inventory);
       break;
     case '5':
-      searchMenu(currentNode->getInventory());
+      searchMenu(currentNode->inventory);
       break;
     // Movement
     case 'w':

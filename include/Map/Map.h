@@ -11,6 +11,10 @@ namespace Maps
   {
     public:
       Map(); // Default constructor. Creates empty map with blank nodes
+      /**
+       * Makes a map of specific size. Does not make any nodes.
+       * @usage Should be used by derived classes since nodes are not created.
+       */
       Map(int mapSize); // Makes a map of specific size. Does not make any nodes
       virtual ~Map(); // Deletes nodes.
 
@@ -44,16 +48,23 @@ namespace Maps
        * @post Nodes will be linked together
        */
       void buildMoveData();
-      std::vector<Node*> grid; // The array of nodes that the player sees [y*size + x]
+      /**
+       * These are nodes that make up the base layer of the game world.
+       * Other nodes may only exist if made by other nodes.
+       */
+      std::vector<Node*> grid;
     private:
       /**
        * Deletes all elements of the grid.
-       * For use by the dtor
+       * @usage Used by the destructor
        */
       void deleteGrid();
       // Vars
       const int DEFAULT_MAP_SIZE { 5 };
-      int mapSize; // The width & height of the square grid of nodes
+      /**
+       * The width, height of the map. mapSize^2 = number of nodes in grid
+       */
+      int mapSize;
   };
 }
 

@@ -15,9 +15,20 @@ namespace Maps
       virtual ~Node();
 
       // Data Access
+
+      /**
+       * Checks to see if this node contains an Actor
+       * @param actor Actor being checked for existence
+       * @return True if actor in this
+       */
       bool contains(Actor* actor);
-      Actor* getActorPtr(int index); // For getting targets
-      Inventory &getInventory() { return inventory; }
+      /**
+       * Returns a pointer to an actor in this.
+       * @pre 0 <= index && index <= number of actors in this.
+       * @param index The index of the actor being returned.
+       * @return A pointer to the actor at position index.
+       */
+      Actor* getActorPtr(int index);
       std::string getName();
       void setName(std::string name) { this->name = name; }
       void setNodeLink(int dir, Node* link);
@@ -28,6 +39,9 @@ namespace Maps
        * @post The node will have an entrance in dir if(isEntrance)
        */
       void setEntranceDir(int dir, bool isEntrance);
+      /**
+       * The node's inventory. Contains items in the node.
+       */
       Inventory inventory;
 
       // Navigation
@@ -46,13 +60,34 @@ namespace Maps
        * @return True if the node has an entrance in direction dir.
        */
       bool getEntranceDir(int dir);
+      /**
+       * Displays a list of nodes that can be traveled to from this node.
+       * Shows direction and name of node.
+       */
       void showNavigationInfo();
+      /**
+       * Shows a line of information for a node in a specific direction
+       * @usage Used be showNavigationInfo() to display information for eac
+       * direction that the player could move in.
+       */
       void showNavigationInfoForNode(int dir);
 
       // Use
+
+      /**
+       * Activates the node. This allows all actors in the node to take turns.
+       * It also will move actors to other nodes at the end
+       */
       virtual void activate();
+      /**
+       * Adds an actor to the node. The actor is added to the end of the actor
+       * list.
+       */
       void addActor(Actor *actor);
-      void moveActors(); // Tries to move all actors which have a move flag
+      /**
+       * Moves all actors which have a move direction set.
+       */
+      void moveActors();
       void removeActor(int index);
       void showActors(); // Shows a list of actors
 
