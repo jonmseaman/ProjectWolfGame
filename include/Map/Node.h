@@ -15,13 +15,14 @@ namespace Maps
       virtual ~Node();
 
       // Data Access
+      // Actors
 
       /**
        * Checks to see if this node contains an Actor
        * @param actor Actor being checked for existence
        * @return True if actor in this
        */
-      bool contains(Actor* actor);
+      bool containsActor(Actor* actor);
       /**
        * Returns a pointer to an actor in this.
        * @pre 0 <= index && index <= number of actors in this.
@@ -29,6 +30,14 @@ namespace Maps
        * @return A pointer to the actor at position index.
        */
       Actor* getActorPtr(int index);
+      /**
+       * Returns the next actor in the node's list
+       * @param actor The actor which before the one that is returned.
+       * @pre There is an actor in this node
+       * @return The actor after the actor
+       */
+      Actor* getNextActor(Actor* actor);
+
       std::string getName();
       void setName(std::string name) { this->name = name; }
       void setNodeLink(int dir, Node* link);

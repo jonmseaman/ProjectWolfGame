@@ -18,7 +18,7 @@ Actor::~Actor() {
 void Actor::takeTurn() {
   dLog << "Actor takes turn" << std::endl;
   if (!hasValidTarget() || !targetPtr->getIsLiving()) {
-    // TODO: Get a target
+    cycleTarget();
     if (hasValidTarget()) {
       onAttack();
     }
@@ -84,7 +84,7 @@ void Actor::endTurn() {
 
 bool Actor::hasValidTarget() {
   bool targetValid = (targetPtr != nullptr)
-    && (currentNode->contains(targetPtr));
+    && (currentNode->containsActor(targetPtr));
   if (!targetValid) {
     // If the target is not valid, remove it.
     targetPtr = nullptr;
@@ -106,4 +106,8 @@ void Actor::onAttack() // TODO: Update for stats class
 
 void Actor::setTarget(Actor* actor) {
   targetPtr = actor;
+}
+
+void Actor::cycleTarget() {
+  targetPtr = currentNode->getNextActor(targetPtr);
 }

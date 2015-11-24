@@ -235,8 +235,7 @@ bool Player::processUserInput(char key) {
       }
       break;
     case 't':
-      //TODO: cycleTarget();
-      inputProcessed = false;
+      cycleTarget();
       break;
     default:
       inputProcessed = false;

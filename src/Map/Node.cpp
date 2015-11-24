@@ -175,12 +175,30 @@ namespace Maps {
      return entranceDirs[dir];
    }
 
-   bool Node::contains(Actor* actor) {
+   bool Node::containsActor(Actor* actor) {
      bool actorFound = false;
      for (auto i = actorPtrList.begin();
       i != actorPtrList.end() && !actorFound; i++) {
         actorFound = actor == *i;
      }
      return actorFound;
+   }
+
+   Actor* Node::getNextActor(Actor* actor) {
+     Actor* nextActor = nullptr;
+     bool actorFound = false;
+
+     // If the actorPtrList is of size one, return actor
+     actorFound = actorPtrList.size() == 1;
+
+     // Iterate to actor
+     auto i = actorPtrList.begin();
+     while (i != actorPtrList.end() && !actorFound && (actor != nullptr)) {
+       actorFound = *i == actor;
+       i++;
+     }
+     nextActor = i == actorPtrList.end() ? *actorPtrList.begin() : *i;
+
+     return nextActor;
    }
 }

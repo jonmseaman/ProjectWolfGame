@@ -21,6 +21,11 @@ class Actor : public Creature
     bool dropItem(int slotNumber); // Drops item to node inventory. slotNumber is index+1 in inventory
     void dropAllItems(); // Drops all items in inventory to node inventory.
     // Targetting
+    /**
+     * Cycles through targets in the node. If there is not an actor != this in
+     * the node, the target will be removed.
+     */
+    void cycleTarget();
     Actor *getTarget() { return targetPtr; }
     void setTarget(Actor* actor);
     /**
@@ -35,7 +40,7 @@ class Actor : public Creature
     bool getIsTurnUsed();
 
     // Movement
-    virtual void onMove(); // TODO: Moving should make other creatures stop targeting you.
+    virtual void onMove();
     /**
      * @usage Used by node to figure out which direction the
      * actor should be moved.
