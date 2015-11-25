@@ -17,13 +17,14 @@ Actor::~Actor() {
 
 void Actor::takeTurn() {
   dLog << "Actor takes turn" << std::endl;
+  bool shouldAttack = hasValidTarget() && targetPtr != this && targetPtr->getIsLiving();
+
   // Aggressive, attacks whatever isn't itself.
-  if (!hasValidTarget() || !targetPtr->getIsLiving() || targetPtr == this) {
+  if (!shouldAttack) {
     cycleTarget();
-    if (hasValidTarget() && targetPtr != this) {
-      onAttack();
-    }
-  } else if (targetPtr->getIsLiving() && targetPtr != this) {
+    shouldAttack = hasValidTarget() && targetPtr != this && targetPtr->getIsLiving();
+  }
+  if (shouldAttack) {
     onAttack();
   }
 }
@@ -102,6 +103,7 @@ void Actor::onAttack() // TODO: Update for stats class
   // TODO: No weapon equipped --> fists
   std::cout << getName() << " swings for " << damage << ". " << std::endl;
   targetPtr->onDamage( damage );
+  setIsTurnUsed();
 }
 
 void Actor::setTarget(Actor* actor) {
