@@ -237,6 +237,9 @@ bool Player::processUserInput(char key) {
     case 't':
       cycleTarget();
       break;
+	  case '\r':
+	    setIsTurnUsed();
+	    break;
     default:
       inputProcessed = false;
       break;

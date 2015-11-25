@@ -22,7 +22,7 @@ class Player : public Actor
      */
     void takeTurn();
 
-	const std::string PROCESSABLE_INPUT = "wasdqe it012345`";
+	const std::string PROCESSABLE_INPUT = "wasdqe it012345`\r"; // \r is return
   protected:
     /**
      * This menu should allow access to all things that the player needs
