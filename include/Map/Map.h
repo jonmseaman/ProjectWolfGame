@@ -1,12 +1,12 @@
 #ifndef MAP_H
 #define MAP_H
+#include <boost/property_tree/ptree.hpp>
 #include <iostream>
 #include <vector>
-#include "Node.h"
 
-// TODO: Add actor (Actor, x , y)
 namespace Maps
 {
+  class Node;
   class Map
   {
     public:
@@ -17,6 +17,10 @@ namespace Maps
        */
       Map(int mapSize); // Makes a map of specific size. Does not make any nodes
       virtual ~Map(); // Deletes nodes.
+      /**
+      * Converts the map to a pair which can be added to an xml tree
+      */
+      boost::property_tree::ptree::value_type toXML();
 
       // Data Acess
 

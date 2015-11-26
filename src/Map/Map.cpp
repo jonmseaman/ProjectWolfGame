@@ -1,8 +1,12 @@
-#include "Map.h"
-#include "utils.h"
-#include "dLog.h"
-#include "stdlib.h"
 #include <assert.h>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+#include "dLog.h"
+#include "File.h"
+#include "Map.h"
+#include "Node.h"
+#include "stdlib.h"
+#include "utils.h"
 namespace Maps
 {
   Map::Map(): Map(DEFAULT_MAP_SIZE) {
@@ -69,5 +73,17 @@ namespace Maps
     for (int i(0); i < grid.size(); ++i) {
       delete grid.at(i);
     }
+  }
+
+  boost::property_tree::ptree::value_type Map::toXML() {
+    using namespace boost::property_tree;
+    ptree tree;
+    tree.push_back(XML_VAR_PAIR(mapSize));
+    // Should a location be saved?
+    for (Node* node : grid) {
+      tree.push_back(node->toXML());
+    }
+
+    return ptree::value_type("Map", tree);
   }
 } // End namespace Maps

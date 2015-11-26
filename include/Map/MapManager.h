@@ -12,7 +12,10 @@
 class MapManager
 {
   public:
-    MapManager();
+    static MapManager& getInstance() {
+      static MapManager instance;
+      return instance;
+    }
     /**
      * Deletes the map. Sets map to nullptr.
      */
@@ -31,8 +34,16 @@ class MapManager
      * @post The game loop will be started.
      */
     void play();
+    /**
+     * Saves your game in file fileName
+     * @pre map != nullptr
+     */
+    void save(std::string fileName = "save1");
   protected:
   private:
+    MapManager(MapManager const&);              // Don't Implement
+    void operator=(MapManager const&); // Don't implement
+    MapManager();
     Maps::Map* map;
     void setMap(Maps::Map* map);
 };

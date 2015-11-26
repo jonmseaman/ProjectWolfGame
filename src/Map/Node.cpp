@@ -1,12 +1,12 @@
 #include <assert.h>
 #include <iomanip>
 #include <iostream>
-#include "Node.h"
 #include "Actor.h"
-#include "Player.h"
 #include "Dir.h"
-#include "utils.h"
 #include "dLog.h"
+#include "Node.h"
+#include "Player.h"
+#include "utils.h"
 int Maps::Node::nodeCount = 1;
 namespace Maps {
   Node::Node(): inventory(Inventory{ "Location Inventory", 8 })
@@ -201,5 +201,17 @@ namespace Maps {
      nextActor = i == actorPtrList.end() ? *actorPtrList.begin() : *i;
 
      return nextActor;
+   }
+
+   boost::property_tree::ptree::value_type Node::toXML() {
+     using namespace boost::property_tree;
+     ptree tree;
+     tree.push_back(inventory.toXML());
+     // Add node type
+     for (Actor* actor : actorPtrList) {
+       tree.push_back(actor->toXML());
+     }
+
+     return ptree::value_type("Node", tree);
    }
 }

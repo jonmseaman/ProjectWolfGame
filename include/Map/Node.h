@@ -1,5 +1,6 @@
 #ifndef NODE_H
 #define NODE_H
+#include <boost/property_tree/ptree.hpp>
 #include <list>
 #include <string>
 #include "Inventory.h"
@@ -13,6 +14,7 @@ namespace Maps
       static int nodeCount;
       Node();
       virtual ~Node();
+      boost::property_tree::ptree::value_type toXML();
 
       // Data Access
       // Actors

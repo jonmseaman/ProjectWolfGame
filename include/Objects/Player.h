@@ -22,7 +22,7 @@ class Player : public Actor
      */
     void takeTurn();
 
-	const std::string PROCESSABLE_INPUT = "wasdqe it012345`\r"; // \r is return
+	const std::string PROCESSABLE_INPUT = "wasdqe it012345`\r\x3f"; // \r is return
   protected:
     /**
      * This menu should allow access to all things that the player needs
@@ -47,6 +47,7 @@ class Player : public Actor
      * and dropping the item.
      */
     void inventoryMenu(Inventory &inv);
+    void saveMenu();
     /**
      * Allows interactions with inventory other than the actor's own.
      * Allows items to be moved to the player's inventory.
@@ -72,7 +73,7 @@ class Player : public Actor
     /**
      * Menu for exiting the game. Asks the user to press 0 to exit.
      */
-     void exitMenu();
+    void exitMenu();
   private:
 };
 
