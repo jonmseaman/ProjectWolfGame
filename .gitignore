@@ -30,6 +30,7 @@ local.properties
 
 ## Other
 DebugLog.txt
+Saves/
 
 #################
 ## Doxygen
