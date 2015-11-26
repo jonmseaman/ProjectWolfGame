@@ -15,7 +15,10 @@ class Actor : public Creature
   public:
     Actor();
     virtual ~Actor();
+    // Loading and Saving
     boost::property_tree::ptree::value_type toXML();
+    int getID() { return id; }
+    void setID(int idNum) { this->id = idNum; }
 
     // Combat
     virtual void onAttack();
@@ -70,6 +73,11 @@ class Actor : public Creature
     void setIsTurnUsed(bool val = true);
     bool isPlayer = false;
   private:
+    /**
+     * ID number for use by the factor.
+     * @usage Set so that the factory knows what type of actor to make
+     */
+    int id;
     bool isTurnUsed; // Should stop allowing actions when this is true.
     int moveDir; // The direction that the map will move the player
 };

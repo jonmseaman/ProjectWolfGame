@@ -6,7 +6,8 @@
 #include "File.h"
 #include "utils.h"
 
-Actor::Actor(): isPlayer(false)
+Actor::Actor(): id(0)
+  , isPlayer(false)
   , isTurnUsed(false)
   , moveDir(Maps::Dir::Stop) {
   dLog << "Actor ctor called" << std::endl;
@@ -120,6 +121,7 @@ boost::property_tree::ptree::value_type Actor::toXML() {
   ptree::value_type xml = Creature::toXML();
 	ptree &tree = xml.second;
   tree.push_back(XML_VAR_PAIR(isPlayer));
+  tree.push_front(XML_VAR_PAIR(id));
 
 	return ptree::value_type("Actor", xml.second);
 }

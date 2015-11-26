@@ -48,6 +48,7 @@ Actor* Factory::newActor(int actor) {
       actorCreated = new Actor{};
       break;
   }
+  actorCreated->setID(actor);
   return actorCreated;
 }
 
@@ -78,6 +79,7 @@ Maps::Map* Factory::newMap(int map) {
 Actor* Factory::getPlayer() {
   if (playerPtr == nullptr) {
     playerPtr = new Player{};
+    playerPtr->setID(ACTOR_PLAYER);
   }
   return playerPtr;
 }

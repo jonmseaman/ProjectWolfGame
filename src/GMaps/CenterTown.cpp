@@ -15,4 +15,5 @@ CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH) {
   getNode(0,1)->addActor(Factory::newActor(ACTOR_RAT));
   getNode(0,1)->addActor(Factory::newActor(ACTOR_RAT));
   getNode(0, 2)->addActor(Factory::newActor(ACTOR_RAT));
+  getNode(3,0)->addActor(Factory::newActor(ACTOR_SWORDSMEN));
 }

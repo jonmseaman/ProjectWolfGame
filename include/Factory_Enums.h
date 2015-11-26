@@ -8,7 +8,8 @@ enum EItems {
 };
 
 enum EActors {
-	ACTOR_RAT = 0,
+	ACTOR_PLAYER = 1,
+	ACTOR_RAT,
 	ACTOR_SWORDSMEN,
 	ACTOR_TYPE_COUNT,
 

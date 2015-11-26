@@ -14,20 +14,14 @@ int main() {
   int choice;
 
   mainMenu:
-  dispList("WolfGame", {"New Game", "Load*", "Options*", "Exit"});
-  choice = getDigit(1, 4);
+  dispList("WolfGame", {"New Game", "Exit"});
+  choice = getDigit(1, 2);
   switch (choice) {
     case 1: // New Game
       game.openMap(EMaps::MAP_CENTER_TOWN); // Opens town
       game.play(); // starts playing
       break;
-    case 2: // Load
-      // Load a map
-      //game.play()
-      break;
-    case 3: // Options
-      break;
-    case 4: // Exit
+    case 2: // Exit
       std::cout << "Exiting." << std::endl;
       break;
     default:
