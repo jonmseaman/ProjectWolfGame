@@ -1,5 +1,6 @@
 #ifndef CREATURE_H
 #define CREATURE_H
+#include <boost/property_tree/ptree.hpp>
 #include <string>
 #include "Stats.h"
 #include "Inventory.h"
@@ -16,6 +17,8 @@ class Creature
   public:
     Creature();
     virtual ~Creature();
+    boost::property_tree::ptree::value_type toXML();
+
     void combatStop(); // Takes creature out of combat and removes targets
 
     // Data Access

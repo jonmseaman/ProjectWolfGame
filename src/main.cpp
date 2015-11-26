@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
   dLog.open("DebugLog.txt", std::fstream::out);
-  MapManager game;
+  MapManager &game = MapManager::getInstance();
   int choice;
 
   mainMenu:

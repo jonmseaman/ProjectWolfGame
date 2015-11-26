@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <assert.h>
 #include "dLog.h"
+#include "File.h"
 #include "Inventory.h"
 
 Inventory::Inventory():Inventory("Inventory", 2) {}
@@ -96,4 +97,19 @@ Item *Inventory::getItem(int slotIndex) {
 bool Inventory::isSlotEmpty(int slotIndex) {
   assert(0 <= slotIndex && slotIndex < size);
   return !(slots.at(slotIndex) == nullptr);
+}
+
+boost::property_tree::ptree::value_type Inventory::toXML() {
+	using namespace boost::property_tree;
+	ptree tree;
+
+	tree.push_back(XML_VAR_SPAIR(name));
+  tree.push_back(XML_VAR_PAIR(size));
+  for (Item* item : slots) {
+    if (item != nullptr) {
+      tree.push_back(item->toXML());
+    }
+  }
+
+	return ptree::value_type("Inventory", tree);
 }

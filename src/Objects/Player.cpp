@@ -1,10 +1,11 @@
 #include <assert.h>
 #include <iostream>
 #include <string>
-#include "Player.h"
 #include "Dir.h"
-#include "utils.h"
 #include "dLog.h"
+#include "MapManager.h"
+#include "Player.h"
+#include "utils.h"
 
 Player::Player() {
   setMaxHealth(100);
@@ -237,6 +238,12 @@ bool Player::processUserInput(char key) {
     case 't':
       cycleTarget();
       break;
+	  case '\r':
+	    setIsTurnUsed();
+	    break;
+    case '\x3f': // F5
+      saveMenu();
+      break;
     default:
       inputProcessed = false;
       break;
@@ -251,6 +258,15 @@ void Player::exitMenu() {
     kill();
     std::exit(0);
   }
+}
+
+void Player::saveMenu() {
+  std::string fileName;
+  std::cout << "Enter a save name: ";
+  std::cin >> fileName;
+  std::cout << "Saving...";
+  MapManager::getInstance().save(fileName);
+  std::cout << " Done." << std::endl;
 }
 
 //TODO: Equipment menu

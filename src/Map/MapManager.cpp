@@ -2,8 +2,10 @@
 #include "MapManager.h"
 #include "utils.h"
 #include "Factory.h"
-// TODO: Add filesystem support. ie, support opening save files from a
-// directory
+#include "File.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+
 MapManager::MapManager(): map(nullptr) {}
 
 void MapManager::closeMap() {
@@ -35,4 +37,30 @@ void MapManager::play() {
   {
     map->activate();
   }
+}
+
+void MapManager::save(std::string fileName) {
+  assert(map != nullptr);
+  using namespace File;
+  using namespace boost::property_tree;
+
+  fs::path filePath = savePath;
+  filePath /= fs::path{fileName}.filename();
+  if ( file.is_open() ) { file.close(); }
+  if ( !exists( savePath )) {
+    fs::create_directory(savePath);
+  }
+  file.open( filePath, std::fstream::out );
+
+  // Make a tree
+  ptree saveTree;
+  // Add map to the tree
+  saveTree.push_back(map->toXML());
+
+  // write to file, with formatting
+  xml_writer_settings<std::string> settings(' ', 2);
+	xml_parser::write_xml(file, saveTree, settings);
+
+
+  file.close();
 }
