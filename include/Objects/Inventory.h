@@ -1,5 +1,6 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
+#include <boost/property_tree/ptree.hpp>
 #include <string>
 #include <vector>
 #include "Item.h"
@@ -9,6 +10,7 @@ class Inventory
     Inventory();
     Inventory(std::string name, int inventorySize);
     virtual ~Inventory();
+    virtual boost::property_tree::ptree::value_type toXML();
 
     bool addItem(Item* item);
     bool addNewItem(Item* item);

@@ -3,8 +3,12 @@
 #include <string>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/property_tree/ptree.hpp>
+
 /** Useful for outputing to xml. Makes output pretty and easy to read. */
-#define XML_VAR_PAIR(c) ptree::value_type{#c, ptree{to_string(c)}}
+#define XML_VAR_PAIR(c) boost::property_tree::ptree::value_type{#c, boost::property_tree::ptree{std::to_string(c)}}
+/** Same as XML_VAR_PAIR except for strings */
+#define XML_VAR_SPAIR(s) boost::property_tree::ptree::value_type{#s, boost::property_tree::ptree(s)}
 namespace fs = boost::filesystem;
 namespace File
 {

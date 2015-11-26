@@ -1,5 +1,6 @@
 #ifndef ACTOR_H
 #define ACTOR_H
+#include <boost/property_tree/ptree.hpp>
 #include "Creature.h"
 #include "Dir.h"
 #include "Node.h"
@@ -14,6 +15,7 @@ class Actor : public Creature
   public:
     Actor();
     virtual ~Actor();
+    boost::property_tree::ptree::value_type toXML();
 
     // Combat
     virtual void onAttack();

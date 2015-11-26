@@ -1,9 +1,11 @@
 #ifndef STATS_H
 #define STATS_H
+#include <boost/property_tree/ptree.hpp>
 class Creature;
 class Stats {
 public:
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
+  boost::property_tree::ptree::value_type toXML();
 
   int getStamina() { return stamina; }
   int getStrength() { return strength; }

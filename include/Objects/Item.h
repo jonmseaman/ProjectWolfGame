@@ -1,6 +1,7 @@
 #ifndef ITEM_H
 #define ITEM_H
 #include <assert.h>
+#include <boost/property_tree/ptree.hpp>
 #include <iostream>
 #include <string>
 #include "Stats.h"
@@ -16,6 +17,7 @@ class Item
 	  Item(std::string name, std::string description, Stats stats);
     Item(std::string name, Stats stats);
     virtual ~Item();
+    boost::property_tree::ptree::value_type toXML();
 
     /**
      * Shows information about the item on std::cout

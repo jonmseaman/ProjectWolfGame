@@ -1,4 +1,5 @@
 #include <iostream>
+#include "File.h"
 #include "Stats.h"
 
 Stats::Stats(int stamina, int strength, int intellect) {
@@ -21,4 +22,15 @@ Stats operator+(Stats stats1, Stats stats2) {
 	intellect = stats1.getIntellect() + stats2.getIntellect();
 
 	return Stats{stam, strength, intellect};
+}
+
+boost::property_tree::ptree::value_type Stats::toXML() {
+	using namespace boost::property_tree;
+	ptree tree;
+
+	tree.push_back(XML_VAR_PAIR(stamina));
+	tree.push_back(XML_VAR_PAIR(strength));
+	tree.push_back(XML_VAR_PAIR(intellect));
+
+	return ptree::value_type("Stats", tree);
 }

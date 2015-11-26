@@ -2,8 +2,9 @@
 #include <assert.h>
 #include "Actor.h"
 #include "Dir.h"
-#include "utils.h"
 #include "dLog.h"
+#include "File.h"
+#include "utils.h"
 
 Actor::Actor(): isPlayer(false)
   , isTurnUsed(false)
@@ -112,4 +113,13 @@ void Actor::setTarget(Actor* actor) {
 
 void Actor::cycleTarget() {
   targetPtr = currentNode->getNextActor(targetPtr);
+}
+
+boost::property_tree::ptree::value_type Actor::toXML() {
+	using namespace boost::property_tree;
+  ptree::value_type xml = Creature::toXML();
+	ptree &tree = xml.second;
+  tree.push_back(XML_VAR_PAIR(isPlayer));
+
+	return ptree::value_type("Actor", xml.second);
 }

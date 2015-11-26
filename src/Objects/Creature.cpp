@@ -1,10 +1,11 @@
 #include <assert.h>
 #include <iostream>
 #include <string>
-#include "Inventory.h"
 #include "Creature.h"
-#include "utils.h"
 #include "dLog.h"
+#include "File.h"
+#include "Inventory.h"
+#include "utils.h"
 
 Creature::Creature(): name("Creature")
   , inventory(Inventory{"Inv", 0})
@@ -85,4 +86,26 @@ void Creature::displayHUDLine() {
   }
   std::cout << name << ": " << health << "/"
     << maxHealth;
+}
+
+boost::property_tree::ptree::value_type Creature::toXML() {
+	using namespace boost::property_tree;
+	ptree tree;
+
+	tree.push_back(XML_VAR_SPAIR(name));
+  tree.push_back(XML_VAR_PAIR(isLiving));
+  tree.push_back(XML_VAR_PAIR(isInCombat));
+
+  tree.push_back(XML_VAR_PAIR(level));
+  tree.push_back(XML_VAR_PAIR(experience));
+
+  tree.push_back(XML_VAR_PAIR(health));
+  tree.push_back(XML_VAR_PAIR(maxHealth));
+
+  tree.push_back(equipment.toXML());
+  tree.push_back(inventory.toXML());
+
+  tree.push_back(stats.toXML());
+
+	return ptree::value_type("Creature", tree);
 }
