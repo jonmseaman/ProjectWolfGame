@@ -8,9 +8,7 @@ CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH) {
   buildMoveData();
   Actor* player = Factory::getPlayer();
   player->inventory.addItem(Factory::newItem(ITEM_BASIC_SWORD));
-  player->inventory.addItem(Factory::newItem(ITEM_BASIC_SWORD));
-  player->inventory.addItem(Factory::newItem(ITEM_BASIC_SWORD));
-  player->inventory.addItem(Factory::newItem(ITEM_BASIC_SWORD));
+  player->inventory.addItem(Factory::newItem(ITEM_HEALING_WAND));
   getNode(0,0)->addActor(player);
   getNode(0,1)->addActor(Factory::newActor(ACTOR_RAT));
   getNode(0,1)->addActor(Factory::newActor(ACTOR_RAT));

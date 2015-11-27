@@ -10,12 +10,14 @@
 namespace Maps
 {
   Map::Map(): Map(DEFAULT_MAP_SIZE) {
+    setID(0);
     for (auto &i: grid) { i = new Node; }
     buildMoveData();
   }
 
   Map::Map(int mapSize): grid{mapSize*mapSize, nullptr}
   , mapSize{mapSize} {
+    setID(0);
   }
 
   Map::~Map() {

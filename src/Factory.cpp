@@ -8,6 +8,7 @@
 #include "CenterTown.h"
 // Objects
 #include "BasicSword.h"
+#include "HealingWand.h"
 // Tiles
 #include "House_2Story.h"
 
@@ -29,15 +30,23 @@ Item* Factory::newItem(int item) {
     case ITEM_BASIC_SWORD:
       itemCreated = new BasicSword{};
       break;
+    case ITEM_HEALING_WAND:
+      itemCreated = new HealingWand{};
+      break;
     default:
       itemCreated = new Item{};
+      break;
   }
+  itemCreated->setID(item);
   return itemCreated;
 }
 
 Actor* Factory::newActor(int actor) {
   Actor* actorCreated = nullptr;
   switch (actor) {
+    case ACTOR_PLAYER:
+      // TODO: Proper singleton for player
+      actorCreated = getPlayer();
     case ACTOR_RAT:
       actorCreated = new Rat{};
       break;
@@ -63,6 +72,7 @@ Maps::Node* Factory::newNode(int node) {
       break;
 
   }
+  nodeCreated->setID(node);
   return nodeCreated;
 }
 

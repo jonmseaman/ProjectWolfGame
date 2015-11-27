@@ -4,6 +4,7 @@
 
 enum EItems {
 	ITEM_BASIC_SWORD,
+	ITEM_HEALING_WAND,
 	ITEM_TYPE_COUNT,
 };
 

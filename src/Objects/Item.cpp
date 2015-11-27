@@ -7,13 +7,15 @@ Item::Item():
 	name("Item")
 	, description("Description")
 	, stats{} {
+		setID(0);
 }
 
 Item::Item(std::string name, Stats stats) : Item(name, "", stats) {
-
+	setID(0);
 }
 
 Item::Item(std::string name, std::string description, Stats stats) {
+	setID(0);
 	this->name = name;
 	this->description = description;
 	this->stats = stats;
@@ -25,19 +27,17 @@ Item::~Item() {
 }
 
 void Item::use(const Creature &usedBy, Creature &usedOn) {
-	int amountToDamage = baseDamage;
-	int amountToHeal = baseHeal;
-
 	// Derive stats from creature using item + this items stats
 	Stats derivedStats = stats + usedBy.stats;
-	// Add extra damage and healing from stats
-	amountToDamage += 2*derivedStats.getStrength();
-	amountToHeal += 2*derivedStats.getIntellect();
 	// Do damage and healing
-	if (amountToDamage > 0) {
+	if (baseDamage > 0) {
+		int amountToDamage = baseDamage;
+		amountToDamage += 2*derivedStats.getStrength();
 		usedOn.onDamage(amountToDamage);
 	}
-	if (amountToHeal > 0) {
+	if (baseHeal > 0) {
+		int amountToHeal = baseHeal;
+		amountToHeal += 2*derivedStats.getIntellect();
 		usedOn.onHeal(amountToHeal);
 	}
 }

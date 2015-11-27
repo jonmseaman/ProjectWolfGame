@@ -18,6 +18,8 @@ class Item
     Item(std::string name, Stats stats);
     virtual ~Item();
     boost::property_tree::ptree::value_type toXML();
+    int getID() { return id; }
+    void setID(int idNum) { this->id = idNum; }
 
     /**
      * Shows information about the item on std::cout
@@ -60,7 +62,7 @@ class Item
     int baseHeal;
 
   private:
-
+    int id;
 };
 
 #endif // ITEM_H

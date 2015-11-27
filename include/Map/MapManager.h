@@ -12,6 +12,7 @@
 class MapManager
 {
   public:
+    /** Singleton */
     static MapManager& getInstance() {
       static MapManager instance;
       return instance;
@@ -39,6 +40,11 @@ class MapManager
      * @pre map != nullptr
      */
     void save(std::string fileName = "save1");
+    /**
+     * Loads from file fileName
+     * @pre fileName exists in File::savePath
+     */
+    void load(std::string fileName = "save1");
   protected:
   private:
     MapManager(MapManager const&);              // Don't Implement

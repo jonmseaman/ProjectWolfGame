@@ -152,5 +152,8 @@
     <ClInclude Include="include\Factory_Enums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\GObjects\HealingWand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

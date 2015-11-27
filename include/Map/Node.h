@@ -15,6 +15,8 @@ namespace Maps
       Node();
       virtual ~Node();
       boost::property_tree::ptree::value_type toXML();
+      int getID() { return id; }
+      void setID(int idNum) { this->id = idNum; }
 
       // Data Access
       // Actors
@@ -110,6 +112,7 @@ namespace Maps
       int getNumActors();
       std::string name;
     private:
+      int id;
   };
 }
 

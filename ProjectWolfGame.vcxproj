@@ -163,6 +163,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="include\GObjects\BasicSword.h" />
+    <ClInclude Include="include\GObjects\HealingWand.h" />
     <ClInclude Include="include\GTiles\House_2Story.h" />
     <ClInclude Include="include\Map\Map.h" />
     <ClInclude Include="include\Map\MapManager.h" />

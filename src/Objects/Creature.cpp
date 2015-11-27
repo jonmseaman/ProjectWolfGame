@@ -36,22 +36,20 @@ void Creature::onDamage(int dmg) { // Should return damage taken
 }
 
 void Creature::onHeal(int heal) {
+  assert(heal >= 0);
   // TODO: Modify heal with abilities/ items
-  health += heal;
-  if (health > maxHealth) {
-    health = maxHealth;
+  if (getIsLiving()) {
+    health += heal;
+    if (health > maxHealth) {
+      health = maxHealth;
+    }
   }
+  std::cout << getName() << " is healed for " << heal << ". " << std::endl;
 }
 
 void Creature::setHealth(int health) {
   this->health = health;
-  if (health > 0 ) {
-    isLiving = true;
-  }
-  else
-  {
-    isLiving = false;
-  }
+  isLiving = health > 0;
 }
 
 void Creature::setMaxHealth(int maxHealth) {
