@@ -118,10 +118,10 @@ void Actor::cycleTarget() {
 
 boost::property_tree::ptree::value_type Actor::toXML() {
 	using namespace boost::property_tree;
-  ptree::value_type xml = Creature::toXML();
-	ptree &tree = xml.second;
-  tree.push_back(XML_VAR_PAIR(isPlayer));
+	ptree tree;
+  // TODO: Adjust so that derived types may add custom xml
   tree.push_front(XML_VAR_PAIR(id));
-
-	return ptree::value_type("Actor", xml.second);
+  // tree.push_back(XML_VAR_PAIR(isPlayer)); // not necessary?
+  tree.push_back(Creature::toXML());
+	return ptree::value_type("Actor", tree);
 }
