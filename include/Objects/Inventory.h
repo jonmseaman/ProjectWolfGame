@@ -4,13 +4,15 @@
 #include <string>
 #include <vector>
 #include "Item.h"
+#include "File.h"
 class Inventory
 {
   public:
     Inventory();
     Inventory(std::string name, int inventorySize);
     virtual ~Inventory();
-    virtual boost::property_tree::ptree::value_type toXML();
+    virtual pairType toXML();
+    void fromXML(const pairType& p);
 
     bool addItem(Item* item);
     bool addNewItem(Item* item);

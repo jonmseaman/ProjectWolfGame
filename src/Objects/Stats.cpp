@@ -24,13 +24,30 @@ Stats operator+(Stats stats1, Stats stats2) {
 	return Stats{stam, strength, intellect};
 }
 
-boost::property_tree::ptree::value_type Stats::toXML() {
-	using namespace boost::property_tree;
-	ptree tree;
+pairType Stats::toXML() {
+	treeType tree;
 
 	tree.push_back(XML_VAR_PAIR(stamina));
 	tree.push_back(XML_VAR_PAIR(strength));
 	tree.push_back(XML_VAR_PAIR(intellect));
 
-	return ptree::value_type("Stats", tree);
+	return pairType("stats", tree);
+}
+
+void Stats::fromXML(const pairType& p) {
+	const treeType& tree = p.second;
+	auto it = p.second.begin();
+	while (it != p.second.end()) {
+    std::string key = it->first;
+		std::string data = it->second.data();
+		if (key == "stamina") {
+			stamina = std::stoi(data);
+		} else if (key == "strength") {
+			strength = std::stoi(data);
+		} else if (key == "intellect") {
+			intellect = std::stoi(data);
+		}
+		it++;
+	}
+
 }

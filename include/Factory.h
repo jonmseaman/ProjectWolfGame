@@ -6,6 +6,7 @@
 #include "Node.h"
 #include "Map.h"
 #include "Factory_Enums.h"
+#include "File.h"
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -14,9 +15,6 @@ class Factory
 public:
 	Factory();
 	~Factory();
-
-	typedef boost::property_tree::ptree 							treeType;
-	typedef boost::property_tree::ptree::value_type 	pairType;
 
 	// Creation functions
 	/**

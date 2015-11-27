@@ -99,9 +99,8 @@ bool Inventory::isSlotEmpty(int slotIndex) {
   return !(slots.at(slotIndex) == nullptr);
 }
 
-boost::property_tree::ptree::value_type Inventory::toXML() {
-	using namespace boost::property_tree;
-	ptree tree;
+pairType Inventory::toXML() {
+  treeType tree{};
 
 	tree.push_back(XML_VAR_SPAIR(name));
   tree.push_back(XML_VAR_PAIR(size));
@@ -111,5 +110,9 @@ boost::property_tree::ptree::value_type Inventory::toXML() {
     }
   }
 
-	return ptree::value_type("Inventory", tree);
+	return pairType("Inventory", tree);
+}
+
+void Inventory::fromXML(const pairType& p) {
+  // TODO: Loading
 }

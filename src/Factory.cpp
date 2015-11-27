@@ -41,6 +41,20 @@ Item* Factory::newItem(int item) {
   return itemCreated;
 }
 
+Item* Factory::newItem(pairType item) {
+  Item* itemCreated = nullptr;
+  treeType &tree = item.second;
+  // get id
+  auto it = tree.find("id");
+  int id = 0;
+  if (it != tree.not_found()) {
+    id = std::stoi(it->second.data());
+  }
+  itemCreated = newItem(id);
+  itemCreated->fromXML(item);
+  return itemCreated;
+}
+
 Actor* Factory::newActor(int actor) {
   Actor* actorCreated = nullptr;
   switch (actor) {
@@ -61,6 +75,20 @@ Actor* Factory::newActor(int actor) {
   return actorCreated;
 }
 
+Actor* Factory::newActor(pairType actor) {
+  Actor* actorCreated = nullptr;
+  // get id
+  treeType &tree = actor.second;
+  int id = 0;
+  auto it = tree.find("id");
+  if (it != tree.not_found()) {
+    id = std::stoi(it->second.data());
+  }
+  actorCreated = newActor(id);
+  actorCreated->fromXML(actor);
+  return actorCreated;
+}
+
 Maps::Node* Factory::newNode(int node) {
   Maps::Node* nodeCreated = nullptr;
   switch (node) {
@@ -76,6 +104,10 @@ Maps::Node* Factory::newNode(int node) {
   return nodeCreated;
 }
 
+Maps::Node* Factory::newNode(pairType node) {
+  return nullptr; // TODO: Loading
+}
+
 Maps::Map* Factory::newMap(int map) {
   Maps::Map* mapCreated = nullptr;
   switch (map) {
@@ -84,6 +116,10 @@ Maps::Map* Factory::newMap(int map) {
       break;
   }
   return mapCreated;
+}
+
+Maps::Map* Factory::newMap(pairType map) {
+  return nullptr; // TODO: Loading
 }
 
 Actor* Factory::getPlayer() {

@@ -86,7 +86,7 @@ void Creature::displayHUDLine() {
     << maxHealth;
 }
 
-boost::property_tree::ptree::value_type Creature::toXML() {
+pairType Creature::toXML() {
 	using namespace boost::property_tree;
 	ptree tree;
 
@@ -105,5 +105,9 @@ boost::property_tree::ptree::value_type Creature::toXML() {
 
   tree.push_back(stats.toXML());
 
-	return ptree::value_type("Creature", tree);
+	return pairType("Creature", tree);
+}
+
+void Creature::fromXML(const pairType& p) {
+  //TODO: Loading
 }
