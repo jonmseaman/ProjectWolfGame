@@ -38,13 +38,14 @@ void Stats::fromXML(const pairType& p) {
 	const treeType& tree = p.second;
 	auto it = p.second.begin();
 	while (it != p.second.end()) {
-    std::string key = it->first;
-		std::string data = it->second.data();
-		if (key == "stamina") {
+		const std::string &key = it->first;
+		const std::string &data = it->second.data();
+
+		if (key == STRING(stamina)) {
 			stamina = std::stoi(data);
-		} else if (key == "strength") {
+		} else if (key == STRING(strength)) {
 			strength = std::stoi(data);
-		} else if (key == "intellect") {
+		} else if (key == STRING(intellect)) {
 			intellect = std::stoi(data);
 		}
 		it++;

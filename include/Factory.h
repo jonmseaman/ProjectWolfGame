@@ -32,15 +32,6 @@ public:
 	static Maps::Node* newNode(pairType);
 	static Maps::Map* newMap(int map);
 	static Maps::Map* newMap(pairType);
-	/**
-	 * This function returns a pointer to the player.
-	 * If the player does not exist, creates the player.
-	 * @return Pointer to player.
-	 */
-	static Actor* getPlayer();
-
-private:
-	static Actor* playerPtr;
 };
 
 #endif FACTORY_H

@@ -17,9 +17,6 @@
 // Tiles
 #include "House_2Story.h"
 
-// Static Initialization
-Actor *Factory::playerPtr = nullptr;
-
 Factory::Factory()
 {
 }
@@ -66,7 +63,7 @@ Actor* Factory::newActor(int actor) {
   switch (actor) {
     case ACTOR_PLAYER:
       // TODO: Proper singleton for player
-      actorCreated = getPlayer();
+      actorCreated = new Player{};
       break;
     case ACTOR_RAT:
       actorCreated = new Rat{};
@@ -133,6 +130,8 @@ Maps::Map* Factory::newMap(int map) {
     case MAP_CENTER_TOWN:
       mapCreated = new CenterTown{};
       break;
+    default:
+      mapCreated = new Maps::Map{};
   }
   mapCreated->setID(map);
   return mapCreated;
@@ -151,12 +150,4 @@ Maps::Map* Factory::newMap(pairType map) {
   mapCreated = newMap(id);
   mapCreated->fromXML(map);
   return mapCreated;
-}
-
-Actor* Factory::getPlayer() {
-  if (playerPtr == nullptr) {
-    playerPtr = new Player{};
-    playerPtr->setID(ACTOR_PLAYER);
-  }
-  return playerPtr;
 }

@@ -128,10 +128,10 @@ void Inventory::fromXML(const pairType& p) {
   slots = std::vector<Item*>(size , nullptr);
 
   auto it = tree.begin();
-  std::string key = it->first;
-  std::string data = it->second.data();
   while (it != tree.end()) {
-    if (key == "name") {
+    const std::string &key = it->first;
+    const std::string &data = it->second.data();
+    if (key == STRING(name)) {
       name = data;
     } else if (key == "Item") {
       Item* item = Factory::newItem(*it);

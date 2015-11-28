@@ -34,6 +34,7 @@ void MapManager::play() {
   {
     map->activate();
   }
+
 }
 
 void MapManager::save(std::string fileName) {
@@ -80,7 +81,6 @@ void MapManager::load(std::string fileName) {
   }
 
   Maps::Map* tempMap = nullptr;
-
   auto it = loadTree.begin();
   while (it != loadTree.end()) {
     const std::string &key = it->first;

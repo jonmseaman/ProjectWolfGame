@@ -44,7 +44,7 @@ class MapManager
     void load(std::string fileName = "save1");
   protected:
   private:
-    MapManager(MapManager const&);              // Don't Implement
+    MapManager(MapManager const&);     // Don't Implement
     void operator=(MapManager const&); // Don't implement
     MapManager();
     Maps::Map* map;

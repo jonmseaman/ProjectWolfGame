@@ -69,15 +69,15 @@ void Item::fromXML(const pairType& item) {
 		const std::string &key = it->first;
     const std::string &data = it->second.data();
 
-		if (key == "name") {
+		if (key == STRING(name)) {
 			name = data;
-		} else if (key == "description") {
+		} else if (key == STRING(description)) {
 			description = data;
-		} else if (key == "baseDamage") {
+		} else if (key == STRING(baseDamage)) {
 			baseDamage = std::stoi(data);
-		} else if (key == "baseHeal") {
+		} else if (key == STRING(baseHeal)) {
 			baseHeal = std::stoi(data);
-		} else if (key == "stats") {
+		} else if (key == "Stats") {
 			stats.fromXML(*it);
 		}
 

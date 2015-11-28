@@ -127,5 +127,6 @@ pairType Actor::toXML() {
 }
 
 void Actor::fromXML(const pairType& p) {
-  //TODO: Loading
+  const treeType &tree = p.second;
+  Creature::fromXML(*tree.find("Creature"));
 }
