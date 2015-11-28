@@ -5,6 +5,7 @@
 #include <string>
 #include "Inventory.h"
 #include "Dir.h"
+#include "File.h"
 class Actor;
 namespace Maps
 {
@@ -14,7 +15,9 @@ namespace Maps
       static int nodeCount;
       Node();
       virtual ~Node();
-      boost::property_tree::ptree::value_type toXML();
+      pairType toXML();
+      void fromXML(const pairType& p);
+
       int getID() { return id; }
       void setID(int idNum) { this->id = idNum; }
 

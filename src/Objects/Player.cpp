@@ -160,6 +160,15 @@ void Player::inventoryMenu(Inventory &inv) {
   }
 }
 
+void Player::loadMenu() {
+  std::string fileName;
+  std::cout << "Enter a file name: ";
+  std::cin >> fileName;
+  std::cout << "Loading...";
+  MapManager::getInstance().load(fileName);
+  std::cout << " Done." << std::endl;
+}
+
 void Player::searchMenu(Inventory &inv) {
   ITEM_SELECT:
   inv.showListOfItems();
@@ -244,6 +253,9 @@ bool Player::processUserInput(char key) {
     case '\x3f': // F5
       saveMenu();
       break;
+    case '\x43': // F9
+      loadMenu();
+      break;
     default:
       inputProcessed = false;
       break;
@@ -262,7 +274,7 @@ void Player::exitMenu() {
 
 void Player::saveMenu() {
   std::string fileName;
-  std::cout << "Enter a save name: ";
+  std::cout << "Enter a file name: ";
   std::cin >> fileName;
   std::cout << "Saving...";
   MapManager::getInstance().save(fileName);

@@ -33,6 +33,7 @@ Item* Factory::newItem(int item) {
     case ITEM_HEALING_WAND:
       itemCreated = new HealingWand{};
       break;
+    case ITEM_DEFAULT:
     default:
       itemCreated = new Item{};
       break;
@@ -61,12 +62,14 @@ Actor* Factory::newActor(int actor) {
     case ACTOR_PLAYER:
       // TODO: Proper singleton for player
       actorCreated = getPlayer();
+      break;
     case ACTOR_RAT:
       actorCreated = new Rat{};
       break;
     case ACTOR_SWORDSMEN:
       actorCreated = new Swordsmen{};
       break;
+    case ACTOR_DEFAULT:
     default:
       actorCreated = new Actor{};
       break;
@@ -95,17 +98,28 @@ Maps::Node* Factory::newNode(int node) {
     case NODE_HOUSE_2STORY:
       nodeCreated = new House_2Story();
       break;
+    case NODE_DEFAULT:
     default:
       nodeCreated = new Maps::Node{};
       break;
-
   }
   nodeCreated->setID(node);
   return nodeCreated;
 }
 
 Maps::Node* Factory::newNode(pairType node) {
-  return nullptr; // TODO: Loading
+  Maps::Node* nodeCreated = nullptr;
+
+  treeType &tree = node.second;
+  // get id
+  auto it = tree.find("id");
+  int id = 0;
+  if (it != tree.not_found()) {
+    id = std::stoi(it->second.data());
+  }
+  nodeCreated = newNode(id);
+  nodeCreated->fromXML(node);
+  return nodeCreated;
 }
 
 Maps::Map* Factory::newMap(int map) {
@@ -115,11 +129,23 @@ Maps::Map* Factory::newMap(int map) {
       mapCreated = new CenterTown{};
       break;
   }
+  mapCreated->setID(map);
   return mapCreated;
 }
 
 Maps::Map* Factory::newMap(pairType map) {
-  return nullptr; // TODO: Loading
+  Maps::Map* mapCreated = nullptr;
+
+  treeType &tree = map.second;
+  // get id
+  auto it = tree.find("id");
+  int id = 0;
+  if (it != tree.not_found()) {
+    id = std::stoi(it->second.data());
+  }
+  mapCreated = newMap(id);
+  mapCreated->fromXML(map);
+  return mapCreated;
 }
 
 Actor* Factory::getPlayer() {

@@ -1,9 +1,10 @@
 #ifndef MAPMANAGER_H
 #define MAPMANAGER_H
 #include <string>
-#include "Map.h"
+//#include "Map.h"
 #include "Factory.h"
 #include "Factory_Enums.h"
+namespace Maps { class Map; }
 /**
  * The purpose of this class is to make it easier to manager maps.
  * Eventually, MapManager will be able to handle multiple open maps and
