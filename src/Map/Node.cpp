@@ -204,7 +204,7 @@ namespace Maps {
      return nextActor;
    }
 
-   boost::property_tree::ptree::value_type Node::toXML() {
+   pairType Node::toXML() {
      using namespace boost::property_tree;
      ptree tree;
      tree.push_back(inventory.toXML());
@@ -214,5 +214,9 @@ namespace Maps {
      }
 
      return ptree::value_type("Node", tree);
+   }
+
+   void Node::fromXML(const pairType &p) {
+     
    }
 }

@@ -23,10 +23,6 @@ class MapManager
      */
     void closeMap();
     /**
-     * Loads a map from the saves folder with name mapName
-     */
-    void openMap(std::string mapName);
-    /**
      * Creates a new map corresponding to mapNum
      */
     void openMap(int mapNum);

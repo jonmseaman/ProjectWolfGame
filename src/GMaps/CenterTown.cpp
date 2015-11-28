@@ -1,5 +1,9 @@
 #include "CenterTown.h"
 #include "Factory.h"
+#include "Item.h"
+#include "Inventory.h"
+#include "Actor.h"
+#include "Node.h"
 
 CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH) {
   for (auto &i : grid ) { i = new Maps::Node; }

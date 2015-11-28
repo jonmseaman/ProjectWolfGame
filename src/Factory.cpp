@@ -1,4 +1,9 @@
 #include "Factory.h"
+#include "Item.h"
+#include "Inventory.h"
+#include "Actor.h"
+#include "Node.h"
+#include "Map.h"
 // Including files for use by factory
 // Actors
 #include "Player.h"

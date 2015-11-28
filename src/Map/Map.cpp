@@ -77,7 +77,7 @@ namespace Maps
     }
   }
 
-  boost::property_tree::ptree::value_type Map::toXML() {
+  pairType Map::toXML() {
     using namespace boost::property_tree;
     ptree tree;
     tree.push_back(XML_VAR_PAIR(mapSize));
@@ -87,5 +87,9 @@ namespace Maps
     }
 
     return ptree::value_type("Map", tree);
+  }
+
+  void Map::fromXML(const pairType &p) {
+
   }
 } // End namespace Maps

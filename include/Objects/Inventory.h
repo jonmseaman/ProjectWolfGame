@@ -12,9 +12,23 @@ class Inventory
     Inventory(std::string name, int inventorySize);
     virtual ~Inventory();
     virtual pairType toXML();
+    /**
+     * Gets data from p.
+     * @attention Deletes all items that are already in this inventory.
+     * @param p The key, tree pair that data will be gathered from.
+     */
     void fromXML(const pairType& p);
 
+    /**
+     * Tries to add item to the inventory.
+     * @return True if the item was added. False otherwise.
+     */
     bool addItem(Item* item);
+    /**
+     * Tries to add the item to the inventory
+     * Deletes the item if there is not an open slot;
+     * @return True if the item was added. False otherwise.
+     */
     bool addNewItem(Item* item);
     void deleteItem(int slotIndex); // Deletes item
     bool removeItem(int slotIndex); // Removes item from slot without freeing memory
@@ -33,6 +47,11 @@ class Inventory
     std::string getName();
     int getSlots();
     bool hasOpenSlot();
+    /**
+     * Returns the index of the first empty slot.
+     * @return The index of the first empty slot or -1 if the
+     * an empty slot is not found.
+     */
     int firstEmpty();
     void showListOfItems();
   protected:

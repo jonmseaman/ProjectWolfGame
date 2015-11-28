@@ -1,4 +1,6 @@
 #include <assert.h>
+#include "exception"
+#include "Map.h"
 #include "MapManager.h"
 #include "utils.h"
 #include "Factory.h"
@@ -17,11 +19,6 @@ void MapManager::openMap(int mapNum) {
   using namespace Maps;
   Map* loadMap = Factory::newMap(mapNum);
   setMap( loadMap );
-}
-
-void openMap(std::string mapName) {
-  //TODO: Implement this.
-  // Should load a map from xml
 }
 
 void MapManager::setMap(Maps::Map* map) {
@@ -50,17 +47,35 @@ void MapManager::save(std::string fileName) {
   if ( !exists( savePath )) {
     fs::create_directory(savePath);
   }
-  file.open( filePath, std::fstream::out );
+  try {
+    file.open( filePath, std::fstream::out );
+    // Make a tree
+    ptree saveTree;
+    // Add map to the tree
+    saveTree.push_back(map->toXML());
 
-  // Make a tree
-  ptree saveTree;
-  // Add map to the tree
-  saveTree.push_back(map->toXML());
-
-  // write to file, with formatting
-  xml_writer_settings<std::string> settings(' ', 2);
-	xml_parser::write_xml(file, saveTree, settings);
-
-
+    // write to file, with formatting
+    xml_writer_settings<std::string> settings(' ', 2);
+  	xml_parser::write_xml(file, saveTree, settings);
+  } catch (std::exception &e) {
+    std::cerr << e.what();
+  }
   file.close();
+}
+
+void MapManager::load(std::string fileName) {
+  using namespace File;
+  using namespace boost::property_tree;
+
+  fs::path filePath = savePath;
+  filePath /= fs::path{fileName};
+  if (file.is_open()) { file.close(); }
+  try {
+    file.open( filePath, std::fstream::in );
+    // make tree and load from file
+    treeType loadTree;
+    xml_parser::read_xml(file, loadTree, xml_parser::trim_whitespace);
+  } catch (std::exception &e) {
+    std::cerr << e.what();
+  }
 }
