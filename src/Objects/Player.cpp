@@ -171,6 +171,7 @@ void Player::loadMenu() {
   std::cin >> fileName;
   std::cout << "Loading...";
   MapManager::getInstance().load(fileName);
+  setIsTurnUsed();
   std::cout << " Done." << std::endl;
 }
 
