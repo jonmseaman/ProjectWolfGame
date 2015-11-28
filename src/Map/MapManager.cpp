@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <assert.h>
 #include "exception"
 #include "Map.h"
@@ -33,6 +34,12 @@ void MapManager::play() {
   while ( true ) // TODO: Make variable for this
   {
     map->activate();
+
+    if (tempMap != nullptr) {
+      std::swap(tempMap, map);
+      delete tempMap;
+      tempMap = nullptr;
+    }
   }
 
 }
@@ -80,20 +87,15 @@ void MapManager::load(std::string fileName) {
     std::cerr << e.what();
   }
 
-  Maps::Map* tempMap = nullptr;
   auto it = loadTree.begin();
   while (it != loadTree.end()) {
     const std::string &key = it->first;
     const std::string &data = it->second.data();
     if (key == "Map") {
+      delete tempMap; // just in case
       tempMap = Factory::newMap(*it);
     }
     it++;
   }
-
-  if (map != nullptr) {
-    delete map;
-  }
-  map = tempMap;
-
+  // tempMap and map are swapped automatically later.
 }

@@ -208,6 +208,7 @@ namespace Maps {
    pairType Node::toXML() {
      using namespace boost::property_tree;
      ptree tree;
+     tree.push_back(XML_VAR_SPAIR(name));
      tree.push_back(inventory.toXML());
      // Add node type
      for (Actor* actor : actorPtrList) {
@@ -224,7 +225,9 @@ namespace Maps {
      while (it != tree.end()) {
        const std::string &key = it->first;
        const std::string &data = it->second.data();
-       if (key == "Actor") {
+       if (key == STRING(name)) {
+         name = data;
+       } else if (key == "Actor") {
          addActor(Factory::newActor(*it));
        } else if (key == "Inventory") {
          inventory.fromXML(*it);

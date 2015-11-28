@@ -48,6 +48,7 @@ class MapManager
     void operator=(MapManager const&); // Don't implement
     MapManager();
     Maps::Map* map;
+    Maps::Map* tempMap;
     void setMap(Maps::Map* map);
 };
 

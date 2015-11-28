@@ -115,5 +115,7 @@ namespace Maps
       }
       it++;
     }
+    // So that the player can move around in the map.
+    buildMoveData();
   }
 } // End namespace Maps
