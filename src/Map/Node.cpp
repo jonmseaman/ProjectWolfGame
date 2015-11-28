@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include "Dir.h"
 #include "dLog.h"
+#include "Factory.h"
 #include "Node.h"
 #include "Player.h"
 #include "utils.h"
@@ -217,6 +218,18 @@ namespace Maps {
    }
 
    void Node::fromXML(const pairType &p) {
-     
+     const treeType &tree = p.second;
+
+     auto it = tree.begin();
+     const std::string &key = it->first;
+     const std::string &data = it->second.data();
+     while (it != tree.end()) {
+       if (key == "Actor") {
+         addActor(Factory::newActor(*it));
+       } else if (key == "Inventory") {
+         inventory.fromXML(*it);
+       }
+       it++;
+     }
    }
 }
