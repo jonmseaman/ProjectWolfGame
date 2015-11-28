@@ -70,12 +70,30 @@ void MapManager::load(std::string fileName) {
   fs::path filePath = savePath;
   filePath /= fs::path{fileName};
   if (file.is_open()) { file.close(); }
+  // make tree and load from file
+  treeType loadTree;
   try {
     file.open( filePath, std::fstream::in );
-    // make tree and load from file
-    treeType loadTree;
     xml_parser::read_xml(file, loadTree, xml_parser::trim_whitespace);
   } catch (std::exception &e) {
     std::cerr << e.what();
   }
+
+  Maps::Map* tempMap = nullptr;
+
+  auto it = loadTree.begin();
+  while (it != loadTree.end()) {
+    const std::string &key = it->first;
+    const std::string &data = it->second.data();
+    if (key == "Map") {
+      tempMap = Factory::newMap(*it);
+    }
+    it++;
+  }
+
+  if (map != nullptr) {
+    delete map;
+  }
+  map = tempMap;
+
 }

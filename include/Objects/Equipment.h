@@ -8,8 +8,7 @@
 class Equipment : public Inventory
 {
 public:
-  //boost::property_tree::ptree::value_type toXML();
-
+  pairType toXML();
 };
 
 #endif /* end of include guard: EQUIPMENT_H */

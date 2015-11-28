@@ -66,8 +66,8 @@ void Item::fromXML(const pairType& item) {
 	auto it = tree.begin();
 
 	while (it != tree.end()) {
-    std::string key = it->first;
-		std::string data = it->second.data();
+		const std::string &key = it->first;
+    const std::string &data = it->second.data();
 
 		if (key == "name") {
 			name = data;

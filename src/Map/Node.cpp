@@ -221,9 +221,9 @@ namespace Maps {
      const treeType &tree = p.second;
 
      auto it = tree.begin();
-     const std::string &key = it->first;
-     const std::string &data = it->second.data();
      while (it != tree.end()) {
+       const std::string &key = it->first;
+       const std::string &data = it->second.data();
        if (key == "Actor") {
          addActor(Factory::newActor(*it));
        } else if (key == "Inventory") {

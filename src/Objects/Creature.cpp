@@ -109,5 +109,36 @@ pairType Creature::toXML() {
 }
 
 void Creature::fromXML(const pairType& p) {
-  //TODO: Loading
+  const treeType &tree = p.second;
+  auto it = tree.begin();
+
+  while (it != tree.end()) {
+    const std::string &key = it->first;
+    const std::string &data = it->second.data();
+
+    if (key == "name") {
+      name = data;
+    } else if (key == "isLiving") {
+      isLiving = (bool)std::stoi(data);
+    } else if (key == "isInCombat") {
+      isInCombat = (bool)std::stoi(data);
+    } else if (key == "level") {
+      level = std::stoi(data);
+    } else if (key == "experience") {
+      experience = std::stoi(data);
+    } else if (key == "health") {
+      health = std::stoi(data);
+    } else if (key == "maxHealth") {
+      maxHealth = std::stoi(data);
+    } else if (key == "Equipment") {
+      equipment.fromXML(*it);
+    } else if (key == "Inventory") {
+      inventory.fromXML(*it);
+    } else if (key == "Stats") {
+      stats.fromXML(*it);
+    }
+    it++;
+  }
+
+
 }

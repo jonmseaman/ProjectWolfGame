@@ -2,6 +2,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include "dLog.h"
+#include "Factory.h"
 #include "File.h"
 #include "Map.h"
 #include "Node.h"
@@ -90,6 +91,29 @@ namespace Maps
   }
 
   void Map::fromXML(const pairType &p) {
+    const treeType &tree = p.second;
 
+    { // Get the mapSize first:
+      auto mapSizeIterator = tree.find("mapSize");
+      const std::string &data = mapSizeIterator->second.data();
+      mapSize = std::stoi(data);
+      deleteGrid();
+      grid = std::vector<Node*>(mapSize*mapSize, nullptr);
+    }
+
+    auto it = tree.begin();
+    int nodeNumber = 0;
+    while (it != tree.end()) {
+      const std::string &key = it->first;
+      const std::string &data = it->second.data();
+      if (key == "Node") {
+        // Sets the next node from xml
+        // Note that since x,y is not recorded in the xml,
+        // nodes can only be loaded in the order they were saved
+        grid.at(nodeNumber) = Factory::newNode(*it);
+        nodeNumber++;
+      }
+      it++;
+    }
   }
 } // End namespace Maps
