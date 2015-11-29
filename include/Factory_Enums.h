@@ -3,12 +3,16 @@
 // Enums for items, actors, nodes, maps
 
 enum EItems {
+	ITEM_DEFAULT = 0,
 	ITEM_BASIC_SWORD,
+	ITEM_HEALING_WAND,
 	ITEM_TYPE_COUNT,
 };
 
 enum EActors {
-	ACTOR_RAT = 0,
+	ACTOR_DEFAULT = 0,
+	ACTOR_PLAYER,
+	ACTOR_RAT,
 	ACTOR_SWORDSMEN,
 	ACTOR_TYPE_COUNT,
 

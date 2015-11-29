@@ -44,6 +44,7 @@ int getInteger(int min, int max);
  */
 const int COLUMN_PADDING{3};
 
+/** From when std::to_string was not working */
 template <typename T> std::string to_string( const T& n )
 {
   std::ostringstream stm ;

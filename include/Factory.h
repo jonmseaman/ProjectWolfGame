@@ -1,11 +1,16 @@
 #ifndef FACTORY_H
 #define FACTORY_H
-
-#include "Item.h"
-#include "Actor.h"
-#include "Node.h"
-#include "Map.h"
 #include "Factory_Enums.h"
+#include "File.h"
+
+class Item;
+class Actor;
+namespace Maps {
+	class Node;
+	class Map;
+} /* Maps */
+
+#include <boost/property_tree/ptree.hpp>
 
 class Factory
 {
@@ -14,19 +19,19 @@ public:
 	~Factory();
 
 	// Creation functions
-	static Item* newItem(int item);
-	static Actor* newActor(int actor);
-	static Maps::Node* newNode(int node);
-	static Maps::Map* newMap(int map);
 	/**
-	 * This function returns a pointer to the player.
-	 * If the player does not exist, creates the player.
-	 * @return Pointer to player.
+	 * For parameters of type pairType, the pair must be a valid xml pair
+	 * for that type
 	 */
-	static Actor* getPlayer();
 
-private:
-	static Actor* playerPtr;
+	static Item* newItem(int item);
+	static Item* newItem(pairType);
+	static Actor* newActor(int actor);
+	static Actor* newActor(pairType);
+	static Maps::Node* newNode(int node);
+	static Maps::Node* newNode(pairType);
+	static Maps::Map* newMap(int map);
+	static Maps::Map* newMap(pairType);
 };
 
 #endif FACTORY_H

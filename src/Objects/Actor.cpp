@@ -6,7 +6,8 @@
 #include "File.h"
 #include "utils.h"
 
-Actor::Actor(): isPlayer(false)
+Actor::Actor(): id(0)
+  , isPlayer(false)
   , isTurnUsed(false)
   , moveDir(Maps::Dir::Stop) {
   dLog << "Actor ctor called" << std::endl;
@@ -115,11 +116,17 @@ void Actor::cycleTarget() {
   targetPtr = currentNode->getNextActor(targetPtr);
 }
 
-boost::property_tree::ptree::value_type Actor::toXML() {
+pairType Actor::toXML() {
 	using namespace boost::property_tree;
-  ptree::value_type xml = Creature::toXML();
-	ptree &tree = xml.second;
-  tree.push_back(XML_VAR_PAIR(isPlayer));
+	treeType tree;
+  // TODO: Adjust so that derived types may add custom xml
+  tree.push_front(XML_VAR_PAIR(id));
+  // tree.push_back(XML_VAR_PAIR(isPlayer)); // not necessary?
+  tree.push_back(Creature::toXML());
+	return ptree::value_type("Actor", tree);
+}
 
-	return ptree::value_type("Actor", xml.second);
+void Actor::fromXML(const pairType& p) {
+  const treeType &tree = p.second;
+  Creature::fromXML(*tree.find("Creature"));
 }

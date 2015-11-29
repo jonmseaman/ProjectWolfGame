@@ -36,22 +36,20 @@ void Creature::onDamage(int dmg) { // Should return damage taken
 }
 
 void Creature::onHeal(int heal) {
+  assert(heal >= 0);
   // TODO: Modify heal with abilities/ items
-  health += heal;
-  if (health > maxHealth) {
-    health = maxHealth;
+  if (getIsLiving()) {
+    health += heal;
+    if (health > maxHealth) {
+      health = maxHealth;
+    }
   }
+  std::cout << getName() << " is healed for " << heal << ". " << std::endl;
 }
 
 void Creature::setHealth(int health) {
   this->health = health;
-  if (health > 0 ) {
-    isLiving = true;
-  }
-  else
-  {
-    isLiving = false;
-  }
+  isLiving = health > 0;
 }
 
 void Creature::setMaxHealth(int maxHealth) {
@@ -88,7 +86,7 @@ void Creature::displayHUDLine() {
     << maxHealth;
 }
 
-boost::property_tree::ptree::value_type Creature::toXML() {
+pairType Creature::toXML() {
 	using namespace boost::property_tree;
 	ptree tree;
 
@@ -107,5 +105,40 @@ boost::property_tree::ptree::value_type Creature::toXML() {
 
   tree.push_back(stats.toXML());
 
-	return ptree::value_type("Creature", tree);
+	return pairType("Creature", tree);
+}
+
+void Creature::fromXML(const pairType& p) {
+  const treeType &tree = p.second;
+  auto it = tree.begin();
+
+  while (it != tree.end()) {
+    const std::string &key = it->first;
+    const std::string &data = it->second.data();
+
+    if (key == "name") {
+      name = data;
+    } else if (key == "isLiving") {
+      isLiving = (bool)std::stoi(data);
+    } else if (key == "isInCombat") {
+      isInCombat = (bool)std::stoi(data);
+    } else if (key == "level") {
+      level = std::stoi(data);
+    } else if (key == "experience") {
+      experience = std::stoi(data);
+    } else if (key == "health") {
+      health = std::stoi(data);
+    } else if (key == "maxHealth") {
+      maxHealth = std::stoi(data);
+    } else if (key == "Equipment") {
+      equipment.fromXML(*it);
+    } else if (key == "Inventory") {
+      inventory.fromXML(*it);
+    } else if (key == "Stats") {
+      stats.fromXML(*it);
+    }
+    it++;
+  }
+
+
 }

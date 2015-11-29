@@ -17,7 +17,9 @@ class Creature
   public:
     Creature();
     virtual ~Creature();
-    boost::property_tree::ptree::value_type toXML();
+    // Stuff for loading / saving
+    virtual pairType toXML();
+    void fromXML(const pairType& p);
 
     void combatStop(); // Takes creature out of combat and removes targets
 

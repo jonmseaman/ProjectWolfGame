@@ -4,6 +4,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <iostream>
 #include <string>
+#include "File.h" // for loading / saving functions
 #include "Stats.h"
 class Creature;
 
@@ -17,7 +18,10 @@ class Item
 	  Item(std::string name, std::string description, Stats stats);
     Item(std::string name, Stats stats);
     virtual ~Item();
-    boost::property_tree::ptree::value_type toXML();
+    pairType toXML();
+    void fromXML(const pairType& p);
+    int getID() { return id; }
+    void setID(int idNum) { this->id = idNum; }
 
     /**
      * Shows information about the item on std::cout
@@ -60,7 +64,7 @@ class Item
     int baseHeal;
 
   private:
-
+    int id;
 };
 
 #endif // ITEM_H

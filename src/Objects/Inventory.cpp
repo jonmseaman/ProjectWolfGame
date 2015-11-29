@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <assert.h>
 #include "dLog.h"
+#include "Factory.h"
 #include "File.h"
 #include "Inventory.h"
 
@@ -29,15 +30,14 @@ bool Inventory::addItem(Item* item) {
 }
 
 bool Inventory::addNewItem(Item* item) {
+  bool addedItem = false;
   if ( hasOpenSlot() ) {
     slots.at(firstEmpty()) = item;
-    return true;
-  }
-  else
-  {
+    addedItem = true;
+  } else {
     delete item;
-    return false;
   }
+  return addedItem;
 }
 
 bool Inventory::removeItem(int slotIndex) {
@@ -69,12 +69,12 @@ bool Inventory::hasOpenSlot() {
 }
 
 int Inventory::firstEmpty() {
-  for (int i(0); i<slots.size(); i++) {
+  for (int i(0); i < slots.size(); i++) {
     if (slots.at(i) == nullptr) {
       return i;
     }
   }
-  return 0;
+  return -1;
 }
 
 void Inventory::showListOfItems() {
@@ -96,12 +96,11 @@ Item *Inventory::getItem(int slotIndex) {
 
 bool Inventory::isSlotEmpty(int slotIndex) {
   assert(0 <= slotIndex && slotIndex < size);
-  return !(slots.at(slotIndex) == nullptr);
+  return slots.at(slotIndex) == nullptr;
 }
 
-boost::property_tree::ptree::value_type Inventory::toXML() {
-	using namespace boost::property_tree;
-	ptree tree;
+pairType Inventory::toXML() {
+  treeType tree{};
 
 	tree.push_back(XML_VAR_SPAIR(name));
   tree.push_back(XML_VAR_PAIR(size));
@@ -111,5 +110,33 @@ boost::property_tree::ptree::value_type Inventory::toXML() {
     }
   }
 
-	return ptree::value_type("Inventory", tree);
+	return pairType("Inventory", tree);
+}
+
+void Inventory::fromXML(const pairType& p) {
+  // TODO: Loading
+  const treeType &tree = p.second;
+
+  // Set the inventory size before doing anything else
+  auto sizePairIterator = tree.find("size");
+  std::string sizeString = sizePairIterator->second.data();
+  size = std::stoi(sizeString);
+  // Deletes all items
+  for (int i(0); i < slots.size(); i++) {
+    delete slots.at(i);
+  }
+  slots = std::vector<Item*>(size , nullptr);
+
+  auto it = tree.begin();
+  while (it != tree.end()) {
+    const std::string &key = it->first;
+    const std::string &data = it->second.data();
+    if (key == STRING(name)) {
+      name = data;
+    } else if (key == "Item") {
+      Item* item = Factory::newItem(*it);
+      addNewItem(item);
+    }
+    it++;
+  }
 }

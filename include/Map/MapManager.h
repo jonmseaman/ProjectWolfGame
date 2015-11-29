@@ -1,9 +1,10 @@
 #ifndef MAPMANAGER_H
 #define MAPMANAGER_H
 #include <string>
-#include "Map.h"
+//#include "Map.h"
 #include "Factory.h"
 #include "Factory_Enums.h"
+namespace Maps { class Map; }
 /**
  * The purpose of this class is to make it easier to manager maps.
  * Eventually, MapManager will be able to handle multiple open maps and
@@ -12,6 +13,7 @@
 class MapManager
 {
   public:
+    /** Singleton */
     static MapManager& getInstance() {
       static MapManager instance;
       return instance;
@@ -20,10 +22,6 @@ class MapManager
      * Deletes the map. Sets map to nullptr.
      */
     void closeMap();
-    /**
-     * Loads a map from the saves folder with name mapName
-     */
-    void openMap(std::string mapName);
     /**
      * Creates a new map corresponding to mapNum
      */
@@ -39,12 +37,18 @@ class MapManager
      * @pre map != nullptr
      */
     void save(std::string fileName = "save1");
+    /**
+     * Loads from file fileName
+     * @pre fileName exists in File::savePath
+     */
+    void load(std::string fileName = "save1");
   protected:
   private:
-    MapManager(MapManager const&);              // Don't Implement
+    MapManager(MapManager const&);     // Don't Implement
     void operator=(MapManager const&); // Don't implement
     MapManager();
     Maps::Map* map;
+    Maps::Map* tempMap;
     void setMap(Maps::Map* map);
 };
 

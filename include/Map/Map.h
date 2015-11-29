@@ -3,6 +3,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <iostream>
 #include <vector>
+#include "File.h"
 
 namespace Maps
 {
@@ -20,7 +21,10 @@ namespace Maps
       /**
       * Converts the map to a pair which can be added to an xml tree
       */
-      boost::property_tree::ptree::value_type toXML();
+      pairType toXML();
+      void fromXML(const pairType& p);
+      int getID() { return id; }
+      void setID(int idNum) { this->id = idNum; }
 
       // Data Acess
 
@@ -58,6 +62,7 @@ namespace Maps
        */
       std::vector<Node*> grid;
     private:
+      int id;
       /**
        * Deletes all elements of the grid.
        * @usage Used by the destructor

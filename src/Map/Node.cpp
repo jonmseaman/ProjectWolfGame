@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include "Dir.h"
 #include "dLog.h"
+#include "Factory.h"
 #include "Node.h"
 #include "Player.h"
 #include "utils.h"
@@ -13,6 +14,7 @@ namespace Maps {
     , nodeLinks{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
     , actorPtrList{}
     , name("Node") {
+    setID(0);
     for (int i = 0; i < Maps::numDirs; i++) {
       entranceDirs[i] = true;
     }
@@ -203,9 +205,10 @@ namespace Maps {
      return nextActor;
    }
 
-   boost::property_tree::ptree::value_type Node::toXML() {
+   pairType Node::toXML() {
      using namespace boost::property_tree;
      ptree tree;
+     tree.push_back(XML_VAR_SPAIR(name));
      tree.push_back(inventory.toXML());
      // Add node type
      for (Actor* actor : actorPtrList) {
@@ -213,5 +216,23 @@ namespace Maps {
      }
 
      return ptree::value_type("Node", tree);
+   }
+
+   void Node::fromXML(const pairType &p) {
+     const treeType &tree = p.second;
+
+     auto it = tree.begin();
+     while (it != tree.end()) {
+       const std::string &key = it->first;
+       const std::string &data = it->second.data();
+       if (key == STRING(name)) {
+         name = data;
+       } else if (key == "Actor") {
+         addActor(Factory::newActor(*it));
+       } else if (key == "Inventory") {
+         inventory.fromXML(*it);
+       }
+       it++;
+     }
    }
 }

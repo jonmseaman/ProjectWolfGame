@@ -1,5 +1,5 @@
-#ifndef ITEM_BASICSWORD_H
-#define ITEM_BASICSWORD_H
+#ifndef ITEM_BASIC_SWORD_H
+#define ITEM_BASIC_SWORD_H
 #include "Item.h"
 
 class BasicSword : public Item
@@ -11,4 +11,4 @@ class BasicSword : public Item
   private:
 };
 
-#endif // ITEM_BASICSWORD_H
+#endif // ITEM_BASIC_SWORD_H
