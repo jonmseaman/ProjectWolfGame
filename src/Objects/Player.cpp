@@ -93,7 +93,7 @@ void Player::moveMenu(int dir) {
   if (dir != 0 && currentNode->canMoveInDir(dir)) {
     setMoveDir(dir);
   } else {
-	std::cout << "Can't move in that direction." << std::endl;
+  std::cout << "Can't move in that direction." << std::endl;
   }
 }
 
@@ -134,7 +134,7 @@ void Player::inventoryMenu(Inventory &inv) {
   // Let player choose item
   std::cout << "Select an item: ";
   int itemIndex = getInteger(0, inv.getSlots());
-	itemIndex--;
+  itemIndex--;
 
   if (itemIndex >= 0) {
     // Get the item,
@@ -253,9 +253,9 @@ bool Player::processUserInput(char key) {
     case 't':
       cycleTarget();
       break;
-	  case '\r':
-	    setIsTurnUsed();
-	    break;
+    case '\r':
+      setIsTurnUsed();
+      break;
     case '\x3f': // F5
       saveMenu();
       break;

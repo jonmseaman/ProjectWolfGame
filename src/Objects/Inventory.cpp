@@ -102,7 +102,7 @@ bool Inventory::isSlotEmpty(int slotIndex) {
 pairType Inventory::toXML() {
   treeType tree{};
 
-	tree.push_back(XML_VAR_SPAIR(name));
+  tree.push_back(XML_VAR_SPAIR(name));
   tree.push_back(XML_VAR_PAIR(size));
   for (Item* item : slots) {
     if (item != nullptr) {
@@ -110,7 +110,7 @@ pairType Inventory::toXML() {
     }
   }
 
-	return pairType("Inventory", tree);
+  return pairType("Inventory", tree);
 }
 
 void Inventory::fromXML(const pairType& p) {
