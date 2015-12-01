@@ -87,10 +87,10 @@ void Creature::displayHUDLine() {
 }
 
 pairType Creature::toXML() {
-	using namespace boost::property_tree;
-	ptree tree;
+  using namespace boost::property_tree;
+  ptree tree;
 
-	tree.push_back(XML_VAR_SPAIR(name));
+  tree.push_back(XML_VAR_SPAIR(name));
   tree.push_back(XML_VAR_PAIR(isLiving));
   tree.push_back(XML_VAR_PAIR(isInCombat));
 
@@ -105,7 +105,7 @@ pairType Creature::toXML() {
 
   tree.push_back(stats.toXML());
 
-	return pairType("Creature", tree);
+  return pairType("Creature", tree);
 }
 
 void Creature::fromXML(const pairType& p) {

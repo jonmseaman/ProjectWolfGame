@@ -25,7 +25,7 @@ namespace Maps {
 
   Node::~Node() {
     dLog << "Maps::Node::~Node() called for Node: " << name << std::endl;
-	  // Delete all the actors
+    // Delete all the actors
     for (auto it = actorPtrList.begin(); it != actorPtrList.end(); ++it ) {
       dLog << "Deleting actor: " << (*it) << " from actor list in node: " << name << std::endl;
       delete (*it);
@@ -108,7 +108,7 @@ namespace Maps {
   }
 
   void Node::setNodeLink(int dir, Node* link) {
-	  this->nodeLinks[dir] = link;
+    this->nodeLinks[dir] = link;
   }
 
   void Node::addActor(Actor *actor) {
@@ -117,23 +117,23 @@ namespace Maps {
   }
 
   void Node::moveActors() {
-	auto it = actorPtrList.begin();
-	while (it != actorPtrList.end()) {
-		  Actor &actor = **it;
-		  int dir = actor.getMoveDir();
-		  std::list<Actor*> &otherList = nodeLinks[dir]->actorPtrList;
-		  // TODO: Make canMoveInDir(DIR) function
-		  if ((dir != Maps::Stop) && (nodeLinks[dir] != nullptr) && !nodeLinks[dir]->isWall()) {
-		    actor.onMove(); // Moving actor
-		    actor.setCurrentNode(nodeLinks[dir]);
-			auto actorToMove = it;
-			it++;
-			// Moves
-			otherList.splice(otherList.begin(), actorPtrList, actorToMove);
-		  } else {
-			  it++;
-		  }
-	}
+  auto it = actorPtrList.begin();
+  while (it != actorPtrList.end()) {
+      Actor &actor = **it;
+      int dir = actor.getMoveDir();
+      std::list<Actor*> &otherList = nodeLinks[dir]->actorPtrList;
+      // TODO: Make canMoveInDir(DIR) function
+      if ((dir != Maps::Stop) && (nodeLinks[dir] != nullptr) && !nodeLinks[dir]->isWall()) {
+        actor.onMove(); // Moving actor
+        actor.setCurrentNode(nodeLinks[dir]);
+      auto actorToMove = it;
+      it++;
+      // Moves
+      otherList.splice(otherList.begin(), actorPtrList, actorToMove);
+      } else {
+        it++;
+      }
+  }
   }
 
   std::string Node::getName() {
