@@ -1,6 +1,5 @@
 #ifndef NODE_H
 #define NODE_H
-#include <boost/property_tree/ptree.hpp>
 #include <list>
 #include <string>
 #include "Inventory.h"

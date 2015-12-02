@@ -1,10 +1,10 @@
 #ifndef CREATURE_H
 #define CREATURE_H
-#include <boost/property_tree/ptree.hpp>
 #include <string>
-#include "Stats.h"
-#include "Inventory.h"
 #include "Equipment.h"
+#include "File.h"
+#include "Inventory.h"
+#include "Stats.h"
 
 /**
  * This class should store all functions for defining what a creature is.

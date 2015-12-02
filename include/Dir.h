@@ -1,6 +1,7 @@
 #ifndef DIR_H
 #define DIR_H
 #include <string>
+
 namespace Maps
 {
   static const int numDirs = 7; // Stopped == 0, and 6 dirs

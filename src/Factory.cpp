@@ -1,9 +1,7 @@
+#include "File.h"
 #include "Factory.h"
-#include "Item.h"
-#include "Inventory.h"
-#include "Actor.h"
-#include "Node.h"
-#include "Map.h"
+#include "Factory_Enums.h"
+
 // Including files for use by factory
 // Actors
 #include "Player.h"

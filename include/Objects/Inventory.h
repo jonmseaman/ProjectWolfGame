@@ -1,10 +1,10 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
-#include <boost/property_tree/ptree.hpp>
 #include <string>
 #include <vector>
-#include "Item.h"
 #include "File.h"
+#include "Item.h"
+
 class Inventory
 {
   public:

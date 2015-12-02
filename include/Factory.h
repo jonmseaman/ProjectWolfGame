@@ -1,16 +1,13 @@
 #ifndef FACTORY_H
 #define FACTORY_H
-#include "Factory_Enums.h"
 #include "File.h"
 
-class Item;
 class Actor;
+class Item;
 namespace Maps {
-	class Node;
 	class Map;
-} /* Maps */
-
-#include <boost/property_tree/ptree.hpp>
+	class Node;
+}
 
 class Factory
 {

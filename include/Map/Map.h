@@ -1,7 +1,5 @@
 #ifndef MAP_H
 #define MAP_H
-#include <boost/property_tree/ptree.hpp>
-#include <iostream>
 #include <vector>
 #include "File.h"
 

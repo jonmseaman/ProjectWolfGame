@@ -1,13 +1,15 @@
 #include <algorithm>
 #include <assert.h>
-#include "exception"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+#include <exception>
+#include <iostream>
 #include "Map.h"
 #include "MapManager.h"
 #include "utils.h"
 #include "Factory.h"
+#include "Factory_Enums.h"
 #include "File.h"
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
 
 MapManager::MapManager(): map(nullptr) {}
 

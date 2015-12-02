@@ -1,8 +1,7 @@
 #ifndef ACTOR_H
 #define ACTOR_H
-#include <boost/property_tree/ptree.hpp>
 #include "Creature.h"
-#include "Dir.h"
+#include "File.h"
 #include "Node.h"
 
 

@@ -1,8 +1,5 @@
 #ifndef ITEM_H
 #define ITEM_H
-#include <assert.h>
-#include <boost/property_tree/ptree.hpp>
-#include <iostream>
 #include <string>
 #include "File.h" // for loading / saving functions
 #include "Stats.h"
