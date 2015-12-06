@@ -2,7 +2,6 @@
 #define CREATURE_H
 #include <string>
 #include "Equipment.h"
-#include "File.h"
 #include "Inventory.h"
 #include "Savable.h"
 #include "Stats.h"

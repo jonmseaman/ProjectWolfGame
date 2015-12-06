@@ -4,7 +4,7 @@
 #include <string>
 #include "Inventory.h"
 #include "Dir.h"
-#include "File.h"
+
 class Actor;
 namespace Maps
 {

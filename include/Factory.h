@@ -1,6 +1,5 @@
 #ifndef FACTORY_H
 #define FACTORY_H
-#include "File.h"
 
 class Actor;
 class Item;

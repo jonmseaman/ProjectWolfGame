@@ -195,7 +195,6 @@
     <ClCompile Include="src\Factory.cpp" />
     <ClCompile Include="src\Dir.cpp" />
     <ClCompile Include="src\dLog.cpp" />
-    <ClCompile Include="src\File\File.cpp" />
     <ClCompile Include="src\File\Savable.cpp" />
     <ClCompile Include="src\GActors\Rat.cpp" />
     <ClCompile Include="src\GActors\Swordsmen.cpp" />
@@ -236,10 +235,6 @@
     <ClInclude Include="include\Enums\MapEnum.h" />
     <ClInclude Include="include\Enums\NodeEnum.h" />
     <ClInclude Include="include\Factory_Enums.h" />
-    <ClInclude Include="include\File\File.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unit_Tests|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="include\File\Savable.h" />
     <ClInclude Include="include\GActors\Rat.h" />
     <ClInclude Include="include\GActors\Swordsmen.h" />

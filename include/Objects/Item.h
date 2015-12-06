@@ -1,7 +1,6 @@
 #ifndef ITEM_H
 #define ITEM_H
 #include <string>
-#include "File.h" // for loading / saving functions
 #include "Stats.h"
 class Creature;
 
