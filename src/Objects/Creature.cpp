@@ -57,6 +57,11 @@ void Creature::setMaxHealth(int maxHealth) {
   setHealth(maxHealth);
 }
 
+void Creature::setIsLiving(bool isLiving)
+{
+  this->isLiving = isLiving;
+}
+
 void Creature::combatStop() {
   flagInCombat(false);
 }
@@ -86,7 +91,7 @@ void Creature::displayHUDLine() {
     << maxHealth;
 }
 
-pairType Creature::toXML() {
+pairType Creature::toTree() {
   using namespace boost::property_tree;
   ptree tree;
 
@@ -100,15 +105,15 @@ pairType Creature::toXML() {
   tree.push_back(XML_VAR_PAIR(health));
   tree.push_back(XML_VAR_PAIR(maxHealth));
 
-  tree.push_back(equipment.toXML());
-  tree.push_back(inventory.toXML());
+  tree.push_back(equipment.toTree());
+  tree.push_back(inventory.toTree());
 
-  tree.push_back(stats.toXML());
+  tree.push_back(stats.toTree());
 
   return pairType("Creature", tree);
 }
 
-void Creature::fromXML(const pairType& p) {
+void Creature::fromTree(const pairType& p) {
   const treeType &tree = p.second;
   auto it = tree.begin();
 
@@ -119,9 +124,9 @@ void Creature::fromXML(const pairType& p) {
     if (key == "name") {
       name = data;
     } else if (key == "isLiving") {
-      isLiving = (bool)std::stoi(data);
+      isLiving = std::stoi(data) > 0;
     } else if (key == "isInCombat") {
-      isInCombat = (bool)std::stoi(data);
+      isInCombat = std::stoi(data) > 0;
     } else if (key == "level") {
       level = std::stoi(data);
     } else if (key == "experience") {
@@ -131,11 +136,11 @@ void Creature::fromXML(const pairType& p) {
     } else if (key == "maxHealth") {
       maxHealth = std::stoi(data);
     } else if (key == "Equipment") {
-      equipment.fromXML(*it);
+      equipment.fromTree(*it);
     } else if (key == "Inventory") {
-      inventory.fromXML(*it);
+      inventory.fromTree(*it);
     } else if (key == "Stats") {
-      stats.fromXML(*it);
+      stats.fromTree(*it);
     }
     it++;
   }
