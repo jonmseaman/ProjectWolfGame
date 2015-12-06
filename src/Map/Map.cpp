@@ -79,19 +79,19 @@ namespace Maps
     }
   }
 
-  pairType Map::toXML() {
+  pairType Map::toTree() {
     using namespace boost::property_tree;
     ptree tree;
     tree.push_back(XML_VAR_PAIR(mapSize));
     // Should a location be saved?
     for (Node* node : grid) {
-      tree.push_back(node->toXML());
+      tree.push_back(node->toTree());
     }
 
     return ptree::value_type("Map", tree);
   }
 
-  void Map::fromXML(const pairType &p) {
+  void Map::fromTree(const pairType &p) {
     const treeType &tree = p.second;
 
     { // Get the mapSize first:

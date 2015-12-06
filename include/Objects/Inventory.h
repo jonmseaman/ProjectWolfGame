@@ -11,13 +11,13 @@ class Inventory
     Inventory();
     Inventory(std::string name, int inventorySize);
     virtual ~Inventory();
-    virtual pairType toXML();
+    virtual pairType toTree();
     /**
      * Gets data from p.
      * @attention Deletes all items that are already in this inventory.
      * @param p The key, tree pair that data will be gathered from.
      */
-    void fromXML(const pairType& p);
+    void fromTree(const pairType& p);
 
     /**
      * Tries to add item to the inventory.

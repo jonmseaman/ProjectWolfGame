@@ -4,12 +4,13 @@
 #include "Equipment.h"
 #include "File.h"
 #include "Inventory.h"
+#include "Savable.h"
 #include "Stats.h"
 
 /**
  * This class should store all functions for defining what a creature is.
  */
-class Creature
+class Creature : public Savable
 {
     // The data structure for the creatures.
     // This class should contain the data and tools for making functioning actors in the game world,
@@ -17,9 +18,6 @@ class Creature
   public:
     Creature();
     virtual ~Creature();
-    // Stuff for loading / saving
-    virtual pairType toXML();
-    void fromXML(const pairType& p);
 
     void combatStop(); // Takes creature out of combat and removes targets
 

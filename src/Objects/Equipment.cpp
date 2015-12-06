@@ -1,6 +1,6 @@
 #include "Equipment.h"
 #include "File.h"
 
-pairType Equipment::toXML() {
-  return pairType("Equipment", Inventory::toXML().second);
+pairType Equipment::toTree() {
+  return pairType("Equipment", Inventory::toTree().second);
 }

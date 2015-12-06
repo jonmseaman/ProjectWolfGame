@@ -205,20 +205,20 @@ namespace Maps {
      return nextActor;
    }
 
-   pairType Node::toXML() {
+   pairType Node::toTree() {
      using namespace boost::property_tree;
      ptree tree;
      tree.push_back(XML_VAR_SPAIR(name));
-     tree.push_back(inventory.toXML());
+     tree.push_back(inventory.toTree());
      // Add node type
      for (Actor* actor : actorPtrList) {
-       tree.push_back(actor->toXML());
+       tree.push_back(actor->toTree());
      }
 
      return ptree::value_type("Node", tree);
    }
 
-   void Node::fromXML(const pairType &p) {
+   void Node::fromTree(const pairType &p) {
      const treeType &tree = p.second;
 
      auto it = tree.begin();
@@ -230,7 +230,7 @@ namespace Maps {
        } else if (key == "Actor") {
          addActor(Factory::newActor(*it));
        } else if (key == "Inventory") {
-         inventory.fromXML(*it);
+         inventory.fromTree(*it);
        }
        it++;
      }

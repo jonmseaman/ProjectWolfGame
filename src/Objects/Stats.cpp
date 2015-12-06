@@ -24,7 +24,7 @@ Stats operator+(Stats stats1, Stats stats2) {
 	return Stats{stam, strength, intellect};
 }
 
-pairType Stats::toXML() {
+pairType Stats::toTree() {
 	treeType tree;
 
 	tree.push_back(XML_VAR_PAIR(stamina));
@@ -34,7 +34,7 @@ pairType Stats::toXML() {
 	return pairType("stats", tree);
 }
 
-void Stats::fromXML(const pairType& p) {
+void Stats::fromTree(const pairType& p) {
 	const treeType& tree = p.second;
 	auto it = p.second.begin();
 	while (it != p.second.end()) {

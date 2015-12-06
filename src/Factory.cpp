@@ -52,7 +52,7 @@ Item* Factory::newItem(pairType item) {
     id = std::stoi(it->second.data());
   }
   itemCreated = newItem(id);
-  itemCreated->fromXML(item);
+  itemCreated->fromTree(item);
   return itemCreated;
 }
 
@@ -88,7 +88,7 @@ Actor* Factory::newActor(pairType actor) {
     id = std::stoi(it->second.data());
   }
   actorCreated = newActor(id);
-  actorCreated->fromXML(actor);
+  actorCreated->fromTree(actor);
   return actorCreated;
 }
 
@@ -118,7 +118,7 @@ Maps::Node* Factory::newNode(pairType node) {
     id = std::stoi(it->second.data());
   }
   nodeCreated = newNode(id);
-  nodeCreated->fromXML(node);
+  nodeCreated->fromTree(node);
   return nodeCreated;
 }
 
@@ -146,6 +146,6 @@ Maps::Map* Factory::newMap(pairType map) {
     id = std::stoi(it->second.data());
   }
   mapCreated = newMap(id);
-  mapCreated->fromXML(map);
+  mapCreated->fromTree(map);
   return mapCreated;
 }

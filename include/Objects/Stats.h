@@ -6,8 +6,8 @@ class Creature;
 class Stats {
 public:
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
-  pairType toXML();
-  void fromXML(const pairType& p);
+  pairType toTree();
+  void fromTree(const pairType& p);
 
   int getStamina() { return stamina; }
   int getStrength() { return strength; }

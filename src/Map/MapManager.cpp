@@ -62,7 +62,7 @@ void MapManager::save(std::string fileName) {
     // Make a tree
     ptree saveTree;
     // Add map to the tree
-    saveTree.push_back(map->toXML());
+    saveTree.push_back(map->toTree());
 
     // write to file, with formatting
     xml_writer_settings<std::string> settings(' ', 2);

@@ -19,8 +19,8 @@ namespace Maps
       /**
       * Converts the map to a pair which can be added to an xml tree
       */
-      pairType toXML();
-      void fromXML(const pairType& p);
+      pairType toTree();
+      void fromTree(const pairType& p);
       int getID() { return id; }
       void setID(int idNum) { this->id = idNum; }
 

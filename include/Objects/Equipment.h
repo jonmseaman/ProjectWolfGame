@@ -7,7 +7,7 @@
 class Equipment : public Inventory
 {
 public:
-  pairType toXML();
+  pairType toTree();
 };
 
 #endif /* end of include guard: EQUIPMENT_H */

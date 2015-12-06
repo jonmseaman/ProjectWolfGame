@@ -15,8 +15,8 @@ class Actor : public Creature
     Actor();
     virtual ~Actor();
     // Loading and Saving
-    pairType toXML();
-    void fromXML(const pairType& p);
+    pairType toTree();
+    void fromTree(const pairType& p);
     int getID() { return id; }
     void setID(int idNum) { this->id = idNum; }
 

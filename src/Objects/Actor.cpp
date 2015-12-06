@@ -116,17 +116,17 @@ void Actor::cycleTarget() {
   targetPtr = currentNode->getNextActor(targetPtr);
 }
 
-pairType Actor::toXML() {
+pairType Actor::toTree() {
   using namespace boost::property_tree;
   treeType tree;
   // TODO: Adjust so that derived types may add custom xml
   tree.push_front(XML_VAR_PAIR(id));
   // tree.push_back(XML_VAR_PAIR(isPlayer)); // not necessary?
-  tree.push_back(Creature::toXML());
+  tree.push_back(Creature::toTree());
   return ptree::value_type("Actor", tree);
 }
 
-void Actor::fromXML(const pairType& p) {
+void Actor::fromTree(const pairType& p) {
   const treeType &tree = p.second;
-  Creature::fromXML(*tree.find("Creature"));
+  Creature::fromTree(*tree.find("Creature"));
 }
