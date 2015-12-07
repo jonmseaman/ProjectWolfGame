@@ -3,8 +3,9 @@
 #include <string>
 #include <vector>
 #include "Item.h"
+#include "Savable.h"
 
-class Inventory
+class Inventory : public File::Savable
 {
   public:
     Inventory();

@@ -1,12 +1,13 @@
 #ifndef MAP_H
 #define MAP_H
 #include <vector>
+#include "Savable.h"
 
 
 namespace Maps
 {
   class Node;
-  class Map
+  class Map : public File::Savable
   {
     public:
       Map(); // Default constructor. Creates empty map with blank nodes
@@ -21,8 +22,6 @@ namespace Maps
       */
       pairType toTree();
       void fromTree(const pairType& p);
-      int getID() { return id; }
-      void setID(int idNum) { this->id = idNum; }
 
       // Data Acess
 
@@ -60,7 +59,6 @@ namespace Maps
        */
       std::vector<Node*> grid;
     private:
-      int id;
       /**
        * Deletes all elements of the grid.
        * @usage Used by the destructor

@@ -81,6 +81,9 @@
     <ClCompile Include="src\File\Savable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test\Objects\Stats_Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Dir.h">

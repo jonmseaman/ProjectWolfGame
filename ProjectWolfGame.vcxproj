@@ -217,6 +217,11 @@
     <ClCompile Include="src\Objects\Player.cpp" />
     <ClCompile Include="src\Objects\Stats.cpp" />
     <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="test\Objects\Stats_Test.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unit_Tests|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="test\test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unit_Tests|Win32'">false</ExcludedFromBuild>

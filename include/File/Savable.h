@@ -11,6 +11,9 @@ public:
   Savable();
   ~Savable();
 
+  int getID() { return id; }
+  void setID(int idNum) { this->id = idNum; }
+
 
   // hide the implementation
   // Stack of update from iterators from boost
@@ -28,6 +31,12 @@ public:
   static void saveMasterTree(std::string fileName);
 
 private:
+  /**
+  * ID number for use by the factor.
+  * @usage Set so that the factory knows what type of actor to make
+  */
+  int id;
+
   /** Removes all children from the tree. */
   void clearSaveTree();
   /* Creates the tree*/

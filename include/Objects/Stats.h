@@ -1,12 +1,11 @@
 #ifndef STATS_H
 #define STATS_H
+#include "Savable.h"
 class Creature;
 
-class Stats {
+class Stats : public File::Savable {
 public:
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
-  pairType toTree();
-  void fromTree(const pairType& p);
 
   int getStamina() { return stamina; }
   int getStrength() { return strength; }

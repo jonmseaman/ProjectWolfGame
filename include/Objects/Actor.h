@@ -16,15 +16,14 @@ class Actor : public Creature
     // Loading and Saving
     pairType toTree();
     void fromTree(const pairType& p);
-    int getID() { return id; }
-    void setID(int idNum) { this->id = idNum; }
+
 
     // Combat
     virtual void onAttack();
     // Inventory
     bool dropItem(int slotNumber); // Drops item to node inventory. slotNumber is index+1 in inventory
     void dropAllItems(); // Drops all items in inventory to node inventory.
-    // Targetting
+    // Targeting
     /**
      * Cycles through targets in the node. If there is not an actor != this in
      * the node, the target will be removed.
@@ -72,11 +71,6 @@ class Actor : public Creature
     void setIsTurnUsed(bool val = true);
     bool isPlayer = false;
   private:
-    /**
-     * ID number for use by the factor.
-     * @usage Set so that the factory knows what type of actor to make
-     */
-    int id;
     bool isTurnUsed; // Should stop allowing actions when this is true.
     int moveDir; // The direction that the map will move the player
 };

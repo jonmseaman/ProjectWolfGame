@@ -1,13 +1,14 @@
 #ifndef MAPMANAGER_H
 #define MAPMANAGER_H
 #include <string>
+#include "Savable.h"
 namespace Maps { class Map; }
 /**
  * The purpose of this class is to make it easier to manager maps.
  * Eventually, MapManager will be able to handle multiple open maps and
  * connect them together to make a seamless larger map.
  */
-class MapManager
+class MapManager : public File::Savable
 {
   public:
     /** Singleton */
