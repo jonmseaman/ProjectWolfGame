@@ -10,7 +10,7 @@ A prototype for a terminal-based RPG.
 
 ## Controls
 
-* ~12345 - Menu access
+* `12345 - Menu access
 * wasdqe - Movement
 * i - inventory
 * Space - Attack
