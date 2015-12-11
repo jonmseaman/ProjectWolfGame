@@ -15,7 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\dLog.cpp">
+    <ClCompile Include="test\test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\Objects\Stats_Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\File\Savable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GActors\Rat.cpp">
@@ -25,6 +31,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GMaps\CenterTown.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GObjects\BasicSword.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GTiles\House_2Story.cpp">
@@ -57,31 +66,22 @@
     <ClCompile Include="src\Objects\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GObjects\BasicSword.cpp">
+    <ClCompile Include="src\Objects\Stats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Dir.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Factory.cpp">
+    <ClCompile Include="src\dLog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\Stats.cpp">
+    <ClCompile Include="src\Factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test\test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\File\Savable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="test\Objects\Stats_Test.cpp">
+    <ClCompile Include="src\utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

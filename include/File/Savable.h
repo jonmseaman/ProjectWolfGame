@@ -2,8 +2,13 @@
 #define SAVABLE_H
 #include <string>
 
-#define STRINGIFY_VALUE_PAIR(var) #var, var
+#define ADD_VAR(var) addVariable( #var, var )
+#define READ_VAR(var) readVariable( #var, var )
+
 namespace File {
+  /** Writes to and loads from file */
+  void save(const std::string &fileName);
+  void load(const std::string &fileName);
 
 class Savable
 {
@@ -11,24 +16,28 @@ public:
   Savable();
   ~Savable();
 
+  /**
+   * Used so that the save file has information on the actual type
+   * of the Actor.
+   */
   int getID() { return id; }
   void setID(int idNum) { this->id = idNum; }
 
+  /**
+   * Should create a tree for the current savable
+   */
+  void start(std::string key);
+  void end();
 
-  // hide the implementation
-  // Stack of update from iterators from boost
+  /** Adds variables for saving */
+  virtual void save() = 0;
+  /** Reads variable from tree */
+  virtual void load() = 0;
 
-  // Writes to a tree, returns self
-  virtual Savable& toTree() = 0;
-  /** Should pop from the stack of iterators and load from that pair */
-  virtual void fromTree() = 0;
-
-  void addSavable(Savable& s);
-  void addVariableToTree(std::string varName, int var);
-  void addVariableToTree(std::string varName, std::string var);
-  void resetSaveTree();
-
-  static void saveMasterTree(std::string fileName);
+  void addVariable(const std::string &varName, int var);
+  void addVariable(const std::string &varName, const std::string &var);
+  void readVariable(const std::string &varName, int &var);
+  void readVariable(const std::string &varName, std::string &var);
 
 private:
   /**
@@ -36,11 +45,6 @@ private:
   * @usage Set so that the factory knows what type of actor to make
   */
   int id;
-
-  /** Removes all children from the tree. */
-  void clearSaveTree();
-  /* Creates the tree*/
-  void initSaveTree();
 };
 } // namespace File
 
