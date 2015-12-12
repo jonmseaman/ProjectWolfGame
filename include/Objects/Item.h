@@ -17,6 +17,9 @@ class Item// : public File::Savable
     virtual ~Item();
     pairType toTree();
     void fromTree(const pairType& p);
+    int getID() { return id; }
+    void setID(int idNum) { this->id = idNum; }
+    int id;
 
     /**
      * Shows information about the item on std::cout

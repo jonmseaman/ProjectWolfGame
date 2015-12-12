@@ -195,7 +195,6 @@
     <ClCompile Include="src\Dir.cpp" />
     <ClCompile Include="src\dLog.cpp" />
     <ClCompile Include="src\Factory.cpp" />
-    <ClCompile Include="src\File\File.cpp" />
     <ClCompile Include="src\File\Savable.cpp" />
     <ClCompile Include="src\GActors\Rat.cpp" />
     <ClCompile Include="src\GActors\Swordsmen.cpp" />

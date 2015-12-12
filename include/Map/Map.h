@@ -1,12 +1,18 @@
 #ifndef MAP_H
 #define MAP_H
 #include <vector>
+#include "File.h"
 
 namespace Maps
 {
   class Node;
   class Map
   {
+    // Temp stuff
+    public:
+      int getID() { return id; }
+      void setID(int idNum) { this->id = idNum; }
+      int id;
     public:
       Map(); // Default constructor. Creates empty map with blank nodes
       /**

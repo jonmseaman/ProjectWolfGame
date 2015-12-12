@@ -30,9 +30,9 @@ public:
   void end();
 
   /** Adds variables for saving */
-  virtual void save() = 0;
+  virtual void save() {} // TODO: Pure virtual
   /** Reads variable from tree */
-  virtual void load() = 0;
+  virtual void load() {} // TODO: Pure virtual
 
   void addVariable(const std::string &varName, int var);
   void addVariable(const std::string &varName, const std::string &var);

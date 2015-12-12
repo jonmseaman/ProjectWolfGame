@@ -11,6 +11,11 @@
  */
 class Actor : public Creature
 {
+    // Temp stuff
+  public:
+    int getID() { return id; }
+    void setID(int idNum) { this->id = idNum; }
+    int id;
   public:
     Actor();
     virtual ~Actor();

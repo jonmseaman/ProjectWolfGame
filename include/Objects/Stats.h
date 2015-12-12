@@ -5,6 +5,10 @@
 class Creature;
 
 class Stats : public File::Savable {
+// TEMP
+public:
+  pairType toTree();
+  void fromTree(const pairType& p);
 public:
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
 
@@ -20,6 +24,8 @@ public:
    * 3 lines, Stamina on one, strength, the intellect
    */
   void showStats();
+
+  
 
 private:
   // Base stats
