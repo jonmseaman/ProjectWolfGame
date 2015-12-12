@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -14,20 +15,30 @@ namespace File {
   typedef ptree::value_type   pairType;
   typedef ptree               treeType;
 
+  
 
   /** The folder in which saves will go. */
   const fs::path savePath("./Saves");
   fs::fstream file;
   fs::path filePath;
-
-  std::stack<pairType*, std::list<pairType*>> saveStack;
+  treeType masterTree;
+  std::stack<treeType*, std::list<treeType*>> treeStack;
 
   /* For storage of information. */
-  treeType masterTree;
-  treeType* workingTree = nullptr;
+  treeType* workingTree() {
+    treeType* treePtr = nullptr;
+    if (treeStack.empty()) {
+      treePtr = &masterTree;
+    }
+    else {
+      treePtr = treeStack.top();
+    }
+
+    return treePtr; 
+  }
 
 
-Savable::Savable()
+Savable::Savable(): id(0)
 {
 }
 
@@ -35,18 +46,21 @@ Savable::~Savable()
 {
 }
 
-void Savable::start(std::string key)
+void Savable::startSave(const std::string& key)
 {
-  saveStack.push(new pairType(key, ptree()));
-  workingTree = &saveStack.top()->second;
+  // Make a new tree to add new vars to
+  // Add the pair to the working tree
+  workingTree()->push_back(pairType(key, ptree()));
+  // Get pointer to tree just added
+  treeType* subTreePtr = &workingTree()->end()->second;
+  // Add recently made
+  treeStack.push(subTreePtr);
 }
 
-void Savable::end()
+void Savable::endSave()
 {
-  pairType* p = saveStack.top();
-  saveStack.pop();
-  saveStack.top()->second.push_back(*p);
-  workingTree = nullptr;
+  assert(!treeStack.empty());
+  treeStack.pop();
 }
 
 void Savable::addVariable(const std::string & varName, int var)
@@ -57,7 +71,7 @@ void Savable::addVariable(const std::string & varName, int var)
 void Savable::addVariable(const std::string & varName, const std::string & var)
 {
   pairType p{ varName, treeType(var) };
-  workingTree->push_back(p);
+  workingTree()->push_back(p);
 }
 
 void Savable::readVariable(const std::string & varName, int & var)
@@ -70,7 +84,7 @@ void Savable::readVariable(const std::string & varName, int & var)
 }
 
 void Savable::readVariable(const std::string & varName, std::string & var)
-{
+{ // TODO: Implement this
   // Find var in tree
 
   // Get the data

@@ -22,8 +22,8 @@
     <ClCompile Include="src\Objects\Player.cpp" />
     <ClCompile Include="src\Objects\Stats.cpp" />
     <ClCompile Include="src\utils.cpp" />
-    <ClCompile Include="test\Objects\Stats_Test.cpp" />
     <ClCompile Include="test\test.cpp" />
+    <ClCompile Include="test\Objects\StatsTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Factory.h" />
@@ -52,5 +52,6 @@
     <ClInclude Include="include\Objects\Player.h" />
     <ClInclude Include="include\Objects\Stats.h" />
     <ClInclude Include="include\utils.h" />
+    <ClInclude Include="test\Test.h" />
   </ItemGroup>
 </Project>

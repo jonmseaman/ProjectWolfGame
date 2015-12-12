@@ -12,6 +12,8 @@ public:
   void fromTree(const pairType& p);
 public:
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
+  void save();
+  void load();
 
   int getStamina() { return stamina; }
   int getStrength() { return strength; }

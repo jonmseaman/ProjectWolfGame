@@ -95,7 +95,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>include\File;$(BOOST_ROOT);include\Enums;include\GActors;include\GMaps;include\GObjects;include\GTiles;include\Map;include\Objects;include;$(IncludePath)</IncludePath>
+    <IncludePath>include\File;$(BOOST_ROOT);include\Enums;include\GActors;include\GMaps;include\GObjects;include\GTiles;include\Map;include\Objects;include;test;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_ROOT)\lib;$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unit_Tests|Win32'">
@@ -215,7 +215,7 @@
     <ClCompile Include="src\Objects\Player.cpp" />
     <ClCompile Include="src\Objects\Stats.cpp" />
     <ClCompile Include="src\utils.cpp" />
-    <ClCompile Include="test\Objects\Stats_Test.cpp">
+    <ClCompile Include="test\Objects\StatsTest.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unit_Tests|Win32'">false</ExcludedFromBuild>
@@ -264,6 +264,7 @@
     <ClInclude Include="include\Objects\Player.h" />
     <ClInclude Include="include\Objects\Stats.h" />
     <ClInclude Include="include\utils.h" />
+    <ClInclude Include="test\Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

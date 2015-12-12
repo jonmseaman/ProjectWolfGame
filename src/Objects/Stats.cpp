@@ -9,6 +9,20 @@ Stats::Stats(int stamina, int strength, int intellect) {
   this->intellect = intellect;
 }
 
+void Stats::save()
+{
+  startSave("Stats");
+  ADD_VAR(stamina);
+  ADD_VAR(strength);
+  ADD_VAR(intellect);
+  endSave();
+}
+
+void Stats::load()
+{
+
+}
+
 void Stats::showStats() {
   using namespace std;
   int fieldWidth = 9; // Length of "Intellect"
