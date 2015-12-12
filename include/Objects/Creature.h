@@ -9,7 +9,7 @@
 /**
  * This class should store all functions for defining what a creature is.
  */
-class Creature : public File::Savable
+class Creature// : public File::Savable
 {
     // The data structure for the creatures.
     // This class should contain the data and tools for making functioning actors in the game world,

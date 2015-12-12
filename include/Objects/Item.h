@@ -7,7 +7,7 @@ class Creature;
 /**
  * This is an item.
  */
-class Item : public File::Savable
+class Item// : public File::Savable
 {
   public:
     Item();

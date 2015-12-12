@@ -5,7 +5,7 @@
 #include "Item.h"
 #include "Savable.h"
 
-class Inventory : public File::Savable
+class Inventory// : public File::Savable
 {
   public:
     Inventory();

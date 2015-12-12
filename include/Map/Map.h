@@ -1,13 +1,11 @@
 #ifndef MAP_H
 #define MAP_H
 #include <vector>
-#include "Savable.h"
-
 
 namespace Maps
 {
   class Node;
-  class Map : public File::Savable
+  class Map
   {
     public:
       Map(); // Default constructor. Creates empty map with blank nodes

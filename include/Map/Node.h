@@ -9,7 +9,7 @@
 class Actor;
 namespace Maps
 {
-  class Node : public File::Savable
+  class Node// : public File::Savable
   {
     public:
       static int nodeCount;
