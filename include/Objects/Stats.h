@@ -6,6 +6,7 @@ class Creature;
 
 class Stats : public File::Savable {
 // TEMP
+  // TODO: Remove temp
 public:
   pairType toTree();
   void fromTree(const pairType& p);
