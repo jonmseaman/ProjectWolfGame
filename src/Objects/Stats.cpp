@@ -1,4 +1,5 @@
 #include <iostream>
+#include "File.h"
 #include "Stats.h"
 
 Stats::Stats(int stamina, int strength, int intellect) {

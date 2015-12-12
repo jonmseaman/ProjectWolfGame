@@ -3,6 +3,7 @@
 #include <assert.h>
 #include "dLog.h"
 #include "Factory.h"
+#include "File.h"
 #include "Inventory.h"
 
 Inventory::Inventory():Inventory("Inventory", 2) {}

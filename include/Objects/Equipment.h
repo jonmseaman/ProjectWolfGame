@@ -1,9 +1,9 @@
 #ifndef EQUIPMENT_H
 #define EQUIPMENT_H
 #include "Inventory.h"
-
-// This class is meant to be a container for equipped items.
-
+#include "File.h"
+// This function is meant to be a container for equipped items.
+#include "File.h"
 class Equipment : public Inventory
 {
 public:

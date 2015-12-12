@@ -1,6 +1,7 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 #include "Creature.h"
+#include "File.h"
 #include "Node.h"
 
 

@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "Dir.h"
 #include "dLog.h"
+#include "File.h"
 #include "utils.h"
 
 Actor::Actor(): id(0)
