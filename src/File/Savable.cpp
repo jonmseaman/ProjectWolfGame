@@ -51,10 +51,14 @@ void Savable::startSave(const std::string& key)
   // Make a new tree to add new vars to
   // Add the pair to the working tree
   workingTree()->push_back(pairType(key, ptree()));
+
   // Get pointer to tree just added
-  treeType* subTreePtr = &workingTree()->end()->second;
-  // Add recently made
+  auto lastPairIt = --workingTree()->end();
+  treeType* subTreePtr = &lastPairIt->second;
+
+  // Add pointer to stack for later use
   treeStack.push(subTreePtr);
+  subTreePtr->data();
 }
 
 void Savable::endSave()
