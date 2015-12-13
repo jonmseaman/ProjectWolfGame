@@ -8,6 +8,11 @@ namespace Maps
   class Node;
   class Map
   {
+    // Temp stuff
+    public:
+      int getID() { return id; }
+      void setID(int idNum) { this->id = idNum; }
+      int id;
     public:
       Map(); // Default constructor. Creates empty map with blank nodes
       /**
@@ -19,10 +24,8 @@ namespace Maps
       /**
       * Converts the map to a pair which can be added to an xml tree
       */
-      pairType toXML();
-      void fromXML(const pairType& p);
-      int getID() { return id; }
-      void setID(int idNum) { this->id = idNum; }
+      pairType toTree();
+      void fromTree(const pairType& p);
 
       // Data Acess
 
@@ -60,7 +63,6 @@ namespace Maps
        */
       std::vector<Node*> grid;
     private:
-      int id;
       /**
        * Deletes all elements of the grid.
        * @usage Used by the destructor

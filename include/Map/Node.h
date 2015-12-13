@@ -4,21 +4,25 @@
 #include <string>
 #include "Inventory.h"
 #include "Dir.h"
-#include "File.h"
+#include "Savable.h"
+
 class Actor;
 namespace Maps
 {
-  class Node
+  class Node// : public File::Savable
   {
+    // Temp stuff
+    public:
+      int getID() { return id; }
+      void setID(int idNum) { this->id = idNum; }
+      int id;
     public:
       static int nodeCount;
       Node();
       virtual ~Node();
-      pairType toXML();
-      void fromXML(const pairType& p);
+      pairType toTree();
+      void fromTree(const pairType& p);
 
-      int getID() { return id; }
-      void setID(int idNum) { this->id = idNum; }
 
       // Data Access
       // Actors
@@ -113,8 +117,6 @@ namespace Maps
       std::list<Actor*> actorPtrList;
       int getNumActors();
       std::string name;
-    private:
-      int id;
   };
 }
 

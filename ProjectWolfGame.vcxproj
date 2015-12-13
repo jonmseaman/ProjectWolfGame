@@ -95,7 +95,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(BOOST_ROOT);include\Enums;include\GActors;include\GMaps;include\GObjects;include\GTiles;include\Map;include\Objects;include;$(IncludePath)</IncludePath>
+    <IncludePath>include\File;$(BOOST_ROOT);include\Enums;include\GActors;include\GMaps;include\GObjects;include\GTiles;include\Map;include\Objects;include;test;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_ROOT)\lib;$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unit_Tests|Win32'">
@@ -192,19 +192,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Factory.cpp" />
     <ClCompile Include="src\Dir.cpp" />
     <ClCompile Include="src\dLog.cpp" />
-    <ClCompile Include="src\File.cpp" />
+    <ClCompile Include="src\Factory.cpp" />
+    <ClCompile Include="src\File\Savable.cpp" />
     <ClCompile Include="src\GActors\Rat.cpp" />
     <ClCompile Include="src\GActors\Swordsmen.cpp" />
     <ClCompile Include="src\GMaps\CenterTown.cpp" />
     <ClCompile Include="src\GObjects\BasicSword.cpp" />
     <ClCompile Include="src\GTiles\House_2Story.cpp" />
     <ClCompile Include="src\main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unit_Tests|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Map\Map.cpp" />
     <ClCompile Include="src\Map\MapManager.cpp" />
@@ -217,6 +215,11 @@
     <ClCompile Include="src\Objects\Player.cpp" />
     <ClCompile Include="src\Objects\Stats.cpp" />
     <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="test\Objects\StatsTest.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unit_Tests|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="test\test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unit_Tests|Win32'">false</ExcludedFromBuild>
@@ -235,10 +238,11 @@
     <ClInclude Include="include\Enums\MapEnum.h" />
     <ClInclude Include="include\Enums\NodeEnum.h" />
     <ClInclude Include="include\Factory_Enums.h" />
-    <ClInclude Include="include\File.h">
+    <ClInclude Include="include\File\File.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unit_Tests|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="include\File\Savable.h" />
     <ClInclude Include="include\GActors\Rat.h" />
     <ClInclude Include="include\GActors\Swordsmen.h" />
     <ClInclude Include="include\GameFiles.h" />
@@ -260,6 +264,7 @@
     <ClInclude Include="include\Objects\Player.h" />
     <ClInclude Include="include\Objects\Stats.h" />
     <ClInclude Include="include\utils.h" />
+    <ClInclude Include="test\Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

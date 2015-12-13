@@ -8,17 +8,18 @@ class Creature;
 /**
  * This is an item.
  */
-class Item
+class Item// : public File::Savable
 {
   public:
     Item();
-	  Item(std::string name, std::string description, Stats stats);
+    Item(std::string name, std::string description, Stats stats);
     Item(std::string name, Stats stats);
     virtual ~Item();
-    pairType toXML();
-    void fromXML(const pairType& p);
+    pairType toTree();
+    void fromTree(const pairType& p);
     int getID() { return id; }
     void setID(int idNum) { this->id = idNum; }
+    int id;
 
     /**
      * Shows information about the item on std::cout
@@ -57,11 +58,8 @@ class Item
   protected:
     std::string name;
     std::string description;
-	  int baseDamage;
+    int baseDamage;
     int baseHeal;
-
-  private:
-    int id;
 };
 
 #endif // ITEM_H

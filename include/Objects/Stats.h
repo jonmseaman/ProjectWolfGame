@@ -1,13 +1,19 @@
 #ifndef STATS_H
 #define STATS_H
+#include "Savable.h"
 #include "File.h"
 class Creature;
 
-class Stats {
+class Stats : public File::Savable {
+// TEMP
+  // TODO: Remove temp
+public:
+  pairType toTree();
+  void fromTree(const pairType& p);
 public:
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
-  pairType toXML();
-  void fromXML(const pairType& p);
+  void save();
+  void load();
 
   int getStamina() { return stamina; }
   int getStrength() { return strength; }
@@ -21,6 +27,8 @@ public:
    * 3 lines, Stamina on one, strength, the intellect
    */
   void showStats();
+
+  
 
 private:
   // Base stats

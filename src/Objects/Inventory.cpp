@@ -99,21 +99,21 @@ bool Inventory::isSlotEmpty(int slotIndex) {
   return slots.at(slotIndex) == nullptr;
 }
 
-pairType Inventory::toXML() {
+pairType Inventory::toTree() {
   treeType tree{};
 
   tree.push_back(XML_VAR_SPAIR(name));
   tree.push_back(XML_VAR_PAIR(size));
   for (Item* item : slots) {
     if (item != nullptr) {
-      tree.push_back(item->toXML());
+      tree.push_back(item->toTree());
     }
   }
 
   return pairType("Inventory", tree);
 }
 
-void Inventory::fromXML(const pairType& p) {
+void Inventory::fromTree(const pairType& p) {
   // TODO: Loading
   const treeType &tree = p.second;
 

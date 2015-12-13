@@ -48,7 +48,7 @@ void Item::showInfo() {
   stats.showStats();
 }
 
-pairType Item::toXML() {
+pairType Item::toTree() {
   using namespace boost::property_tree;
   ptree tree;
 
@@ -56,12 +56,12 @@ pairType Item::toXML() {
   tree.push_back(XML_VAR_SPAIR(description));
   tree.push_back(XML_VAR_PAIR(baseDamage));
   tree.push_back(XML_VAR_PAIR(baseHeal));
-  tree.push_back(stats.toXML());
+  tree.push_back(stats.toTree());
 
   return ptree::value_type("Item", tree);
 }
 
-void Item::fromXML(const pairType& item) {
+void Item::fromTree(const pairType& item) {
   const treeType &tree = item.second;
   auto it = tree.begin();
 
@@ -78,7 +78,7 @@ void Item::fromXML(const pairType& item) {
     } else if (key == STRING(baseHeal)) {
       baseHeal = std::stoi(data);
     } else if (key == "Stats") {
-      stats.fromXML(*it);
+      stats.fromTree(*it);
     }
 
     it++;

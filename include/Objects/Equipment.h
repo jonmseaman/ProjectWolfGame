@@ -3,11 +3,11 @@
 #include "Inventory.h"
 #include "File.h"
 // This function is meant to be a container for equipped items.
-
+#include "File.h"
 class Equipment : public Inventory
 {
 public:
-  pairType toXML();
+  pairType toTree();
 };
 
 #endif /* end of include guard: EQUIPMENT_H */
