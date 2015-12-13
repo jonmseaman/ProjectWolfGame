@@ -69,27 +69,27 @@ void Savable::endSave()
   treeStack.pop();
 }
 
-void Savable::addVariable(const std::string & varName, int var)
+void Savable::save(const std::string & varName, int var)
 {
-  addVariable(varName, std::to_string(var));
+  save(varName, std::to_string(var));
 }
 
-void Savable::addVariable(const std::string & varName, const std::string & var)
+void Savable::save(const std::string & varName, const std::string & var)
 {
   pairType p{ varName, treeType(var) };
   workingTree()->push_back(p);
 }
 
-void Savable::readVariable(const std::string & varName, int & var)
+void Savable::load(const std::string & varName, int & var)
 {
   std::string stringValue;
-  readVariable(varName, stringValue);
+  load(varName, stringValue);
 
   // Convert value to int
   var = std::stoi(stringValue);
 }
 
-void Savable::readVariable(const std::string & varName, std::string & var)
+void Savable::load(const std::string & varName, std::string & var)
 { // TODO: Implement this
   // Find var in tree
 

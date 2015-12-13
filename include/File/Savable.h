@@ -2,8 +2,8 @@
 #define SAVABLE_H
 #include <string>
 
-#define ADD_VAR(var) addVariable( #var, var )
-#define READ_VAR(var) readVariable( #var, var )
+#define ADD_VAR(var) Savable::save( #var, var )
+#define READ_VAR(var) Savable::load( #var, var )
 
 namespace File {
   /** Writes to and loads from file */
@@ -29,10 +29,13 @@ public:
   /** Reads variable from tree */
   virtual void load() = 0;
 
-  void addVariable(const std::string &varName, int var);
-  void addVariable(const std::string &varName, const std::string &var);
-  void readVariable(const std::string &varName, int &var);
-  void readVariable(const std::string &varName, std::string &var);
+  void save(Savable& s) { s.save(); }
+  void save(const std::string &varName, int var);
+  void save(const std::string &varName, const std::string &var);
+
+  void load(Savable& l) { l.load(); }
+  void load(const std::string &varName, int &var);
+  void load(const std::string &varName, std::string &var);
 public:
 //protected:
   /**
