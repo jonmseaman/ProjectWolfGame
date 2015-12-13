@@ -133,6 +133,8 @@ void save(const std::string & fileName)
     // TODO: Send a better message to the user
     std::cout << e.what() << std::endl;
   }
+
+  masterTree.clear();
   file.close();
 }
 

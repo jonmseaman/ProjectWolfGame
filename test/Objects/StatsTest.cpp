@@ -1,6 +1,11 @@
 #include "Test.h"
 #include "Stats.h"
 
+
+/**
+ * This file is for testing the stats class as well as the savable class.
+ * The savable tests are performed here since Savable is partially abstract.
+ */
 BOOST_AUTO_TEST_SUITE(StatsTest)
 
 
@@ -46,7 +51,11 @@ Test(save) {
 }
 
 Test(File_Save) {
-  File::save("StatsTest");
+  File::save("StatsTest1");
+}
+
+Test(File_Save_AfterHavingSavedAlready) {
+  File::save("StatsTest2");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
