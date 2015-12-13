@@ -45,4 +45,8 @@ Test(save) {
   }
 }
 
+Test(File_Save) {
+  File::save("StatsTest");
+}
+
 BOOST_AUTO_TEST_SUITE_END()

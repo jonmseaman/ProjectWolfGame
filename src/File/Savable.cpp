@@ -2,6 +2,8 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+#include <iostream>
 #include <stack>
 #include <list>
 
@@ -15,7 +17,7 @@ namespace File {
   typedef ptree::value_type   pairType;
   typedef ptree               treeType;
 
-  
+
 
   /** The folder in which saves will go. */
   const fs::path savePath("./Saves");
@@ -34,7 +36,7 @@ namespace File {
       treePtr = treeStack.top();
     }
 
-    return treePtr; 
+    return treePtr;
   }
 
 
@@ -97,6 +99,41 @@ void Savable::readVariable(const std::string & varName, std::string & var)
 
   // Clear node in tree
 
+}
+
+void save(const std::string & fileName)
+{
+  using namespace File;
+  using namespace boost::property_tree;
+
+  // Path to file
+  fs::path filePath = savePath;
+  filePath /= fs::path{ fileName }.filename();
+  filePath += ".sav";
+
+  if (file.is_open())
+  {
+    file.close();
+  }
+
+  // Make sure the directory exists
+  if (!exists(savePath)) {
+    fs::create_directory(savePath);
+  }
+
+  // Try to open and save the file
+  try {
+    file.open(filePath, std::fstream::out);
+
+    // write to file, with formatting
+    xml_writer_settings<std::string> settings(' ', 2);
+    xml_parser::write_xml(file, masterTree, settings);
+  }
+  catch (std::exception &e) {
+    // TODO: Send a better message to the user
+    std::cout << e.what() << std::endl;
+  }
+  file.close();
 }
 
 } // namespace File
