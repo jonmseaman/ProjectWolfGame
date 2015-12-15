@@ -11,7 +11,7 @@
  */
 
 void dispList(const std::vector<std::string> &listItems) {
-  for (int i(0); i<listItems.size(); i++) {
+  for (int i(0); i < listItems.size(); i++) {
     std::cout << std::setw(COLUMN_PADDING) << std::right << i+1 << ": " << listItems.at(i) << std::endl;
   }
 }

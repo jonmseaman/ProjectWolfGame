@@ -3,11 +3,7 @@
 #include "File.h"
 #include "Item.h"
 
-Item::Item():
-  name("Item")
-  , description("Description")
-  , stats{} {
-    setID(0);
+Item::Item() :Item("Item", Stats()) {
 }
 
 Item::Item(std::string name, Stats stats) : Item(name, "", stats) {

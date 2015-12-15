@@ -15,6 +15,7 @@ class Item// : public File::Savable
     Item(std::string name, std::string description, Stats stats);
     Item(std::string name, Stats stats);
     virtual ~Item();
+    // TODO: Remove these
     pairType toTree();
     void fromTree(const pairType& p);
     int getID() { return id; }
@@ -25,21 +26,21 @@ class Item// : public File::Savable
      * Shows information about the item on std::cout
      * Shows name, description, stats.
      */
-    void showInfo();
+    void showInfo() const;
 
     /**
      * Returns the name of the item.
      */
-    std::string getName() { return name; }
+    std::string getName() const { return name; }
     /**
      * Returns the description of the item.
      */
-    std::string getDescription() { return description; }
+    std::string getDescription() const { return description; }
 
     void setDescription(const std::string &description) { this->description = description; }
 
-    int getDamage() { return baseDamage; }
-    int getHeal() { return baseHeal; }
+    int getDamage() const { return baseDamage; }
+    int getHeal() const { return baseHeal; }
     void setDamage(int damage) { baseDamage = damage; }
     void setHeal(int heal) { baseHeal = heal; }
 
@@ -54,7 +55,7 @@ class Item// : public File::Savable
      * @post usedOn will have been affected by the item.
      */
      virtual void use(const Creature &usedBy, Creature &usedOn);
-    Stats stats;
+     Stats stats;
   protected:
     std::string name;
     std::string description;
