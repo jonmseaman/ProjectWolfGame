@@ -60,7 +60,7 @@ void Savable::startSave(const std::string& key)
 
   // Add pointer to stack for later use
   treeStack.push(subTreePtr);
-  subTreePtr->data();
+  ADD_VAR(id);
 }
 
 void Savable::endSave()

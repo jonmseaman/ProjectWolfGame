@@ -12,9 +12,9 @@ public:
   void fromTree(const pairType& p);
 public:
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
-  void save();
-  void load();
+  SAVABLE;
 
+  // Get and set methods
   int getStamina() { return stamina; }
   int getStrength() { return strength; }
   int getIntellect() { return intellect; }
@@ -26,7 +26,7 @@ public:
    * Shows a list of stats and their values
    * 3 lines, Stamina on one, strength, the intellect
    */
-  void showStats();
+  void showStats() const;
 
   
 

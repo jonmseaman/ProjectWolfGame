@@ -8,13 +8,14 @@ class Creature;
 /**
  * This is an item.
  */
-class Item// : public File::Savable
+class Item : public File::Savable
 {
   public:
     Item();
     Item(std::string name, std::string description, Stats stats);
     Item(std::string name, Stats stats);
     virtual ~Item();
+    SAVABLE;
     // TODO: Remove these
     pairType toTree();
     void fromTree(const pairType& p);

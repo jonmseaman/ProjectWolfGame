@@ -2,6 +2,7 @@
 #include "Creature.h"
 #include "File.h"
 #include "Item.h"
+#include "Savable.h"
 
 Item::Item() :Item("Item", Stats()) {
 }
@@ -22,6 +23,19 @@ Item::Item(std::string name, std::string description, Stats stats) {
 Item::~Item() {
 }
 
+void Item::save()
+{
+  startSave("Item");
+  Savable::save(stats);
+
+
+  endSave();
+}
+
+void Item::load() {
+
+}
+
 void Item::use(const Creature &usedBy, Creature &usedOn) {
   // Derive stats from creature using item + this items stats
   Stats derivedStats = stats + usedBy.stats;
@@ -38,7 +52,7 @@ void Item::use(const Creature &usedBy, Creature &usedOn) {
   }
 }
 
-void Item::showInfo() {
+void Item::showInfo() const {
   std::cout << "Name: " << name << std::endl;
   std::cout << "Description: " << description << std::endl;
   stats.showStats();

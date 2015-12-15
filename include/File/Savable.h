@@ -4,6 +4,7 @@
 
 #define ADD_VAR(var) Savable::save( #var, var )
 #define READ_VAR(var) Savable::load( #var, var )
+#define SAVABLE void save(); void load()
 
 namespace File {
   /** Writes to and loads from file */

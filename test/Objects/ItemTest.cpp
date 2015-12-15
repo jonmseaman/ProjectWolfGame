@@ -11,6 +11,10 @@ Test(ConstructorTest) {
   //BOOST_REQUIRE(i.stats == Stats(1,2,3));
 }
 
+Test(save) {
+  Item i("Item", "Desc", Stats{ 1,2,3 });
+  i.save();
+}
 
 
 

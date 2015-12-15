@@ -20,10 +20,14 @@ void Stats::save()
 
 void Stats::load()
 {
+  startLoad("Stats");
+  READ_VAR(stamina);
 
+
+  endLoad();
 }
 
-void Stats::showStats() {
+void Stats::showStats() const {
   using namespace std;
   int fieldWidth = 9; // Length of "Intellect"
   cout << std::left << std::setw(fieldWidth) <<  "Stamina" << ": " << stamina << endl;
