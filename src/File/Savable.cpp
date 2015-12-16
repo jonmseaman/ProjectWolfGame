@@ -69,12 +69,12 @@ void Savable::endSave()
   treeStack.pop();
 }
 
-void Savable::save(const std::string & varName, int var)
+void Savable::save(const std::string & varName, int var) const
 {
   save(varName, std::to_string(var));
 }
 
-void Savable::save(const std::string & varName, const std::string & var)
+void Savable::save(const std::string & varName, const std::string & var) const
 {
   pairType p{ varName, treeType(var) };
   workingTree()->push_back(p);
