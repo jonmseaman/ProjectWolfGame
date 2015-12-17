@@ -46,14 +46,17 @@ BOOST_AUTO_TEST_CASE(save) {
 }
 
 BOOST_AUTO_TEST_CASE(File_Save) {
+  // This file can be inspected manually
   File::save("StatsTest1");
 }
 
 BOOST_AUTO_TEST_CASE(File_Save_AfterHavingSavedAlready) {
+  // This file can be inspected for manually
   File::save("StatsTest2");
 }
 
 BOOST_AUTO_TEST_CASE(File_Load) {
+  // The two files generated should have exactly the same content.
   File::load("StatsTest1");
   File::save("StatsTest1_AfterLoad");
 }
