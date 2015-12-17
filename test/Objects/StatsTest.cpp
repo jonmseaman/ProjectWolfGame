@@ -53,4 +53,9 @@ BOOST_AUTO_TEST_CASE(File_Save_AfterHavingSavedAlready) {
   File::save("StatsTest2");
 }
 
+BOOST_AUTO_TEST_CASE(File_Load) {
+  File::load("StatsTest1");
+  File::save("StatsTest1_AfterLoad");
+}
+
 BOOST_AUTO_TEST_SUITE_END()

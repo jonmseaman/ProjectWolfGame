@@ -130,11 +130,32 @@ void save(const std::string & fileName)
     xml_parser::write_xml(file, masterTree, settings);
   }
   catch (std::exception &e) {
-    // TODO: Send a better message to the user
-    std::cout << e.what() << std::endl;
+    std::cerr << e.what() << std::endl;
   }
 
   masterTree.clear();
+  file.close();
+}
+
+void load(const std::string& fileName)
+{
+  using namespace File;
+  using namespace boost::property_tree;
+
+  fs::path filePath = savePath;
+  filePath /= fs::path{fileName};
+  filePath += ".sav";
+  
+  if (file.is_open()) { file.close(); }
+
+  try {
+    file.open( filePath, std::fstream::in );
+    xml_parser::read_xml(file, masterTree, xml_parser::trim_whitespace);
+  }
+  catch (std::exception &e) {
+    std::cerr << e.what() << std::endl;
+  }
+
   file.close();
 }
 

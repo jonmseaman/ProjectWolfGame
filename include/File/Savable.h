@@ -7,9 +7,18 @@
 #define SAVABLE void save(); void load()
 
 namespace File {
-  /** Writes to and loads from file */
-  // TODO: Let this function have a pointer to a master savable to call
+  /**
+   * Takes the current master tree and writes it to a file
+   * with filename fileName.
+   * Data saved with Savable::save() will be written to disk.
+   * @param fileName The name of the file on disk.
+   */
   void save(const std::string &fileName);
+  /**
+   * Loads a tree from a file to the masterTree.
+   * Allows Savable::load() to be used for loading.
+   * @param fileName The name of the file being loaded from disk.
+   */
   void load(const std::string &fileName);
 
 class Savable
