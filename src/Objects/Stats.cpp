@@ -20,11 +20,11 @@ void Stats::save()
 
 void Stats::load()
 {
-  startLoad("Stats");
-  READ_VAR(stamina);
-  READ_VAR(strength);
-  READ_VAR(intellect);
-  endLoad();
+  // startLoad("Stats");
+  // READ_VAR(stamina);
+  // READ_VAR(strength);
+  // READ_VAR(intellect);
+  // endLoad();
 }
 
 void Stats::showStats() const {
@@ -70,5 +70,12 @@ void Stats::fromTree(const pairType& p) {
     }
     it++;
   }
+}
 
+bool operator==(const Stats& l, const Stats& r) {
+  bool areEqual = true;
+  areEqual = areEqual && (l.getStamina() == r.getStamina());
+  areEqual = areEqual && (l.getStrength() == r.getStrength());
+  areEqual = areEqual && (l.getIntellect() == r.getIntellect());
+  return areEqual;
 }

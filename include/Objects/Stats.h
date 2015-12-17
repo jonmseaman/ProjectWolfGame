@@ -15,9 +15,9 @@ public:
   SAVABLE;
 
   // Get and set methods
-  int getStamina() { return stamina; }
-  int getStrength() { return strength; }
-  int getIntellect() { return intellect; }
+  int getStamina() const { return stamina; }
+  int getStrength() const { return strength; }
+  int getIntellect() const { return intellect; }
   void setStamina(int stam) { stamina = stam; }
   void setStrength(int strength) { this->strength = strength; }
   void setIntellect(int intellect) { this->intellect = intellect; }
@@ -28,7 +28,7 @@ public:
    */
   void showStats() const;
 
-  
+
 
 private:
   // Base stats
@@ -38,5 +38,6 @@ private:
 };
 
 Stats operator+(Stats stats1, Stats stats2);
+bool operator==(const Stats& l, const Stats& r);
 
 #endif /* end of include guard: STATS_H */

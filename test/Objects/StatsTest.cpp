@@ -37,11 +37,12 @@ Test(additionOperator) {
 Stats s{ 1,2,3 };
 
 Test(save) {
+  Stats sOriginal = s;
   for (int i = 0; i < 10; i++) {
     s.save();
   }
-
-  BOOST_CHECK(s == Save{ 1,2,3 });
+  
+  BOOST_CHECK(s == sOriginal);
 }
 
 Test(File_Save) {
