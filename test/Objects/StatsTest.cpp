@@ -28,7 +28,7 @@ Test(showStatsTest) {
 }
 
 Test(additionOperator) {
-  Stats s = Stats{ 1,2,3 } +Stats{ 2,2,2 };
+  Stats s = Stats{ 1,2,3 } + Stats{ 2,2,2 };
   Check(s.getStamina() == 1 + 2);
   Check(s.getStrength() == 2 + 2);
   Check(s.getIntellect() == 3 + 2);
