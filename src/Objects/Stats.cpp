@@ -22,8 +22,8 @@ void Stats::load()
 {
   startLoad("Stats");
   READ_VAR(stamina);
-
-
+  READ_VAR(strength);
+  READ_VAR(intellect);
   endLoad();
 }
 

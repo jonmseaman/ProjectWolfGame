@@ -37,8 +37,7 @@ public:
   void load(Savable& l) { l.load(); }
   void load(const std::string &varName, int &var);
   void load(const std::string &varName, std::string &var);
-public:
-//protected:
+protected:
   /**
    * Should create a tree for the current savable
    */

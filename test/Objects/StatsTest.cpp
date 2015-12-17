@@ -34,20 +34,14 @@ Test(additionOperator) {
   Check(s.getIntellect() == 3 + 2);
 }
 
-
 Stats s{ 1,2,3 };
-Test(startSave) {
-  s.startSave("Test");
-}
-
-Test(endSave) {
-  s.endSave();
-}
 
 Test(save) {
   for (int i = 0; i < 10; i++) {
     s.save();
   }
+
+  BOOST_CHECK(s == Save{ 1,2,3 });
 }
 
 Test(File_Save) {
