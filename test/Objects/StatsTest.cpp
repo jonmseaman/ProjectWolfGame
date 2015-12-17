@@ -1,4 +1,4 @@
-#include "Test.h"
+#include <boost/test/unit_test.hpp>
 #include "Stats.h"
 
 
@@ -12,44 +12,44 @@ BOOST_AUTO_TEST_SUITE(StatsTest)
 BOOST_AUTO_TEST_CASE(Constructor) {
 
   Stats s = Stats{ 1,2,3 };
-  Check(s.getStamina() == 1);
-  Check(s.getStrength() == 2);
-  Check(s.getIntellect() == 3);
+  BOOST_CHECK(s.getStamina() == 1);
+  BOOST_CHECK(s.getStrength() == 2);
+  BOOST_CHECK(s.getIntellect() == 3);
 
   s = Stats();
-  Check(s.getStamina() == 0);
-  Check(s.getStrength() == 0);
-  Check(s.getIntellect() == 0);
+  BOOST_CHECK(s.getStamina() == 0);
+  BOOST_CHECK(s.getStrength() == 0);
+  BOOST_CHECK(s.getIntellect() == 0);
 }
 
-Test(showStatsTest) {
+BOOST_AUTO_TEST_CASE(showStatsTest) {
   Stats s{ 1,2,3 };
   s.showStats();
 }
 
-Test(additionOperator) {
+BOOST_AUTO_TEST_CASE(additionOperator) {
   Stats s = Stats{ 1,2,3 } + Stats{ 2,2,2 };
-  Check(s.getStamina() == 1 + 2);
-  Check(s.getStrength() == 2 + 2);
-  Check(s.getIntellect() == 3 + 2);
+  BOOST_CHECK(s.getStamina() == 1 + 2);
+  BOOST_CHECK(s.getStrength() == 2 + 2);
+  BOOST_CHECK(s.getIntellect() == 3 + 2);
 }
 
 Stats s{ 1,2,3 };
 
-Test(save) {
+BOOST_AUTO_TEST_CASE(save) {
   Stats sOriginal = s;
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 3; i++) {
     s.save();
   }
-  
+
   BOOST_CHECK(s == sOriginal);
 }
 
-Test(File_Save) {
+BOOST_AUTO_TEST_CASE(File_Save) {
   File::save("StatsTest1");
 }
 
-Test(File_Save_AfterHavingSavedAlready) {
+BOOST_AUTO_TEST_CASE(File_Save_AfterHavingSavedAlready) {
   File::save("StatsTest2");
 }
 
