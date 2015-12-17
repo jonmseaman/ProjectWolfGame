@@ -26,9 +26,11 @@ Item::~Item() {
 void Item::save()
 {
   startSave("Item");
-  Savable::save(stats);
-
-
+  ADD_VAR(name);
+  ADD_VAR(description);
+  ADD_VAR(baseDamage);
+  ADD_VAR(baseHeal);
+  stats.save();
   endSave();
 }
 

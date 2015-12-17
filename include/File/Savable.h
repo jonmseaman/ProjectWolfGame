@@ -39,11 +39,9 @@ public:
   /** Reads variable from tree */
   virtual void load() = 0;
 
-  void save(Savable& s) { s.save(); }
   void save(const std::string &varName, int var) const;
   void save(const std::string &varName, const std::string &var) const;
 
-  void load(Savable& l) { l.load(); }
   void load(const std::string &varName, int &var);
   void load(const std::string &varName, std::string &var);
 protected:

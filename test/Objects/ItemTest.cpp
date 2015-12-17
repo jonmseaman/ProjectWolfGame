@@ -8,7 +8,7 @@ BOOST_AUTO_TEST_CASE(ConstructorTest) {
 
   BOOST_REQUIRE_EQUAL(i.getName(), "Item");
   BOOST_REQUIRE_EQUAL(i.getDescription(), "Desc");
-  //BOOST_REQUIRE(i.stats == Stats(1,2,3));
+  BOOST_REQUIRE(i.stats == Stats(1,2,3));
 }
 
 BOOST_AUTO_TEST_CASE(save) {
