@@ -28,11 +28,8 @@ namespace File {
 
   /* For storage of information. */
   treeType* workingTree() {
-    treeType* treePtr = nullptr;
-    if (treeStack.empty()) {
-      treePtr = &masterTree;
-    }
-    else {
+    treeType* treePtr = &masterTree;
+    if (!treeStack.empty()) {
       treePtr = treeStack.top();
     }
 
@@ -82,7 +79,7 @@ void Savable::save(const std::string & varName, const std::string & var) const
 
 void Savable::load(const std::string & varName, int & var)
 {
-  std::string stringValue;
+  std::string stringValue = "";
   load(varName, stringValue);
 
   // Convert value to int
@@ -90,15 +87,27 @@ void Savable::load(const std::string & varName, int & var)
 }
 
 void Savable::load(const std::string & varName, std::string & var)
-{ // TODO: Implement this
+{
   // Find var in tree
+  auto it = workingTree()->begin();
 
-  // Get the data
+  bool foundVar = false;
+  while (it != workingTree()->end() && !foundVar) {
+    // If found var data
+    foundVar = it->first == varName;
+    std::cout << "Key: " << it->first << std::endl;
+    if (!foundVar) {
+      it++;
+    }
+  }
 
-  // assign value
-
-  // Clear node in tree
-
+  if (it != workingTree()->end()) {
+    // TODO: Throw an exception
+    // Get and assign value
+    var = it->second.data();
+    // Clear node in tree
+    workingTree()->erase(it);
+  }
 }
 
 void save(const std::string & fileName)
@@ -109,7 +118,7 @@ void save(const std::string & fileName)
   // Path to file
   fs::path filePath = savePath;
   filePath /= fs::path{ fileName }.filename();
-  filePath += ".sav";
+  filePath += ".xml";
 
   if (file.is_open())
   {
@@ -130,6 +139,7 @@ void save(const std::string & fileName)
     xml_parser::write_xml(file, masterTree, settings);
   }
   catch (std::exception &e) {
+    // TODO: Better catch
     std::cerr << e.what() << std::endl;
   }
 
@@ -143,9 +153,12 @@ void load(const std::string& fileName)
   using namespace boost::property_tree;
 
   fs::path filePath = savePath;
-  filePath /= fs::path{fileName};
-  filePath += ".sav";
-  
+  filePath /= fs::path{ fileName }.filename();
+
+  if (!filePath.has_extension()) {
+    filePath += ".xml";
+  }
+
   if (file.is_open()) { file.close(); }
 
   try {

@@ -25,6 +25,7 @@
     <ClCompile Include="test\test.cpp" />
     <ClCompile Include="test\Objects\StatsTest.cpp" />
     <ClCompile Include="test\Objects\ItemTest.cpp" />
+    <ClCompile Include="test\File\SavableTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Factory.h" />

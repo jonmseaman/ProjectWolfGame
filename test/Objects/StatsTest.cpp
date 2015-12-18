@@ -3,8 +3,7 @@
 
 
 /**
- * This file is for testing the stats class as well as the savable class.
- * The savable tests are performed here since Savable is partially abstract.
+ * This file is for testing the stats class.
  */
 BOOST_AUTO_TEST_SUITE(StatsTest)
 

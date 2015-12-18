@@ -2,6 +2,7 @@
 #define MAPMANAGER_H
 #include <string>
 #include "Savable.h"
+
 namespace Maps { class Map; }
 /**
  * The purpose of this class is to make it easier to manager maps.
