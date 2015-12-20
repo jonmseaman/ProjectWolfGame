@@ -14,6 +14,9 @@ using namespace boost::property_tree;
 namespace fs = boost::filesystem;
 
 namespace File {
+
+// Data for File::
+
   typedef ptree::value_type   pairType;
   typedef ptree               treeType;
 
@@ -25,6 +28,7 @@ namespace File {
   fs::path filePath;
   treeType masterTree;
   std::stack<treeType*, std::list<treeType*>> treeStack;
+  std::stack<ptree::iterator, std::list<ptree::iterator>> eraseStack;
 
   /* For storage of information. */
   treeType* workingTree() {
@@ -36,79 +40,7 @@ namespace File {
     return treePtr;
   }
 
-
-Savable::Savable(): id(0)
-{
-}
-
-Savable::~Savable()
-{
-}
-
-void Savable::startSave(const std::string& key)
-{
-  // Make a new tree to add new vars to
-  // Add the pair to the working tree
-  workingTree()->push_back(pairType(key, ptree()));
-
-  // Get pointer to tree just added
-  auto lastPairIt = --workingTree()->end();
-  treeType* subTreePtr = &lastPairIt->second;
-
-  // Add pointer to stack for later use
-  treeStack.push(subTreePtr);
-  ADD_VAR(id);
-}
-
-void Savable::endSave()
-{
-  assert(!treeStack.empty());
-  treeStack.pop();
-}
-
-void Savable::save(const std::string & varName, int var) const
-{
-  save(varName, std::to_string(var));
-}
-
-void Savable::save(const std::string & varName, const std::string & var) const
-{
-  pairType p{ varName, treeType(var) };
-  workingTree()->push_back(p);
-}
-
-void Savable::load(const std::string & varName, int & var)
-{
-  std::string stringValue = "";
-  load(varName, stringValue);
-
-  // Convert value to int
-  var = std::stoi(stringValue);
-}
-
-void Savable::load(const std::string & varName, std::string & var)
-{
-  // Find var in tree
-  auto it = workingTree()->begin();
-
-  bool foundVar = false;
-  while (it != workingTree()->end() && !foundVar) {
-    // If found var data
-    foundVar = it->first == varName;
-    std::cout << "Key: " << it->first << std::endl;
-    if (!foundVar) {
-      it++;
-    }
-  }
-
-  if (it != workingTree()->end()) {
-    // TODO: Throw an exception
-    // Get and assign value
-    var = it->second.data();
-    // Clear node in tree
-    workingTree()->erase(it);
-  }
-}
+// Methods in File::
 
 void save(const std::string & fileName)
 {
@@ -154,10 +86,7 @@ void load(const std::string& fileName)
 
   fs::path filePath = savePath;
   filePath /= fs::path{ fileName }.filename();
-
-  if (!filePath.has_extension()) {
-    filePath += ".xml";
-  }
+  filePath += ".xml";
 
   if (file.is_open()) { file.close(); }
 
@@ -170,6 +99,119 @@ void load(const std::string& fileName)
   }
 
   file.close();
+}
+
+void close() {
+  masterTree.clear();
+
+  // Clear both stacks
+  treeStack = std::stack<treeType*, std::list<treeType*>>();
+  eraseStack = std::stack<ptree::iterator, std::list<ptree::iterator>>();
+}
+
+// Methods for Savable
+
+Savable::Savable(): id(0)
+{
+}
+
+Savable::~Savable()
+{
+}
+
+void Savable::startSave(const std::string& key)
+{
+  // Make a new tree to add new vars to
+  // Add the pair to the working tree
+  workingTree()->push_back(pairType(key, ptree()));
+
+  // Get pointer to tree just added
+  auto lastPairIt = --workingTree()->end();
+  treeType* subTreePtr = &lastPairIt->second;
+
+  // Add pointer to stack for later use
+  treeStack.push(subTreePtr);
+  ADD_VAR(id);
+}
+
+void Savable::endSave()
+{
+  assert(!treeStack.empty());
+  // We no longer want to work with this tree, so remove from stack
+  treeStack.pop();
+}
+
+void Savable::startLoad(const std::string & key)
+{
+  // look in current working tree for pair with key @param key
+  auto it = workingTree()->begin();
+  bool foundVar = false;
+  while (it != workingTree()->end() && !foundVar) {
+    // If found var data
+    foundVar = it->first == key;
+    if (!foundVar) {
+      it++;
+    }
+  }
+
+  // Add iterator to 'erase' stack so that it can be erased later
+  eraseStack.push(it);
+
+  // Add iterator's tree to tree stack so that we can load vars from it
+  treeStack.push(&it->second);
+}
+
+void Savable::endLoad()
+{
+  // pop tree stack for loading
+  treeStack.pop();
+  // take iterator from 'erase' stack erase it from the working tree
+  workingTree()->erase(eraseStack.top());
+  // pop 'erase' stack
+  eraseStack.pop();
+}
+
+void Savable::save(const std::string & varName, int var) const
+{
+  save(varName, std::to_string(var));
+}
+
+void Savable::save(const std::string & varName, const std::string & var) const
+{
+  pairType p{ varName, treeType(var) };
+  workingTree()->push_back(p);
+}
+
+void Savable::load(const std::string & varName, int & var)
+{
+  std::string stringValue = "";
+  load(varName, stringValue);
+
+  // Convert value to int
+  var = std::stoi(stringValue);
+}
+
+void Savable::load(const std::string & varName, std::string & var)
+{
+  // Find var in tree
+  auto it = workingTree()->begin();
+
+  bool foundVar = false;
+  while (it != workingTree()->end() && !foundVar) {
+    // If found var data
+    foundVar = it->first == varName;
+    if (!foundVar) {
+      it++;
+    }
+  }
+
+  if (it != workingTree()->end()) {
+    // TODO: Throw an exception? if we are at end
+    // Get and assign value
+    var = it->second.data();
+    // Clear node in tree
+    workingTree()->erase(it);
+  }
 }
 
 } // namespace File

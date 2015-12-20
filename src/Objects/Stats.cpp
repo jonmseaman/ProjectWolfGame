@@ -20,11 +20,11 @@ void Stats::save()
 
 void Stats::load()
 {
-  // startLoad("Stats");
-  // READ_VAR(stamina);
-  // READ_VAR(strength);
-  // READ_VAR(intellect);
-  // endLoad();
+  startLoad("Stats");
+  READ_VAR(stamina);
+  READ_VAR(strength);
+  READ_VAR(intellect);
+  endLoad();
 }
 
 void Stats::showStats() const {

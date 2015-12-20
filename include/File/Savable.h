@@ -11,15 +11,22 @@ namespace File {
    * Takes the current master tree and writes it to a file
    * with filename fileName.
    * Data saved with Savable::save() will be written to disk.
-   * @param fileName The name of the file on disk.
+   * @param fileName The name of the file on disk. If fileName has
+   * a relative path or extension, these are removed.
    */
   void save(const std::string &fileName);
   /**
    * Loads a tree from a file to the masterTree.
    * Allows Savable::load() to be used for loading.
    * @param fileName The name of the file being loaded from disk.
+   * If fileName has a relative path or extension, these are removed.
    */
   void load(const std::string &fileName);
+
+  /**
+   * Clears a save in progress.
+   */
+   void close();
 
 class Savable
 {
