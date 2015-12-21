@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(load_string_int) {
 /**
  * Tests to make sure all variables are loaded from file correctly.
  */
-BOOST_AUTO_TEST_CASE(stats_load) {
+BOOST_AUTO_TEST_CASE(stats_load_singleSavable) {
   Stats s(1,2,3);
   Stats loadedStats;
   Stats sOriginal = s;
@@ -66,17 +66,49 @@ BOOST_AUTO_TEST_CASE(stats_load) {
   File::save("stats_load_test");
   File::load("stats_load_test");
 
-  cout << "Stats before load: " << endl;
-  loadedStats.showStats();
   // Load stats
   loadedStats.load();
-  cout << "Stats after load: " << endl;
-  loadedStats.showStats();
 
-  // Make sure
-  BOOST_CHECK(loadedStats.getStamina() == sOriginal.getStamina());
-  BOOST_CHECK(loadedStats.getStrength() == sOriginal.getStrength());
-  BOOST_CHECK(loadedStats.getIntellect() == sOriginal.getIntellect());
+  // Make sure loaded stats are correct
+  BOOST_CHECK(loadedStats == sOriginal);
+}
+
+/**
+ * Makes sure loading and saving is working for many consecutive
+ * saves and loads
+ */
+BOOST_AUTO_TEST_CASE(stats_load_multipleSavables) {
+  const int numSavs = 15;
+  Stats s [numSavs];
+  Stats loadedStats [numSavs];
+  Stats sOriginal [numSavs];
+  // Init arrays
+  for (int i = 0; i < numSavs; i++) {
+    s[i] = Stats{i + 1, i + 2, i + 3};
+    sOriginal[i] = s[i];
+  }
+
+  // Make sure nothing is left over from previous loading / saving
+  File::close();
+
+  // Save
+  for (auto i = 0; i < numSavs; i++) {
+    s[i].save();
+  }
+
+  File::save("stats_load_test");
+  File::load("stats_load_test");
+
+  // Save
+  for (auto i = 0; i < numSavs; i++) {
+    loadedStats[i].load();
+  }
+
+  // Make sure loaded stats are correct
+  for (auto i = 0; i < numSavs; i++) {
+    BOOST_CHECK(loadedStats[i] == sOriginal[i]);
+    BOOST_CHECK(s[i] == sOriginal[i]);
+  }
 }
 
 
