@@ -6,12 +6,14 @@
 #include "Item.h"
 #include "Savable.h"
 
-class Inventory// : public File::Savable
+class Inventory : public File::Savable
 {
   public:
     Inventory();
     Inventory(std::string name, int inventorySize);
     virtual ~Inventory();
+    SAVABLE; // Load / save functions
+
     virtual pairType toTree();
     /**
      * Gets data from p.

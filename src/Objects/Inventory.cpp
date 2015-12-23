@@ -18,6 +18,23 @@ Inventory::~Inventory() {
   }
 }
 
+void Inventory::save() {
+  startSave("Inventory");
+  ADD_VAR(name);
+  ADD_VAR(size);
+  // Save items
+  for (Item* i : slots) {
+    if (i != nullptr) {
+      i.save();
+    }
+  }
+  endSave();
+}
+
+void Inventory::load() {
+
+}
+
 bool Inventory::addItem(Item* item) {
   if ( hasOpenSlot() ) {
     slots.at(firstEmpty()) = item;
