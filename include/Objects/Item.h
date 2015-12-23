@@ -15,7 +15,8 @@ class Item : public File::Savable
     Item(std::string name, std::string description, Stats stats);
     Item(std::string name, Stats stats);
     virtual ~Item();
-    SAVABLE;
+    SAVABLE; // load and save functions
+    
     // TODO: Remove these
     pairType toTree();
     void fromTree(const pairType& p);

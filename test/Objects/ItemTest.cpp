@@ -16,7 +16,11 @@ BOOST_AUTO_TEST_CASE(save) {
   i.save();
 }
 
-
+/** Make sure the item is actually used. */
+BOOST_AUTO_TEST_CASE(use) {
+  // Make sure an item that does damage actually does damage
+  // TODO: Write this test
+}
 
 
 BOOST_AUTO_TEST_SUITE_END()

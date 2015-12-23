@@ -12,30 +12,35 @@ using std::endl;
  */
 BOOST_AUTO_TEST_SUITE(SavableTest)
 
+/** Make sure the basic save function works. */
 BOOST_AUTO_TEST_CASE(save_void) {
   Stats s;
   s.save();
 }
 
+/** Typical test of this method. */
 BOOST_AUTO_TEST_CASE(save_string_string) {
   Stats s;
   s.Savable::save("StringSave", "StringSave");
 }
 
+/** Typical test of this method. */
 BOOST_AUTO_TEST_CASE(save_string_int) {
   Stats s;
   s.Savable::save("Int_15", 15);
 }
 
+/** This is so that the programmer can see the format of the output */
 BOOST_AUTO_TEST_CASE(file_save) {
-  File::save("Test/SavableTest");
+  File::save("SavableTest");
 }
 
 // We have to laod from a file to test the load functions
 BOOST_AUTO_TEST_CASE(file_load) {
-  File::load("Test/SavableTest");
+  File::load("SavableTest");
 }
 
+/** Typical test of this method. */
 BOOST_AUTO_TEST_CASE(load_string_string) {
   std::string stringVar = "";
   Stats s;
@@ -44,6 +49,7 @@ BOOST_AUTO_TEST_CASE(load_string_string) {
   BOOST_CHECK(stringVar == "StringSave");
 }
 
+/** Typical test of this method. */
 BOOST_AUTO_TEST_CASE(load_string_int) {
   Stats s;
   int intVar = 0;
