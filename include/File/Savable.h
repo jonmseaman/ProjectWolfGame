@@ -4,29 +4,28 @@
 
 #define ADD_VAR(var) Savable::save( #var, var )
 #define READ_VAR(var) Savable::load( #var, var )
+
+/** Makes it easier to declare necessary savable functions. */
 #define SAVABLE void save(); void load()
 
 namespace File {
   /**
-   * Takes the current master tree and writes it to a file
-   * with filename fileName.
-   * Data saved with Savable::save() will be written to disk.
+   * Takes the all variables and objects which have been saved and writes
+   * them to a file.
    * @param fileName The name of the file on disk. If fileName has
    * a relative path or extension, these are removed.
    */
   void save(const std::string &fileName);
   /**
-   * Loads a tree from a file to the masterTree.
-   * Allows Savable::load() to be used for loading.
+   * Gets data of variables and objects from a file. These are ready to be
+   * loaded after this function is called.
    * @param fileName The name of the file being loaded from disk.
    * If fileName has a relative path or extension, these are removed.
    */
   void load(const std::string &fileName);
 
-  /**
-   * Clears a save in progress.
-   */
-   void close();
+  /** Clears a save in progress. */
+  void close();
 
 class Savable
 {
@@ -46,16 +45,30 @@ public:
   /** Reads variable from tree */
   virtual void load() = 0;
 
+  /**
+   * Adds a variable to the current location in the save tree.
+   * The variable will be written to disk when File::save() is called.
+   * @param varName A key for identifying the variable upon load.
+   */
   void save(const std::string &varName, int var) const;
   void save(const std::string &varName, const std::string &var) const;
 
+  /**
+   * Reads variables in from load tree.
+   * @param varName The key which the variable was saved with.
+   */
   void load(const std::string &varName, int &var);
   void load(const std::string &varName, std::string &var);
 protected:
   /**
-   * Should create a tree for the current savable
+   * Creates a tree for the current savable.
+   * @usage Inside of a derived class implementation of Savable::save()
+   * before adding variables.
    */
   void startSave(const std::string& key);
+  /**
+   * Stops writing to the current tree. Moves point of saving to parent node.
+   */
   void endSave();
   /**
    * Looks for next element available for loading that matches key.
