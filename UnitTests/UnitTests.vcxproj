@@ -39,24 +39,26 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Common.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Savable\;$(BOOST_ROOT);$(SolutionDir)\ProjectWolfGame\include;$(SolutionDir)\ProjectWolfGame\include\File;$(SolutionDir)\ProjectWolfGame\include\Objects;$(SolutionDir)\ProjectWolfGame\include\Map</IncludePath>
     <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Configuration)\</IntDir>
+    <OutDir>$(OUT_DIRECTORY)</OutDir>
+    <IntDir>$(INTERMEDIATE_DIRECTORY)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Savable\;$(BOOST_ROOT);$(SolutionDir)\ProjectWolfGame\include;$(SolutionDir)\ProjectWolfGame\include\File;$(SolutionDir)\ProjectWolfGame\include\Objects;$(SolutionDir)\ProjectWolfGame\include\Map</IncludePath>
     <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Configuration)\</IntDir>
+    <OutDir>$(OUT_DIRECTORY)</OutDir>
+    <IntDir>$(INTERMEDIATE_DIRECTORY)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

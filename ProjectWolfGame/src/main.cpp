@@ -4,13 +4,11 @@
 #include <iostream>
 #include "MapManager.h"
 #include "utils.h"
-#include "dLog.h"
 #include "Factory_Enums.h"
 #include "File.h"
 using namespace std;
 
 int main() {
-  dLog.open("DebugLog.txt", std::fstream::out);
   MapManager &game = MapManager::getInstance();
   int choice;
 
@@ -31,6 +29,5 @@ int main() {
       break;
   }
 
-  dLog.close();
   return 0;
 }

@@ -3,7 +3,6 @@
 #include <iostream>
 #include "Actor.h"
 #include "Dir.h"
-#include "dLog.h"
 #include "Factory.h"
 #include "Node.h"
 #include "Player.h"
@@ -24,10 +23,8 @@ namespace Maps {
   }
 
   Node::~Node() {
-    dLog << "Maps::Node::~Node() called for Node: " << name << std::endl;
     // Delete all the actors
     for (auto it = actorPtrList.begin(); it != actorPtrList.end(); ++it ) {
-      dLog << "Deleting actor: " << (*it) << " from actor list in node: " << name << std::endl;
       delete (*it);
     }
   }
@@ -43,9 +40,7 @@ namespace Maps {
   }
 
   void Node::activate() {
-    dLog << "Node: " << name << " activated" << std::endl;
     for (auto it = actorPtrList.begin(); it != actorPtrList.end(); ++it ) { // Going through list of actors
-      dLog << "Taking turn for " << (*it)->getName() << std::endl;
       if ( (*it)->getIsLiving() || (*it)->getIsPlayer() ) // getIsPlayer() allows special behavior for players
       {
         (*it)->takeTurn();

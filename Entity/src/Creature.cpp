@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include "Creature.h"
-#include "dLog.h"
 #include "File.h"
 #include "Inventory.h"
 #include "utils.h"
@@ -10,11 +9,9 @@
 Creature::Creature(): name("Creature")
   , inventory(Inventory{"Inv", 0})
   , isLiving(false) {
-  dLog << "Creature ctor called" << std::endl;
 }
 
 Creature::~Creature() {
-  dLog << "Creature dtor called" << std::endl;
 }
 
 void Creature::onDamage(int dmg) { // Should return damage taken

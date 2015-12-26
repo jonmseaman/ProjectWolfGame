@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include "Dir.h"
-#include "dLog.h"
 #include "MapManager.h"
 #include "Player.h"
 #include "utils.h"
@@ -88,7 +87,6 @@ void Player::moveMenu(int dir) {
   }
   // TODO: Make sure that the player enters a possible direction
 
-  dLog << "Player entered " << dir << " for Player::moveMenu() choice" << std::endl;
   // set flags. Movedir && turnUsed
   if (dir != 0 && currentNode->canMoveInDir(dir)) {
     setMoveDir(dir);

@@ -2,7 +2,6 @@
 #include <assert.h>
 #include "Actor.h"
 #include "Dir.h"
-#include "dLog.h"
 #include "File.h"
 #include "utils.h"
 
@@ -10,15 +9,12 @@ Actor::Actor(): id(0)
   , isPlayer(false)
   , isTurnUsed(false)
   , moveDir(Maps::Dir::Stop) {
-  dLog << "Actor ctor called" << std::endl;
 }
 
 Actor::~Actor() {
-  dLog << "Actor dtor called" << std::endl;
 }
 
 void Actor::takeTurn() {
-  dLog << "Actor takes turn" << std::endl;
   bool shouldAttack = hasValidTarget() && targetPtr != this && targetPtr->getIsLiving();
 
   // Aggressive, attacks whatever isn't itself.
