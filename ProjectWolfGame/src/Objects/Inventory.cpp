@@ -25,7 +25,7 @@ void Inventory::save() {
   // Save items
   for (Item* i : slots) {
     if (i != nullptr) {
-      i.save();
+      i->save();
     }
   }
   endSave();
