@@ -48,15 +48,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Savable\;$(BOOST_ROOT);$(SolutionDir)\ProjectWolfGame\include;$(SolutionDir)\ProjectWolfGame\include\File;$(SolutionDir)\ProjectWolfGame\include\Objects;$(SolutionDir)\ProjectWolfGame\include\Map</IncludePath>
-    <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
     <OutDir>$(OUT_DIRECTORY)</OutDir>
     <IntDir>$(INTERMEDIATE_DIRECTORY)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Savable\;$(BOOST_ROOT);$(SolutionDir)\ProjectWolfGame\include;$(SolutionDir)\ProjectWolfGame\include\File;$(SolutionDir)\ProjectWolfGame\include\Objects;$(SolutionDir)\ProjectWolfGame\include\Map</IncludePath>
-    <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
     <OutDir>$(OUT_DIRECTORY)</OutDir>
     <IntDir>$(INTERMEDIATE_DIRECTORY)</IntDir>
   </PropertyGroup>

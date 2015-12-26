@@ -77,7 +77,6 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(OUT_DIRECTORY)</OutDir>
     <IntDir>$(INTERMEDIATE_DIRECTORY)</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);include;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -88,7 +87,6 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(OUT_DIRECTORY)</OutDir>
     <IntDir>$(INTERMEDIATE_DIRECTORY)</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);include;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

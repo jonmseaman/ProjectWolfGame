@@ -81,8 +81,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(BOOST_ROOT)</IncludePath>
-    <LibraryPath>$(BOOSt_LIBRARYDIR);$(LibraryPath)</LibraryPath>
     <OutDir>$(OUT_DIRECTORY)</OutDir>
     <IntDir>$(INTERMEDIATE_DIRECTORY)</IntDir>
   </PropertyGroup>
@@ -93,8 +91,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(BOOST_ROOT)</IncludePath>
-    <LibraryPath>$(BOOSt_LIBRARYDIR);$(LibraryPath)</LibraryPath>
     <OutDir>$(OUT_DIRECTORY)</OutDir>
     <IntDir>$(INTERMEDIATE_DIRECTORY)</IntDir>
   </PropertyGroup>

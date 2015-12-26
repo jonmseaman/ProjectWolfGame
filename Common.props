@@ -10,6 +10,8 @@
     </OutDir>
     <IntDir>
     </IntDir>
+    <IncludePath>$(BOOST_ROOT);$(SolutionDir)\Savable\;$(SolutionDir)\Entity\include\;$(SolutionDir)\ProjectWolfGame\include\;$(SolutionDir)\ProjectWolfGame\include\File\;$(SolutionDir)\ProjectWolfGame\include\Map;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup />
   <ItemGroup>
