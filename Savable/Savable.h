@@ -1,5 +1,13 @@
 #ifndef SAVABLE_H
 #define SAVABLE_H
+
+
+#ifdef SAVABLE_EXPORTS
+#define SAVABLE_EXPORTS_API __declspec(dllexport) 
+#else
+#define SAVABLE_EXPORTS_API __declspec(dllimport) 
+#endif
+
 #include <string>
 
 #define ADD_VAR(var) Savable::save( #var, var )
@@ -15,19 +23,19 @@ namespace File {
    * @param fileName The name of the file on disk. If fileName has
    * a relative path or extension, these are removed.
    */
-  void save(const std::string &fileName);
+  void SAVABLE_EXPORTS_API save(const std::string &fileName);
   /**
    * Gets data of variables and objects from a file. These are ready to be
    * loaded after this function is called.
    * @param fileName The name of the file being loaded from disk.
    * If fileName has a relative path or extension, these are removed.
    */
-  void load(const std::string &fileName);
+  void SAVABLE_EXPORTS_API load(const std::string &fileName);
 
   /** Clears a save in progress. */
-  void close();
+  void SAVABLE_EXPORTS_API close();
 
-class Savable
+class SAVABLE_EXPORTS_API Savable
 {
 public:
   Savable();
