@@ -56,4 +56,7 @@
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="test\Test.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
 </Project>
