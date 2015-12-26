@@ -48,31 +48,19 @@ void MapManager::play() {
 
 void MapManager::save(std::string fileName) {
   assert(map != nullptr);
-  using namespace File;
-  using namespace boost::property_tree;
-
-  fs::path filePath = savePath;
-  filePath /= fs::path{fileName}.filename();
-  if ( file.is_open() ) { file.close(); }
-  if ( !exists( savePath )) {
-    fs::create_directory(savePath);
-  }
   try {
-    file.open( filePath, std::fstream::out );
-    // Make a tree
-    ptree saveTree;
-    // Add map to the tree
-    saveTree.push_back(map->toTree());
-
-    // write to file, with formatting
-    xml_writer_settings<std::string> settings(' ', 2);
-  	xml_parser::write_xml(file, saveTree, settings);
+    File::save(fileName);
   } catch (std::exception &e) {
     std::cerr << e.what();
   }
-  file.close();
 }
 
+
+// TODO: REMOVE THIS
+// Sloppy temporary solution
+namespace File {
+  fs::fstream file;
+}
 void MapManager::load(std::string fileName) {
   using namespace File;
   using namespace boost::property_tree;
