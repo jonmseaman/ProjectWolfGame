@@ -1,5 +1,13 @@
 #ifndef FACTORY_H
 #define FACTORY_H
+
+#ifdef CREATE_EXPORTS
+#define CREATE_API __declspec(dllexport) 
+#else
+#define CREATE_API __declspec(dllimport) 
+#endif
+
+#include "Entity.h"
 #include "File.h"
 
 class Actor;
@@ -9,7 +17,7 @@ namespace Maps {
   class Node;
 }
 
-class Factory
+class ENTITY_API Factory
 {
 public:
   Factory();

@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{377FA18F-6059-4527-9239-14DFD84B556E}</ProjectGuid>
+    <ProjectGuid>{2530B83C-1EFF-4603-B3D7-F67CD3F76361}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Entity</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <RootNamespace>Create</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -80,8 +80,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(OUT_DIRECTORY)</OutDir>
-    <IntDir>$(INTERMEDIATE_DIRECTORY)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -90,8 +88,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(OUT_DIRECTORY)</OutDir>
-    <IntDir>$(INTERMEDIATE_DIRECTORY)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -99,7 +95,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ENTITY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CREATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -112,7 +108,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;ENTITY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;CREATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -127,7 +123,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;ENTITY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CREATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,7 +140,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;ENTITY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;CREATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -154,38 +150,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\Actor.h" />
-    <ClInclude Include="include\Creature.h" />
-    <ClInclude Include="include\Dir.h" />
-    <ClInclude Include="include\Entity.h" />
-    <ClInclude Include="include\Equipment.h" />
-    <ClInclude Include="include\Factory.h" />
-    <ClInclude Include="include\Inventory.h" />
-    <ClInclude Include="include\Item.h" />
-    <ClInclude Include="include\Map\Map.h" />
-    <ClInclude Include="include\Map\MapManager.h" />
-    <ClInclude Include="include\Map\Node.h" />
-    <ClInclude Include="include\Player.h" />
-    <ClInclude Include="include\Stats.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Actor.cpp" />
-    <ClCompile Include="src\Creature.cpp" />
-    <ClCompile Include="src\Dir.cpp" />
-    <ClCompile Include="src\Equipment.cpp" />
-    <ClCompile Include="src\Factory.cpp" />
-    <ClCompile Include="src\Inventory.cpp" />
-    <ClCompile Include="src\Item.cpp" />
-    <ClCompile Include="src\Map\Map.cpp" />
-    <ClCompile Include="src\Map\MapManager.cpp" />
-    <ClCompile Include="src\Map\Node.cpp" />
-    <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="src\Stats.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Savable\Savable.vcxproj">
-      <Project>{c7e799d0-ae85-46f2-87e5-a15e8d1cbf08}</Project>
+    <ProjectReference Include="..\Entity\Entity.vcxproj">
+      <Project>{377fa18f-6059-4527-9239-14dfd84b556e}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Create.h" />
+    <ClInclude Include="include\Create_Enums.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Create.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

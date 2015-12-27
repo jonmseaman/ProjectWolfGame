@@ -7,8 +7,8 @@
 #include "Map.h"
 #include "MapManager.h"
 #include "utils.h"
-#include "Factory.h"
-#include "Factory_Enums.h"
+#include "Create.h"
+#include "Create_Enums.h"
 #include "File.h"
 
 MapManager::MapManager(): map(nullptr) {}

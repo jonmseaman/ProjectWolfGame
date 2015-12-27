@@ -121,7 +121,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Factory.cpp" />
     <ClCompile Include="src\GActors\Rat.cpp" />
     <ClCompile Include="src\GActors\Swordsmen.cpp" />
     <ClCompile Include="src\GMaps\CenterTown.cpp" />
@@ -150,7 +149,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Factory.h" />
     <ClInclude Include="include\Enums\MapEnum.h" />
     <ClInclude Include="include\Enums\NodeEnum.h" />
     <ClInclude Include="include\Factory_Enums.h" />
@@ -172,6 +170,9 @@
     <ClInclude Include="test\Test.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Create\Create.vcxproj">
+      <Project>{2530b83c-1eff-4603-b3d7-f67cd3f76361}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.vcxproj">
       <Project>{377fa18f-6059-4527-9239-14dfd84b556e}</Project>
     </ProjectReference>
