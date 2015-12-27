@@ -1,6 +1,7 @@
 #ifndef MAPMANAGER_H
 #define MAPMANAGER_H
 #include <string>
+#include "Entity.h"
 #include "Savable.h"
 
 namespace Maps { class Map; }
@@ -9,7 +10,7 @@ namespace Maps { class Map; }
  * Eventually, MapManager will be able to handle multiple open maps and
  * connect them together to make a seamless larger map.
  */
-class MapManager// : public File::Savable
+class ENTITY_API MapManager// : public File::Savable
 {
   public:
     /** Singleton */

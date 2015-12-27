@@ -1,12 +1,13 @@
 #ifndef MAP_H
 #define MAP_H
 #include <vector>
+#include "Entity.h"
 #include "File.h"
 
 namespace Maps
 {
   class Node;
-  class Map
+  class ENTITY_API Map
   {
     // Temp stuff
     public:

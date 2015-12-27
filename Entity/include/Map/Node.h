@@ -2,6 +2,7 @@
 #define NODE_H
 #include <list>
 #include <string>
+#include "Entity.h"
 #include "Inventory.h"
 #include "Dir.h"
 #include "Savable.h"
@@ -9,7 +10,7 @@
 class Actor;
 namespace Maps
 {
-  class Node// : public File::Savable
+  class ENTITY_API Node// : public File::Savable
   {
     // Temp stuff
     public:
