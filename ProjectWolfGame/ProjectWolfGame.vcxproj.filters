@@ -1,11 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\GActors\Rat.cpp" />
-    <ClCompile Include="src\GActors\Swordsmen.cpp" />
-    <ClCompile Include="src\GMaps\CenterTown.cpp" />
-    <ClCompile Include="src\GObjects\BasicSword.cpp" />
-    <ClCompile Include="src\GTiles\House_2Story.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="test\test.cpp" />
@@ -14,17 +9,7 @@
     <ClCompile Include="test\File\SavableTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Enums\MapEnum.h" />
-    <ClInclude Include="include\Enums\NodeEnum.h" />
-    <ClInclude Include="include\Factory_Enums.h" />
     <ClInclude Include="include\File\File.h" />
-    <ClInclude Include="include\GActors\Rat.h" />
-    <ClInclude Include="include\GActors\Swordsmen.h" />
-    <ClInclude Include="include\GameFiles.h" />
-    <ClInclude Include="include\GMaps\CenterTown.h" />
-    <ClInclude Include="include\GObjects\BasicSword.h" />
-    <ClInclude Include="include\GObjects\HealingWand.h" />
-    <ClInclude Include="include\GTiles\House_2Story.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="test\Test.h" />
   </ItemGroup>

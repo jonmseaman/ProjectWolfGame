@@ -10,7 +10,7 @@
     </OutDir>
     <IntDir>
     </IntDir>
-    <IncludePath>$(SolutionDir)Create\include\;$(BOOST_ROOT);$(SolutionDir)\Savable\;$(SolutionDir)\Entity\include\;$(SolutionDir)\Entity\include\Map\;$(SolutionDir)\ProjectWolfGame\include\;$(SolutionDir)\ProjectWolfGame\include\File\;$(SolutionDir)\ProjectWolfGame\include\Map;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Create\include\;$(BOOST_ROOT);$(SolutionDir)\Savable\;$(SolutionDir)\Entity\include\;$(SolutionDir)\Entity\include\Map\;$(SolutionDir)\Game\include\GTiles\;$(SolutionDir)\Game\include\GActors\;$(SolutionDir)\Game\include\GObjects\;$(SolutionDir)\Game\include\GMaps\;$(SolutionDir)\Game\include\;$(SolutionDir)\ProjectWolfGame\include\;$(SolutionDir)\ProjectWolfGame\include\File\;$(SolutionDir)\ProjectWolfGame\include\Map;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup />

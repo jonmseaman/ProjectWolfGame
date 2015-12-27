@@ -1,8 +1,9 @@
 #ifndef HOUSE_2STORY_H
 #define HOUSE_2STORY_H
 #include "Node.h"
+#include "Game.h"
 
-class House_2Story : public Maps::Node
+class GAME_API House_2Story : public Maps::Node
 {
   public:
     House_2Story();

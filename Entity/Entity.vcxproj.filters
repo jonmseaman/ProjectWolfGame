@@ -51,9 +51,6 @@
     <ClInclude Include="include\Dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Factory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Actor.cpp">
@@ -87,9 +84,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Dir.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

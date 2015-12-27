@@ -153,6 +153,9 @@
     <ProjectReference Include="..\Entity\Entity.vcxproj">
       <Project>{377fa18f-6059-4527-9239-14dfd84b556e}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Game\Game.vcxproj">
+      <Project>{4d937935-2f5b-4065-a964-4a2a0a4fb632}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Create.h" />

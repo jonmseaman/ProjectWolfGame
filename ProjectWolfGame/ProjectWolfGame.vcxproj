@@ -121,11 +121,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\GActors\Rat.cpp" />
-    <ClCompile Include="src\GActors\Swordsmen.cpp" />
-    <ClCompile Include="src\GMaps\CenterTown.cpp" />
-    <ClCompile Include="src\GObjects\BasicSword.cpp" />
-    <ClCompile Include="src\GTiles\House_2Story.cpp" />
     <ClCompile Include="src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -149,23 +144,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Enums\MapEnum.h" />
-    <ClInclude Include="include\Enums\NodeEnum.h" />
-    <ClInclude Include="include\Factory_Enums.h" />
     <ClInclude Include="include\File\File.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="include\GActors\Rat.h" />
-    <ClInclude Include="include\GActors\Swordsmen.h" />
-    <ClInclude Include="include\GameFiles.h" />
-    <ClInclude Include="include\GMaps\CenterTown.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\BasicSword.h" />
-    <ClInclude Include="include\GObjects\HealingWand.h" />
-    <ClInclude Include="include\GTiles\House_2Story.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="test\Test.h" />
   </ItemGroup>
@@ -175,6 +157,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.vcxproj">
       <Project>{377fa18f-6059-4527-9239-14dfd84b556e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Game\Game.vcxproj">
+      <Project>{4d937935-2f5b-4065-a964-4a2a0a4fb632}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Savable\Savable.vcxproj">
       <Project>{c7e799d0-ae85-46f2-87e5-a15e8d1cbf08}</Project>

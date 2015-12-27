@@ -1,8 +1,9 @@
 #ifndef ITEM_BASIC_SWORD_H
 #define ITEM_BASIC_SWORD_H
+#include "Game.h"
 #include "Item.h"
 
-class BasicSword : public Item
+class GAME_API BasicSword : public Item
 {
   public:
     BasicSword();
