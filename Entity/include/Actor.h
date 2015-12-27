@@ -3,13 +3,14 @@
 #include "Creature.h"
 #include "File.h"
 #include "Node.h"
+#include "Entity.h"
 
 
 /**
  * The actor class is a creature which with behavior.
  * This should be generalized into Players, Mobs, Bosses etc
  */
-class Actor : public Creature
+class ENTITY_API Actor : public Creature
 {
     // Temp stuff
   public:

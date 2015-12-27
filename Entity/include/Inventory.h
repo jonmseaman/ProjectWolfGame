@@ -2,11 +2,12 @@
 #define INVENTORY_H
 #include <string>
 #include <vector>
+#include "Entity.h"
 #include "File.h"
 #include "Item.h"
 #include "Savable.h"
 
-class Inventory : public File::Savable
+class ENTITY_API Inventory : public File::Savable
 {
   public:
     Inventory();

@@ -1,6 +1,7 @@
 #ifndef ITEM_H
 #define ITEM_H
 #include <string>
+#include "Entity.h"
 #include "File.h" // for loading / saving functions
 #include "Stats.h"
 class Creature;
@@ -8,7 +9,7 @@ class Creature;
 /**
  * This is an item.
  */
-class Item : public File::Savable
+class ENTITY_API Item : public File::Savable
 {
   public:
     Item();

@@ -154,9 +154,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Entity.h" />
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\Creature.h" />
+    <ClInclude Include="include\Entity.h" />
     <ClInclude Include="include\Equipment.h" />
     <ClInclude Include="include\Inventory.h" />
     <ClInclude Include="include\Item.h" />
