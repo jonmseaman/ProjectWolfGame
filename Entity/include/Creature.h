@@ -1,16 +1,18 @@
 #ifndef CREATURE_H
 #define CREATURE_H
 #include <string>
+#include "Entity.h"
 #include "Equipment.h"
 #include "File.h"
 #include "Inventory.h"
 #include "Savable.h"
 #include "Stats.h"
 
+
 /**
  * This class should store all functions for defining what a creature is.
  */
-class Creature// : public File::Savable
+class ENTITY_API Creature// : public File::Savable
 {
     // The data structure for the creatures.
     // This class should contain the data and tools for making functioning actors in the game world,

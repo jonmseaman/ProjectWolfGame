@@ -2,8 +2,9 @@
 #define PLAYER_H
 
 #include "Actor.h"
+#include "Entity.h"
 
-class Player : public Actor
+class ENTITY_API Player : public Actor
 {
   public:
     Player();

@@ -121,7 +121,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Dir.cpp" />
     <ClCompile Include="src\Factory.cpp" />
     <ClCompile Include="src\GActors\Rat.cpp" />
     <ClCompile Include="src\GActors\Swordsmen.cpp" />
@@ -131,9 +130,6 @@
     <ClCompile Include="src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\Map\Map.cpp" />
-    <ClCompile Include="src\Map\MapManager.cpp" />
-    <ClCompile Include="src\Map\Node.cpp" />
     <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="test\File\SavableTest.cpp" />
     <ClCompile Include="test\Objects\ItemTest.cpp">
@@ -155,7 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Factory.h" />
-    <ClInclude Include="include\Dir.h" />
     <ClInclude Include="include\Enums\MapEnum.h" />
     <ClInclude Include="include\Enums\NodeEnum.h" />
     <ClInclude Include="include\Factory_Enums.h" />
@@ -173,9 +168,6 @@
     <ClInclude Include="include\GObjects\BasicSword.h" />
     <ClInclude Include="include\GObjects\HealingWand.h" />
     <ClInclude Include="include\GTiles\House_2Story.h" />
-    <ClInclude Include="include\Map\Map.h" />
-    <ClInclude Include="include\Map\MapManager.h" />
-    <ClInclude Include="include\Map\Node.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="test\Test.h" />
   </ItemGroup>
