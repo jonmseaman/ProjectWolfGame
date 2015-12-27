@@ -7,7 +7,6 @@
 #define CREATE_API __declspec(dllimport) 
 #endif
 
-#include "Entity.h"
 #include "File.h"
 
 class Actor;
@@ -17,7 +16,7 @@ namespace Maps {
   class Node;
 }
 
-class ENTITY_API Factory
+class CREATE_API Factory
 {
 public:
   Factory();
