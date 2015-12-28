@@ -5,7 +5,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/property_tree/ptree.hpp>
 
-/** Useful for outputing to xml. Makes output pretty and easy to read. */
+/** Useful for outputting to xml. Makes output pretty and easy to read. */
 #define XML_VAR_PAIR(c) boost::property_tree::ptree::value_type{#c, boost::property_tree::ptree{std::to_string(c)}}
 
 /** Same as XML_VAR_PAIR except for strings */
@@ -21,7 +21,6 @@ namespace File
 {
   /** The folder in which saves will go. */
   const fs::path savePath{"./Saves"};
-  extern fs::fstream file;
   extern fs::path filePath;
 }
 #endif

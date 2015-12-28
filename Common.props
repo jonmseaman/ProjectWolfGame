@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <OUT_DIRECTORY>$(SolutionDir)\bin\$(Configuration)\</OUT_DIRECTORY>
+    <INTERMEDIATE_DIRECTORY>$(SolutionDir)\build\$(Configuration)\$(ProjectName)\</INTERMEDIATE_DIRECTORY>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>
+    </OutDir>
+    <IntDir>
+    </IntDir>
+    <IncludePath>$(SolutionDir)Create\include\;$(BOOST_ROOT);$(SolutionDir)\Savable\;$(SolutionDir)\Entity\include\;$(SolutionDir)\Entity\include\Map\;$(SolutionDir)\Game\include\GTiles\;$(SolutionDir)\Game\include\GActors\;$(SolutionDir)\Game\include\GObjects\;$(SolutionDir)\Game\include\GMaps\;$(SolutionDir)\Game\include\;$(SolutionDir)\ProjectWolfGame\include\;$(SolutionDir)\ProjectWolfGame\include\File\;$(SolutionDir)\ProjectWolfGame\include\Map;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="OUT_DIRECTORY">
+      <Value>$(OUT_DIRECTORY)</Value>
+    </BuildMacro>
+    <BuildMacro Include="INTERMEDIATE_DIRECTORY">
+      <Value>$(INTERMEDIATE_DIRECTORY)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
