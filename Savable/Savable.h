@@ -37,6 +37,7 @@ namespace File {
 
 class SAVABLE_EXPORTS_API Savable
 {
+  typedef int idType;
 public:
   Savable();
   ~Savable();
@@ -47,6 +48,14 @@ public:
    */
   int getID() { return id; }
   void setID(int idNum) { this->id = idNum; }
+
+  /**
+   * Returns the id value of the first thing that can be loaded
+   * which also has key matching the param.
+   * Calling this method does not change any data.
+   * @param the key of the item being loaded
+   */
+  static idType nextID(const std::string& key);
 
   /** Adds variables for saving */
   virtual void save() = 0;

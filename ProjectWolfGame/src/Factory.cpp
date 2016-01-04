@@ -24,6 +24,21 @@ Factory::~Factory()
 {
 }
 
+// Methods for new loading / saving system
+
+Item* Factory::loadNewItem() {
+  Item* item = nullptr;
+  // get id
+  Savable::idType id = Savable::nextID("Item");
+  // create object using old int it system
+  // tell that object to load
+  // return object
+}
+
+// Actor* Factory::loadNewActor();
+// Maps::Node* Factory::loadNewNode();
+// Maps::Map* Factory::loadNewMap();
+
 Item* Factory::newItem(int item) {
   Item* itemCreated = nullptr;
   switch (item) {

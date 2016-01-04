@@ -16,19 +16,26 @@ public:
   ~Factory();
 
   // Creation functions
-  /**
-   * For parameters of type pairType, the pair must be a valid xml pair
-   * for that type
-   */
 
+  // Methods for new saving / loading system
+  static Item* loadNewItem();
+  static Actor* loadNewActor();
+  static Maps::Node* loadNewNode();
+  static Maps::Map* loadNewMap();
+
+  // Int id system
   static Item* newItem(int item);
-  static Item* newItem(pairType);
   static Actor* newActor(int actor);
-  static Actor* newActor(pairType);
   static Maps::Node* newNode(int node);
-  static Maps::Node* newNode(pairType);
   static Maps::Map* newMap(int map);
+
+  // Old LS system
+  static Item* newItem(pairType);
+  static Actor* newActor(pairType);
+  static Maps::Node* newNode(pairType);
   static Maps::Map* newMap(pairType);
+
+
 
   // TODO: Load functions.
   // Functions to load from the file.

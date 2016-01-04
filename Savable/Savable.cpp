@@ -109,7 +109,9 @@ void close() {
   eraseStack = std::stack<ptree::iterator, std::list<ptree::iterator>>();
 }
 
+//////////////////////
 // Methods for Savable
+//////////////////////
 
 Savable::Savable(): id(0)
 {
@@ -117,6 +119,32 @@ Savable::Savable(): id(0)
 
 Savable::~Savable()
 {
+}
+
+Savable::idType Savable::nextID(const std::string& key) {
+  // look in current working tree for pair with key @param key
+  auto it = workingTree()->begin();
+  bool foundVar = false;
+  while (it != workingTree()->end() && !foundVar) {
+    // If found var data
+    foundVar = it->first == key;
+    if (!foundVar) {
+      it++;
+    }
+  }
+
+  // tree should have a child with key "id", find the child
+  auto &tree = it->second;
+  // find it
+  auto idIterator = tree.find("id"); // TODO: Remove hardcoding
+  if (idIterator != tree.not_found()) {
+    return Savable::convertToIdType(idIterator->second.data());
+  } else {
+    // throw an exception?
+    // TODO: fix this
+    return 0;
+  }
+
 }
 
 void Savable::startSave(const std::string& key)
