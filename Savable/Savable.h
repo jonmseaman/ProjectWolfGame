@@ -37,10 +37,11 @@ namespace File {
 
 class SAVABLE_EXPORTS_API Savable
 {
-  typedef int idType;
 public:
   Savable();
   ~Savable();
+
+  typedef int idType;
 
   /**
    * Used so that the save file has information on the actual type

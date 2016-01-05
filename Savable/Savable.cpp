@@ -4,6 +4,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <iostream>
+#include <string>
 #include <stack>
 #include <list>
 
@@ -138,7 +139,8 @@ Savable::idType Savable::nextID(const std::string& key) {
   // find it
   auto idIterator = tree.find("id"); // TODO: Remove hardcoding
   if (idIterator != tree.not_found()) {
-    return Savable::convertToIdType(idIterator->second.data());
+    auto idData = idIterator->second.data();
+    return std::stoi(idData); // Convet to idType
   } else {
     // throw an exception?
     // TODO: fix this

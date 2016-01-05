@@ -51,8 +51,10 @@ void MapManager::save(std::string fileName) {
   using namespace File;
   using namespace boost::property_tree;
 
+  fs::fstream file;
   fs::path filePath = savePath;
   filePath /= fs::path{fileName}.filename();
+
   if ( file.is_open() ) { file.close(); }
   if ( !exists( savePath )) {
     fs::create_directory(savePath);
@@ -77,8 +79,10 @@ void MapManager::load(std::string fileName) {
   using namespace File;
   using namespace boost::property_tree;
 
+  fs::fstream file;
   fs::path filePath = savePath;
   filePath /= fs::path{fileName};
+
   if (file.is_open()) { file.close(); }
   // make tree and load from file
   treeType loadTree;

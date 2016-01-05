@@ -1,6 +1,7 @@
 #include "File.h"
 #include "Factory.h"
 #include "Factory_Enums.h"
+#include "Savable.h"
 
 // Including files for use by factory
 // Actors
@@ -28,11 +29,15 @@ Factory::~Factory()
 
 Item* Factory::loadNewItem() {
   Item* item = nullptr;
-  // get id
-  Savable::idType id = Savable::nextID("Item");
-  // create object using old int it system
-  // tell that object to load
-  // return object
+
+  // get id and create object with appropriate dynamic type
+  File::Savable::idType id = File::Savable::nextID("Item");
+  Factory::newItem(id);
+
+  // load data from save
+  item->load();
+
+  return item;
 }
 
 // Actor* Factory::loadNewActor();
