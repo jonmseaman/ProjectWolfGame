@@ -165,7 +165,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="include\Enums\MapEnum.h" />
     <ClInclude Include="include\Enums\NodeEnum.h" />
     <ClInclude Include="include\Factory_Enums.h" />
     <ClInclude Include="include\File\File.h">
@@ -174,7 +173,6 @@
     </ClInclude>
     <ClInclude Include="include\GActors\Rat.h" />
     <ClInclude Include="include\GActors\Swordsmen.h" />
-    <ClInclude Include="include\GameFiles.h" />
     <ClInclude Include="include\GMaps\CenterTown.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">false</ExcludedFromBuild>
