@@ -46,7 +46,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\ProjectWolfGame\include;$(SolutionDir)\ProjectWolfGame\include\File;$(SolutionDir)\ProjectWolfGame\include\Objects;$(SolutionDir)\ProjectWolfGame\include\Map;$(BOOST_ROOT)</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\ProjectWolfGame\include;$(SolutionDir)\ProjectWolfGame\include\File;$(SolutionDir)\ProjectWolfGame\include\Objects;$(SolutionDir)\ProjectWolfGame\include\Map;$(BOOST_ROOT);$(SolutionDir);$(SolutionDir)\Savable</IncludePath>
     <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -90,6 +90,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="StatsTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Savable\Savable.vcxproj">
+      <Project>{c7e799d0-ae85-46f2-87e5-a15e8d1cbf08}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

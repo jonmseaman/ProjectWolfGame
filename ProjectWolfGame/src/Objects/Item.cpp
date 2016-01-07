@@ -35,7 +35,13 @@ void Item::save()
 }
 
 void Item::load() {
-
+  startLoad("Item");
+  READ_VAR(name);
+  READ_VAR(description);
+  READ_VAR(baseDamage);
+  READ_VAR(baseHeal);
+  stats.load();
+  endLoad();
 }
 
 void Item::use(const Creature &usedBy, Creature &usedOn) {
