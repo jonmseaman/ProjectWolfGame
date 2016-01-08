@@ -1,6 +1,6 @@
 //#include "stdafx.h"
 #include "CppUnitTest.h"
-#include "Stats.h"
+#include "Objects/Stats.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

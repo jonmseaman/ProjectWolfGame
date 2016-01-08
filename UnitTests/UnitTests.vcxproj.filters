@@ -11,10 +11,19 @@
     <Filter Include="Source\Objects">
       <UniqueIdentifier>{1162704c-0b11-4f34-a0c5-b469d69da2aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PWGSource">
+      <UniqueIdentifier>{6c5a43f2-6e64-43dd-9245-8d4db2306b1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PWGSource\Objects">
+      <UniqueIdentifier>{57974e0c-06c4-41a2-a2b0-12bda92d6b9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StatsTest.cpp">
       <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ProjectWolfGame\src\Objects\Stats.cpp">
+      <Filter>PWGSource\Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

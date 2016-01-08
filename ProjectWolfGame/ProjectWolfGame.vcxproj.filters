@@ -26,9 +26,6 @@
     <ClCompile Include="src\Objects\Player.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\Stats.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="src\Map\Map.cpp">
       <Filter>Source\Map</Filter>
     </ClCompile>
@@ -58,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="src\Factory.cpp">
       <Filter>Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\Stats.cpp">
+      <Filter>Source\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

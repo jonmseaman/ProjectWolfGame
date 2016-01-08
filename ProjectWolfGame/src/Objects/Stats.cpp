@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include "File.h"
-#include "Stats.h"
+#include "Objects/Stats.h"
 
 Stats::Stats(int stamina, int strength, int intellect) {
   this->stamina = stamina;
