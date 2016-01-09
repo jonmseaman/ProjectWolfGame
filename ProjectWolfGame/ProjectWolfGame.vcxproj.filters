@@ -6,7 +6,6 @@
     <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="test\test.cpp" />
     <ClCompile Include="test\Objects\ItemTest.cpp" />
-    <ClCompile Include="test\File\SavableTest.cpp" />
     <ClCompile Include="src\Objects\Actor.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>

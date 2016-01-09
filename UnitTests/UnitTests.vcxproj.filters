@@ -5,25 +5,31 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source">
-      <UniqueIdentifier>{1613a5a9-0e35-414a-85a8-88a90f825abd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Objects">
-      <UniqueIdentifier>{1162704c-0b11-4f34-a0c5-b469d69da2aa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="PWGSource">
       <UniqueIdentifier>{6c5a43f2-6e64-43dd-9245-8d4db2306b1c}</UniqueIdentifier>
     </Filter>
     <Filter Include="PWGSource\Objects">
       <UniqueIdentifier>{57974e0c-06c4-41a2-a2b0-12bda92d6b9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PWGSourceTest">
+      <UniqueIdentifier>{1613a5a9-0e35-414a-85a8-88a90f825abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PWGSourceTest\Objects">
+      <UniqueIdentifier>{1162704c-0b11-4f34-a0c5-b469d69da2aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SavableTest">
+      <UniqueIdentifier>{c908d756-45ac-4a4f-83f6-6562e923ed65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StatsTest.cpp">
-      <Filter>Source\Objects</Filter>
+      <Filter>PWGSourceTest\Objects</Filter>
     </ClCompile>
     <ClCompile Include="..\ProjectWolfGame\src\Objects\Stats.cpp">
       <Filter>PWGSource\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SavableTest.cpp">
+      <Filter>SavableTest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

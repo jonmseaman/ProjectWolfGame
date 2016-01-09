@@ -92,6 +92,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ProjectWolfGame\src\Objects\Stats.cpp" />
+    <ClCompile Include="SavableTest.cpp" />
     <ClCompile Include="StatsTest.cpp" />
   </ItemGroup>
   <ItemGroup>
