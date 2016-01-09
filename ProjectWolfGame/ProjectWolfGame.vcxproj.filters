@@ -5,7 +5,6 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="test\test.cpp" />
-    <ClCompile Include="test\Objects\StatsTest.cpp" />
     <ClCompile Include="test\Objects\ItemTest.cpp" />
     <ClCompile Include="test\File\SavableTest.cpp" />
     <ClCompile Include="src\Objects\Actor.cpp">
