@@ -28,11 +28,9 @@ Factory::~Factory()
 // Methods for new loading / saving system
 
 Item* Factory::loadNewItem() {
-  Item* item = nullptr;
-
   // get id and create object with appropriate dynamic type
   File::Savable::idType id = File::Savable::nextID("Item");
-  Factory::newItem(id);
+  Item* item = Factory::newItem(id);
 
   // load data from save
   item->load();
@@ -40,9 +38,38 @@ Item* Factory::loadNewItem() {
   return item;
 }
 
-// Actor* Factory::loadNewActor();
-// Maps::Node* Factory::loadNewNode();
-// Maps::Map* Factory::loadNewMap();
+Actor* Factory::loadNewActor() {
+  File::Savable::idType id = File::Savable::nextID("Actor");
+  Actor* actor = Factory::newActor(id);
+
+  //TODO: actor->load();
+
+  return actor;
+}
+
+Maps::Node* Factory::loadNewNode() {
+  using namespace File;
+  using namespace Maps;
+
+  Savable::idType id = Savable::nextID("Node");
+  Node* node = Factory::newNode(id);
+
+  //TODO: node->load();
+
+  return node;
+}
+
+
+Maps::Map* Factory::loadNewMap() {
+  using namespace File;
+  using namespace Maps;
+
+  Savable::idType id = Savable::nextID("Map");
+  Map* map = Factory::newMap(id);
+
+  //TODO: map->load();
+  return map;
+}
 
 Item* Factory::newItem(int item) {
   Item* itemCreated = nullptr;
