@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <assert.h>
 #include "dLog.h"
-#include "Factory.h"
+#include "Create.h"
 #include "File.h"
 #include "Inventory.h"
 
@@ -151,7 +151,7 @@ void Inventory::fromTree(const pairType& p) {
     if (key == STRING(name)) {
       name = data;
     } else if (key == "Item") {
-      Item* item = Factory::newItem(*it);
+      Item* item = Create::newItem(*it);
       addNewItem(item);
     }
     it++;

@@ -4,7 +4,7 @@
 #include "Actor.h"
 #include "Dir.h"
 #include "dLog.h"
-#include "Factory.h"
+#include "Create.h"
 #include "Node.h"
 #include "Player.h"
 #include "utils.h"
@@ -228,7 +228,7 @@ namespace Maps {
        if (key == STRING(name)) {
          name = data;
        } else if (key == "Actor") {
-         addActor(Factory::newActor(*it));
+         addActor(Create::newActor(*it));
        } else if (key == "Inventory") {
          inventory.fromTree(*it);
        }

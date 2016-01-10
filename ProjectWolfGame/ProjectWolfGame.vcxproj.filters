@@ -51,11 +51,11 @@
     <ClCompile Include="src\Dir.cpp">
       <Filter>Source\Map</Filter>
     </ClCompile>
-    <ClCompile Include="src\Factory.cpp">
-      <Filter>Source\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="src\Objects\Stats.cpp">
       <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Create.cpp">
+      <Filter>Source\Create</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,11 +117,11 @@
     <ClInclude Include="include\Dir.h">
       <Filter>Source\Map</Filter>
     </ClInclude>
-    <ClInclude Include="include\Factory.h">
-      <Filter>Source\Factory</Filter>
+    <ClInclude Include="include\Create.h">
+      <Filter>Source\Create</Filter>
     </ClInclude>
-    <ClInclude Include="include\Factory_Enums.h">
-      <Filter>Source\Factory</Filter>
+    <ClInclude Include="include\Create_Enums.h">
+      <Filter>Source\Create</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,14 +134,14 @@
     <Filter Include="Source\Map">
       <UniqueIdentifier>{0047edb3-7077-4440-b021-a99b2592afb5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Factory">
-      <UniqueIdentifier>{5f9e8830-b27a-467a-ab71-9e70a9b9e92d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\GObjects">
       <UniqueIdentifier>{e6dd7c8c-f240-46bd-b3f0-2ecc2bbad7ab}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\GMaps">
       <UniqueIdentifier>{29c452dc-fe58-445d-b1ea-edf0b4ba8e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Create">
+      <UniqueIdentifier>{5f9e8830-b27a-467a-ab71-9e70a9b9e92d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

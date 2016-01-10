@@ -121,7 +121,7 @@
   <ItemGroup>
     <ClCompile Include="src\Dir.cpp" />
     <ClCompile Include="src\dLog.cpp" />
-    <ClCompile Include="src\Factory.cpp" />
+    <ClCompile Include="src\Create.cpp" />
     <ClCompile Include="src\GActors\Rat.cpp" />
     <ClCompile Include="src\GActors\Swordsmen.cpp" />
     <ClCompile Include="src\GMaps\CenterTown.cpp" />
@@ -154,14 +154,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Factory.h" />
+    <ClInclude Include="include\Create.h" />
     <ClInclude Include="include\Dir.h" />
     <ClInclude Include="include\dLog.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="include\Enums\NodeEnum.h" />
-    <ClInclude Include="include\Factory_Enums.h" />
+    <ClInclude Include="include\Create_Enums.h" />
     <ClInclude Include="include\File\File.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">false</ExcludedFromBuild>

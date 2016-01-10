@@ -3,7 +3,7 @@
 #include <boost/property_tree/xml_parser.hpp>
 #include <iostream>
 #include "dLog.h"
-#include "Factory.h"
+#include "Create.h"
 #include "File.h"
 #include "Map.h"
 #include "Node.h"
@@ -111,7 +111,7 @@ namespace Maps
         // Sets the next node from xml
         // Note that since x,y is not recorded in the xml,
         // nodes can only be loaded in the order they were saved
-        grid.at(nodeNumber) = Factory::newNode(*it);
+        grid.at(nodeNumber) = Create::newNode(*it);
         nodeNumber++;
       }
       it++;

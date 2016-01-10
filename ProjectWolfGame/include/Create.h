@@ -1,5 +1,5 @@
-#ifndef FACTORY_H
-#define FACTORY_H
+#ifndef CREATE_H
+#define CREATE_H
 #include "File.h"
 
 class Actor;
@@ -9,11 +9,11 @@ namespace Maps {
   class Node;
 }
 
-class Factory
+class Create
 {
 public:
-  Factory();
-  ~Factory();
+  Create();
+  ~Create();
 
   // Creation functions
 
@@ -34,12 +34,6 @@ public:
   static Actor* newActor(pairType);
   static Maps::Node* newNode(pairType);
   static Maps::Map* newMap(pairType);
-
-
-
-  // TODO: Load functions.
-  // Functions to load from the file.
-  // Must identify what the appropriate type is
 };
 
-#endif FACTORY_H
+#endif CREATE_H

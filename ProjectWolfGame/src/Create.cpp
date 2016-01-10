@@ -1,6 +1,6 @@
 #include "File.h"
-#include "Factory.h"
-#include "Factory_Enums.h"
+#include "Create.h"
+#include "Create_Enums.h"
 #include "Savable.h"
 
 // Including files for use by factory
@@ -16,21 +16,21 @@
 // Tiles
 #include "House_2Story.h"
 
-Factory::Factory()
+Create::Create()
 {
 }
 
 
-Factory::~Factory()
+Create::~Create()
 {
 }
 
 // Methods for new loading / saving system
 
-Item* Factory::loadNewItem() {
+Item* Create::loadNewItem() {
   // get id and create object with appropriate dynamic type
   File::Savable::idType id = File::Savable::nextID("Item");
-  Item* item = Factory::newItem(id);
+  Item* item = Create::newItem(id);
 
   // load data from save
   item->load();
@@ -38,21 +38,21 @@ Item* Factory::loadNewItem() {
   return item;
 }
 
-Actor* Factory::loadNewActor() {
+Actor* Create::loadNewActor() {
   File::Savable::idType id = File::Savable::nextID("Actor");
-  Actor* actor = Factory::newActor(id);
+  Actor* actor = Create::newActor(id);
 
   //TODO: actor->load();
 
   return actor;
 }
 
-Maps::Node* Factory::loadNewNode() {
+Maps::Node* Create::loadNewNode() {
   using namespace File;
   using namespace Maps;
 
   Savable::idType id = Savable::nextID("Node");
-  Node* node = Factory::newNode(id);
+  Node* node = Create::newNode(id);
 
   //TODO: node->load();
 
@@ -60,18 +60,18 @@ Maps::Node* Factory::loadNewNode() {
 }
 
 
-Maps::Map* Factory::loadNewMap() {
+Maps::Map* Create::loadNewMap() {
   using namespace File;
   using namespace Maps;
 
   Savable::idType id = Savable::nextID("Map");
-  Map* map = Factory::newMap(id);
+  Map* map = Create::newMap(id);
 
   //TODO: map->load();
   return map;
 }
 
-Item* Factory::newItem(int item) {
+Item* Create::newItem(int item) {
   Item* itemCreated = nullptr;
   switch (item) {
     case ITEM_BASIC_SWORD:
@@ -89,7 +89,7 @@ Item* Factory::newItem(int item) {
   return itemCreated;
 }
 
-Item* Factory::newItem(pairType item) {
+Item* Create::newItem(pairType item) {
   Item* itemCreated = nullptr;
   treeType &tree = item.second;
   // get id
@@ -103,7 +103,7 @@ Item* Factory::newItem(pairType item) {
   return itemCreated;
 }
 
-Actor* Factory::newActor(int actor) {
+Actor* Create::newActor(int actor) {
   Actor* actorCreated = nullptr;
   switch (actor) {
     case ACTOR_PLAYER:
@@ -125,7 +125,7 @@ Actor* Factory::newActor(int actor) {
   return actorCreated;
 }
 
-Actor* Factory::newActor(pairType actor) {
+Actor* Create::newActor(pairType actor) {
   Actor* actorCreated = nullptr;
   // get id
   treeType &tree = actor.second;
@@ -139,7 +139,7 @@ Actor* Factory::newActor(pairType actor) {
   return actorCreated;
 }
 
-Maps::Node* Factory::newNode(int node) {
+Maps::Node* Create::newNode(int node) {
   Maps::Node* nodeCreated = nullptr;
   switch (node) {
     case NODE_HOUSE_2STORY:
@@ -154,7 +154,7 @@ Maps::Node* Factory::newNode(int node) {
   return nodeCreated;
 }
 
-Maps::Node* Factory::newNode(pairType node) {
+Maps::Node* Create::newNode(pairType node) {
   Maps::Node* nodeCreated = nullptr;
 
   treeType &tree = node.second;
@@ -169,7 +169,7 @@ Maps::Node* Factory::newNode(pairType node) {
   return nodeCreated;
 }
 
-Maps::Map* Factory::newMap(int map) {
+Maps::Map* Create::newMap(int map) {
   Maps::Map* mapCreated = nullptr;
   switch (map) {
     case MAP_CENTER_TOWN:
@@ -182,7 +182,7 @@ Maps::Map* Factory::newMap(int map) {
   return mapCreated;
 }
 
-Maps::Map* Factory::newMap(pairType map) {
+Maps::Map* Create::newMap(pairType map) {
   Maps::Map* mapCreated = nullptr;
 
   treeType &tree = map.second;
