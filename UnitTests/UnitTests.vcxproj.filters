@@ -31,5 +31,23 @@
     <ClCompile Include="SavableTest.cpp">
       <Filter>SavableTest</Filter>
     </ClCompile>
+    <ClCompile Include="ItemTest.cpp">
+      <Filter>PWGSourceTest\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ProjectWolfGame\src\Objects\Item.cpp">
+      <Filter>PWGSource\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ProjectWolfGame\src\Objects\Creature.cpp">
+      <Filter>PWGSource\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ProjectWolfGame\src\Objects\Equipment.cpp">
+      <Filter>PWGSource\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ProjectWolfGame\src\Objects\Inventory.cpp">
+      <Filter>PWGSource\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ProjectWolfGame\src\Create.cpp">
+      <Filter>PWGSource</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

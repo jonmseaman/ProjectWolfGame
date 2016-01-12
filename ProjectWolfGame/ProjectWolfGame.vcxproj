@@ -122,11 +122,11 @@
     <ClCompile Include="src\Dir.cpp" />
     <ClCompile Include="src\dLog.cpp" />
     <ClCompile Include="src\Create.cpp" />
-    <ClCompile Include="src\GActors\Rat.cpp" />
-    <ClCompile Include="src\GActors\Swordsmen.cpp" />
-    <ClCompile Include="src\GMaps\CenterTown.cpp" />
+    <ClCompile Include="src\GObjects\Rat.cpp" />
+    <ClCompile Include="src\GObjects\Swordsmen.cpp" />
+    <ClCompile Include="src\GObjects\CenterTown.cpp" />
     <ClCompile Include="src\GObjects\BasicSword.cpp" />
-    <ClCompile Include="src\GTiles\House_2Story.cpp" />
+    <ClCompile Include="src\GObjects\House_2Story.cpp" />
     <ClCompile Include="src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -166,15 +166,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="include\GActors\Rat.h" />
-    <ClInclude Include="include\GActors\Swordsmen.h" />
-    <ClInclude Include="include\GMaps\CenterTown.h">
+    <ClInclude Include="include\GObjects\Rat.h" />
+    <ClInclude Include="include\GObjects\Swordsmen.h" />
+    <ClInclude Include="include\GObjects\CenterTown.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="include\GObjects\BasicSword.h" />
     <ClInclude Include="include\GObjects\HealingWand.h" />
-    <ClInclude Include="include\GTiles\House_2Story.h" />
+    <ClInclude Include="include\GObjects\House_2Story.h" />
     <ClInclude Include="include\Map\Map.h" />
     <ClInclude Include="include\Map\MapManager.h" />
     <ClInclude Include="include\Map\Node.h" />

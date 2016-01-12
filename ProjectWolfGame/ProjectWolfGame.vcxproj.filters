@@ -15,9 +15,6 @@
     <ClCompile Include="src\Objects\Equipment.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\Item.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="src\Objects\Inventory.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
@@ -36,18 +33,6 @@
     <ClCompile Include="src\GObjects\BasicSword.cpp">
       <Filter>Source\GObjects</Filter>
     </ClCompile>
-    <ClCompile Include="src\GTiles\House_2Story.cpp">
-      <Filter>Source\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GActors\Rat.cpp">
-      <Filter>Source\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GActors\Swordsmen.cpp">
-      <Filter>Source\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GMaps\CenterTown.cpp">
-      <Filter>Source\GMaps</Filter>
-    </ClCompile>
     <ClCompile Include="src\Dir.cpp">
       <Filter>Source\Map</Filter>
     </ClCompile>
@@ -56,6 +41,21 @@
     </ClCompile>
     <ClCompile Include="src\Create.cpp">
       <Filter>Source\Create</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\Item.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GObjects\Rat.cpp">
+      <Filter>Source\GObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GObjects\Swordsmen.cpp">
+      <Filter>Source\GObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GObjects\CenterTown.cpp">
+      <Filter>Source\GMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GObjects\House_2Story.cpp">
+      <Filter>Source\GObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,18 +102,6 @@
     <ClInclude Include="include\GObjects\HealingWand.h">
       <Filter>Source\GObjects</Filter>
     </ClInclude>
-    <ClInclude Include="include\GTiles\House_2Story.h">
-      <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GActors\Rat.h">
-      <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GActors\Swordsmen.h">
-      <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GMaps\CenterTown.h">
-      <Filter>Source\GMaps</Filter>
-    </ClInclude>
     <ClInclude Include="include\Dir.h">
       <Filter>Source\Map</Filter>
     </ClInclude>
@@ -122,6 +110,18 @@
     </ClInclude>
     <ClInclude Include="include\Create_Enums.h">
       <Filter>Source\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GObjects\CenterTown.h">
+      <Filter>Source\GMaps</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GObjects\Rat.h">
+      <Filter>Source\GObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GObjects\Swordsmen.h">
+      <Filter>Source\GObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GObjects\House_2Story.h">
+      <Filter>Source\GObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

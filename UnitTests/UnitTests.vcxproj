@@ -91,7 +91,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\ProjectWolfGame\src\Create.cpp" />
+    <ClCompile Include="..\ProjectWolfGame\src\Objects\Creature.cpp" />
+    <ClCompile Include="..\ProjectWolfGame\src\Objects\Equipment.cpp" />
+    <ClCompile Include="..\ProjectWolfGame\src\Objects\Inventory.cpp" />
+    <ClCompile Include="..\ProjectWolfGame\src\Objects\Item.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\Objects\Stats.cpp" />
+    <ClCompile Include="ItemTest.cpp" />
     <ClCompile Include="SavableTest.cpp" />
     <ClCompile Include="StatsTest.cpp" />
   </ItemGroup>

@@ -102,3 +102,12 @@ void Item::fromTree(const pairType& item) {
     it++;
   }
 }
+
+bool operator==(const Item & l, const Item & r)
+{
+  return l.getName() == r.getName()
+    && l.getDescription() == r.getDescription()
+    && l.getDamage() == r.getDamage()
+    && l.getHeal() == r.getHeal()
+    && l.stats == r.stats;
+}
