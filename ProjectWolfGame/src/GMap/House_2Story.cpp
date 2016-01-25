@@ -1,5 +1,5 @@
 #include <string>
-#include "House_2Story.h"
+#include "GObjects\House_2Story.h"
 #include "Dir.h"
 
 House_2Story::House_2Story() {
@@ -11,8 +11,8 @@ House_2Story::House_2Story() {
   secondFloor.setName("House: Second Floor");
   // Set possible entrancesDirs
   for (int i = 0; i < Maps::numDirs; i++) {
-	  setEntranceDir(i, true);
-	  secondFloor.setEntranceDir(i, false);
+    setEntranceDir(i, true);
+    secondFloor.setEntranceDir(i, false);
   }
   setEntranceDir(Maps::Down, false);
   secondFloor.setEntranceDir(Maps::Down, true); // Can only enter second floor from south

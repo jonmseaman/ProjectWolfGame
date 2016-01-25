@@ -51,11 +51,11 @@
     <ClCompile Include="src\GObjects\Swordsmen.cpp">
       <Filter>Source\GObjects</Filter>
     </ClCompile>
-    <ClCompile Include="src\GObjects\CenterTown.cpp">
-      <Filter>Source\GMaps</Filter>
+    <ClCompile Include="src\GMap\House_2Story.cpp">
+      <Filter>Source\GMap</Filter>
     </ClCompile>
-    <ClCompile Include="src\GObjects\House_2Story.cpp">
-      <Filter>Source\GObjects</Filter>
+    <ClCompile Include="src\GMap\CenterTown.cpp">
+      <Filter>Source\GMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,7 +112,7 @@
       <Filter>Source\Create</Filter>
     </ClInclude>
     <ClInclude Include="include\GObjects\CenterTown.h">
-      <Filter>Source\GMaps</Filter>
+      <Filter>Source\GMap</Filter>
     </ClInclude>
     <ClInclude Include="include\GObjects\Rat.h">
       <Filter>Source\GObjects</Filter>
@@ -121,7 +121,7 @@
       <Filter>Source\GObjects</Filter>
     </ClInclude>
     <ClInclude Include="include\GObjects\House_2Story.h">
-      <Filter>Source\GObjects</Filter>
+      <Filter>Source\GMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,11 +137,11 @@
     <Filter Include="Source\GObjects">
       <UniqueIdentifier>{e6dd7c8c-f240-46bd-b3f0-2ecc2bbad7ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\GMaps">
-      <UniqueIdentifier>{29c452dc-fe58-445d-b1ea-edf0b4ba8e08}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Create">
       <UniqueIdentifier>{5f9e8830-b27a-467a-ab71-9e70a9b9e92d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GMap">
+      <UniqueIdentifier>{29c452dc-fe58-445d-b1ea-edf0b4ba8e08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

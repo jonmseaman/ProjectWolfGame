@@ -5,16 +5,16 @@
 
 // Including files for use by factory
 // Actors
-#include "Player.h"
-#include "Rat.h"
-#include "Swordsmen.h"
+#include "Objects\Player.h"
+#include "GObjects\Rat.h"
+#include "GObjects\Swordsmen.h"
 // Maps
-#include "CenterTown.h"
+#include "GObjects\CenterTown.h"
 // Objects
-#include "BasicSword.h"
-#include "HealingWand.h"
+#include "GObjects\BasicSword.h"
+#include "GObjects\HealingWand.h"
 // Tiles
-#include "House_2Story.h"
+#include "GObjects\House_2Story.h"
 
 Create::Create()
 {

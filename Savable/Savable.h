@@ -3,9 +3,9 @@
 
 
 #ifdef SAVABLE_EXPORTS
-#define SAVABLE_EXPORTS_API __declspec(dllexport) 
+#define SAVABLE_EXPORTS_API __declspec(dllexport)
 #else
-#define SAVABLE_EXPORTS_API __declspec(dllimport) 
+#define SAVABLE_EXPORTS_API __declspec(dllimport)
 #endif
 
 #include <string>
@@ -62,6 +62,14 @@ public:
   virtual void save() = 0;
   /** Reads variable from tree */
   virtual void load() = 0;
+
+  /**
+   * Checks if there is a Savable with a specific key.
+   * @param key The key that will be checked.
+   * @return True if there is a Savable that can be lodaed
+   * with the specified key.
+   */
+  bool canLoad(const std::string &key);
 
   /**
    * Adds a variable to the current location in the save tree.

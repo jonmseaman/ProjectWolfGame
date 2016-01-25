@@ -32,7 +32,14 @@ void Inventory::save() {
 }
 
 void Inventory::load() {
-
+  startLoad("Inventory");
+  READ_VAR(name);
+  READ_VAR(size);
+  while (Savable::canLoad("Item"))
+  {
+    this->addNewItem(Create::loadNewItem());
+  }
+  endLoad();
 }
 
 bool Inventory::addItem(Item* item) {

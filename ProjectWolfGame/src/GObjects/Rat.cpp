@@ -1,4 +1,4 @@
-#include "Rat.h"
+#include "GObjects\Rat.h"
 #include <iostream>
 Rat::Rat() {
   setName("Rat");

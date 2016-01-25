@@ -244,4 +244,21 @@ void Savable::load(const std::string & varName, std::string & var)
   }
 }
 
+bool Savable::canLoad(const std::string &key)
+{
+  bool foundSavable = false;
+
+  auto it = workingTree()->begin();
+  while (!foundSavable && it != workingTree()->end())
+  {
+    foundSavable = it->first == key;
+    if (!foundSavable)
+    {
+      it++;
+    }
+  }
+
+  return foundSavable;
+}
+
 } // namespace File

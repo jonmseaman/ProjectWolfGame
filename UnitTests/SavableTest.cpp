@@ -89,5 +89,25 @@ namespace UnitTests
         Assert::IsTrue(sOriginal[i] == s[i]);
       }
     }
+
+    TEST_METHOD(canLoadTest)
+    {
+      std::string className = "Stats";
+      Stats s{ 1,2,3 };
+      s.save();
+
+      // Get ready for loading.
+      File::save("canLoadTest");
+      File::load("canLoadTest");
+
+      Assert::IsTrue(s.canLoad(className));
+
+      // canLoad should now return false
+      s.load();
+
+      Assert::IsFalse(s.canLoad(className));
+
+    }
+
   };
 }

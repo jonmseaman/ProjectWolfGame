@@ -1,5 +1,6 @@
-#include "Swordsmen.h"
-#include "BasicSword.h"
+#include "GObjects\Swordsmen.h"
+#include "GObjects\BasicSword.h"
+
 Swordsmen::Swordsmen(): Actor() {
   setName("Swordsmen");
   setMaxHealth(50);
