@@ -91,6 +91,35 @@ void Creature::displayHUDLine() {
     << maxHealth;
 }
 
+void Creature::save()
+{
+  startSave("Creature");
+  ADD_VAR(name);
+  // TODO: Check this
+  // isLiving set from health?
+  // isInCombat not important to save
+  ADD_VAR(level);
+  ADD_VAR(experience);
+  ADD_VAR(health);
+  ADD_VAR(maxHealth);
+  equipment.save();
+  inventory.save();
+  endSave();
+}
+
+void Creatre::load()
+{
+  startLoad("Creature");
+  READ_VAR(name);
+  READ_VAR(level);
+  READ_VAR(experience);
+  READ_VAR(health);
+  READ_VAR(maxHealth);
+  equipment.load();
+  inventory.load();
+  endLoad();
+}
+
 pairType Creature::toTree() {
   using namespace boost::property_tree;
   ptree tree;

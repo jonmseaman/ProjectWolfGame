@@ -10,7 +10,7 @@
 /**
  * This class should store all functions for defining what a creature is.
  */
-class Creature// : public File::Savable
+class Creature : public File::Savable
 {
     // The data structure for the creatures.
     // This class should contain the data and tools for making functioning actors in the game world,
@@ -25,6 +25,8 @@ class Creature// : public File::Savable
     Creature();
     virtual ~Creature();
 
+    SAVABLE; // load / save
+
     void combatStop(); // Takes creature out of combat and removes targets
 
     // Data Access
@@ -35,6 +37,7 @@ class Creature// : public File::Savable
     void setHealth(int health);
     void setMaxHealth(int maxHealth); // Set max hp, also sets hp
     void setIsLiving(bool isLiving); // Can be used to kill a creature
+
     // Experience
     void levelUp();
     int experienceToNextLevel();
