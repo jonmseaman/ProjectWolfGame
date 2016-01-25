@@ -4,7 +4,6 @@
     <ClCompile Include="src\dLog.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\utils.cpp" />
-    <ClCompile Include="test\test.cpp" />
     <ClCompile Include="test\Objects\ItemTest.cpp" />
     <ClCompile Include="src\Objects\Actor.cpp">
       <Filter>Source\Objects</Filter>
