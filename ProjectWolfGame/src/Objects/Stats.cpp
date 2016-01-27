@@ -12,18 +12,18 @@ Stats::Stats(int stamina, int strength, int intellect) {
 void Stats::save()
 {
   startSave("Stats");
-  ADD_VAR(stamina);
-  ADD_VAR(strength);
-  ADD_VAR(intellect);
+  SAVE(stamina);
+  SAVE(strength);
+  SAVE(intellect);
   endSave();
 }
 
 void Stats::load()
 {
   startLoad("Stats");
-  READ_VAR(stamina);
-  READ_VAR(strength);
-  READ_VAR(intellect);
+  LOAD(stamina);
+  LOAD(strength);
+  LOAD(intellect);
   endLoad();
 }
 

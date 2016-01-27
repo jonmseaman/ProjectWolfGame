@@ -20,8 +20,8 @@ Inventory::~Inventory() {
 
 void Inventory::save() {
   startSave("Inventory");
-  ADD_VAR(name);
-  ADD_VAR(size);
+  SAVE(name);
+  SAVE(size);
   // Save items
   for (Item* i : slots) {
     if (i != nullptr) {
@@ -33,8 +33,8 @@ void Inventory::save() {
 
 void Inventory::load() {
   startLoad("Inventory");
-  READ_VAR(name);
-  READ_VAR(size);
+  LOAD(name);
+  LOAD(size);
   while (Savable::canLoad("Item"))
   {
     this->addNewItem(Create::loadNewItem());

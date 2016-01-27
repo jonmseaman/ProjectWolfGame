@@ -26,20 +26,20 @@ Item::~Item() {
 void Item::save()
 {
   startSave("Item");
-  ADD_VAR(name);
-  ADD_VAR(description);
-  ADD_VAR(baseDamage);
-  ADD_VAR(baseHeal);
+  SAVE(name);
+  SAVE(description);
+  SAVE(baseDamage);
+  SAVE(baseHeal);
   stats.save();
   endSave();
 }
 
 void Item::load() {
   startLoad("Item");
-  READ_VAR(name);
-  READ_VAR(description);
-  READ_VAR(baseDamage);
-  READ_VAR(baseHeal);
+  LOAD(name);
+  LOAD(description);
+  LOAD(baseDamage);
+  LOAD(baseHeal);
   stats.load();
   endLoad();
 }

@@ -10,8 +10,8 @@
 
 #include <string>
 
-#define ADD_VAR(var) Savable::save( #var, var )
-#define READ_VAR(var) Savable::load( #var, var )
+#define SAVE(var) Savable::save( #var, var )
+#define LOAD(var) Savable::load( #var, var )
 
 /** Makes it easier to declare necessary savable functions. */
 #define SAVABLE void save(); void load()

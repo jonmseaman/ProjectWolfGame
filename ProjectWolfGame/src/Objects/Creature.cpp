@@ -94,27 +94,27 @@ void Creature::displayHUDLine() {
 void Creature::save()
 {
   startSave("Creature");
-  ADD_VAR(name);
+  SAVE(name);
   // TODO: Check this
   // isLiving set from health?
   // isInCombat not important to save
-  ADD_VAR(level);
-  ADD_VAR(experience);
-  ADD_VAR(health);
-  ADD_VAR(maxHealth);
+  SAVE(level);
+  SAVE(experience);
+  SAVE(health);
+  SAVE(maxHealth);
   equipment.save();
   inventory.save();
   endSave();
 }
 
-void Creatre::load()
+void Creature::load()
 {
   startLoad("Creature");
-  READ_VAR(name);
-  READ_VAR(level);
-  READ_VAR(experience);
-  READ_VAR(health);
-  READ_VAR(maxHealth);
+  LOAD(name);
+  LOAD(level);
+  LOAD(experience);
+  LOAD(health);
+  LOAD(maxHealth);
   equipment.load();
   inventory.load();
   endLoad();
