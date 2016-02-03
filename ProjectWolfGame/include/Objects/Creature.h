@@ -10,18 +10,17 @@
 /**
  * This class should store all functions for defining what a creature is.
  */
-class Creature : public File::Savable
-{
+class Creature : public File::Savable {
     // The data structure for the creatures.
     // This class should contain the data and tools for making functioning actors in the game world,
-    //    but not actually include a way to _act_
+    // but not actually include a way to _act_
 
-  // TEMP STUFF
-  public:
-      // Loading and Saving
-      pairType toTree();
-      void fromTree(const pairType& p);
-  public:
+// TEMP STUFF
+public:
+    // Loading and Saving
+    pairType toTree();
+    void fromTree(const pairType& p);
+public:
     Creature();
     virtual ~Creature();
 
@@ -46,14 +45,14 @@ class Creature : public File::Savable
     // Creature stuff
 
     /**
-     * Uses an item. Applies effects to this if the item is 'defensive'
-     * or applies the effects to the target if offensive
-     * @param item The item being used.
-     * @param usedOn The creature that the item is being used on.
-     */
+      * Uses an item. Applies effects to this if the item is 'defensive'
+      * or applies the effects to the target if offensive
+      * @param item The item being used.
+      * @param usedOn The creature that the item is being used on.
+      */
     void useItem(Item &item, Creature &usedOn);
     /**
-     * This function handles creatures being damaged
+     * T  his function handles creatures being damaged
      * Kills the creature if the damage is sufficient
      * @param dmg The amount of damage that this creature
      */
@@ -71,7 +70,7 @@ class Creature : public File::Savable
     Stats stats;
 
 
-  protected:
+protected:
     void flagInCombat(bool val); // sets combat status
 private:
     std::string name;
