@@ -107,10 +107,6 @@
     <ClCompile Include="src\Objects\Player.cpp" />
     <ClCompile Include="src\Objects\Stats.cpp" />
     <ClCompile Include="src\utils.cpp" />
-    <ClCompile Include="test\Objects\ItemTest.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Create.h" />
@@ -142,7 +138,6 @@
     <ClInclude Include="include\Objects\Player.h" />
     <ClInclude Include="include\Objects\Stats.h" />
     <ClInclude Include="include\utils.h" />
-    <ClInclude Include="test\Test.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Savable\Savable.vcxproj">
