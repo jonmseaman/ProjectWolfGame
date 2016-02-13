@@ -9,19 +9,19 @@
 class Actor;
 namespace Maps
 {
-  class Node// : public File::Savable
+  class Node : public File::Savable
   {
     // Temp stuff
     public:
       int getID() { return id; }
       void setID(int idNum) { this->id = idNum; }
       int id;
-    public:
-      static int nodeCount;
-      Node();
-      virtual ~Node();
       pairType toTree();
       void fromTree(const pairType& p);
+    public:
+      Node();
+      virtual ~Node();
+      SAVABLE;
 
 
       // Data Access
@@ -54,7 +54,7 @@ namespace Maps
       /**
        * Allows setting entrance direction for nodes. Nodes can be entered and
        * exited from entrance directions.
-       * @pre 0 < dir < Maps::numDirs
+       * @pre 0 < dir < Maps::NUM_DIRS
        * @post The node will have an entrance in dir if(isEntrance)
        */
       void setEntranceDir(int dir, bool isEntrance);
@@ -68,14 +68,14 @@ namespace Maps
       /**
        * This function is to figure out if moving an actor in a specific
        * direction is possible.
-       * @pre 0 <= dir < numDirs
+       * @pre 0 <= dir < NUM_DIRS
        * @return True if an actor could move from this int direction dir.
        */
       bool canMoveInDir(int dir);
       /**
        * Allows retrieval of entrance directions on nodes.
        * @param dir The direction being checked.
-       * @pre 0 <= dir < numDirs
+       * @pre 0 <= dir < NUM_DIRS
        * @return True if the node has an entrance in direction dir.
        */
       bool getEntranceDir(int dir);
@@ -111,12 +111,13 @@ namespace Maps
       void showActors(); // Shows a list of actors
 
     protected:
-      Node* nodeLinks[numDirs];
+      Node* nodeLinks[NUM_DIRS];
       /// The directions from which this node can be entered
-      bool entranceDirs[numDirs];
+      bool entranceDirs[NUM_DIRS];
       std::list<Actor*> actorPtrList;
       int getNumActors();
       std::string name;
+      static int nodeCount;
   };
 }
 

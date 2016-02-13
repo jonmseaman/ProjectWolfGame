@@ -69,7 +69,7 @@ class Actor : public Creature
     /**
      * Tries to set movement for the actor.
      * If it is possible to move in direction dir, then the turn is used.
-     * @pre 0 <= dir < numDirs
+     * @pre 0 <= dir < NUM_DIRS
      * @post Turn is used if it is possible to move in direction
      * @post Actor will be set to move after turns
      */

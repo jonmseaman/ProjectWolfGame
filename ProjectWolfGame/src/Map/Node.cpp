@@ -15,7 +15,7 @@ namespace Maps {
     , actorPtrList{}
     , name("Node") {
     setID(0);
-    for (int i = 0; i < Maps::numDirs; i++) {
+    for (int i = 0; i < Maps::NUM_DIRS; i++) {
       entranceDirs[i] = true;
     }
     entranceDirs[Dir::Down] = false; // Entrances in all dirs != down
@@ -61,43 +61,23 @@ namespace Maps {
 
   void Node::showNavigationInfo() {
     bool noDirs{true};
-    if (entranceDirs[Dir::North] && nodeLinks[Dir::North] != nullptr) {
-      showNavigationInfoForNode(Dir::North);
-      std::cout << std::endl;
-      noDirs = false;
+
+    // Show navigation info for all directions.
+    for (int i = 1; i < NUM_DIRS; i++) {
+      if (entranceDirs[i] && nodeLinks[i] != nullptr) {
+        showNavigationInfoForNode(i);
+        std::cout << std::endl;
+        noDirs = false;
+      }
     }
-    if (entranceDirs[Dir::East] && nodeLinks[Dir::East] != nullptr) {
-      showNavigationInfoForNode(Dir::East);
-      std::cout << std::endl;
-      noDirs = false;
-    }
-    if (entranceDirs[Dir::West] && nodeLinks[Dir::West] != nullptr) {
-      showNavigationInfoForNode(Dir::West);
-      std::cout << std::endl;
-      noDirs = false;
-    }
-    if (entranceDirs[Dir::South] && nodeLinks[Dir::South] != nullptr) {
-      showNavigationInfoForNode(Dir::South);
-      std::cout << std::endl;
-      noDirs = false;
-    }
-    if (entranceDirs[Dir::Up] && nodeLinks[Dir::Up] != nullptr) {
-      showNavigationInfoForNode(Dir::Up);
-      std::cout << std::endl;
-      noDirs = false;
-    }
-    if (entranceDirs[Dir::Down] && nodeLinks[Dir::Down] != nullptr) {
-      showNavigationInfoForNode(Dir::Down);
-      std::cout << std::endl;
-      noDirs = false;
-    }
+
     if (noDirs) {
       std::cout << "You cannot leave this area." << std::endl;
     }
   }
 
   void Node::showNavigationInfoForNode(int dir) {
-    assert(0 < dir && dir < numDirs);
+    assert(0 < dir && dir < NUM_DIRS);
     std::cout << std::setw(COLUMN_PADDING) << std::right << dir << ": ";
     std::cout << Maps::dirName(dir) << " to " << nodeLinks[dir]->getName();
     // Check to see if the node can accept entry from this direction
@@ -156,12 +136,12 @@ namespace Maps {
   }
 
   void Node::setEntranceDir(int dir, bool isEntrance) {
-    assert(0 <= dir && dir < Maps::numDirs);
+    assert(0 <= dir && dir < Maps::NUM_DIRS);
     entranceDirs[dir] = isEntrance;
   }
 
   bool Node::canMoveInDir(int dir) {
-    assert(0 <= dir < numDirs);
+    assert(0 <= dir < NUM_DIRS);
     bool nodeInDirExists = nodeLinks[dir] != nullptr;
     bool entrancesExist = false;
     if (nodeInDirExists) {
@@ -173,7 +153,7 @@ namespace Maps {
   }
 
    bool Node::getEntranceDir(int dir) {
-     assert(0 <= dir < numDirs);
+     assert(0 <= dir < NUM_DIRS);
      return entranceDirs[dir];
    }
 
@@ -234,5 +214,37 @@ namespace Maps {
        }
        it++;
      }
+   }
+
+   void Node::save()
+   {
+     startSave("Node");
+     // entrance dirs?
+     // TODO: toString for an array or vector
+     SAVE(getNumActors());
+     for (Actor* a : actorPtrList)
+     {
+       a->save();
+     }
+
+     // TODO: Other variables
+
+     
+     endSave();
+   }
+
+   void Node::load()
+   {
+     startLoad("Node");
+     int numActors = 0;
+     Savable::load(STRING(getNumActors()), numActors);
+     for (int i = 0; i < numActors; i++) {
+       // TODO: Fix this, the key will be "Creature" with the current system
+       Create::loadNewActor();
+     } 
+
+     // TODO: Other variables
+
+     endLoad();
    }
 }

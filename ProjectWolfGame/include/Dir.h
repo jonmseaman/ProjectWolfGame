@@ -4,7 +4,7 @@
 
 namespace Maps
 {
-  static const int numDirs = 7; // Stopped == 0, and 6 dirs
+  static const int NUM_DIRS = 7; // Stopped == 0, and 6 dirs
   /**
    * Directions. Used by nodes and maps.
    */
@@ -36,7 +36,7 @@ namespace Maps
   /**
    * Converts a direction to its reverse direction (ie: N-->S)
    * @param dir The dir being converted
-   * @pre 0 <= dir <= numDirs
+   * @pre 0 <= dir <= NUM_DIRS
    * @return An int corresponding to the opposite direction
    */
   int oppositeDir(int dir);

@@ -41,7 +41,7 @@ void Actor::setCurrentNode(Maps::Node *node) {
 
 void Actor::setMoveDir(int dir) {
   assert(currentNode != nullptr);
-  assert(0 <= dir && dir < Maps::numDirs);
+  assert(0 <= dir && dir < Maps::NUM_DIRS);
   moveDir = dir;
   if (currentNode->canMoveInDir(dir)) {
     setIsTurnUsed();

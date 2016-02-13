@@ -28,7 +28,7 @@ int wasdqeToDir(char dir) {
 }
 
 std::string dirName(int dir) {
-	assert(0 <= dir && dir < numDirs);
+	assert(0 <= dir && dir < NUM_DIRS);
 
 	std::string dirName;
 	if (dir == Dir::Stop) {
@@ -50,7 +50,7 @@ std::string dirName(int dir) {
 }
 
 int oppositeDir(int dir) {
-	assert(0 <= dir && dir < numDirs);
+	assert(0 <= dir && dir < NUM_DIRS);
 
 	int revDir; // The reverse directoin
 	if (dir == Dir::Stop) {

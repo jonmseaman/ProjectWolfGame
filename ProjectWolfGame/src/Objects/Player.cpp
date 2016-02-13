@@ -84,7 +84,7 @@ void Player::moveMenu(int dir) {
     currentNode->showNavigationInfo();
     // Get direction
     std::cout << "Enter direction: ";
-    dir = getDigit(0,Maps::numDirs-1);
+    dir = getDigit(0,Maps::NUM_DIRS-1);
   }
   // TODO: Make sure that the player enters a possible direction
 

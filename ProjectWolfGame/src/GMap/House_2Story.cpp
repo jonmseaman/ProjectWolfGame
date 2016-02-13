@@ -10,7 +10,7 @@ House_2Story::House_2Story() {
   setName("House: First Floor");
   secondFloor.setName("House: Second Floor");
   // Set possible entrancesDirs
-  for (int i = 0; i < Maps::numDirs; i++) {
+  for (int i = 0; i < Maps::NUM_DIRS; i++) {
     setEntranceDir(i, true);
     secondFloor.setEntranceDir(i, false);
   }
