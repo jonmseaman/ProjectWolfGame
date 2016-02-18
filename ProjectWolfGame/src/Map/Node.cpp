@@ -216,13 +216,13 @@ namespace Maps {
      startSave("Node");
      // entrance dirs?
      // TODO: toString for an array or vector
-     SAVE(getNumActors());
-     for (Actor* a : actorPtrList)
-     {
+     int numActors = getNumActors();
+     SAVE(numActors);
+     for (Actor* a : actorPtrList) {
        a->save();
      }
 
-     // TODO: Other variables
+     // TODO: Entrance dirs
 
      
      endSave();
@@ -231,14 +231,20 @@ namespace Maps {
    void Node::load()
    {
      startLoad("Node");
+     // Figure out how many actors were saved.
      int numActors = 0;
-     Savable::load(STRING(getNumActors()), numActors);
-     for (int i = 0; i < numActors; i++) {
-       // TODO: Fix this, the key will be "Creature" with the current system
-       Create::loadNewActor();
-     } 
+     LOAD(numActors);
 
-     // TODO: Other variables
+     for (int i = 0; i < numActors; i++) {
+       Create::loadNewActor();
+     }
+     
+     for (int i = 0; i < NUM_DIRS; i++) {
+         // LOAD(entranceDirs[i]);
+         // TODO: Entrance dirs
+     }
+     LOAD(name);
+
 
      endLoad();
    }
