@@ -126,3 +126,15 @@ void Actor::fromTree(const pairType& p) {
   const treeType &tree = p.second;
   Creature::fromTree(*tree.find("Creature"));
 }
+
+void Actor::save() {
+    startSave("Actor");
+    Creature::save();
+    endSave();
+}
+
+void Actor::load() {
+    startLoad("Actor");
+    Creature::load();
+    endLoad();
+}

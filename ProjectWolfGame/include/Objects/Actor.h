@@ -23,6 +23,8 @@ class Actor : public Creature
     pairType toTree();
     void fromTree(const pairType& p);
 
+    SAVABLE;
+
 
     // Combat
     virtual void onAttack();
