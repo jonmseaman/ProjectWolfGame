@@ -2,7 +2,6 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <iostream>
-#include "dLog.h"
 #include "Create.h"
 #include "File.h"
 #include "Map.h"
@@ -27,7 +26,6 @@ namespace Maps
   }
 
   void Map::activate() {
-    dLog << "Map activated." << std::endl;
     for ( auto &node : grid ) {
       node->activate();
     }
@@ -44,7 +42,6 @@ namespace Maps
   void Map::buildMoveData() {
     for ( int yIndex( 0 ); yIndex < mapSize; yIndex++ ) {
       for ( int xIndex( 0 ); xIndex < mapSize; xIndex++ ) {
-        dLog << "\tsetNodeLinks: " << xIndex << ", " << yIndex << std::endl;
         // Add node links to the current node
         Node &currentNode = *getNode(xIndex, yIndex);
         if ( yIndex < mapSize-1 ) { // Build north

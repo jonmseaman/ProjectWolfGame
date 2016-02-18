@@ -88,7 +88,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Dir.cpp" />
-    <ClCompile Include="src\dLog.cpp" />
     <ClCompile Include="src\Create.cpp" />
     <ClCompile Include="src\GMap\CenterTown.cpp" />
     <ClCompile Include="src\GMap\House_2Story.cpp" />
@@ -111,9 +110,6 @@
   <ItemGroup>
     <ClInclude Include="include\Create.h" />
     <ClInclude Include="include\Dir.h" />
-    <ClInclude Include="include\dLog.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="include\Enums\NodeEnum.h" />
     <ClInclude Include="include\Create_Enums.h" />
     <ClInclude Include="include\File\File.h">

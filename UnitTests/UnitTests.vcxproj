@@ -93,7 +93,6 @@
   <ItemGroup>
     <ClCompile Include="..\ProjectWolfGame\src\Create.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\Dir.cpp" />
-    <ClCompile Include="..\ProjectWolfGame\src\dLog.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\GMap\CenterTown.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\GMap\House_2Story.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\GObjects\BasicSword.cpp" />

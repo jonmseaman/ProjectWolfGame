@@ -84,9 +84,6 @@
     <ClCompile Include="..\ProjectWolfGame\src\Dir.cpp">
       <Filter>PWG</Filter>
     </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\dLog.cpp">
-      <Filter>PWG</Filter>
-    </ClCompile>
     <ClCompile Include="..\ProjectWolfGame\src\utils.cpp">
       <Filter>PWG</Filter>
     </ClCompile>
