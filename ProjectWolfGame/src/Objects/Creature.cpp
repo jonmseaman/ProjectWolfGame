@@ -91,10 +91,10 @@ void Creature::displayHUDLine() {
 void Creature::save()
 {
   startSave("Creature");
-  SAVE(name);
   // TODO: Check this
   // isLiving set from health?
   // isInCombat not important to save
+  SAVE(name);
   SAVE(level);
   SAVE(experience);
   SAVE(health);
