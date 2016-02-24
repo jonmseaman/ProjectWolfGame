@@ -9,7 +9,7 @@ namespace Maps { class Map; }
  * Eventually, MapManager will be able to handle multiple open maps and
  * connect them together to make a seamless larger map.
  */
-class MapManager// : public File::Savable
+class MapManager
 {
   public:
     /** Singleton */
@@ -35,12 +35,12 @@ class MapManager// : public File::Savable
      * Saves your game in file fileName
      * @pre map != nullptr
      */
-    void save(std::string fileName = "save1");
+    void save(const std::string &fileName = "save1");
     /**
      * Loads from file fileName
      * @pre fileName exists in File::savePath
      */
-    void load(std::string fileName = "save1");
+    void load(const std::string &fileName = "save1");
   protected:
   private:
     MapManager(MapManager const&);     // Don't Implement
