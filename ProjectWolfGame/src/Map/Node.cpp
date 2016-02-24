@@ -216,6 +216,7 @@ namespace Maps {
      startSave("Node");
      // entrance dirs?
      // TODO: toString for an array or vector
+     SAVE(name);
      int numActors = getNumActors();
      SAVE(numActors);
      for (Actor* a : actorPtrList) {
@@ -231,6 +232,7 @@ namespace Maps {
    void Node::load()
    {
      startLoad("Node");
+     LOAD(name);
      // Figure out how many actors were saved.
      int numActors = 0;
      LOAD(numActors);
@@ -243,7 +245,6 @@ namespace Maps {
          // LOAD(entranceDirs[i]);
          // TODO: Entrance dirs
      }
-     LOAD(name);
 
 
      endLoad();

@@ -2,11 +2,12 @@
 #define MAP_H
 #include <vector>
 #include "File.h"
+#include "Savable.h"
 
 namespace Maps
 {
   class Node;
-  class Map
+  class Map : public File::Savable
   {
     // Temp stuff
     public:
@@ -21,6 +22,7 @@ namespace Maps
        */
       Map(int mapSize); // Makes a map of specific size. Does not make any nodes
       virtual ~Map(); // Deletes nodes.
+      SAVABLE;
       /**
       * Converts the map to a pair which can be added to an xml tree
       */
