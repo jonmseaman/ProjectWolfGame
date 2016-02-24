@@ -53,32 +53,9 @@ void MapManager::save(const std::string &fileName) {
 }
 
 void MapManager::load(const std::string &fileName) {
-  using namespace File;
-  using namespace boost::property_tree;
+    File::load(fileName);
 
-  fs::fstream file;
-  fs::path filePath = savePath;
-  filePath /= fs::path{fileName};
-
-  if (file.is_open()) { file.close(); }
-  // make tree and load from file
-  treeType loadTree;
-  try {
-    file.open( filePath, std::fstream::in );
-    xml_parser::read_xml(file, loadTree, xml_parser::trim_whitespace);
-  } catch (std::exception &e) {
-    std::cerr << e.what();
-  }
-
-  auto it = loadTree.begin();
-  while (it != loadTree.end()) {
-    const std::string &key = it->first;
-    const std::string &data = it->second.data();
-    if (key == "Map") {
-      delete tempMap; // just in case
-      tempMap = Create::newMap(*it);
-    }
-    it++;
-  }
-  // tempMap and map are swapped automatically later.
+    // tempMap and map are swapped automatically later.
+    delete tempMap;
+    tempMap = Create::loadNewMap();
 }
