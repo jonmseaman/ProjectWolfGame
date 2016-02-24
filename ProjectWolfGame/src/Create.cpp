@@ -89,20 +89,6 @@ Item* Create::newItem(int item) {
   return itemCreated;
 }
 
-Item* Create::newItem(pairType item) {
-  Item* itemCreated = nullptr;
-  treeType &tree = item.second;
-  // get id
-  auto it = tree.find("id");
-  int id = 0;
-  if (it != tree.not_found()) {
-    id = std::stoi(it->second.data());
-  }
-  itemCreated = newItem(id);
-  itemCreated->fromTree(item);
-  return itemCreated;
-}
-
 Actor* Create::newActor(int actor) {
   Actor* actorCreated = nullptr;
   switch (actor) {
@@ -125,20 +111,6 @@ Actor* Create::newActor(int actor) {
   return actorCreated;
 }
 
-Actor* Create::newActor(pairType actor) {
-  Actor* actorCreated = nullptr;
-  // get id
-  treeType &tree = actor.second;
-  int id = 0;
-  auto it = tree.find("id");
-  if (it != tree.not_found()) {
-    id = std::stoi(it->second.data());
-  }
-  actorCreated = newActor(id);
-  actorCreated->fromTree(actor);
-  return actorCreated;
-}
-
 Maps::Node* Create::newNode(int node) {
   Maps::Node* nodeCreated = nullptr;
   switch (node) {
@@ -154,21 +126,6 @@ Maps::Node* Create::newNode(int node) {
   return nodeCreated;
 }
 
-Maps::Node* Create::newNode(pairType node) {
-  Maps::Node* nodeCreated = nullptr;
-
-  treeType &tree = node.second;
-  // get id
-  auto it = tree.find("id");
-  int id = 0;
-  if (it != tree.not_found()) {
-    id = std::stoi(it->second.data());
-  }
-  nodeCreated = newNode(id);
-  nodeCreated->fromTree(node);
-  return nodeCreated;
-}
-
 Maps::Map* Create::newMap(int map) {
   Maps::Map* mapCreated = nullptr;
   switch (map) {
@@ -179,20 +136,5 @@ Maps::Map* Create::newMap(int map) {
       mapCreated = new Maps::Map{};
   }
   mapCreated->setID(map);
-  return mapCreated;
-}
-
-Maps::Map* Create::newMap(pairType map) {
-  Maps::Map* mapCreated = nullptr;
-
-  treeType &tree = map.second;
-  // get id
-  auto it = tree.find("id");
-  int id = 0;
-  if (it != tree.not_found()) {
-    id = std::stoi(it->second.data());
-  }
-  mapCreated = newMap(id);
-  mapCreated->fromTree(map);
   return mapCreated;
 }
