@@ -120,11 +120,25 @@ namespace Maps
   void Map::save() {
       startSave("Map");
 
+      // Save the nodes
+      SAVE(mapSize);
+      for (int i = 0; i < grid.size(); i++) {
+          grid.at(i)->save();
+      }
+
       endSave();
   }
 
   void Map::load() {
       startLoad("Map");
+
+      // Load the nodes
+      LOAD(mapSize);
+      grid = std::vector<Node*>(mapSize * mapSize, nullptr);
+      for (int i = 0; i < grid.size(); i++) {
+          grid.at(i) = Create::loadNewNode();
+      }
+      buildMoveData(); // Get map ready for use.
 
       endLoad();
   }
