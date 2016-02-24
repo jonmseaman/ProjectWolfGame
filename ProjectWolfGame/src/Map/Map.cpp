@@ -116,4 +116,17 @@ namespace Maps
     // So that the player can move around in the map.
     buildMoveData();
   }
+
+  void Map::save() {
+      startSave("Map");
+
+      endSave();
+  }
+
+  void Map::load() {
+      startLoad("Map");
+
+      endLoad();
+  }
+
 } // End namespace Maps
