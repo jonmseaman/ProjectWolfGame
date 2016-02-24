@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Creature.h"
-#include "File.h"
 #include "Item.h"
 #include "Savable.h"
 
@@ -64,43 +63,6 @@ void Item::showInfo() const {
   std::cout << "Name: " << name << std::endl;
   std::cout << "Description: " << description << std::endl;
   stats.showStats();
-}
-
-pairType Item::toTree() {
-  using namespace boost::property_tree;
-  ptree tree;
-
-  tree.push_back(XML_VAR_SPAIR(name));
-  tree.push_back(XML_VAR_SPAIR(description));
-  tree.push_back(XML_VAR_PAIR(baseDamage));
-  tree.push_back(XML_VAR_PAIR(baseHeal));
-  tree.push_back(stats.toTree());
-
-  return ptree::value_type("Item", tree);
-}
-
-void Item::fromTree(const pairType& item) {
-  const treeType &tree = item.second;
-  auto it = tree.begin();
-
-  while (it != tree.end()) {
-    const std::string &key = it->first;
-    const std::string &data = it->second.data();
-
-    if (key == STRING(name)) {
-      name = data;
-    } else if (key == STRING(description)) {
-      description = data;
-    } else if (key == STRING(baseDamage)) {
-      baseDamage = std::stoi(data);
-    } else if (key == STRING(baseHeal)) {
-      baseHeal = std::stoi(data);
-    } else if (key == "Stats") {
-      stats.fromTree(*it);
-    }
-
-    it++;
-  }
 }
 
 bool operator==(const Item & l, const Item & r)

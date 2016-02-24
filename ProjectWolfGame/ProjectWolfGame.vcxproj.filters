@@ -56,7 +56,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\File\File.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\Objects\Actor.h">
       <Filter>Source\Objects</Filter>

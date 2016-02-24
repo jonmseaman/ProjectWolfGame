@@ -2,11 +2,9 @@
 #include <assert.h>
 #include "Actor.h"
 #include "Dir.h"
-#include "File.h"
 #include "utils.h"
 
-Actor::Actor(): id(0)
-  , isPlayer(false)
+Actor::Actor(): isPlayer(false)
   , isTurnUsed(false)
   , moveDir(Maps::Dir::Stop) {
 }
@@ -110,21 +108,6 @@ void Actor::setTarget(Actor* actor) {
 
 void Actor::cycleTarget() {
   targetPtr = currentNode->getNextActor(targetPtr);
-}
-
-pairType Actor::toTree() {
-  using namespace boost::property_tree;
-  treeType tree;
-  // TODO: Adjust so that derived types may add custom xml
-  tree.push_front(XML_VAR_PAIR(id));
-  // tree.push_back(XML_VAR_PAIR(isPlayer)); // not necessary?
-  tree.push_back(Creature::toTree());
-  return ptree::value_type("Actor", tree);
-}
-
-void Actor::fromTree(const pairType& p) {
-  const treeType &tree = p.second;
-  Creature::fromTree(*tree.find("Creature"));
 }
 
 void Actor::save() {

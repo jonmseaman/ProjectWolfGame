@@ -11,13 +11,6 @@ namespace Maps
 {
   class Node : public File::Savable
   {
-    // Temp stuff
-    public:
-      int getID() { return id; }
-      void setID(int idNum) { this->id = idNum; }
-      int id;
-      pairType toTree();
-      void fromTree(const pairType& p);
     public:
       Node();
       virtual ~Node();

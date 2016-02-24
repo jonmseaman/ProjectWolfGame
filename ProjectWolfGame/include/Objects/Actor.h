@@ -1,7 +1,6 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 #include "Creature.h"
-#include "File.h"
 #include "Node.h"
 
 
@@ -11,18 +10,9 @@
  */
 class Actor : public Creature
 {
-    // Temp stuff
-  public:
-    int getID() { return id; }
-    void setID(int idNum) { this->id = idNum; }
-    int id;
   public:
     Actor();
     virtual ~Actor();
-    // Loading and Saving
-    pairType toTree();
-    void fromTree(const pairType& p);
-
     SAVABLE;
 
 

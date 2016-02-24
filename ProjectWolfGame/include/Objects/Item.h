@@ -1,7 +1,6 @@
 #ifndef ITEM_H
 #define ITEM_H
 #include <string>
-#include "File.h" // for loading / saving functions
 #include "Stats.h"
 class Creature;
 
@@ -16,13 +15,6 @@ class Item : public File::Savable
     Item(std::string name, Stats stats);
     virtual ~Item();
     SAVABLE; // load and save functions
-    
-    // TODO: Remove these
-    pairType toTree();
-    void fromTree(const pairType& p);
-    int getID() { return id; }
-    void setID(int idNum) { this->id = idNum; }
-    int id;
 
     /**
      * Shows information about the item on std::cout

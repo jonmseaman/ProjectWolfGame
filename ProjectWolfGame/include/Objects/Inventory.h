@@ -2,7 +2,6 @@
 #define INVENTORY_H
 #include <string>
 #include <vector>
-#include "File.h"
 #include "Item.h"
 #include "Savable.h"
 
@@ -13,14 +12,6 @@ class Inventory : public File::Savable
     Inventory(std::string name, int inventorySize);
     virtual ~Inventory();
     SAVABLE; // Load / save functions
-
-    virtual pairType toTree();
-    /**
-     * Gets data from p.
-     * @attention Deletes all items that are already in this inventory.
-     * @param p The key, tree pair that data will be gathered from.
-     */
-    void fromTree(const pairType& p);
 
     /**
      * Tries to add item to the inventory.

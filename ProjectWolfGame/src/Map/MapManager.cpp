@@ -1,7 +1,5 @@
 #include <algorithm>
 #include <assert.h>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
 #include <exception>
 #include <iostream>
 #include "Map.h"
@@ -9,7 +7,6 @@
 #include "utils.h"
 #include "Create.h"
 #include "Create_Enums.h"
-#include "File.h"
 
 MapManager::MapManager(): map(nullptr) {}
 

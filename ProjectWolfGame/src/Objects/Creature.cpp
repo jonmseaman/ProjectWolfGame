@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include "Creature.h"
-#include "File.h"
 #include "Inventory.h"
 #include "utils.h"
 
@@ -117,59 +116,3 @@ void Creature::load()
   endLoad();
 }
 
-pairType Creature::toTree() {
-  using namespace boost::property_tree;
-  ptree tree;
-
-  tree.push_back(XML_VAR_SPAIR(name));
-  tree.push_back(XML_VAR_PAIR(isLiving));
-  tree.push_back(XML_VAR_PAIR(isInCombat));
-
-  tree.push_back(XML_VAR_PAIR(level));
-  tree.push_back(XML_VAR_PAIR(experience));
-
-  tree.push_back(XML_VAR_PAIR(health));
-  tree.push_back(XML_VAR_PAIR(maxHealth));
-
-  tree.push_back(equipment.toTree());
-  tree.push_back(inventory.toTree());
-
-  tree.push_back(stats.toTree());
-
-  return pairType("Creature", tree);
-}
-
-void Creature::fromTree(const pairType& p) {
-  const treeType &tree = p.second;
-  auto it = tree.begin();
-
-  while (it != tree.end()) {
-    const std::string &key = it->first;
-    const std::string &data = it->second.data();
-
-    if (key == "name") {
-      name = data;
-    } else if (key == "isLiving") {
-      isLiving = std::stoi(data) > 0;
-    } else if (key == "isInCombat") {
-      isInCombat = std::stoi(data) > 0;
-    } else if (key == "level") {
-      level = std::stoi(data);
-    } else if (key == "experience") {
-      experience = std::stoi(data);
-    } else if (key == "health") {
-      health = std::stoi(data);
-    } else if (key == "maxHealth") {
-      maxHealth = std::stoi(data);
-    } else if (key == "Equipment") {
-      equipment.fromTree(*it);
-    } else if (key == "Inventory") {
-      inventory.fromTree(*it);
-    } else if (key == "Stats") {
-      stats.fromTree(*it);
-    }
-    it++;
-  }
-
-
-}

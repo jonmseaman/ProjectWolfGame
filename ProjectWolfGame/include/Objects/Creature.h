@@ -2,7 +2,6 @@
 #define CREATURE_H
 #include <string>
 #include "Equipment.h"
-#include "File.h"
 #include "Inventory.h"
 #include "Savable.h"
 #include "Stats.h"
@@ -15,11 +14,6 @@ class Creature : public File::Savable {
     // This class should contain the data and tools for making functioning actors in the game world,
     // but not actually include a way to _act_
 
-// TEMP STUFF
-public:
-    // Loading and Saving
-    pairType toTree();
-    void fromTree(const pairType& p);
 public:
     Creature();
     virtual ~Creature();

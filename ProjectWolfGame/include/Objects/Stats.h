@@ -1,15 +1,9 @@
 #ifndef STATS_H
 #define STATS_H
 #include "Savable.h"
-#include "File.h"
 class Creature;
 
 class Stats : public File::Savable {
-// TEMP
-  // TODO: Remove temp
-public:
-  pairType toTree();
-  void fromTree(const pairType& p);
 public:
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
   SAVABLE;

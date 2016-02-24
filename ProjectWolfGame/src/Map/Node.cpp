@@ -180,37 +180,6 @@ namespace Maps {
      return nextActor;
    }
 
-   pairType Node::toTree() {
-     using namespace boost::property_tree;
-     ptree tree;
-     tree.push_back(XML_VAR_SPAIR(name));
-     tree.push_back(inventory.toTree());
-     // Add node type
-     for (Actor* actor : actorPtrList) {
-       tree.push_back(actor->toTree());
-     }
-
-     return ptree::value_type("Node", tree);
-   }
-
-   void Node::fromTree(const pairType &p) {
-     const treeType &tree = p.second;
-
-     auto it = tree.begin();
-     while (it != tree.end()) {
-       const std::string &key = it->first;
-       const std::string &data = it->second.data();
-       if (key == STRING(name)) {
-         name = data;
-       } else if (key == "Actor") {
-         addActor(Create::newActor(*it));
-       } else if (key == "Inventory") {
-         inventory.fromTree(*it);
-       }
-       it++;
-     }
-   }
-
    void Node::save()
    {
      startSave("Node");

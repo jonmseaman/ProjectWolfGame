@@ -28,12 +28,6 @@ public:
   static Actor* newActor(int actor);
   static Maps::Node* newNode(int node);
   static Maps::Map* newMap(int map);
-
-  // Old LS system
-  static Item* newItem(pairType);
-  static Actor* newActor(pairType);
-  static Maps::Node* newNode(pairType);
-  static Maps::Map* newMap(pairType);
 };
 
 #endif CREATE_H

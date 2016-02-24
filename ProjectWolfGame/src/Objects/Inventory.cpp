@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <assert.h>
 #include "Create.h"
-#include "File.h"
 #include "Inventory.h"
 
 Inventory::Inventory():Inventory("Inventory", 2) {}
@@ -120,46 +119,4 @@ Item *Inventory::getItem(int slotIndex) {
 bool Inventory::isSlotEmpty(int slotIndex) {
   assert(0 <= slotIndex && slotIndex < size);
   return slots.at(slotIndex) == nullptr;
-}
-
-pairType Inventory::toTree() {
-  treeType tree{};
-
-  tree.push_back(XML_VAR_SPAIR(name));
-  tree.push_back(XML_VAR_PAIR(size));
-  for (Item* item : slots) {
-    if (item != nullptr) {
-      tree.push_back(item->toTree());
-    }
-  }
-
-  return pairType("Inventory", tree);
-}
-
-void Inventory::fromTree(const pairType& p) {
-  // TODO: Loading
-  const treeType &tree = p.second;
-
-  // Set the inventory size before doing anything else
-  auto sizePairIterator = tree.find("size");
-  std::string sizeString = sizePairIterator->second.data();
-  size = std::stoi(sizeString);
-  // Deletes all items
-  for (int i(0); i < slots.size(); i++) {
-    delete slots.at(i);
-  }
-  slots = std::vector<Item*>(size , nullptr);
-
-  auto it = tree.begin();
-  while (it != tree.end()) {
-    const std::string &key = it->first;
-    const std::string &data = it->second.data();
-    if (key == STRING(name)) {
-      name = data;
-    } else if (key == "Item") {
-      Item* item = Create::newItem(*it);
-      addNewItem(item);
-    }
-    it++;
-  }
 }

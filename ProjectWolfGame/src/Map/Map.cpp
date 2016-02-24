@@ -1,9 +1,6 @@
 #include <assert.h>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
 #include <iostream>
 #include "Create.h"
-#include "File.h"
 #include "Map.h"
 #include "Node.h"
 #include "stdlib.h"
@@ -74,47 +71,6 @@ namespace Maps
     for (int i(0); i < grid.size(); ++i) {
       delete grid.at(i);
     }
-  }
-
-  pairType Map::toTree() {
-    using namespace boost::property_tree;
-    ptree tree;
-    tree.push_back(XML_VAR_PAIR(mapSize));
-    // Should a location be saved?
-    for (Node* node : grid) {
-      tree.push_back(node->toTree());
-    }
-
-    return ptree::value_type("Map", tree);
-  }
-
-  void Map::fromTree(const pairType &p) {
-    const treeType &tree = p.second;
-
-    { // Get the mapSize first:
-      auto mapSizeIterator = tree.find("mapSize");
-      const std::string &data = mapSizeIterator->second.data();
-      mapSize = std::stoi(data);
-      deleteGrid();
-      grid = std::vector<Node*>(mapSize*mapSize, nullptr);
-    }
-
-    auto it = tree.begin();
-    int nodeNumber = 0;
-    while (it != tree.end()) {
-      const std::string &key = it->first;
-      const std::string &data = it->second.data();
-      if (key == "Node") {
-        // Sets the next node from xml
-        // Note that since x,y is not recorded in the xml,
-        // nodes can only be loaded in the order they were saved
-        grid.at(nodeNumber) = Create::newNode(*it);
-        nodeNumber++;
-      }
-      it++;
-    }
-    // So that the player can move around in the map.
-    buildMoveData();
   }
 
   void Map::save() {

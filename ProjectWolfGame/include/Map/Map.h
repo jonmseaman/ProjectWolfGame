@@ -1,7 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
 #include <vector>
-#include "File.h"
 #include "Savable.h"
 
 namespace Maps
@@ -23,11 +22,6 @@ namespace Maps
       Map(int mapSize); // Makes a map of specific size. Does not make any nodes
       virtual ~Map(); // Deletes nodes.
       SAVABLE;
-      /**
-      * Converts the map to a pair which can be added to an xml tree
-      */
-      pairType toTree();
-      void fromTree(const pairType& p);
 
       // Data Acess
 
