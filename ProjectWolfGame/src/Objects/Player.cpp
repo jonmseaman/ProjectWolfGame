@@ -4,7 +4,7 @@
 #include "Dir.h"
 #include "MapManager.h"
 #include "Player.h"
-#include "utils.h"
+#include "input.h"
 
 Player::Player() {
   setMaxHealth(100);

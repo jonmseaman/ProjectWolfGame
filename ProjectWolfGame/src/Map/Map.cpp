@@ -4,7 +4,7 @@
 #include "Map.h"
 #include "Node.h"
 #include "stdlib.h"
-#include "utils.h"
+#include "input.h"
 namespace Maps
 {
   Map::Map(): Map(DEFAULT_MAP_SIZE) {

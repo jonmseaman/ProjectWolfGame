@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="src\Objects\Actor.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
@@ -54,9 +53,9 @@
     <ClCompile Include="src\GMap\CenterTown.cpp">
       <Filter>Source\GMap</Filter>
     </ClCompile>
+    <ClCompile Include="src\input.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\Objects\Actor.h">
       <Filter>Source\Objects</Filter>
     </ClInclude>
@@ -117,6 +116,7 @@
     <ClInclude Include="include\GObjects\House_2Story.h">
       <Filter>Source\GMap</Filter>
     </ClInclude>
+    <ClInclude Include="include\input.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
