@@ -86,9 +86,6 @@
     <ClInclude Include="include\Map\Node.h">
       <Filter>Source\Map</Filter>
     </ClInclude>
-    <ClInclude Include="include\Enums\NodeEnum.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
     <ClInclude Include="include\GObjects\BasicSword.h">
       <Filter>Source\GObjects</Filter>
     </ClInclude>

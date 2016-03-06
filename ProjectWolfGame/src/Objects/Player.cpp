@@ -238,7 +238,7 @@ bool Player::processUserInput(char key) {
     case 'd':
     case 'q':
     case 'e':
-      setMoveDir(Maps::wasdqeToDir(key));
+      setMoveDir(Maps::charToDir(key));
       break;
     // Attack
     case ' ':

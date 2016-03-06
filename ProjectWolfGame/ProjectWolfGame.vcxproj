@@ -110,7 +110,6 @@
   <ItemGroup>
     <ClInclude Include="include\Create.h" />
     <ClInclude Include="include\Dir.h" />
-    <ClInclude Include="include\Enums\NodeEnum.h" />
     <ClInclude Include="include\Create_Enums.h" />
     <ClInclude Include="include\GObjects\Rat.h" />
     <ClInclude Include="include\GObjects\Swordsmen.h" />
