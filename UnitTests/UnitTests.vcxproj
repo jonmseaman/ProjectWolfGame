@@ -98,6 +98,7 @@
     <ClCompile Include="..\ProjectWolfGame\src\GObjects\BasicSword.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\GObjects\Rat.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\GObjects\Swordsmen.cpp" />
+    <ClCompile Include="..\ProjectWolfGame\src\input.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\Map\Map.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\Map\MapManager.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\Map\Node.cpp" />
@@ -108,7 +109,6 @@
     <ClCompile Include="..\ProjectWolfGame\src\Objects\Item.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\Objects\Player.cpp" />
     <ClCompile Include="..\ProjectWolfGame\src\Objects\Stats.cpp" />
-    <ClCompile Include="..\ProjectWolfGame\src\utils.cpp" />
     <ClCompile Include="ItemTest.cpp" />
     <ClCompile Include="SavableTest.cpp" />
     <ClCompile Include="StatsTest.cpp" />

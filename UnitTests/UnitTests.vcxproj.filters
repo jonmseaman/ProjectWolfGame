@@ -84,11 +84,11 @@
     <ClCompile Include="..\ProjectWolfGame\src\Dir.cpp">
       <Filter>PWG</Filter>
     </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\utils.cpp">
-      <Filter>PWG</Filter>
-    </ClCompile>
     <ClCompile Include="..\ProjectWolfGame\src\GMap\CenterTown.cpp">
       <Filter>PWG\GMap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ProjectWolfGame\src\input.cpp">
+      <Filter>PWG</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
