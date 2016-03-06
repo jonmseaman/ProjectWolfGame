@@ -21,8 +21,6 @@ namespace File {
   typedef ptree::value_type   pairType;
   typedef ptree               treeType;
 
-
-
   /** The folder in which saves will go. */
   const fs::path savePath("./Saves");
   fs::fstream file;
