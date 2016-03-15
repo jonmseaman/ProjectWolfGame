@@ -34,19 +34,17 @@ void Stats::showStats() const {
   cout << std::setw(fieldWidth) << "Intellect" << ": " << intellect << endl;
 }
 
-Stats operator+(Stats stats1, Stats stats2) {
+Stats Stats::operator+(const Stats& r) const {
   int stam, strength, intellect;
-  stam = stats1.getStamina() + stats2.getStamina();
-  strength = stats1.getStrength() + stats2.getStrength();
-  intellect = stats1.getIntellect() + stats2.getIntellect();
+  stam = getStamina() + r.getStamina();
+  strength = getStrength() + r.getStrength();
+  intellect = getIntellect() + r.getIntellect();
 
   return Stats{stam, strength, intellect};
 }
 
-bool operator==(const Stats& l, const Stats& r) {
-  bool areEqual = true;
-  areEqual = areEqual && (l.getStamina() == r.getStamina());
-  areEqual = areEqual && (l.getStrength() == r.getStrength());
-  areEqual = areEqual && (l.getIntellect() == r.getIntellect());
-  return areEqual;
+bool Stats::operator==(const Stats& r) const {
+    return getStamina() == r.getStamina()
+        && getStrength() == r.getStrength()
+        && getIntellect() == r.getIntellect();
 }

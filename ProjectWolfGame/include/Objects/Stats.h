@@ -22,6 +22,8 @@ public:
    */
   void showStats() const;
 
+  Stats operator+(const Stats& r) const;
+  bool operator==(const Stats& r) const;
 
 
 private:
@@ -31,7 +33,5 @@ private:
   int intellect; // Boosts spell damage
 };
 
-Stats operator+(Stats stats1, Stats stats2);
-bool operator==(const Stats& l, const Stats& r);
 
 #endif /* end of include guard: STATS_H */

@@ -65,11 +65,11 @@ void Item::showInfo() const {
   stats.showStats();
 }
 
-bool operator==(const Item & l, const Item & r)
+bool Item::operator==(const Item & r)
 {
-  return l.getName() == r.getName()
-    && l.getDescription() == r.getDescription()
-    && l.getDamage() == r.getDamage()
-    && l.getHeal() == r.getHeal()
-    && l.stats == r.stats;
+  return getName() == r.getName()
+    && getDescription() == r.getDescription()
+    && getDamage() == r.getDamage()
+    && getHeal() == r.getHeal()
+    && stats == r.stats;
 }
