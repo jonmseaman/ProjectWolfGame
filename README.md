@@ -1,8 +1,9 @@
 # ProjectWolfGame
 A prototype for a terminal-based RPG.
 
-## Dependencies
+## Tools
 * Boost Libraries - http://www.boost.org/
+* Visual Studio 2015
 
 ## How to Build
 1. Add environment variables BOOST_ROOT and BOOST_LIBRARYDIR

@@ -6,7 +6,7 @@
 #include "Create.h"
 #include "Node.h"
 #include "Player.h"
-#include "utils.h"
+#include "input.h"
 int Maps::Node::nodeCount = 1;
 namespace Maps {
   Node::Node(): inventory(Inventory{ "Location Inventory", 8 })

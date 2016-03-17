@@ -173,12 +173,11 @@
     <ClCompile Include="src\Objects\Item.cpp" />
     <ClCompile Include="src\Objects\Player.cpp" />
     <ClCompile Include="src\Objects\Stats.cpp" />
-    <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="src\input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Create.h" />
     <ClInclude Include="include\Dir.h" />
-    <ClInclude Include="include\Enums\NodeEnum.h" />
     <ClInclude Include="include\Create_Enums.h" />
     <ClInclude Include="include\GObjects\Rat.h" />
     <ClInclude Include="include\GObjects\Swordsmen.h" />
@@ -199,7 +198,7 @@
     <ClInclude Include="include\Objects\Item.h" />
     <ClInclude Include="include\Objects\Player.h" />
     <ClInclude Include="include\Objects\Stats.h" />
-    <ClInclude Include="include\utils.h" />
+    <ClInclude Include="include\input.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Savable\Savable.vcxproj">

@@ -50,6 +50,7 @@ class Item : public File::Savable
      */
      virtual void use(const Creature &usedBy, Creature &usedOn);
      Stats stats;
+    bool operator==(const Item& r);
   protected:
     std::string name;
     std::string description;
@@ -57,6 +58,5 @@ class Item : public File::Savable
     int baseHeal;
 };
 
-bool operator==(const Item& l, const Item& r);
 
 #endif // ITEM_H

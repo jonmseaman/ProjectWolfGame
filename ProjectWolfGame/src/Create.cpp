@@ -1,4 +1,3 @@
-#include "File.h"
 #include "Create.h"
 #include "Create_Enums.h"
 #include "Savable.h"
@@ -42,7 +41,7 @@ Actor* Create::loadNewActor() {
   File::Savable::idType id = File::Savable::nextID("Actor");
   Actor* actor = Create::newActor(id);
 
-  //TODO: actor->load();
+  actor->load();
 
   return actor;
 }
@@ -54,7 +53,7 @@ Maps::Node* Create::loadNewNode() {
   Savable::idType id = Savable::nextID("Node");
   Node* node = Create::newNode(id);
 
-  //TODO: node->load();
+  node->load();
 
   return node;
 }
@@ -67,7 +66,7 @@ Maps::Map* Create::loadNewMap() {
   Savable::idType id = Savable::nextID("Map");
   Map* map = Create::newMap(id);
 
-  //TODO: map->load();
+  map->load();
   return map;
 }
 

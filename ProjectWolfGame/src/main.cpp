@@ -3,7 +3,7 @@
 /// A text-based RPG
 #include <iostream>
 #include "MapManager.h"
-#include "utils.h"
+#include "input.h"
 #include "Create_Enums.h"
 using namespace std;
 

@@ -22,10 +22,10 @@ namespace Maps
   /**
    * Converts a char of wasdqe to the corresponding travel direction
    * @param The char being converted to an int
-   * @post wasdqeToDir in enum Dir
+   * @post charToDir in enum Dir
    * @return An int corresponding to charDir
    */
-  int wasdqeToDir(char charDir);
+  int charToDir(char charDir);
   /**
    * Converts an int in enum Dir to its name
    * @param dir The int being converted to a string

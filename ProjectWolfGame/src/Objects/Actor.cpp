@@ -2,7 +2,7 @@
 #include <assert.h>
 #include "Actor.h"
 #include "Dir.h"
-#include "utils.h"
+#include "input.h"
 
 Actor::Actor(): isPlayer(false)
   , isTurnUsed(false)

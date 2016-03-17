@@ -4,7 +4,7 @@
 
 namespace Maps {
 
-int wasdqeToDir(char dir) {
+int charToDir(char dir) {
 	int intDir = 0;
 	if (dir == 'w') {
 		intDir = Maps::North;

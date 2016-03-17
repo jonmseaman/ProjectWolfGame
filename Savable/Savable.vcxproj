@@ -22,7 +22,6 @@
     <ClCompile Include="Savable.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="File.h" />
     <ClInclude Include="Savable.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

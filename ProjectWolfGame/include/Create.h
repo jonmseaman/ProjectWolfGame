@@ -1,6 +1,5 @@
 #ifndef CREATE_H
 #define CREATE_H
-#include "File.h"
 
 class Actor;
 class Item;
