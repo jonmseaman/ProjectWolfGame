@@ -46,13 +46,18 @@ void save(const std::string & fileName)
   using namespace File;
   using namespace boost::property_tree;
 
+  for (size_t i = 0; i < fileName.length(); i++) {
+    if (!isalnum(fileName.at(i))) {
+      throw std::invalid_argument("File name can only contain alpha-numeric characters.");
+    }
+  }
+
   // Path to file
   fs::path filePath = savePath;
   filePath /= fs::path{ fileName }.filename();
   filePath += ".xml";
 
-  if (file.is_open())
-  {
+  if (file.is_open()) {
     file.close();
   }
 
