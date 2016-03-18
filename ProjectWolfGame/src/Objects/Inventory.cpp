@@ -62,15 +62,10 @@ bool Inventory::addNewItem(Item* item) {
   return addedItem;
 }
 
-bool Inventory::removeItem(int slotIndex) {
+Item* Inventory::removeItem(int slotIndex) {
+  Item* removed = slots.at(slotIndex);
   slots.at(slotIndex) = nullptr;
-  return true;
-}
-
-void Inventory::deleteItem(int slotIndex) {
-  assert ( slotIndex>=0 && slotIndex<slots.size() );
-  delete slots.at(slotIndex);
-  slots.at(slotIndex) = nullptr;
+  return removed;
 }
 
 std::string Inventory::getName() {
@@ -110,10 +105,8 @@ void Inventory::showListOfItems() {
   }
 }
 
-Item *Inventory::getItem(int slotIndex) {
-  assert(slots.at(slotIndex) != nullptr);
-  assert(0 <= slotIndex && slotIndex < slots.size());
-  return slots.at(slotIndex);
+Item *& Inventory::at(int slotIndex) {
+    return this->slots.at(slotIndex);
 }
 
 bool Inventory::isSlotEmpty(int slotIndex) {

@@ -24,13 +24,13 @@ class Inventory : public File::Savable
      * @return True if the item was added. False otherwise.
      */
     bool addNewItem(Item* item);
-    void deleteItem(int slotIndex); // Deletes item
-    bool removeItem(int slotIndex); // Removes item from slot without freeing memory
+    Item* removeItem(int slotIndex); // Removes item from slot without freeing memory
+
     /**
-     * Allows access to the items in the inventory
-     * @pre There is an item in slot slotIndex
+     * Allows access to items in the inventory.
+     * @pre 0 <= slotIndex <= inventory.size
      */
-    Item *getItem(int slotIndex);
+    Item*& at(int slotIndex);
     /**
      * Checks to see if a slot is empty.
      * @param slotIndex The index of the item slot being checked

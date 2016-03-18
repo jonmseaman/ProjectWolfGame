@@ -136,7 +136,7 @@ void Player::inventoryMenu(Inventory &inv) {
 
   if (itemIndex >= 0) {
     // Get the item,
-    Item *item = inventory.getItem(itemIndex);
+    Item *item = inventory.at(itemIndex);
     // Show them menu for that item.
     dispList({"Use","Examine", "Drop"});
     int actionNumber = getDigit(0,3);
@@ -191,7 +191,7 @@ void Player::searchMenu(Inventory &inv) {
     } else if (!inventory.hasOpenSlot()) {
       std::cout << "Your inventory is full." << std::endl;
     } else
-    if (inventory.addItem(inv.getItem(itemIndex))) {
+    if (inventory.addItem(inv.at(itemIndex))) {
       std::cout << "Trying to remove item. Choice: " << choice << std::endl;
       inv.removeItem(itemIndex);
     } else {
