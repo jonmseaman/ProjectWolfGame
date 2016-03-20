@@ -2,58 +2,58 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Objects\Actor.cpp">
-      <Filter>Source\Objects</Filter>
+    <ClCompile Include="src\input.cpp" />
+    <ClCompile Include="src\Game\Maps\CenterTown.cpp">
+      <Filter>Source\GMap</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\Creature.cpp">
-      <Filter>Source\Objects</Filter>
+    <ClCompile Include="src\Game\Maps\House_2Story.cpp">
+      <Filter>Source\GMap</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\Equipment.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Objects\Inventory.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Objects\Player.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Map\Map.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Map\MapManager.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Map\Node.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GObjects\BasicSword.cpp">
+    <ClCompile Include="src\Game\Actors\Rat.cpp">
       <Filter>Source\GObjects</Filter>
     </ClCompile>
-    <ClCompile Include="src\Dir.cpp">
+    <ClCompile Include="src\Game\Actors\Swordsmen.cpp">
+      <Filter>Source\GObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Items\BasicSword.cpp">
+      <Filter>Source\GObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Map\Map.cpp">
       <Filter>Source\Map</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\Stats.cpp">
+    <ClCompile Include="src\Engine\Map\MapManager.cpp">
+      <Filter>Source\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Map\Node.cpp">
+      <Filter>Source\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Objects\Actor.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\Create.cpp">
+    <ClCompile Include="src\Engine\Objects\Creature.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Objects\Equipment.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Objects\Inventory.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Objects\Item.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Objects\Player.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Objects\Stats.cpp">
+      <Filter>Source\RPG</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Create.cpp">
       <Filter>Source\Create</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\Item.cpp">
-      <Filter>Source\Objects</Filter>
+    <ClCompile Include="src\Engine\Dir.cpp">
+      <Filter>Source\Map</Filter>
     </ClCompile>
-    <ClCompile Include="src\GObjects\Rat.cpp">
-      <Filter>Source\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GObjects\Swordsmen.cpp">
-      <Filter>Source\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GMap\House_2Story.cpp">
-      <Filter>Source\GMap</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GMap\CenterTown.cpp">
-      <Filter>Source\GMap</Filter>
-    </ClCompile>
-    <ClCompile Include="src\input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Objects\Actor.h">
@@ -72,9 +72,6 @@
       <Filter>Source\Objects</Filter>
     </ClInclude>
     <ClInclude Include="include\Objects\Player.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Stats.h">
       <Filter>Source\Objects</Filter>
     </ClInclude>
     <ClInclude Include="include\Map\Map.h">
@@ -114,6 +111,9 @@
       <Filter>Source\GMap</Filter>
     </ClInclude>
     <ClInclude Include="include\input.h" />
+    <ClInclude Include="include\Objects\Stats.h">
+      <Filter>Source\RPG</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -133,6 +133,9 @@
     </Filter>
     <Filter Include="Source\GMap">
       <UniqueIdentifier>{29c452dc-fe58-445d-b1ea-edf0b4ba8e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\RPG">
+      <UniqueIdentifier>{5908cc4c-7056-47b6-ad5a-00113b793d13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

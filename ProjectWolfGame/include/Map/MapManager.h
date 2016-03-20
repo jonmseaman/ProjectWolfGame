@@ -2,8 +2,12 @@
 #define MAPMANAGER_H
 #include <string>
 #include "Savable.h"
+namespace Engine {
+  namespace Maps { class Map; }
+}
 
-namespace Maps { class Map; }
+using namespace Engine;
+
 /**
  * The purpose of this class is to make it easier to manager maps.
  * Eventually, MapManager will be able to handle multiple open maps and

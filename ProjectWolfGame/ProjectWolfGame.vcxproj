@@ -155,24 +155,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Dir.cpp" />
-    <ClCompile Include="src\Create.cpp" />
-    <ClCompile Include="src\GMap\CenterTown.cpp" />
-    <ClCompile Include="src\GMap\House_2Story.cpp" />
-    <ClCompile Include="src\GObjects\Rat.cpp" />
-    <ClCompile Include="src\GObjects\Swordsmen.cpp" />
-    <ClCompile Include="src\GObjects\BasicSword.cpp" />
+    <ClCompile Include="src\Engine\Dir.cpp" />
+    <ClCompile Include="src\Engine\Create.cpp" />
+    <ClCompile Include="src\Game\Maps\CenterTown.cpp" />
+    <ClCompile Include="src\Game\Maps\House_2Story.cpp" />
+    <ClCompile Include="src\Game\Actors\Rat.cpp" />
+    <ClCompile Include="src\Game\Actors\Swordsmen.cpp" />
+    <ClCompile Include="src\Game\Items\BasicSword.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Map\Map.cpp" />
-    <ClCompile Include="src\Map\MapManager.cpp" />
-    <ClCompile Include="src\Map\Node.cpp" />
-    <ClCompile Include="src\Objects\Actor.cpp" />
-    <ClCompile Include="src\Objects\Creature.cpp" />
-    <ClCompile Include="src\Objects\Equipment.cpp" />
-    <ClCompile Include="src\Objects\Inventory.cpp" />
-    <ClCompile Include="src\Objects\Item.cpp" />
-    <ClCompile Include="src\Objects\Player.cpp" />
-    <ClCompile Include="src\Objects\Stats.cpp" />
+    <ClCompile Include="src\Engine\Map\Map.cpp" />
+    <ClCompile Include="src\Engine\Map\MapManager.cpp" />
+    <ClCompile Include="src\Engine\Map\Node.cpp" />
+    <ClCompile Include="src\Engine\Objects\Actor.cpp" />
+    <ClCompile Include="src\Engine\Objects\Creature.cpp" />
+    <ClCompile Include="src\Engine\Objects\Equipment.cpp" />
+    <ClCompile Include="src\Engine\Objects\Inventory.cpp" />
+    <ClCompile Include="src\Engine\Objects\Item.cpp" />
+    <ClCompile Include="src\Engine\Objects\Player.cpp" />
+    <ClCompile Include="src\Engine\Objects\Stats.cpp" />
     <ClCompile Include="src\input.cpp" />
   </ItemGroup>
   <ItemGroup>

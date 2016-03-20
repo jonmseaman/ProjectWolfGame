@@ -4,9 +4,11 @@
 #include "Dir.h"
 #include "input.h"
 
+using namespace Engine::Maps;
+
 Actor::Actor(): isPlayer(false)
   , isTurnUsed(false)
-  , moveDir(Maps::Dir::Stop) {
+  , moveDir(STOP) {
 }
 
 Actor::~Actor() {
@@ -29,13 +31,13 @@ int Actor::getMoveDir() {
   return moveDir;
 }
 
-void Actor::setCurrentNode(Maps::Node *node) {
+void Actor::setCurrentNode(Node *node) {
   this->currentNode = node;
 }
 
 void Actor::setMoveDir(int dir) {
   assert(currentNode != nullptr);
-  assert(0 <= dir && dir < Maps::NUM_DIRS);
+  assert(0 <= dir && dir < NUM_DIRS);
   moveDir = dir;
   if (currentNode->canMoveInDir(dir)) {
     setIsTurnUsed();

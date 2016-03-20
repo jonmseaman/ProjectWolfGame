@@ -3,8 +3,9 @@
 
 #include "Map.h"
 const int CENTER_TOWN_WIDTH{5};
+using namespace Engine::Maps;
 
-class CenterTown : public Maps::Map
+class CenterTown : public Map
 {
 public:
   CenterTown();

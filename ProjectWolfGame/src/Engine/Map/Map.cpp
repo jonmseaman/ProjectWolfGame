@@ -5,6 +5,7 @@
 #include "Node.h"
 #include "stdlib.h"
 #include "input.h"
+namespace Engine {
 namespace Maps
 {
   Map::Map(): Map(DEFAULT_MAP_SIZE) {
@@ -43,19 +44,19 @@ namespace Maps
         Node &currentNode = *getNode(xIndex, yIndex);
         if ( yIndex < mapSize-1 ) { // Build north
           Node *north = getNode(xIndex, yIndex+1);
-          currentNode.setNodeLink(Dir::North, north);
+          currentNode.setNodeLink(Dir::NORTH, north);
         }
         if ( xIndex < mapSize-1 ) { // build east
           Node *east = getNode(xIndex+1, yIndex);
-          currentNode.setNodeLink(Dir::East, east);
+          currentNode.setNodeLink(Dir::EAST, east);
         }
         if ( xIndex > 0 ) { // build west
           Node *west = getNode(xIndex-1, yIndex);
-          currentNode.setNodeLink(Dir::West, west);
+          currentNode.setNodeLink(Dir::WEST, west);
         }
         if ( yIndex > 0 ) { // build south
           Node *south = getNode(xIndex, yIndex-1);
-          currentNode.setNodeLink(Dir::South, south);
+          currentNode.setNodeLink(Dir::SOUTH, south);
         }
       }
     }
@@ -100,3 +101,4 @@ namespace Maps
   }
 
 } // End namespace Maps
+}

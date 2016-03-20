@@ -1,7 +1,7 @@
 #ifndef DIR_H
 #define DIR_H
 #include <string>
-
+namespace Engine {
 namespace Maps
 {
   static const int NUM_DIRS = 7; // Stopped == 0, and 6 dirs
@@ -10,13 +10,13 @@ namespace Maps
    */
   enum Dir
   {
-    Stop = 0,
-    North,
-    East,
-    West,
-    South,
-    Up,
-    Down,
+    STOP = 0,
+    NORTH,
+    EAST,
+    WEST,
+    SOUTH,
+    UP,
+    DOWN,
   };
 
   /**
@@ -40,5 +40,6 @@ namespace Maps
    * @return An int corresponding to the opposite direction
    */
   int oppositeDir(int dir);
+}
 }
 #endif // DIR_H

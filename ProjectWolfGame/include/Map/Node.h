@@ -7,6 +7,7 @@
 #include "Savable.h"
 
 class Actor;
+namespace Engine {
 namespace Maps
 {
   class Node : public File::Savable
@@ -113,5 +114,5 @@ namespace Maps
       static int nodeCount;
   };
 }
-
+}
 #endif

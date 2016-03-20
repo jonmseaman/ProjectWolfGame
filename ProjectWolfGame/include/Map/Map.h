@@ -3,6 +3,7 @@
 #include <vector>
 #include "Savable.h"
 
+namespace Engine {
 namespace Maps
 {
   class Node;
@@ -72,5 +73,5 @@ namespace Maps
       int mapSize;
   };
 }
-
+}
 #endif

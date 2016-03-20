@@ -7,7 +7,11 @@
 #include "Node.h"
 #include "Player.h"
 #include "input.h"
-int Maps::Node::nodeCount = 1;
+
+using namespace Engine::Maps;
+
+int Node::nodeCount = 1;
+namespace Engine {
 namespace Maps {
   Node::Node(): inventory(Inventory{ "Location Inventory", 8 })
     , nodeLinks{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
@@ -17,7 +21,7 @@ namespace Maps {
     for (int i = 0; i < Maps::NUM_DIRS; i++) {
       entranceDirs[i] = true;
     }
-    entranceDirs[Dir::Down] = false; // Entrances in all dirs != down
+    entranceDirs[Dir::DOWN] = false; // Entrances in all dirs != down
     name += to_string(nodeCount);
     nodeCount++;
   }
@@ -98,7 +102,7 @@ namespace Maps {
       int dir = actor.getMoveDir();
       std::list<Actor*> &otherList = nodeLinks[dir]->actorPtrList;
       // TODO: Make canMoveInDir(DIR) function
-      if ((dir != Maps::Stop) && (nodeLinks[dir] != nullptr) && !nodeLinks[dir]->isWall()) {
+      if ((dir != Maps::STOP) && (nodeLinks[dir] != nullptr) && !nodeLinks[dir]->isWall()) {
         actor.onMove(); // Moving actor
         actor.setCurrentNode(nodeLinks[dir]);
       auto actorToMove = it;
@@ -218,4 +222,5 @@ namespace Maps {
 
      endLoad();
    }
+}
 }

@@ -15,6 +15,9 @@
 // Tiles
 #include "GObjects\House_2Story.h"
 
+using namespace File;
+using namespace Engine::Maps;
+
 Create::Create()
 {
 }
@@ -46,9 +49,7 @@ Actor* Create::loadNewActor() {
   return actor;
 }
 
-Maps::Node* Create::loadNewNode() {
-  using namespace File;
-  using namespace Maps;
+Node* Create::loadNewNode() {
 
   Savable::idType id = Savable::nextID("Node");
   Node* node = Create::newNode(id);
@@ -59,10 +60,7 @@ Maps::Node* Create::loadNewNode() {
 }
 
 
-Maps::Map* Create::loadNewMap() {
-  using namespace File;
-  using namespace Maps;
-
+Map* Create::loadNewMap() {
   Savable::idType id = Savable::nextID("Map");
   Map* map = Create::newMap(id);
 
@@ -110,29 +108,29 @@ Actor* Create::newActor(int actor) {
   return actorCreated;
 }
 
-Maps::Node* Create::newNode(int node) {
-  Maps::Node* nodeCreated = nullptr;
+Node* Create::newNode(int node) {
+  Node* nodeCreated = nullptr;
   switch (node) {
     case NODE_HOUSE_2STORY:
       nodeCreated = new House_2Story();
       break;
     case NODE_DEFAULT:
     default:
-      nodeCreated = new Maps::Node{};
+      nodeCreated = new Node{};
       break;
   }
   nodeCreated->setID(node);
   return nodeCreated;
 }
 
-Maps::Map* Create::newMap(int map) {
-  Maps::Map* mapCreated = nullptr;
+Map* Create::newMap(int map) {
+  Map* mapCreated = nullptr;
   switch (map) {
     case MAP_CENTER_TOWN:
       mapCreated = new CenterTown{};
       break;
     default:
-      mapCreated = new Maps::Map{};
+      mapCreated = new Map{};
   }
   mapCreated->setID(map);
   return mapCreated;

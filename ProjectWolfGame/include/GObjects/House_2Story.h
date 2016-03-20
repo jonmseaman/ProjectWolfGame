@@ -2,7 +2,9 @@
 #define HOUSE_2STORY_H
 #include "Node.h"
 
-class House_2Story : public Maps::Node
+using namespace Engine::Maps;
+
+class House_2Story : public Node
 {
   public:
     House_2Story();

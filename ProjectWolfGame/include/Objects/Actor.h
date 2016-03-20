@@ -3,6 +3,7 @@
 #include "Creature.h"
 #include "Node.h"
 
+using namespace Engine::Maps;
 
 /**
  * The actor class is a creature which with behavior.
@@ -48,7 +49,7 @@ class Actor : public Creature
      * @return The direction that the actor should move
      */
     int getMoveDir();
-    void setCurrentNode(Maps::Node *node);
+    void setCurrentNode(Node *node);
     // Special
     bool getIsPlayer();
   protected:
@@ -56,7 +57,7 @@ class Actor : public Creature
      * The node that the actor is currently in.
      * Used for movement, targetting, awareness...
      */
-    Maps::Node *currentNode;
+    Node *currentNode;
     Actor* targetPtr;
     /**
      * Tries to set movement for the actor.

@@ -2,10 +2,11 @@
 #include "Create.h"
 #include "Create_Enums.h"
 #include "Actor.h"
-class Maps::Node;
+class Engine::Maps::Node;
+using namespace Engine::Maps;
 
 CenterTown::CenterTown(): Map(CENTER_TOWN_WIDTH) {
-  for (auto &i : grid ) { i = new Maps::Node; }
+  for (auto &i : grid ) { i = new Node; }
   setNode(1, 0, Create::newNode(NODE_HOUSE_2STORY));
   setNode(2, 0, Create::newNode(NODE_HOUSE_2STORY));
   buildMoveData();
