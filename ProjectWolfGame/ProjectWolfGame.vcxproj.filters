@@ -26,54 +26,15 @@
     <ClCompile Include="src\Engine\Map\Node.cpp">
       <Filter>Source\Map</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Objects\Actor.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Objects\Creature.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Objects\Equipment.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Objects\Inventory.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Objects\Item.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Objects\Player.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Objects\Stats.cpp">
-      <Filter>Source\RPG</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Create.cpp">
-      <Filter>Source\Create</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Dir.cpp">
+    <ClCompile Include="src\Game\main.cpp" />
+    <ClCompile Include="src\Engine\Map\Dir.cpp">
       <Filter>Source\Map</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\main.cpp" />
+    <ClCompile Include="src\Engine\Map\Create.cpp">
+      <Filter>Source\Create</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Objects\Actor.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Creature.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Equipment.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Item.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Inventory.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Player.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="include\Map\Map.h">
       <Filter>Source\Map</Filter>
     </ClInclude>
@@ -89,15 +50,6 @@
     <ClInclude Include="include\GObjects\HealingWand.h">
       <Filter>Source\GObjects</Filter>
     </ClInclude>
-    <ClInclude Include="include\Dir.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Create.h">
-      <Filter>Source\Create</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Create_Enums.h">
-      <Filter>Source\Create</Filter>
-    </ClInclude>
     <ClInclude Include="include\GObjects\CenterTown.h">
       <Filter>Source\GMap</Filter>
     </ClInclude>
@@ -111,9 +63,6 @@
       <Filter>Source\GMap</Filter>
     </ClInclude>
     <ClInclude Include="include\input.h" />
-    <ClInclude Include="include\Objects\Stats.h">
-      <Filter>Source\RPG</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">

@@ -155,8 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Engine\Dir.cpp" />
-    <ClCompile Include="src\Engine\Create.cpp" />
+    <ClCompile Include="src\Engine\Map\Dir.cpp" />
+    <ClCompile Include="src\Engine\Map\Create.cpp" />
     <ClCompile Include="src\Game\Maps\CenterTown.cpp" />
     <ClCompile Include="src\Game\Maps\House_2Story.cpp" />
     <ClCompile Include="src\Game\Actors\Rat.cpp" />
@@ -166,19 +166,9 @@
     <ClCompile Include="src\Engine\Map\Map.cpp" />
     <ClCompile Include="src\Engine\Map\MapManager.cpp" />
     <ClCompile Include="src\Engine\Map\Node.cpp" />
-    <ClCompile Include="src\Engine\Objects\Actor.cpp" />
-    <ClCompile Include="src\Engine\Objects\Creature.cpp" />
-    <ClCompile Include="src\Engine\Objects\Equipment.cpp" />
-    <ClCompile Include="src\Engine\Objects\Inventory.cpp" />
-    <ClCompile Include="src\Engine\Objects\Item.cpp" />
-    <ClCompile Include="src\Engine\Objects\Player.cpp" />
-    <ClCompile Include="src\Engine\Objects\Stats.cpp" />
     <ClCompile Include="src\input.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Create.h" />
-    <ClInclude Include="include\Dir.h" />
-    <ClInclude Include="include\Create_Enums.h" />
     <ClInclude Include="include\GObjects\Rat.h" />
     <ClInclude Include="include\GObjects\Swordsmen.h" />
     <ClInclude Include="include\GObjects\CenterTown.h">
@@ -191,16 +181,12 @@
     <ClInclude Include="include\Map\Map.h" />
     <ClInclude Include="include\Map\MapManager.h" />
     <ClInclude Include="include\Map\Node.h" />
-    <ClInclude Include="include\Objects\Actor.h" />
-    <ClInclude Include="include\Objects\Creature.h" />
-    <ClInclude Include="include\Objects\Equipment.h" />
-    <ClInclude Include="include\Objects\Inventory.h" />
-    <ClInclude Include="include\Objects\Item.h" />
-    <ClInclude Include="include\Objects\Player.h" />
-    <ClInclude Include="include\Objects\Stats.h" />
     <ClInclude Include="include\input.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Engine\Engine.vcxproj">
+      <Project>{07ce2381-a3a4-42e2-9e05-edae05cdba2c}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Savable\Savable.vcxproj">
       <Project>{c7e799d0-ae85-46f2-87e5-a15e8d1cbf08}</Project>
     </ProjectReference>
