@@ -1,7 +1,7 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 #include "Creature.h"
-#include "Node.h"
+#include "Map/Node.h"
 
 using namespace Engine::Maps;
 

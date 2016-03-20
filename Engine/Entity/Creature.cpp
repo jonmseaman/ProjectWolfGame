@@ -3,7 +3,6 @@
 #include <string>
 #include "Creature.h"
 #include "Inventory.h"
-#include "input.h"
 
 Creature::Creature(): name("Creature")
   , inventory(Inventory{"Inv", 0})

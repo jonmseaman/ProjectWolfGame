@@ -2,7 +2,7 @@
 #define NODE_H
 #include <list>
 #include <string>
-#include "Inventory.h"
+#include "Entity/Inventory.h"
 #include "Dir.h"
 #include "Savable.h"
 

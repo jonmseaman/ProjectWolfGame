@@ -1,10 +1,10 @@
 #include <assert.h>
 #include <iostream>
 #include <string>
-#include "Dir.h"
-#include "MapManager.h"
+#include "Map/Dir.h"
+#include "Map/MapManager.h"
 #include "Player.h"
-#include "input.h"
+#include "UI/Input.h"
 
 Player::Player() {
   setMaxHealth(100);

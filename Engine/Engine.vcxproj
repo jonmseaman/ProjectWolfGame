@@ -149,9 +149,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Create.h" />
-    <ClInclude Include="Create_Enums.h" />
-    <ClInclude Include="Dir.h" />
+    <ClInclude Include="Map\Create.h" />
+    <ClInclude Include="Map\Create_Enums.h" />
+    <ClInclude Include="Map\Dir.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Entity\Actor.h" />
     <ClInclude Include="Entity\Creature.h" />
@@ -165,10 +165,11 @@
     <ClInclude Include="Map\Node.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UI\Input.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Create.cpp" />
-    <ClCompile Include="Dir.cpp" />
+    <ClCompile Include="Map\Create.cpp" />
+    <ClCompile Include="Map\Dir.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -195,6 +196,7 @@
     <ClCompile Include="Map\MapManager.cpp" />
     <ClCompile Include="Map\Node.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="UI\Input.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

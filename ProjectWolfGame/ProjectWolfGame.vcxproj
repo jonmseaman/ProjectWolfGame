@@ -155,18 +155,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Engine\Map\Dir.cpp" />
-    <ClCompile Include="src\Engine\Map\Create.cpp" />
     <ClCompile Include="src\Game\Maps\CenterTown.cpp" />
     <ClCompile Include="src\Game\Maps\House_2Story.cpp" />
     <ClCompile Include="src\Game\Actors\Rat.cpp" />
     <ClCompile Include="src\Game\Actors\Swordsmen.cpp" />
     <ClCompile Include="src\Game\Items\BasicSword.cpp" />
     <ClCompile Include="src\Game\main.cpp" />
-    <ClCompile Include="src\Engine\Map\Map.cpp" />
-    <ClCompile Include="src\Engine\Map\MapManager.cpp" />
-    <ClCompile Include="src\Engine\Map\Node.cpp" />
-    <ClCompile Include="src\input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GObjects\Rat.h" />
@@ -181,7 +175,6 @@
     <ClInclude Include="include\Map\Map.h" />
     <ClInclude Include="include\Map\MapManager.h" />
     <ClInclude Include="include\Map\Node.h" />
-    <ClInclude Include="include\input.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

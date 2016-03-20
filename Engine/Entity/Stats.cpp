@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include "Objects/Stats.h"
+#include "Entity/Stats.h"
 
 Stats::Stats(int stamina, int strength, int intellect) {
   this->stamina = stamina;

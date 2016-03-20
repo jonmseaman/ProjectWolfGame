@@ -1,12 +1,12 @@
 #include <assert.h>
 #include <iomanip>
 #include <iostream>
-#include "Actor.h"
+#include "Entity/Actor.h"
 #include "Dir.h"
 #include "Create.h"
 #include "Node.h"
-#include "Player.h"
-#include "input.h"
+#include "Entity/Player.h"
+#include "UI/Input.h"
 
 using namespace Engine::Maps;
 

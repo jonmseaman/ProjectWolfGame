@@ -1,8 +1,8 @@
 #include <iostream>
 #include <assert.h>
 #include "Actor.h"
-#include "Dir.h"
-#include "input.h"
+#include "Map/Dir.h"
+#include "UI/Input.h"
 
 using namespace Engine::Maps;
 
