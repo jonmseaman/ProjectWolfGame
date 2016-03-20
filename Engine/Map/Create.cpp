@@ -4,7 +4,7 @@
 
 // Including files for use by factory
 // Actors
-#include "Objects\Player.h"
+#include "Entity/Player.h"
 #include "GObjects\Rat.h"
 #include "GObjects\Swordsmen.h"
 // Maps
