@@ -149,8 +149,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Map\Create.h" />
-    <ClInclude Include="Map\Create_Enums.h" />
+    <ClInclude Include="Create\Create.h" />
+    <ClInclude Include="Create\Create_Enums.h" />
     <ClInclude Include="Map\Dir.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Entity\Actor.h" />
@@ -168,7 +168,7 @@
     <ClInclude Include="UI\Input.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Map\Create.cpp" />
+    <ClCompile Include="Create\Create.cpp" />
     <ClCompile Include="Map\Dir.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>

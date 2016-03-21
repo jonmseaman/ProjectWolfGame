@@ -2,30 +2,36 @@
 #include "Create_Enums.h"
 #include "Savable.h"
 
-// Including files for use by factory
-// Actors
-#include "Entity/Player.h"
-#include "GObjects\Rat.h"
-#include "GObjects\Swordsmen.h"
-// Maps
-#include "GObjects\CenterTown.h"
-// Objects
-#include "GObjects\BasicSword.h"
-#include "GObjects\HealingWand.h"
-// Tiles
-#include "GObjects\House_2Story.h"
+#include <Entity/Actor.h>
+#include <Entity/Player.h>
+#include <Map/Node.h>
+#include <Map/Map.h>
+
+#pragma region CreateData
+#include <map>
+
+class CreateData {
+public:
+  // Map of item names to items.
+  static std::map<std::string, Item*> items;
+  // Map of item names to items.
+  static std::map<std::string, Node*> nodes;
+  // Map of item names to items.
+  static std::map<std::string, Actor*> actors;
+  // Maps not include due to size.
+};
+
+#pragma endregion
+
+
 
 using namespace File;
 using namespace Engine::Maps;
 
-Create::Create()
-{
-}
+Create::Create() {}
 
 
-Create::~Create()
-{
-}
+Create::~Create() {}
 
 // Methods for new loading / saving system
 
@@ -134,4 +140,28 @@ Map* Create::newMap(int map) {
   }
   mapCreated->setID(map);
   return mapCreated;
+}
+
+Item * Create::Item(std::string name) {
+  // Find the item in the map.
+  auto it = CreateData::items.find(name);
+  Item* item = nullptr;
+  if (it != CreateData::items.end()) {
+    item = it->second;
+  }
+  // Return a copy of the item.
+
+  return &(*item);
+}
+
+Actor * Create::Actor(std::string name) {
+  return nullptr;
+}
+
+Node * Create::Node(std::string name) {
+  return nullptr;
+}
+
+Map * Create::Map(std::string name) {
+  return nullptr;
 }

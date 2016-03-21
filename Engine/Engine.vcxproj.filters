@@ -60,13 +60,13 @@
     <ClInclude Include="Map\Dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map\Create.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Create_Enums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="UI\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Create\Create_Enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Create\Create.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -113,10 +113,10 @@
     <ClCompile Include="Map\Dir.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Map\Create.cpp">
+    <ClCompile Include="UI\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI\Input.cpp">
+    <ClCompile Include="Create\Create.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
