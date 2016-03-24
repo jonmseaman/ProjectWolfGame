@@ -1,16 +1,9 @@
 #ifndef CREATE_H
 #define CREATE_H
 #include <string>
+#include "CreatableClassDeclarations.h"
 
-class Actor;
-class Item;
-namespace Engine {
-namespace Maps {
-class Map;
-class Node;
-}
-}
-
+using namespace Engine::Entity;
 using namespace Engine::Maps;
 
 class Create {
@@ -34,10 +27,10 @@ public:
 
   // Str map system
 
-  static Item* Item(std::string);
-  static Actor* Actor(std::string);
-  static Node* Node(std::string);
-  static Map* Map(std::string);
+  static Item* Item(const std::string&);
+  static Actor* Actor(const std::string&);
+  static Node* Node(const std::string&);
+  static Map* Map(const std::string&);
 };
 
 #endif CREATE_H

@@ -2,6 +2,7 @@
 #define ITEM_H
 #include <string>
 #include "Stats.h"
+#include <Create/Createable.h>
 class Creature;
 
 /**
@@ -14,7 +15,8 @@ class Item : public File::Savable
     Item(std::string name, std::string description, Stats stats);
     Item(std::string name, Stats stats);
     virtual ~Item();
-    SAVABLE; // load and save functions
+    SAVABLE;
+    CREATABLE(Item)
 
     /**
      * Shows information about the item on std::cout

@@ -17,11 +17,6 @@ Player::Player() {
 Player::~Player() {
 }
 
-Actor* getInstance() {
-  static Player player{};
-  return &player;
-}
-
 void Player::combatMenu(int choice) {
   if (choice == 0) {
     dispList("====Combat====", {"Attack", "Targets", "Inventory"});

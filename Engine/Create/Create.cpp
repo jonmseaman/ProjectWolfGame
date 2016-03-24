@@ -1,5 +1,6 @@
 #include "Create.h"
 #include "Create_Enums.h"
+#include "CreateData.h"
 #include "Savable.h"
 
 #include <Entity/Actor.h>
@@ -7,26 +8,18 @@
 #include <Map/Node.h>
 #include <Map/Map.h>
 
-#pragma region CreateData
-#include <map>
+using namespace File;
+using namespace Engine::Maps;
+using namespace Engine::Entity;
 
-class CreateData {
-public:
-  // Map of item names to items.
-  static std::map<std::string, Item*> items;
-  // Map of item names to items.
-  static std::map<std::string, Node*> nodes;
-  // Map of item names to items.
-  static std::map<std::string, Actor*> actors;
-  // Maps not include due to size.
-};
+#pragma region CreateData
+
+
+CreateData createData;
 
 #pragma endregion
 
-
-
-using namespace File;
-using namespace Engine::Maps;
+#pragma region Create
 
 Create::Create() {}
 
@@ -165,3 +158,5 @@ Node * Create::Node(std::string name) {
 Map * Create::Map(std::string name) {
   return nullptr;
 }
+
+#pragma endregion
