@@ -2,7 +2,7 @@
 A prototype for a terminal-based RPG.
 
 ## Tools
-* Boost Libraries - http://www.boost.org/
+* Boost Libraries 1.60 - http://www.boost.org/
 * Visual Studio 2015
 
 ## How to Build
