@@ -9,11 +9,6 @@ namespace Maps
   class Node;
   class Map : public File::Savable
   {
-    // Temp stuff
-    public:
-      int getID() { return id; }
-      void setID(int idNum) { this->id = idNum; }
-      int id;
     public:
       Map(); // Default constructor. Creates empty map with blank nodes
       /**

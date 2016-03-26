@@ -5,30 +5,26 @@
 
 #include <Entity/Item.h>
 #include <Entity/Player.h>
+#include <Entity/Actor.h>
 #include <Map/Node.h>
 #include <Map/Map.h>
 
+
 #pragma region Create
 
+using namespace File;
+using namespace Engine::Entity;
+using namespace Engine::Maps;
+
 namespace Creation {
-
-using namespace ::File;
-using ::Engine::Maps::Node;
-using ::Engine::Maps::Map;
-using ::Engine::Entity::Item;
-using ::Engine::Entity::Actor;
-
-Create::Create() {}
-
-
-Create::~Create() {}
 
 // Methods for new loading / saving system
 
 Item* Create::loadNewItem() {
+  using namespace ::Engine::Entity;
   // get id and create object with appropriate dynamic type
-  File::Savable::idType id = File::Savable::nextID("Item");
-  Engine::Entity::Item* item = Create::newItem(id);
+  Savable::idType id = File::Savable::nextID("Item");
+  Item* item = Create::newItem(id);
 
   // load data from save
   item->load();
@@ -37,8 +33,8 @@ Item* Create::loadNewItem() {
 }
 
 Actor* Create::loadNewActor() {
-  File::Savable::idType id = File::Savable::nextID("Actor");
-  Engine::Entity::Actor* actor = Create::newActor(id);
+  Savable::idType id = File::Savable::nextID("Actor");
+  Actor* actor = Create::newActor(id);
 
   actor->load();
 
@@ -48,7 +44,7 @@ Actor* Create::loadNewActor() {
 Node* Create::loadNewNode() {
 
   Savable::idType id = Savable::nextID("Node");
-  Engine::Maps::Node* node = Create::newNode(id);
+  Node* node = Create::newNode(id);
 
   node->load();
 
@@ -58,14 +54,14 @@ Node* Create::loadNewNode() {
 
 Map* Create::loadNewMap() {
   Savable::idType id = Savable::nextID("Map");
-  Engine::Maps::Map* map = Create::newMap(id);
+  Map* map = Create::newMap(id);
 
   map->load();
   return map;
 }
 
 Item* Create::newItem(int item) {
-  Engine::Entity::Item* itemCreated = nullptr;
+  Item* itemCreated = nullptr;
   switch (item) {
     case ITEM_BASIC_SWORD:
       itemCreated = new BasicSword{};
