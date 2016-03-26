@@ -54,26 +54,26 @@
     <ClInclude Include="UI\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Create\Create_Enums.h">
+    <ClInclude Include="Creation\CreatableClassDeclarations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Create\Create.h">
+    <ClInclude Include="Creation\Create.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Create\Createable.h">
+    <ClInclude Include="Creation\Create_Enums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Create\Registration.h">
+    <ClInclude Include="Creation\Createable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Create\CreatableClassDeclarations.h">
+    <ClInclude Include="Creation\CreateData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Creation\Registration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Entity\Stats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -110,10 +110,10 @@
     <ClCompile Include="UI\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Create\Create.cpp">
+    <ClCompile Include="Creation\Create.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Create\Registration.cpp">
+    <ClCompile Include="Creation\Registration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

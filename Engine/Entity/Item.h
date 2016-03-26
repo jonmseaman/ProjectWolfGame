@@ -2,7 +2,10 @@
 #define ITEM_H
 #include <string>
 #include "Stats.h"
-#include <Create/Createable.h>
+#include <Creation/Createable.h>
+
+namespace Engine {
+namespace Entity {
 class Creature;
 
 /**
@@ -60,5 +63,7 @@ class Item : public File::Savable
     int baseHeal;
 };
 
+}
+}
 
 #endif // ITEM_H

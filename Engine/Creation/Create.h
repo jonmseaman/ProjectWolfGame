@@ -6,6 +6,8 @@
 using namespace Engine::Entity;
 using namespace Engine::Maps;
 
+namespace Creation {
+
 class Create {
 public:
   Create();
@@ -14,23 +16,25 @@ public:
   // Creation functions
 
   // Methods for new saving / loading system
-  static Item* loadNewItem();
-  static Actor* loadNewActor();
+  static Engine::Entity::Item* loadNewItem();
+  static Engine::Entity::Actor* loadNewActor();
   static Node* loadNewNode();
   static Map* loadNewMap();
 
   // Int id system
-  static Item* newItem(int item);
-  static Actor* newActor(int actor);
+  static Engine::Entity::Item* newItem(int item);
+  static Engine::Entity::Actor* newActor(int actor);
   static Node* newNode(int node);
   static Map* newMap(int map);
 
   // Str map system
 
-  static Item* Item(const std::string&);
-  static Actor* Actor(const std::string&);
+  static Engine::Entity::Item* Item(const std::string&);
+  static Engine::Entity::Actor* Actor(const std::string&);
   static Node* Node(const std::string&);
   static Map* Map(const std::string&);
 };
+
+}
 
 #endif CREATE_H

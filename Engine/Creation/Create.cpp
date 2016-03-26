@@ -3,23 +3,20 @@
 #include "CreateData.h"
 #include "Savable.h"
 
-#include <Entity/Actor.h>
+#include <Entity/Item.h>
 #include <Entity/Player.h>
 #include <Map/Node.h>
 #include <Map/Map.h>
 
-using namespace File;
-using namespace Engine::Maps;
-using namespace Engine::Entity;
-
-#pragma region CreateData
-
-
-CreateData createData;
-
-#pragma endregion
-
 #pragma region Create
+
+namespace Creation {
+
+using namespace ::File;
+using ::Engine::Maps::Node;
+using ::Engine::Maps::Map;
+using ::Engine::Entity::Item;
+using ::Engine::Entity::Actor;
 
 Create::Create() {}
 
@@ -31,7 +28,7 @@ Create::~Create() {}
 Item* Create::loadNewItem() {
   // get id and create object with appropriate dynamic type
   File::Savable::idType id = File::Savable::nextID("Item");
-  Item* item = Create::newItem(id);
+  Engine::Entity::Item* item = Create::newItem(id);
 
   // load data from save
   item->load();
@@ -41,7 +38,7 @@ Item* Create::loadNewItem() {
 
 Actor* Create::loadNewActor() {
   File::Savable::idType id = File::Savable::nextID("Actor");
-  Actor* actor = Create::newActor(id);
+  Engine::Entity::Actor* actor = Create::newActor(id);
 
   actor->load();
 
@@ -51,7 +48,7 @@ Actor* Create::loadNewActor() {
 Node* Create::loadNewNode() {
 
   Savable::idType id = Savable::nextID("Node");
-  Node* node = Create::newNode(id);
+  Engine::Maps::Node* node = Create::newNode(id);
 
   node->load();
 
@@ -61,14 +58,14 @@ Node* Create::loadNewNode() {
 
 Map* Create::loadNewMap() {
   Savable::idType id = Savable::nextID("Map");
-  Map* map = Create::newMap(id);
+  Engine::Maps::Map* map = Create::newMap(id);
 
   map->load();
   return map;
 }
 
 Item* Create::newItem(int item) {
-  Item* itemCreated = nullptr;
+  Engine::Entity::Item* itemCreated = nullptr;
   switch (item) {
     case ITEM_BASIC_SWORD:
       itemCreated = new BasicSword{};
@@ -135,28 +132,6 @@ Map* Create::newMap(int map) {
   return mapCreated;
 }
 
-Item * Create::Item(std::string name) {
-  // Find the item in the map.
-  auto it = CreateData::items.find(name);
-  Item* item = nullptr;
-  if (it != CreateData::items.end()) {
-    item = it->second;
-  }
-  // Return a copy of the item.
-
-  return &(*item);
-}
-
-Actor * Create::Actor(std::string name) {
-  return nullptr;
-}
-
-Node * Create::Node(std::string name) {
-  return nullptr;
-}
-
-Map * Create::Map(std::string name) {
-  return nullptr;
-}
+} // End namespace Creation
 
 #pragma endregion

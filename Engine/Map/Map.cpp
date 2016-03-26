@@ -1,13 +1,15 @@
 #include <assert.h>
 #include <iostream>
-#include "Create.h"
+#include <Creation/Create.h>
+#include <UI/Input.h>
 #include "Map.h"
 #include "Node.h"
 #include "stdlib.h"
-#include "UI/Input.h"
 namespace Engine {
 namespace Maps
 {
+using namespace Creation;
+
   Map::Map(): Map(DEFAULT_MAP_SIZE) {
     setID(0);
     for (auto &i: grid) { i = new Node; }
