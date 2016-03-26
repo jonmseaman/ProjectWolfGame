@@ -158,7 +158,6 @@
     <ClInclude Include="Creation\Create.h" />
     <ClInclude Include="Creation\CreateData.h" />
     <ClInclude Include="Creation\Registration.h" />
-    <ClInclude Include="Creation\Create_Enums.h" />
     <ClInclude Include="Creation\Createable.h" />
     <ClInclude Include="Map\Dir.h" />
     <ClInclude Include="Engine.h" />
@@ -176,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Creation\Create.cpp" />
+    <ClCompile Include="Creation\CreateData.cpp" />
     <ClCompile Include="Creation\Registration.cpp" />
     <ClCompile Include="Map\Dir.cpp" />
     <ClCompile Include="Entity\Actor.cpp" />
@@ -189,6 +189,11 @@
     <ClCompile Include="Map\MapManager.cpp" />
     <ClCompile Include="Map\Node.cpp" />
     <ClCompile Include="UI\Input.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Savable\Savable.vcxproj">
+      <Project>{c7e799d0-ae85-46f2-87e5-a15e8d1cbf08}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

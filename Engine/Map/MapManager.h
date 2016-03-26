@@ -28,7 +28,7 @@ class MapManager
     /**
      * Creates a new map corresponding to mapNum
      */
-    void openMap(int mapNum);
+    void openMap(const std::string&);
     /**
      * Starts the game loop for the opened map.
      * @pre There is a map open. (map != nullptr)
@@ -47,8 +47,8 @@ class MapManager
     void load(const std::string &fileName = "save1");
   protected:
   private:
-    MapManager(MapManager const&);     // Don't Implement
-    void operator=(MapManager const&); // Don't implement
+    MapManager(MapManager const&) = delete;
+    void operator=(MapManager const&) = delete;
     MapManager();
     Maps::Map* map;
     Maps::Map* tempMap;

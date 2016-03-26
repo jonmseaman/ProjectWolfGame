@@ -1,5 +1,4 @@
 #include "Create.h"
-#include "Create_Enums.h"
 #include "CreateData.h"
 #include "Savable.h"
 
@@ -42,7 +41,6 @@ Actor* Create::loadNewActor() {
 }
 
 Node* Create::loadNewNode() {
-
   Savable::idType id = Savable::nextID("Node");
   Node* node = Create::newNode(id);
 
@@ -60,72 +58,20 @@ Map* Create::loadNewMap() {
   return map;
 }
 
-Item* Create::newItem(int item) {
-  Item* itemCreated = nullptr;
-  switch (item) {
-    case ITEM_BASIC_SWORD:
-      itemCreated = new BasicSword{};
-      break;
-    case ITEM_HEALING_WAND:
-      itemCreated = new HealingWand{};
-      break;
-    case ITEM_DEFAULT:
-    default:
-      itemCreated = new Item{};
-      break;
-  }
-  itemCreated->setID(item);
-  return itemCreated;
+Engine::Entity::Item * Create::newItem(const std::string &) {
+  return nullptr;
 }
 
-Actor* Create::newActor(int actor) {
-  Actor* actorCreated = nullptr;
-  switch (actor) {
-    case ACTOR_PLAYER:
-      // TODO: Proper singleton for player
-      actorCreated = new Player{};
-      break;
-    case ACTOR_RAT:
-      actorCreated = new Rat{};
-      break;
-    case ACTOR_SWORDSMEN:
-      actorCreated = new Swordsmen{};
-      break;
-    case ACTOR_DEFAULT:
-    default:
-      actorCreated = new Actor{};
-      break;
-  }
-  actorCreated->setID(actor);
-  return actorCreated;
+Engine::Entity::Actor * Create::newActor(const std::string &) {
+  return nullptr;
 }
 
-Node* Create::newNode(int node) {
-  Node* nodeCreated = nullptr;
-  switch (node) {
-    case NODE_HOUSE_2STORY:
-      nodeCreated = new House_2Story();
-      break;
-    case NODE_DEFAULT:
-    default:
-      nodeCreated = new Node{};
-      break;
-  }
-  nodeCreated->setID(node);
-  return nodeCreated;
+Engine::Maps::Node * Create::newNode(const std::string &) {
+  return nullptr;
 }
 
-Map* Create::newMap(int map) {
-  Map* mapCreated = nullptr;
-  switch (map) {
-    case MAP_CENTER_TOWN:
-      mapCreated = new CenterTown{};
-      break;
-    default:
-      mapCreated = new Map{};
-  }
-  mapCreated->setID(map);
-  return mapCreated;
+Engine::Maps::Map * Create::newMap(const std::string &) {
+  return nullptr;
 }
 
 } // End namespace Creation

@@ -8,6 +8,7 @@
 #include "Node.h"
 
 using namespace Engine::Maps;
+using namespace Engine::Entity;
 
 int Node::nodeCount = 1;
 namespace Engine {

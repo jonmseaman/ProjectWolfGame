@@ -3,7 +3,6 @@
 #include <exception>
 #include <iostream>
 #include <Creation/Create.h>
-#include <Creation/Create_Enums.h>
 #include "Map.h"
 #include "MapManager.h"
 
@@ -14,9 +13,9 @@ void MapManager::closeMap() {
   map = nullptr;
 }
 
-void MapManager::openMap(int mapNum) {
+void MapManager::openMap(const std::string& map) {
   using namespace Maps;
-  Map* loadMap = Creation::Create::newMap(mapNum);
+  Map* loadMap = Creation::Create::newMap(map);
   setMap( loadMap );
 }
 

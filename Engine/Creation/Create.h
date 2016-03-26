@@ -6,7 +6,7 @@
 
 namespace Creation {
 
-class Create {
+class ENGINE_API Create {
 public:
   // Creation functions
 
@@ -15,12 +15,6 @@ public:
   static Engine::Entity::Actor* loadNewActor();
   static Engine::Maps::Node* loadNewNode();
   static Engine::Maps::Map* loadNewMap();
-
-  // Int id system
-  static Engine::Entity::Item* newItem(int item);
-  static Engine::Entity::Actor* newActor(int actor);
-  static Engine::Maps::Node* newNode(int node);
-  static Engine::Maps::Map* newMap(int map);
 
   // Str map system
   static Engine::Entity::Item* newItem(const std::string&);
