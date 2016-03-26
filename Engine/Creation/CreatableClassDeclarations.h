@@ -1,5 +1,4 @@
-#ifndef CREATABLE_CLASS_DECLARATIONS_H
-#define CREATABLE_CLASS_DECLARATIONS_H
+#pragma once
 
 namespace Engine {
 namespace Entity {
@@ -11,5 +10,3 @@ class Node;
 class Map;
 }
 }
-#endif // !CREATABLE_CLASS_DECLARATIONS_H
-
