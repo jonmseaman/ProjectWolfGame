@@ -2,14 +2,16 @@
 #include <iomanip>
 #include "Entity/Stats.h"
 
+namespace Engine {
+namespace Entity {
+
 Stats::Stats(int stamina, int strength, int intellect) {
   this->stamina = stamina;
   this->strength = strength;
   this->intellect = intellect;
 }
 
-void Stats::save()
-{
+void Stats::save() {
   startSave("Stats");
   SAVE(stamina);
   SAVE(strength);
@@ -17,8 +19,7 @@ void Stats::save()
   endSave();
 }
 
-void Stats::load()
-{
+void Stats::load() {
   startLoad("Stats");
   LOAD(stamina);
   LOAD(strength);
@@ -29,7 +30,7 @@ void Stats::load()
 void Stats::showStats() const {
   using namespace std;
   int fieldWidth = 9; // Length of "Intellect"
-  cout << std::left << std::setw(fieldWidth) <<  "Stamina" << ": " << stamina << endl;
+  cout << std::left << std::setw(fieldWidth) << "Stamina" << ": " << stamina << endl;
   cout << std::setw(fieldWidth) << "Strength" << ": " << strength << endl;
   cout << std::setw(fieldWidth) << "Intellect" << ": " << intellect << endl;
 }
@@ -40,11 +41,14 @@ Stats Stats::operator+(const Stats& r) const {
   strength = getStrength() + r.getStrength();
   intellect = getIntellect() + r.getIntellect();
 
-  return Stats{stam, strength, intellect};
+  return Stats{ stam, strength, intellect };
 }
 
 bool Stats::operator==(const Stats& r) const {
-    return getStamina() == r.getStamina()
-        && getStrength() == r.getStrength()
-        && getIntellect() == r.getIntellect();
+  return getStamina() == r.getStamina()
+    && getStrength() == r.getStrength()
+    && getIntellect() == r.getIntellect();
+}
+
+}
 }

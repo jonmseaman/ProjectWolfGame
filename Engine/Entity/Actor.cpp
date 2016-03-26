@@ -6,13 +6,14 @@
 
 using namespace Engine::Maps;
 
-Actor::Actor(): isPlayer(false)
-  , isTurnUsed(false)
-  , moveDir(STOP) {
-}
+namespace Engine {
+namespace Entity {
 
-Actor::~Actor() {
-}
+Actor::Actor() : isPlayer(false)
+, isTurnUsed(false)
+, moveDir(STOP) {}
+
+Actor::~Actor() {}
 
 void Actor::takeTurn() {
   bool shouldAttack = hasValidTarget() && targetPtr != this && targetPtr->getIsLiving();
@@ -62,7 +63,7 @@ void Actor::onMove() {
 }
 
 bool Actor::dropItem(int slotIndex) {
-  assert ( slotIndex >= 0 && slotIndex <= inventory.getSlots() );
+  assert(slotIndex >= 0 && slotIndex <= inventory.getSlots());
   if (!currentNode->inventory.hasOpenSlot()) {
     delete inventory.removeItem(slotIndex);
   } else {
@@ -73,7 +74,7 @@ bool Actor::dropItem(int slotIndex) {
 }
 
 void Actor::dropAllItems() {
-  for (int i(0); i < inventory.getSlots(); i++ ) {
+  for (int i(0); i < inventory.getSlots(); i++) {
     dropItem(i);
   }
 }
@@ -93,14 +94,14 @@ bool Actor::hasValidTarget() {
 
 void Actor::onAttack() // TODO: Update for stats class
 { // TODO: Update for weapons
-  assert( targetPtr != nullptr );
+  assert(targetPtr != nullptr);
   int damage = stats.getStrength();
   // damage += damage from weapon
   // TODO: Update this for items.
   // TODO: Update combat text
   // TODO: No weapon equipped --> fists
   std::cout << getName() << " swings for " << damage << ". " << std::endl;
-  targetPtr->onDamage( damage );
+  targetPtr->onDamage(damage);
   setIsTurnUsed();
 }
 
@@ -113,13 +114,16 @@ void Actor::cycleTarget() {
 }
 
 void Actor::save() {
-    startSave("Actor");
-    Creature::save();
-    endSave();
+  startSave("Actor");
+  Creature::save();
+  endSave();
 }
 
 void Actor::load() {
-    startLoad("Actor");
-    Creature::load();
-    endLoad();
+  startLoad("Actor");
+  Creature::load();
+  endLoad();
+}
+
+}
 }

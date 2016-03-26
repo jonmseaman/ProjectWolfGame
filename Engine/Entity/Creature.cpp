@@ -4,23 +4,24 @@
 #include "Creature.h"
 #include "Inventory.h"
 
-Creature::Creature(): name("Creature")
-  , inventory(Inventory{"Inv", 0})
-  , isLiving(false) {
-}
+namespace Engine {
+namespace Entity {
 
-Creature::~Creature() {
-}
+Creature::Creature() : name("Creature")
+, inventory(Inventory{ "Inv", 0 })
+, isLiving(false) {}
+
+Creature::~Creature() {}
 
 void Creature::onDamage(int dmg) { // Should return damage taken
   // TODO: Update this for armor
   // modify dmg value based on armor
-  if ( getIsLiving() ) {
+  if (getIsLiving()) {
     std::cout << getName() << " is hit for " << dmg << ". ";
     flagInCombat(true);
   }
   health -= dmg;
-  if ( health <= 0 ) {
+  if (health <= 0) {
     health = 0;
     isLiving = false;
   }
@@ -52,8 +53,7 @@ void Creature::setMaxHealth(int maxHealth) {
   setHealth(maxHealth);
 }
 
-void Creature::setIsLiving(bool isLiving)
-{
+void Creature::setIsLiving(bool isLiving) {
   this->isLiving = isLiving;
 }
 
@@ -70,7 +70,7 @@ void Creature::setName(std::string name) {
 }
 
 void Creature::kill() {
-  onDamage( health );
+  onDamage(health);
 }
 
 void Creature::useItem(Item &item, Creature &usedOn) {
@@ -86,8 +86,7 @@ void Creature::displayHUDLine() {
     << maxHealth;
 }
 
-void Creature::save()
-{
+void Creature::save() {
   startSave("Creature");
   // TODO: Check this
   // isLiving set from health?
@@ -102,8 +101,7 @@ void Creature::save()
   endSave();
 }
 
-void Creature::load()
-{
+void Creature::load() {
   startLoad("Creature");
   LOAD(name);
   LOAD(level);
@@ -115,3 +113,5 @@ void Creature::load()
   endLoad();
 }
 
+}
+}

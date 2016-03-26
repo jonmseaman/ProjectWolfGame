@@ -6,6 +6,9 @@
 #include "Savable.h"
 #include "Stats.h"
 
+namespace Engine {
+namespace Entity {
+
 /**
  * This class should store all functions for defining what a creature is.
  */
@@ -80,5 +83,7 @@ private:
     int health;
     int maxHealth; // This should be calculated.
 };
+}
+}
 
 #endif // CREATURE_H

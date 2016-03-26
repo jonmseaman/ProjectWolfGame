@@ -6,8 +6,10 @@
 #include "Dir.h"
 #include "Savable.h"
 
-class Actor;
 namespace Engine {
+namespace Entity {
+class Actor;
+}
 namespace Maps
 {
   class Node : public File::Savable
@@ -26,21 +28,21 @@ namespace Maps
        * @param actor Actor being checked for existence
        * @return True if actor in this
        */
-      bool containsActor(Actor* actor);
+      bool containsActor(Engine::Entity::Actor* actor);
       /**
        * Returns a pointer to an actor in this.
        * @pre 0 <= index && index <= number of actors in this.
        * @param index The index of the actor being returned.
        * @return A pointer to the actor at position index.
        */
-      Actor* getActorPtr(int index);
+      Engine::Entity::Actor* getActorPtr(int index);
       /**
        * Returns the next actor in the node's list
        * @param actor The actor which before the one that is returned.
        * @pre There is an actor in this node
        * @return The actor after the actor
        */
-      Actor* getNextActor(Actor* actor);
+      Engine::Entity::Actor* getNextActor(Engine::Entity::Actor* actor);
 
       std::string getName();
       void setName(std::string name) { this->name = name; }
@@ -55,7 +57,7 @@ namespace Maps
       /**
        * The node's inventory. Contains items in the node.
        */
-      Inventory inventory;
+      Engine::Entity::Inventory inventory;
 
       // Navigation
       virtual bool isWall() { return false; }
@@ -96,7 +98,7 @@ namespace Maps
        * Adds an actor to the node. The actor is added to the end of the actor
        * list.
        */
-      void addActor(Actor *actor);
+      void addActor(Engine::Entity::Actor *actor);
       /**
        * Moves all actors which have a move direction set.
        */
@@ -108,7 +110,7 @@ namespace Maps
       Node* nodeLinks[NUM_DIRS];
       /// The directions from which this node can be entered
       bool entranceDirs[NUM_DIRS];
-      std::list<Actor*> actorPtrList;
+      std::list<Engine::Entity::Actor*> actorPtrList;
       int getNumActors();
       std::string name;
       static int nodeCount;

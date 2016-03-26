@@ -2,10 +2,9 @@
 #include <assert.h>
 #include <exception>
 #include <iostream>
+#include <Creation/Create.h>
 #include "Map.h"
 #include "MapManager.h"
-#include "Create.h"
-#include "Create_Enums.h"
 
 MapManager::MapManager(): map(nullptr) {}
 
@@ -14,9 +13,9 @@ void MapManager::closeMap() {
   map = nullptr;
 }
 
-void MapManager::openMap(int mapNum) {
+void MapManager::openMap(const std::string& map) {
   using namespace Maps;
-  Map* loadMap = Create::newMap(mapNum);
+  Map* loadMap = Creation::Create::newMap(map);
   setMap( loadMap );
 }
 
@@ -53,5 +52,5 @@ void MapManager::load(const std::string &fileName) {
 
     // tempMap and map are swapped automatically later.
     delete tempMap;
-    tempMap = Create::loadNewMap();
+    tempMap = Creation::Create::loadNewMap();
 }

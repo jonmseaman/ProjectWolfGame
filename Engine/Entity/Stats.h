@@ -1,6 +1,10 @@
 #ifndef STATS_H
 #define STATS_H
 #include "Savable.h"
+
+namespace Engine {
+namespace Entity {
+
 class Creature;
 
 class Stats : public File::Savable {
@@ -33,5 +37,7 @@ private:
   int intellect; // Boosts spell damage
 };
 
+}
+}
 
 #endif /* end of include guard: STATS_H */

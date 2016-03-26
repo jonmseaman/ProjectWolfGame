@@ -1,14 +1,14 @@
 #include <assert.h>
 #include <iomanip>
 #include <iostream>
-#include "Entity/Actor.h"
+#include <Creation/Create.h>
+#include <Entity/Player.h>
+#include <UI/Input.h>
 #include "Dir.h"
-#include "Create.h"
 #include "Node.h"
-#include "Entity/Player.h"
-#include "UI/Input.h"
 
 using namespace Engine::Maps;
+using namespace Engine::Entity;
 
 int Node::nodeCount = 1;
 namespace Engine {
@@ -211,7 +211,7 @@ namespace Maps {
      LOAD(numActors);
 
      for (int i = 0; i < numActors; i++) {
-       Create::loadNewActor();
+       Creation::Create::loadNewActor();
      }
      
      for (int i = 0; i < NUM_DIRS; i++) {

@@ -3,6 +3,10 @@
 #include "Item.h"
 #include "Savable.h"
 
+namespace Engine {
+namespace Entity {
+
+
 Item::Item() :Item("Item", Stats()) {
 }
 
@@ -72,4 +76,7 @@ bool Item::operator==(const Item & r)
     && getDamage() == r.getDamage()
     && getHeal() == r.getHeal()
     && stats == r.stats;
+}
+
+}
 }

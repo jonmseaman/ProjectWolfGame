@@ -180,9 +180,6 @@
     <ProjectReference Include="..\Engine\Engine.vcxproj">
       <Project>{07ce2381-a3a4-42e2-9e05-edae05cdba2c}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Savable\Savable.vcxproj">
-      <Project>{c7e799d0-ae85-46f2-87e5-a15e8d1cbf08}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
