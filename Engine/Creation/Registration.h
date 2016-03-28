@@ -4,7 +4,7 @@
 
 namespace Creation {
 
-class Registration {
+class ENGINE_API Registration {
 public:
   Registration(const std::string& name, Engine::Entity::Item* (*c)());
 };

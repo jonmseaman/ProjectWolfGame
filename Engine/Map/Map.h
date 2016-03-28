@@ -7,7 +7,7 @@ namespace Engine {
 namespace Maps
 {
   class Node;
-  class Map : public File::Savable
+  class ENGINE_API Map : public File::Savable
   {
     public:
       Map(); // Default constructor. Creates empty map with blank nodes

@@ -1,6 +1,8 @@
 #ifndef ITEM_HEALING_WAND_H
 #define ITEM_HEALING_WAND_H
-#include "Item.h"
+#include <Entity/Item.h>
+
+using namespace Engine::Entity;
 
 class HealingWand : public Item
 {

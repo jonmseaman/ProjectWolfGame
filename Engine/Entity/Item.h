@@ -11,7 +11,7 @@ class Creature;
 /**
  * This is an item.
  */
-class Item : public File::Savable
+class ENGINE_API Item : public File::Savable
 {
   public:
     Item();

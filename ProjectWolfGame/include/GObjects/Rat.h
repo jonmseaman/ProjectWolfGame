@@ -1,7 +1,8 @@
 #ifndef RAT_H
 #define RAT_H
 
-#include "Actor.h"
+#include <Entity/Actor.h>
+using namespace Engine::Entity;
 
 /**
  * This class is supposed to represent a rat.

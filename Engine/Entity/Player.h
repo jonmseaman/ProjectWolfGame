@@ -6,7 +6,7 @@
 namespace Engine {
 namespace Entity {
 
-class Player : public Actor {
+class ENGINE_API Player : public Actor {
 public:
   Player();
   virtual ~Player();

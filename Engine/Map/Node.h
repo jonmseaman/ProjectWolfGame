@@ -12,7 +12,7 @@ class Actor;
 }
 namespace Maps
 {
-  class Node : public File::Savable
+  class ENGINE_API Node : public File::Savable
   {
     public:
       Node();

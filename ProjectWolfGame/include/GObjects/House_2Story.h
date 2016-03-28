@@ -1,6 +1,6 @@
 #ifndef HOUSE_2STORY_H
 #define HOUSE_2STORY_H
-#include "Node.h"
+#include <Map/Node.h>
 
 using namespace Engine::Maps;
 

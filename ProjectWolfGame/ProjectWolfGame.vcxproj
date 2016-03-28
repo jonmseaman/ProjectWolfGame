@@ -172,9 +172,6 @@
     <ClInclude Include="include\GObjects\BasicSword.h" />
     <ClInclude Include="include\GObjects\HealingWand.h" />
     <ClInclude Include="include\GObjects\House_2Story.h" />
-    <ClInclude Include="include\Map\Map.h" />
-    <ClInclude Include="include\Map\MapManager.h" />
-    <ClInclude Include="include\Map\Node.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

@@ -2,9 +2,8 @@
 /// ProjectReWolf
 /// A text-based RPG
 #include <iostream>
-#include "MapManager.h"
-#include "input.h"
-#include "Create_Enums.h"
+#include <Map/MapManager.h>
+#include <UI/Input.h>
 using namespace std;
 
 int main() {

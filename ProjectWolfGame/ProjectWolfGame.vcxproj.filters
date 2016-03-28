@@ -19,15 +19,6 @@
     <ClCompile Include="src\Game\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Map\Map.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Map\MapManager.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Map\Node.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
     <ClInclude Include="include\GObjects\BasicSword.h">
       <Filter>Source\GObjects</Filter>
     </ClInclude>
@@ -51,23 +42,11 @@
     <Filter Include="Source">
       <UniqueIdentifier>{9f7602d2-c24b-4c58-9737-29cb0a7af95e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Objects">
-      <UniqueIdentifier>{37dd12a7-54e5-4eac-b090-29f6a9a2b8f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Map">
-      <UniqueIdentifier>{0047edb3-7077-4440-b021-a99b2592afb5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\GObjects">
       <UniqueIdentifier>{e6dd7c8c-f240-46bd-b3f0-2ecc2bbad7ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Create">
-      <UniqueIdentifier>{5f9e8830-b27a-467a-ab71-9e70a9b9e92d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\GMap">
       <UniqueIdentifier>{29c452dc-fe58-445d-b1ea-edf0b4ba8e08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\RPG">
-      <UniqueIdentifier>{5908cc4c-7056-47b6-ad5a-00113b793d13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #ifndef ITEM_BASIC_SWORD_H
 #define ITEM_BASIC_SWORD_H
-#include "Item.h"
+#include <Entity/Item.h>
+using Engine::Entity::
 
 class BasicSword : public Item
 {

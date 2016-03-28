@@ -12,7 +12,7 @@ namespace Entity {
  * The actor class is a creature which with behavior.
  * This should be generalized into Players, Mobs, Bosses etc
  */
-class Actor : public Creature {
+class ENGINE_API Actor : public Creature {
 public:
   Actor();
   virtual ~Actor();

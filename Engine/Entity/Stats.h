@@ -7,7 +7,7 @@ namespace Entity {
 
 class Creature;
 
-class Stats : public File::Savable {
+class ENGINE_API Stats : public File::Savable {
 public:
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
   SAVABLE;
