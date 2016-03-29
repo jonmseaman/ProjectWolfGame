@@ -1,6 +1,7 @@
 #ifndef STATS_H
 #define STATS_H
 #include "Savable.h"
+#include <Engine.h>
 
 namespace Engine {
 namespace Entity {

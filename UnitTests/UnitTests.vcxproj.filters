@@ -12,14 +12,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="StatsTest.cpp">
-      <Filter>PWGTest\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="SavableTest.cpp">
-      <Filter>SavableTest</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemTest.cpp">
-      <Filter>PWGTest\Objects</Filter>
-    </ClCompile>
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
 </Project>

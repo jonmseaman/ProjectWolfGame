@@ -58,19 +58,19 @@ Map* Create::loadNewMap() {
   return map;
 }
 
-Engine::Entity::Item * Create::newItem(const std::string &) {
+Engine::Entity::Item * Create::newItem(const std::string &id) {
+  return CreateData::items.at(id)();
+}
+
+Engine::Entity::Actor * Create::newActor(const std::string &id) {
+  return CreateData::actors.at(id)();
+}
+
+Engine::Maps::Node * Create::newNode(const std::string &id) {
   return nullptr;
 }
 
-Engine::Entity::Actor * Create::newActor(const std::string &) {
-  return nullptr;
-}
-
-Engine::Maps::Node * Create::newNode(const std::string &) {
-  return nullptr;
-}
-
-Engine::Maps::Map * Create::newMap(const std::string &) {
+Engine::Maps::Map * Create::newMap(const std::string &id) {
   return nullptr;
 }
 

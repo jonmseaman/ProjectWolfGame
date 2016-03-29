@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "Actor.h"
+#include <Engine.h>
 
 namespace Engine {
 namespace Entity {

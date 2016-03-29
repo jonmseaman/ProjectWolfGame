@@ -79,22 +79,18 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\ProjectWolfGame\include;$(SolutionDir)\ProjectWolfGame\include\File;$(SolutionDir)\ProjectWolfGame\include\Objects;$(SolutionDir)\ProjectWolfGame\include\Map;$(BOOST_ROOT);$(SolutionDir)\Savable\</IncludePath>
     <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\ProjectWolfGame\include;$(SolutionDir)\ProjectWolfGame\include\File;$(SolutionDir)\ProjectWolfGame\include\Objects;$(SolutionDir)\ProjectWolfGame\include\Map;$(BOOST_ROOT);$(SolutionDir)\Savable\</IncludePath>
     <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\ProjectWolfGame\include;$(SolutionDir)\ProjectWolfGame\include\File;$(SolutionDir)\ProjectWolfGame\include\Objects;$(SolutionDir)\ProjectWolfGame\include\Map;$(BOOST_ROOT);$(SolutionDir)\Savable\</IncludePath>
     <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\ProjectWolfGame\include;$(SolutionDir)\ProjectWolfGame\include\File;$(SolutionDir)\ProjectWolfGame\include\Objects;$(SolutionDir)\ProjectWolfGame\include\Map;$(BOOST_ROOT);$(SolutionDir)\Savable\</IncludePath>
     <LibraryPath>$(BOOST_LIBRARYDIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -166,9 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ItemTest.cpp" />
-    <ClCompile Include="SavableTest.cpp" />
-    <ClCompile Include="StatsTest.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

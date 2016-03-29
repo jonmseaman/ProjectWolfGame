@@ -19,7 +19,7 @@ class ENGINE_API Item : public File::Savable
     Item(std::string name, Stats stats);
     virtual ~Item();
     SAVABLE;
-    CREATABLE(Item)
+    CREATABLE_ITEM(Item)
 
     /**
      * Shows information about the item on std::cout

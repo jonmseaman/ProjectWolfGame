@@ -13,7 +13,7 @@ using namespace Engine;
  * Eventually, MapManager will be able to handle multiple open maps and
  * connect them together to make a seamless larger map.
  */
-class MapManager
+class ENGINE_API MapManager
 {
   public:
     /** Singleton */
