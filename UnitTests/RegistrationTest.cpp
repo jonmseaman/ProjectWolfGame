@@ -11,8 +11,6 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTests {
 
-
-
 #pragma region TestClassesForRegistration
 
 // Class to test registration for;
@@ -36,6 +34,7 @@ CREATEABLE_REGISTRATION(TestableNode);
 
 class TestableMap : public Engine::Maps::Map {
 public:
+  TestableMap() : Map(5) {}
   CREATABLE_MAP(TestableMap);
 };
 CREATEABLE_REGISTRATION(TestableMap);
