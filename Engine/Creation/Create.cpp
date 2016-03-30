@@ -67,11 +67,11 @@ Engine::Entity::Actor * Create::newActor(const std::string &id) {
 }
 
 Engine::Maps::Node * Create::newNode(const std::string &id) {
-  return nullptr;
+  return CreateData::nodes.at(id)();
 }
 
 Engine::Maps::Map * Create::newMap(const std::string &id) {
-  return nullptr;
+  return CreateData::maps.at(id)();
 }
 
 } // End namespace Creation
