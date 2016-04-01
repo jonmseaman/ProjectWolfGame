@@ -2,6 +2,7 @@
 #define INVENTORY_H
 #include <string>
 #include <vector>
+#include <Engine.h>
 #include "Item.h"
 #include "Savable.h"
 

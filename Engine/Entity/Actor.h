@@ -1,5 +1,6 @@
 #ifndef ACTOR_H
 #define ACTOR_H
+#include <Engine.h>
 #include "Creature.h"
 #include "Map/Node.h"
 

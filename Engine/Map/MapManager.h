@@ -1,5 +1,6 @@
 #ifndef MAPMANAGER_H
 #define MAPMANAGER_H
+#include <Engine.h>
 #include <string>
 #include "Savable.h"
 namespace Engine {

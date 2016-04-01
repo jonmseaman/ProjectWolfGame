@@ -1,5 +1,6 @@
 #ifndef EQUIPMENT_H
 #define EQUIPMENT_H
+#include <Engine.h>
 #include "Inventory.h"
 
 namespace Engine {

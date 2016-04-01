@@ -1,5 +1,6 @@
 #ifndef NODE_H
 #define NODE_H
+#include <Engine.h>
 #include <list>
 #include <string>
 #include "Entity/Inventory.h"

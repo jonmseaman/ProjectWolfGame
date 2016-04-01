@@ -1,5 +1,6 @@
 #ifndef ITEM_H
 #define ITEM_H
+#include <Engine.h>
 #include <string>
 #include "Stats.h"
 #include <Creation/Createable.h>

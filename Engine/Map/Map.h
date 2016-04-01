@@ -1,5 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
+#include <Engine.h>
 #include <vector>
 #include "Savable.h"
 

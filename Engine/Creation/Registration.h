@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "CreatableClassDeclarations.h"
+#include <Engine.h>
 
 namespace Creation {
 

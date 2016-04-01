@@ -2,6 +2,7 @@
 /// ProjectReWolf
 /// A text-based RPG
 #include <iostream>
+#include <Engine.h>
 #include <Map/MapManager.h>
 #include <UI/Input.h>
 using namespace std;
