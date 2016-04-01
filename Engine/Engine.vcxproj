@@ -162,7 +162,6 @@
     <ClInclude Include="Entity\Equipment.h" />
     <ClInclude Include="Entity\Inventory.h" />
     <ClInclude Include="Entity\Item.h" />
-    <ClInclude Include="Entity\Player.h" />
     <ClInclude Include="Entity\Stats.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapManager.h" />
@@ -179,7 +178,6 @@
     <ClCompile Include="Entity\Equipment.cpp" />
     <ClCompile Include="Entity\Inventory.cpp" />
     <ClCompile Include="Entity\Item.cpp" />
-    <ClCompile Include="Entity\Player.cpp" />
     <ClCompile Include="Entity\Stats.cpp" />
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\MapManager.cpp" />

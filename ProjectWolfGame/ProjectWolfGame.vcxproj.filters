@@ -18,6 +18,7 @@
     </ClCompile>
     <ClCompile Include="src\Game\main.cpp" />
     <ClCompile Include="src\Game\Items\HealingWand.cpp" />
+    <ClCompile Include="src\Game\Actors\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -29,5 +30,8 @@
     <Filter Include="Source\GMap">
       <UniqueIdentifier>{29c452dc-fe58-445d-b1ea-edf0b4ba8e08}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Game\Actors\Player.h" />
   </ItemGroup>
 </Project>

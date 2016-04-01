@@ -1,6 +1,7 @@
 #ifndef CREATURE_H
 #define CREATURE_H
 #include <string>
+#include <Engine.h>
 #include "Equipment.h"
 #include "Inventory.h"
 #include "Savable.h"
@@ -12,7 +13,7 @@ namespace Entity {
 /**
  * This class should store all functions for defining what a creature is.
  */
-class Creature : public File::Savable {
+class ENGINE_API Creature : public File::Savable {
     // The data structure for the creatures.
     // This class should contain the data and tools for making functioning actors in the game world,
     // but not actually include a way to _act_

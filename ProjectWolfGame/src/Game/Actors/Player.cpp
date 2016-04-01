@@ -1,13 +1,17 @@
 #include <assert.h>
 #include <iostream>
 #include <string>
+#include <Creation/Creatable.h>
 #include "Map/Dir.h"
 #include "Map/MapManager.h"
 #include "Player.h"
-#include "UI/Input.h"
+#include <UI/Input.h>
+
 
 namespace Engine {
 namespace Entity {
+
+CREATABLE_REGISTRATION(Player);
 
 Player::Player() {
   setMaxHealth(100);

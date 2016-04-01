@@ -6,6 +6,7 @@ using namespace Engine::Maps;
 
 class House_2Story : public Node {
 public:
+  CREATABLE_NODE(House_2Story)
   House_2Story() {
     // Link first and second floor
     setNodeLink(UP, &secondFloor);
@@ -30,3 +31,4 @@ protected:
 private:
   Node secondFloor{};
 };
+CREATABLE_REGISTRATION(House_2Story);

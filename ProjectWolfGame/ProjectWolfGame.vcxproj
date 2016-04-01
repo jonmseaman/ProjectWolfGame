@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game\Actors\Player.cpp" />
     <ClCompile Include="src\Game\Items\HealingWand.cpp" />
     <ClCompile Include="src\Game\Maps\CenterTown.cpp" />
     <ClCompile Include="src\Game\Maps\House_2Story.cpp" />
@@ -167,6 +168,9 @@
     <ProjectReference Include="..\Engine\Engine.vcxproj">
       <Project>{07ce2381-a3a4-42e2-9e05-edae05cdba2c}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Game\Actors\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

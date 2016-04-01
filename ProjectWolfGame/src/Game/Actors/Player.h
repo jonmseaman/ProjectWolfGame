@@ -1,15 +1,15 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "Actor.h"
-#include <Engine.h>
+#include <Entity/Actor.h>
 
 namespace Engine {
 namespace Entity {
 
-class ENGINE_API Player : public Actor {
+class Player : public Actor {
 public:
   Player();
   virtual ~Player();
+  CREATABLE_ACTOR(Player)
 
   /**
    * Shows the player's HUD.

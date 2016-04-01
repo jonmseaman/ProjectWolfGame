@@ -1,8 +1,9 @@
 #include <assert.h>
 #include <iomanip>
 #include <iostream>
+#include <string>
 #include <Creation/Create.h>
-#include <Entity/Player.h>
+#include <Entity/Actor.h>
 #include <UI/Input.h>
 #include "Dir.h"
 #include "Node.h"
@@ -22,7 +23,7 @@ namespace Maps {
       entranceDirs[i] = true;
     }
     entranceDirs[Dir::DOWN] = false; // Entrances in all dirs != down
-    name += to_string(nodeCount);
+    name += std::to_string(nodeCount);
     nodeCount++;
   }
 

@@ -3,7 +3,6 @@
 #include "Savable.h"
 
 #include <Entity/Item.h>
-#include <Entity/Player.h>
 #include <Entity/Actor.h>
 #include <Map/Node.h>
 #include <Map/Map.h>

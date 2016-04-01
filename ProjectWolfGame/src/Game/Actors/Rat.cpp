@@ -15,9 +15,6 @@ public:
     setMaxHealth(2);
     stats = Stats{ 2, 1, 1 };
   }
-  virtual ~Rat();
-protected:
-private:
 };
 
 CREATABLE_REGISTRATION(Rat);
