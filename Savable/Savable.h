@@ -41,7 +41,7 @@ public:
   Savable();
   ~Savable();
 
-  typedef int idType;
+  typedef std::string idType;
 
   /**
    * Used so that the save file has information on the actual type

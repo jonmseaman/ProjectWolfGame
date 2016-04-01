@@ -155,55 +155,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Dir.cpp" />
-    <ClCompile Include="src\Create.cpp" />
-    <ClCompile Include="src\GMap\CenterTown.cpp" />
-    <ClCompile Include="src\GMap\House_2Story.cpp" />
-    <ClCompile Include="src\GObjects\Rat.cpp" />
-    <ClCompile Include="src\GObjects\Swordsmen.cpp" />
-    <ClCompile Include="src\GObjects\BasicSword.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Map\Map.cpp" />
-    <ClCompile Include="src\Map\MapManager.cpp" />
-    <ClCompile Include="src\Map\Node.cpp" />
-    <ClCompile Include="src\Objects\Actor.cpp" />
-    <ClCompile Include="src\Objects\Creature.cpp" />
-    <ClCompile Include="src\Objects\Equipment.cpp" />
-    <ClCompile Include="src\Objects\Inventory.cpp" />
-    <ClCompile Include="src\Objects\Item.cpp" />
-    <ClCompile Include="src\Objects\Player.cpp" />
-    <ClCompile Include="src\Objects\Stats.cpp" />
-    <ClCompile Include="src\input.cpp" />
+    <ClCompile Include="src\Game\Actors\Player.cpp" />
+    <ClCompile Include="src\Game\Items\HealingWand.cpp" />
+    <ClCompile Include="src\Game\Maps\CenterTown.cpp" />
+    <ClCompile Include="src\Game\Maps\House_2Story.cpp" />
+    <ClCompile Include="src\Game\Actors\Rat.cpp" />
+    <ClCompile Include="src\Game\Actors\Swordsmen.cpp" />
+    <ClCompile Include="src\Game\Items\BasicSword.cpp" />
+    <ClCompile Include="src\Game\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Create.h" />
-    <ClInclude Include="include\Dir.h" />
-    <ClInclude Include="include\Create_Enums.h" />
-    <ClInclude Include="include\GObjects\Rat.h" />
-    <ClInclude Include="include\GObjects\Swordsmen.h" />
-    <ClInclude Include="include\GObjects\CenterTown.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\BasicSword.h" />
-    <ClInclude Include="include\GObjects\HealingWand.h" />
-    <ClInclude Include="include\GObjects\House_2Story.h" />
-    <ClInclude Include="include\Map\Map.h" />
-    <ClInclude Include="include\Map\MapManager.h" />
-    <ClInclude Include="include\Map\Node.h" />
-    <ClInclude Include="include\Objects\Actor.h" />
-    <ClInclude Include="include\Objects\Creature.h" />
-    <ClInclude Include="include\Objects\Equipment.h" />
-    <ClInclude Include="include\Objects\Inventory.h" />
-    <ClInclude Include="include\Objects\Item.h" />
-    <ClInclude Include="include\Objects\Player.h" />
-    <ClInclude Include="include\Objects\Stats.h" />
-    <ClInclude Include="include\input.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Savable\Savable.vcxproj">
-      <Project>{c7e799d0-ae85-46f2-87e5-a15e8d1cbf08}</Project>
+    <ProjectReference Include="..\Engine\Engine.vcxproj">
+      <Project>{07ce2381-a3a4-42e2-9e05-edae05cdba2c}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Game\Actors\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

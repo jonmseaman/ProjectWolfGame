@@ -4,91 +4,14 @@
     <Filter Include="SavableTest">
       <UniqueIdentifier>{c908d756-45ac-4a4f-83f6-6562e923ed65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PWG">
-      <UniqueIdentifier>{6c5a43f2-6e64-43dd-9245-8d4db2306b1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PWG\Objects">
-      <UniqueIdentifier>{57974e0c-06c4-41a2-a2b0-12bda92d6b9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="PWGTest">
       <UniqueIdentifier>{1613a5a9-0e35-414a-85a8-88a90f825abd}</UniqueIdentifier>
     </Filter>
     <Filter Include="PWGTest\Objects">
       <UniqueIdentifier>{1162704c-0b11-4f34-a0c5-b469d69da2aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PWG\Map">
-      <UniqueIdentifier>{b5acc197-f562-42ff-8bd3-c23ce2d90f83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PWG\GMap">
-      <UniqueIdentifier>{e6972c57-0619-4f3b-9935-d3b424100ed7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PWG\GObjects">
-      <UniqueIdentifier>{e7f06886-0ba1-4ac1-80d3-b4fdc4fafc6e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="StatsTest.cpp">
-      <Filter>PWGTest\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Objects\Stats.cpp">
-      <Filter>PWG\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="SavableTest.cpp">
-      <Filter>SavableTest</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemTest.cpp">
-      <Filter>PWGTest\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Objects\Item.cpp">
-      <Filter>PWG\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Objects\Creature.cpp">
-      <Filter>PWG\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Objects\Equipment.cpp">
-      <Filter>PWG\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Objects\Inventory.cpp">
-      <Filter>PWG\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Create.cpp">
-      <Filter>PWG</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Map\Map.cpp">
-      <Filter>PWG\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Map\MapManager.cpp">
-      <Filter>PWG\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Map\Node.cpp">
-      <Filter>PWG\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\GMap\House_2Story.cpp">
-      <Filter>PWG\GMap</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\GObjects\BasicSword.cpp">
-      <Filter>PWG\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\GObjects\Rat.cpp">
-      <Filter>PWG\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\GObjects\Swordsmen.cpp">
-      <Filter>PWG\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Objects\Actor.cpp">
-      <Filter>PWG\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Objects\Player.cpp">
-      <Filter>PWG\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\Dir.cpp">
-      <Filter>PWG</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\GMap\CenterTown.cpp">
-      <Filter>PWG\GMap</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectWolfGame\src\input.cpp">
-      <Filter>PWG</Filter>
-    </ClCompile>
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
 </Project>

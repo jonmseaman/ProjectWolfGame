@@ -1,138 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Objects\Actor.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Objects\Creature.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Objects\Equipment.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Objects\Inventory.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Objects\Player.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Map\Map.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Map\MapManager.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Map\Node.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GObjects\BasicSword.cpp">
-      <Filter>Source\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Dir.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Objects\Stats.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Create.cpp">
-      <Filter>Source\Create</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Objects\Item.cpp">
-      <Filter>Source\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GObjects\Rat.cpp">
-      <Filter>Source\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GObjects\Swordsmen.cpp">
-      <Filter>Source\GObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GMap\House_2Story.cpp">
+    <ClCompile Include="src\Game\Maps\CenterTown.cpp">
       <Filter>Source\GMap</Filter>
     </ClCompile>
-    <ClCompile Include="src\GMap\CenterTown.cpp">
+    <ClCompile Include="src\Game\Maps\House_2Story.cpp">
       <Filter>Source\GMap</Filter>
     </ClCompile>
-    <ClCompile Include="src\input.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\Objects\Actor.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Creature.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Equipment.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Item.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Inventory.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Player.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Objects\Stats.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Map\Map.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Map\MapManager.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Map\Node.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\BasicSword.h">
+    <ClCompile Include="src\Game\Actors\Rat.cpp">
       <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\HealingWand.h">
+    </ClCompile>
+    <ClCompile Include="src\Game\Actors\Swordsmen.cpp">
       <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Dir.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Create.h">
-      <Filter>Source\Create</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Create_Enums.h">
-      <Filter>Source\Create</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\CenterTown.h">
-      <Filter>Source\GMap</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\Rat.h">
+    </ClCompile>
+    <ClCompile Include="src\Game\Items\BasicSword.cpp">
       <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\Swordsmen.h">
-      <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\House_2Story.h">
-      <Filter>Source\GMap</Filter>
-    </ClInclude>
-    <ClInclude Include="include\input.h" />
+    </ClCompile>
+    <ClCompile Include="src\Game\main.cpp" />
+    <ClCompile Include="src\Game\Items\HealingWand.cpp" />
+    <ClCompile Include="src\Game\Actors\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
       <UniqueIdentifier>{9f7602d2-c24b-4c58-9737-29cb0a7af95e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Objects">
-      <UniqueIdentifier>{37dd12a7-54e5-4eac-b090-29f6a9a2b8f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Map">
-      <UniqueIdentifier>{0047edb3-7077-4440-b021-a99b2592afb5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\GObjects">
       <UniqueIdentifier>{e6dd7c8c-f240-46bd-b3f0-2ecc2bbad7ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Create">
-      <UniqueIdentifier>{5f9e8830-b27a-467a-ab71-9e70a9b9e92d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\GMap">
       <UniqueIdentifier>{29c452dc-fe58-445d-b1ea-edf0b4ba8e08}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Game\Actors\Player.h" />
   </ItemGroup>
 </Project>
