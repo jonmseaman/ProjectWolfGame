@@ -13,4 +13,4 @@
 /// A macro used to create a global variable which will auto-register
 /// a class for creation by the Create class.
 /// </summary>
-#define CREATEABLE_REGISTRATION(ClassName) Creation::Registration __registration##ClassName ( #ClassName, ClassName ::create )
+#define CREATABLE_REGISTRATION(ClassName) Creation::Registration __registration##ClassName ( #ClassName, ClassName ::create )

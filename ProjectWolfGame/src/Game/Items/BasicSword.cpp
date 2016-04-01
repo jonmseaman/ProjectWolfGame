@@ -1,7 +1,12 @@
-#include "GObjects\BasicSword.h"
+#include <Creation/Creatable.h>
+#include <Entity/Item.h>
 
-BasicSword::BasicSword() : Item("Sword", Stats{5, 5, 0}) {
-}
+using namespace Engine::Entity;
 
-BasicSword::~BasicSword() {
-}
+class BasicSword : public Item {
+public:
+  CREATABLE_ITEM(BasicSword)
+  BasicSword() : Item("Sword", Stats{ 5,5,0 }) {}
+};
+
+CREATABLE_REGISTRATION(BasicSword);

@@ -60,13 +60,13 @@
     <ClInclude Include="Creation\Create.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Creation\Createable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Creation\CreateData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Creation\Registration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Creation\Creatable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

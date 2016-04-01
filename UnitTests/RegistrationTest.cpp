@@ -3,7 +3,7 @@
 #include <Entity/Actor.h>
 #include <Map/Node.h>
 #include <Map/Map.h>
-#include <Creation/Createable.h>
+#include <Creation/Creatable.h>
 #include <Creation/Create.h>
 #include <Engine.h>
 using namespace Engine::Entity;
@@ -18,26 +18,26 @@ class TestableItem : public Engine::Entity::Item {
 public:
   CREATABLE_ITEM(TestableItem);
 };
-CREATEABLE_REGISTRATION(TestableItem);
+CREATABLE_REGISTRATION(TestableItem);
 
 class TestableActor : public Engine::Entity::Actor {
 public:
   CREATABLE_ACTOR(TestableActor);
 };
-CREATEABLE_REGISTRATION(TestableActor);
+CREATABLE_REGISTRATION(TestableActor);
 
 class TestableNode : public Engine::Maps::Node {
 public:
   CREATABLE_NODE(TestableNode);
 };
-CREATEABLE_REGISTRATION(TestableNode);
+CREATABLE_REGISTRATION(TestableNode);
 
 class TestableMap : public Engine::Maps::Map {
 public:
   TestableMap() : Map(5) {}
   CREATABLE_MAP(TestableMap);
 };
-CREATEABLE_REGISTRATION(TestableMap);
+CREATABLE_REGISTRATION(TestableMap);
 
 #pragma endregion
 

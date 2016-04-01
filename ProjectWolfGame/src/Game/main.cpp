@@ -2,7 +2,6 @@
 /// ProjectReWolf
 /// A text-based RPG
 #include <iostream>
-#include <Engine.h>
 #include <Map/MapManager.h>
 #include <UI/Input.h>
 using namespace std;
@@ -16,7 +15,7 @@ int main() {
   choice = getDigit(1, 2);
   switch (choice) {
     case 1: // New Game
-      game.openMap(EMaps::MAP_CENTER_TOWN); // Opens town
+      game.openMap("CenterTown"); // Opens town
       game.play(); // starts playing
       break;
     case 2: // Exit

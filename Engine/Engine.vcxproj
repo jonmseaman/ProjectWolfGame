@@ -154,7 +154,7 @@
     <ClInclude Include="Creation\Create.h" />
     <ClInclude Include="Creation\CreateData.h" />
     <ClInclude Include="Creation\Registration.h" />
-    <ClInclude Include="Creation\Createable.h" />
+    <ClInclude Include="Creation\Creatable.h" />
     <ClInclude Include="Map\Dir.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Entity\Actor.h" />

@@ -17,26 +17,7 @@
       <Filter>Source\GObjects</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\GObjects\BasicSword.h">
-      <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\HealingWand.h">
-      <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\CenterTown.h">
-      <Filter>Source\GMap</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\Rat.h">
-      <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\Swordsmen.h">
-      <Filter>Source\GObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\House_2Story.h">
-      <Filter>Source\GMap</Filter>
-    </ClInclude>
+    <ClCompile Include="src\Game\Items\HealingWand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">

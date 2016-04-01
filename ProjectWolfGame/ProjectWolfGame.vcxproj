@@ -155,23 +155,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game\Items\HealingWand.cpp" />
     <ClCompile Include="src\Game\Maps\CenterTown.cpp" />
     <ClCompile Include="src\Game\Maps\House_2Story.cpp" />
     <ClCompile Include="src\Game\Actors\Rat.cpp" />
     <ClCompile Include="src\Game\Actors\Swordsmen.cpp" />
     <ClCompile Include="src\Game\Items\BasicSword.cpp" />
     <ClCompile Include="src\Game\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\GObjects\Rat.h" />
-    <ClInclude Include="include\GObjects\Swordsmen.h" />
-    <ClInclude Include="include\GObjects\CenterTown.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="include\GObjects\BasicSword.h" />
-    <ClInclude Include="include\GObjects\HealingWand.h" />
-    <ClInclude Include="include\GObjects\House_2Story.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
