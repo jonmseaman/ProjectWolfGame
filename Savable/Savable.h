@@ -47,8 +47,8 @@ public:
    * Used so that the save file has information on the actual type
    * of the Actor.
    */
-  int getID() { return id; }
-  void setID(int idNum) { this->id = idNum; }
+  idType getID() { return id; }
+  void setID(idType idNum) { this->id = idNum; }
 
   /**
    * Returns the id value of the first thing that can be loaded
@@ -107,7 +107,7 @@ private:
   * ID number for use by the factor.
   * @usage Set so that the factory knows what type of actor to make
   */
-  int id;
+  idType id;
 };
 } // namespace File
 
