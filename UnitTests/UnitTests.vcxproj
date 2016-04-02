@@ -162,7 +162,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ItemTest.cpp" />
     <ClCompile Include="RegistrationTest.cpp" />
+    <ClCompile Include="SavableTest.cpp" />
+    <ClCompile Include="StatsTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

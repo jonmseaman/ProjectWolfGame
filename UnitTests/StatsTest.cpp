@@ -1,7 +1,8 @@
 #include "CppUnitTest.h"
-#include "Objects/Stats.h"
+#include <Entity/Stats.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace Engine::Entity;
 
 namespace UnitTests
 {		
