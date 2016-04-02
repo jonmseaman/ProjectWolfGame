@@ -117,7 +117,7 @@ void close() {
 // Methods for Savable
 //////////////////////
 
-Savable::Savable(): id(0)
+Savable::Savable(): id("id")
 {
 }
 
