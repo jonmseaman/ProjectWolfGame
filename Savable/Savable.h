@@ -3,9 +3,9 @@
 
 
 #ifdef SAVABLE_EXPORTS
-#define SAVABLE_EXPORTS_API __declspec(dllexport)
+#define SAVABLE_API __declspec(dllexport)
 #else
-#define SAVABLE_EXPORTS_API __declspec(dllimport)
+#define SAVABLE_API __declspec(dllimport)
 #endif
 
 #include <string>
@@ -23,32 +23,32 @@ namespace File {
    * @param fileName The name of the file on disk. If fileName has
    * a relative path or extension, these are removed.
    */
-  void SAVABLE_EXPORTS_API save(const std::string &fileName);
+  void SAVABLE_API save(const std::string &fileName);
   /**
    * Gets data of variables and objects from a file. These are ready to be
    * loaded after this function is called.
    * @param fileName The name of the file being loaded from disk.
    * If fileName has a relative path or extension, these are removed.
    */
-  void SAVABLE_EXPORTS_API load(const std::string &fileName);
+  void SAVABLE_API load(const std::string &fileName);
 
   /** Clears a save in progress. */
-  void SAVABLE_EXPORTS_API close();
+  void SAVABLE_API close();
 
-class SAVABLE_EXPORTS_API Savable
+class SAVABLE_API Savable
 {
 public:
   Savable();
   ~Savable();
 
-  typedef std::string idType;
+  typedef const char* idType;
 
   /**
    * Used so that the save file has information on the actual type
    * of the Actor.
    */
   idType getID() { return id; }
-  void setID(idType idNum) { this->id = idNum; }
+  void setID(idType id) { this->id = id; }
 
   /**
    * Returns the id value of the first thing that can be loaded

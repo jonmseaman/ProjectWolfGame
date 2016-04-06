@@ -143,7 +143,7 @@ Savable::idType Savable::nextID(const std::string& key) {
   auto idIterator = tree.find("id"); // TODO: Remove hardcoding
   if (idIterator != tree.not_found()) {
     auto idData = idIterator->second.data();
-    return idData;
+    return idData.c_str();
   } else {
     // throw an exception?
     // TODO: fix this
