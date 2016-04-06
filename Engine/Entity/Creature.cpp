@@ -65,7 +65,7 @@ void Creature::flagInCombat(bool val) {
   isInCombat = val;
 }
 
-void Creature::setName(std::string name) {
+void Creature::setName(char* name) {
   this->name = name;
 }
 

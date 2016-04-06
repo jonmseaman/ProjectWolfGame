@@ -77,6 +77,7 @@ public:
    * @param varName A key for identifying the variable upon load.
    */
   void save(const std::string &varName, int var) const;
+  void save(const std::string &varName, const char* var) const;
   void save(const std::string &varName, const std::string &var) const;
 
   /**
@@ -84,6 +85,7 @@ public:
    * @param varName The key which the variable was saved with.
    */
   void load(const std::string &varName, int &var);
+  void load(const std::string &varName, char* &var);
   void load(const std::string &varName, std::string &var);
 protected:
   /**

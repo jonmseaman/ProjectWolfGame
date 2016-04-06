@@ -209,6 +209,10 @@ void Savable::save(const std::string & varName, int var) const
   save(varName, std::to_string(var));
 }
 
+void Savable::save(const std::string & varName, const char* var) const {
+  save(varName, std::string(var));
+}
+
 void Savable::save(const std::string & varName, const std::string & var) const
 {
   pairType p{ varName, treeType(var) };
@@ -222,6 +226,12 @@ void Savable::load(const std::string & varName, int & var)
 
   // Convert value to int
   var = std::stoi(stringValue);
+}
+
+void Savable::load(const std::string &varName, char* &var) {
+  std::string stringValue;
+  load(varName, stringValue);
+  //var = stringValue.dat
 }
 
 void Savable::load(const std::string & varName, std::string & var)
