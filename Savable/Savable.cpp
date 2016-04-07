@@ -47,7 +47,8 @@ void save(const std::string & fileName)
   using namespace boost::property_tree;
 
   for (size_t i = 0; i < fileName.length(); i++) {
-    if (!isalnum(fileName.at(i))) {
+    char c = fileName.at(i);
+    if (!(isalnum(c) || c == '_')){
       throw std::invalid_argument("File name can only contain alpha-numeric characters.");
     }
   }
@@ -143,7 +144,7 @@ Savable::idType Savable::nextID(const std::string& key) {
   auto idIterator = tree.find("id"); // TODO: Remove hardcoding
   if (idIterator != tree.not_found()) {
     auto idData = idIterator->second.data();
-    return idData.c_str();
+    return idData;
   } else {
     // throw an exception?
     // TODO: fix this

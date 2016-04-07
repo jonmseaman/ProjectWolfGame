@@ -22,6 +22,7 @@ namespace File {
    * them to a file.
    * @param fileName The name of the file on disk. If fileName has
    * a relative path or extension, these are removed.
+   * @requires for char c in fileName, c is alphanumeric or c == '_'
    */
   void SAVABLE_API save(const std::string &fileName);
   /**
@@ -29,6 +30,7 @@ namespace File {
    * loaded after this function is called.
    * @param fileName The name of the file being loaded from disk.
    * If fileName has a relative path or extension, these are removed.
+   * @requires for char c in fileName, c is alphanumeric or c == '_'
    */
   void SAVABLE_API load(const std::string &fileName);
 
@@ -41,7 +43,7 @@ public:
   Savable();
   ~Savable();
 
-  typedef const char* idType;
+  typedef std::string idType;
 
   /**
    * Used so that the save file has information on the actual type

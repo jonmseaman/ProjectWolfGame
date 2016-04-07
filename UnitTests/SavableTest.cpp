@@ -12,7 +12,9 @@ namespace UnitTests
   {
   public:
 
-    TEST_METHOD(save_string_string)
+
+
+    TEST_METHOD(saveAndLoadStringString)
     {
       Stats s;
 
@@ -21,7 +23,7 @@ namespace UnitTests
       std::string varValueOriginal = varValue;
       s.Savable::save(varName, varValue);
       
-      std::string fname = "SavableTest_string_string";
+      std::string fname = "saveAndLoadStringString";
       File::save(fname);
       File::load(fname);
 
@@ -40,7 +42,6 @@ namespace UnitTests
       int varValue = 125;
       int varValueOriginal = varValue;
       s.Savable::save(varName, varValue);
-
       std::string fname = "SavableTest_string_int";
       File::save(fname);
       File::load(fname);
