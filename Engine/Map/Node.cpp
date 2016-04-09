@@ -18,7 +18,6 @@ namespace Maps {
     , nodeLinks{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
     , actorPtrList{}
     , name("Node") {
-    setID(0);
     for (int i = 0; i < Maps::NUM_DIRS; i++) {
       entranceDirs[i] = true;
     }

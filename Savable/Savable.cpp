@@ -118,13 +118,9 @@ void close() {
 // Methods for Savable
 //////////////////////
 
-Savable::Savable(): id("id")
-{
-}
+Savable::Savable() {}
 
-Savable::~Savable()
-{
-}
+Savable::~Savable() {}
 
 Savable::idType Savable::nextID(const std::string& key) {
   // look in current working tree for pair with key @param key

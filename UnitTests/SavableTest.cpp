@@ -11,8 +11,16 @@ namespace UnitTests
   TEST_CLASS(SavableTest)
   {
   public:
+    TEST_METHOD(testGetAndSetId) {
+      auto s = Stats{ 1,2,3 };
+      s.setID("Stats");
 
+      Assert::IsTrue("Stats" == s.getID());
+    }
 
+    TEST_METHOD(testNextId) {
+
+    }
 
     TEST_METHOD(saveAndLoadStringString)
     {

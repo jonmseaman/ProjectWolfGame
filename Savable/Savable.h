@@ -57,6 +57,7 @@ public:
    * which also has key matching the param.
    * Calling this method does not change any data.
    * @param the key of the item being loaded
+   * @requires A file is open.
    */
   static idType nextID(const std::string& key);
 

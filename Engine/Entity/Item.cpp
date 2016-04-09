@@ -7,15 +7,11 @@ namespace Engine {
 namespace Entity {
 
 
-Item::Item() :Item("Item", Stats()) {
-}
+Item::Item() :Item("Item", Stats()) {}
 
-Item::Item(std::string name, Stats stats) : Item(name, "", stats) {
-  setID(0);
-}
+Item::Item(std::string name, Stats stats) : Item(name, "", stats) {}
 
 Item::Item(std::string name, std::string description, Stats stats) {
-  setID(0);
   this->name = name;
   this->description = description;
   this->stats = stats;
