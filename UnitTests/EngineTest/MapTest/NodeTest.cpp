@@ -12,13 +12,12 @@ namespace UnitTests {
 
 TEST_CLASS(NodeTest) {
   TEST_METHOD(testContainsActorWhenNotContained) {
-    Node* n = Creation::Create::newNode("TestableNode");
+    Node n;
     Actor* a = Creation::Create::newActor("TestableActor");
     Assert::IsTrue(a != nullptr);
-    n->addActor(a);
+    n.addActor(a);
 
-    Assert::IsTrue(n->containsActor(a));
-    delete n;
+    Assert::IsTrue(n.containsActor(a));
   }
 
   TEST_METHOD(testContainsActorWhenContained) {
