@@ -162,11 +162,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EngineTests\CreateTest.cpp" />
-    <ClCompile Include="EngineTests\ItemTest.cpp" />
-    <ClCompile Include="EngineTests\RegistrationTest.cpp" />
+    <ClCompile Include="EngineTest\CreateTest.cpp" />
+    <ClCompile Include="EngineTest\ItemTest.cpp" />
+    <ClCompile Include="EngineTest\MapTest\NodeTest.cpp" />
+    <ClCompile Include="EngineTest\RegistrationTest.cpp" />
     <ClCompile Include="SavableTest.cpp" />
-    <ClCompile Include="EngineTests\StatsTest.cpp" />
+    <ClCompile Include="EngineTest\StatsTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
