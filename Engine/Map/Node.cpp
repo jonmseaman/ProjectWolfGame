@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <Creation/Create.h>
+#include <Creation/Creatable.h>
 #include <Entity/Actor.h>
 #include <UI/Input.h>
 #include "Dir.h"
@@ -11,9 +12,15 @@
 using namespace Engine::Maps;
 using namespace Engine::Entity;
 
+
 int Node::nodeCount = 1;
 namespace Engine {
 namespace Maps {
+
+  // Special registration for default node. Allows creation with empty string or 'Node'.
+  Creation::Registration __registrationNodeEmptyString("", []() { return new Node; });
+  Creation::Registration __registrationNode("Node", []() {return new Node; });
+
   Node::Node(): inventory(Inventory{ "Location Inventory", 8 })
     , nodeLinks{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
     , actorPtrList{}
@@ -158,9 +165,8 @@ namespace Maps {
 
    bool Node::containsActor(Actor* actor) {
      bool actorFound = false;
-     for (auto i = actorPtrList.begin();
-      i != actorPtrList.end() && !actorFound; i++) {
-        actorFound = actor == *i;
+     for (auto i = actorPtrList.begin(); i != actorPtrList.end() && !actorFound; i++) {
+       actorFound = actor == *i;
      }
      return actorFound;
    }
@@ -211,7 +217,7 @@ namespace Maps {
      LOAD(numActors);
 
      for (int i = 0; i < numActors; i++) {
-       Creation::Create::loadNewActor();
+       actorPtrList.push_back(Creation::Create::loadNewActor());
      }
      
      for (int i = 0; i < NUM_DIRS; i++) {

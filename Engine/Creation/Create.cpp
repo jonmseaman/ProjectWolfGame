@@ -7,7 +7,6 @@
 #include <Map/Node.h>
 #include <Map/Map.h>
 
-
 #pragma region Create
 
 using namespace File;
