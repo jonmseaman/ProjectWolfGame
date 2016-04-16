@@ -7,6 +7,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace Engine::Maps;
 using namespace Engine::Entity;
+using namespace Creation;
 
 namespace UnitTests {
 
@@ -25,7 +26,31 @@ TEST_CLASS(NodeTest) {
     Actor* a = Creation::Create::newActor("TestableActor");
     Assert::IsFalse(a == nullptr);
     Assert::IsFalse(n.containsActor(a));
-    delete a;
+  }
+
+  TEST_METHOD(testNodeSave) {
+    Node n;
+    Assert::IsFalse(n.canLoad("Node"));
+    n.addActor(Create::newActor("TestableActor"));
+    n.addActor(Create::newActor("TestableActor"));
+    n.addActor(Create::newActor("TestableActor"));
+    n.addActor(Create::newActor("TestableActor"));
+    n.addActor(Create::newActor("TestableActor"));
+    n.save();
+
+    Assert::IsTrue(n.canLoad("Node"));
+  }
+
+  TEST_METHOD(testNodeLoad) {
+    Node n;
+    Node saved;
+    Actor* a = Create::newActor("TestableActor");
+    saved.addActor(a);
+    saved.save();
+
+    Assert::IsTrue(n.canLoad("Node"));
+    n.load();
+    Assert::IsTrue(n.getActorPtr(0) != nullptr);
   }
 };
 

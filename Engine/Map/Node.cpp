@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <assert.h>
 #include <iomanip>
 #include <iostream>
@@ -164,11 +165,7 @@ namespace Maps {
    }
 
    bool Node::containsActor(Actor* actor) {
-     bool actorFound = false;
-     for (auto i = actorPtrList.begin(); i != actorPtrList.end() && !actorFound; i++) {
-       actorFound = actor == *i;
-     }
-     return actorFound;
+     return std::find(actorPtrList.begin(), actorPtrList.end(), actor) != actorPtrList.end();
    }
 
    Actor* Node::getNextActor(Actor* actor) {
