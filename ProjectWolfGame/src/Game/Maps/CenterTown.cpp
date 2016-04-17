@@ -15,8 +15,6 @@ public:
   CREATABLE_MAP(CenterTown)
   CenterTown() : Map(CENTER_TOWN_WIDTH) {
     for (auto &i : grid) { i = new Node; }
-    //setNode(1, 0, Create::newNode("House_2Story"));
-    //setNode(2, 0, Create::newNode("House_2Story"));
     buildMoveData();
     Actor* player = Create::newActor("Player");
     player->inventory.addItem(Create::newItem("BasicSword"));

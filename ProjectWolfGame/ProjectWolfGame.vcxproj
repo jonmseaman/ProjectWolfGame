@@ -158,7 +158,6 @@
     <ClCompile Include="src\Game\Actors\Player.cpp" />
     <ClCompile Include="src\Game\Items\HealingWand.cpp" />
     <ClCompile Include="src\Game\Maps\CenterTown.cpp" />
-    <ClCompile Include="src\Game\Maps\House_2Story.cpp" />
     <ClCompile Include="src\Game\Actors\Rat.cpp" />
     <ClCompile Include="src\Game\Actors\Swordsmen.cpp" />
     <ClCompile Include="src\Game\Items\BasicSword.cpp" />
