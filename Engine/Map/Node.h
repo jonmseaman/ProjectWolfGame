@@ -107,11 +107,11 @@ namespace Maps
       void moveActors();
       void showActors(); // Shows a list of actors
 
+      std::list<Engine::Entity::Actor*> actorPtrs;
     protected:
       Node* nodeLinks[NUM_DIRS];
       /// The directions from which this node can be entered
       bool entranceDirs[NUM_DIRS];
-      std::list<Engine::Entity::Actor*> actorPtrs;
       std::string name;
       static int nodeCount;
   };

@@ -164,6 +164,7 @@
   <ItemGroup>
     <ClCompile Include="EngineTest\CreateTest.cpp" />
     <ClCompile Include="EngineTest\ItemTest.cpp" />
+    <ClCompile Include="EngineTest\MapTest\MapTest.cpp" />
     <ClCompile Include="EngineTest\MapTest\NodeTest.cpp" />
     <ClCompile Include="EngineTest\RegistrationTest.cpp" />
     <ClCompile Include="SavableTest.cpp" />

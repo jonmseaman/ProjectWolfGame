@@ -50,7 +50,8 @@ TEST_CLASS(NodeTest) {
 
     Assert::IsTrue(n.canLoad("Node"));
     n.load();
-    Assert::IsTrue(n.getActorPtr(0) != nullptr);
+    Assert::IsTrue(n.getNumActors() == 1, L"Incorrect number of Actors in node.");
+    Assert::IsTrue(n.getActorPtr(0) != nullptr, L"First actor is null");
   }
 };
 
