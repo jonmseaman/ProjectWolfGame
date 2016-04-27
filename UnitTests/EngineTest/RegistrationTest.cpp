@@ -34,7 +34,12 @@ CREATABLE_REGISTRATION(TestableNode);
 
 class TestableMap : public Engine::Maps::Map {
 public:
-  TestableMap() : Map(5) {}
+  TestableMap() : Map(5) {
+    for (auto& n : this->grid) {
+      n = new Node;
+    }
+    buildMoveData();
+  }
   CREATABLE_MAP(TestableMap);
 };
 CREATABLE_REGISTRATION(TestableMap);

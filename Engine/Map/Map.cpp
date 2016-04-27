@@ -10,8 +10,10 @@ namespace Maps
 {
 using namespace Creation;
 
-  Map::Map(): Map(DEFAULT_MAP_SIZE) {
-    for (auto &i: grid) { i = new Node; }
+  Map::Map() : Map(DEFAULT_MAP_SIZE) {
+    for (auto& i : grid) {
+      i = new Node; 
+    }
     buildMoveData();
   }
 
@@ -61,7 +63,12 @@ using namespace Creation;
     }
   }
 
+  int Map::getMapSize() {
+    return this->grid.size();
+  }
+
   Node* Map::getNode(int xInd, int yInd) {
+    assert(0 <= xInd && 0 <= yInd);
     assert(xInd < mapSize && yInd < mapSize);
     assert(grid.at(yInd*mapSize + xInd) != nullptr);
     return grid.at(yInd*mapSize + xInd);

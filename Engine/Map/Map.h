@@ -23,8 +23,7 @@ namespace Maps
       // Data Acess
 
       /**
-       * Creates a map with size mapSize
-       * Nodes are initialized to nullptrs
+       * @return number of nodes in this map.
        */
       int getMapSize();
       /**
