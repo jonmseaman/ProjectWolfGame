@@ -41,6 +41,20 @@ namespace Maps {
     }
   }
 
+  void Node::clearSavable() {
+    // Node links and entrance dirs
+    for (int i = 0; i < NUM_DIRS; i++) {
+      nodeLinks[i] = nullptr;
+      entranceDirs[i] = false;
+    }
+    
+    for (auto& actor : actorPtrs) {
+      delete actor;
+    }
+    actorPtrs.clear();
+    inventory.clearSavable();
+  }
+
   Actor* Node::getActorPtr( int index ) {
     assert(0 <= index && index <= actorPtrs.size());
     auto it = actorPtrs.begin();
@@ -183,7 +197,7 @@ namespace Maps {
        i++;
      }
      nextActor = i == actorPtrs.end() ? *actorPtrs.begin() : *i;
-
+     
      return nextActor;
    }
 
@@ -207,6 +221,7 @@ namespace Maps {
 
    void Node::load()
    {
+     clearSavable();
      startLoad("Node");
      LOAD(name);
      // Figure out how many actors were saved.

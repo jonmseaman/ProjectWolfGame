@@ -254,6 +254,8 @@ void Savable::load(const std::string & varName, std::string & var)
   }
 }
 
+void Savable::clearSavable() {}
+
 bool Savable::canLoad(const std::string &key)
 {
   bool foundSavable = false;

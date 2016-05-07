@@ -15,6 +15,7 @@
 
 /** Makes it easier to declare necessary savable functions. */
 #define SAVABLE void save(); void load()
+#define SAVABLE_CLEAR void save(); void load(); void clearSavable()
 
 namespace File {
   /**
@@ -90,6 +91,8 @@ public:
   void load(const std::string &varName, int &var);
   void load(const std::string &varName, char* &var);
   void load(const std::string &varName, std::string &var);
+
+  virtual void clearSavable();
 protected:
   /**
    * Creates a tree for the current savable.

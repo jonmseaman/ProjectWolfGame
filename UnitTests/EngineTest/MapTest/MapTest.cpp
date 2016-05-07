@@ -12,6 +12,12 @@ using namespace Creation;
 namespace UnitTests {
 
 TEST_CLASS(MapTest) {
+  TEST_METHOD(mapDefaultConstructor) {
+    Map m{};
+    int mSize = m.getMapSize();
+    Assert::IsTrue(m.grid.size() == mSize * mSize, (ToString(m.grid.size()) + L" == " + ToString(mSize * mSize)).c_str());
+  }
+
   TEST_METHOD(mapSaveDefaultMap) {
     Map* m = Create::newMap("TestableMap");
     m->save();

@@ -18,7 +18,7 @@ namespace Maps
     public:
       Node();
       virtual ~Node();
-      SAVABLE;
+      SAVABLE_CLEAR;
 
 
       // Data Access
@@ -108,6 +108,7 @@ namespace Maps
       void showActors(); // Shows a list of actors
 
       std::list<Engine::Entity::Actor*> actorPtrs;
+
     protected:
       Node* nodeLinks[NUM_DIRS];
       /// The directions from which this node can be entered

@@ -16,9 +16,9 @@ namespace Maps
        * Makes a map of specific size. Does not make any nodes.
        * @usage Should be used by derived classes since nodes are not created.
        */
-      Map(int mapSize); // Makes a map of specific size. Does not make any nodes
+      Map(int mapWidth); // Makes a map of specific size. Does not make any nodes
       virtual ~Map(); // Deletes nodes.
-      SAVABLE;
+      SAVABLE_CLEAR;
 
       // Data Acess
 
@@ -42,6 +42,11 @@ namespace Maps
        * Activates all nodes in the map.
        */
       void activate();
+      /**
+      * These are nodes that make up the base layer of the game world.
+      * Other nodes may only exist if made by other nodes.
+      */
+      std::vector<Node*> grid;
     protected:
       /**
        * Connects the nodes to each other.
@@ -49,11 +54,6 @@ namespace Maps
        * @post Nodes will be linked together
        */
       void buildMoveData();
-      /**
-       * These are nodes that make up the base layer of the game world.
-       * Other nodes may only exist if made by other nodes.
-       */
-      std::vector<Node*> grid;
     private:
       /**
        * Deletes all elements of the grid.
@@ -61,7 +61,7 @@ namespace Maps
        */
       void deleteGrid();
       // Vars
-      const int DEFAULT_MAP_SIZE { 5 };
+      static const int DEFAULT_MAP_SIZE;
       /**
        * The width, height of the map. mapSize^2 = number of nodes in grid
        */
