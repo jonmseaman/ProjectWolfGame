@@ -23,7 +23,7 @@ Map::Map() : grid{ DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE, nullptr }
   }
 
   Map::Map(int mapWidth) : grid{ mapWidth*mapWidth, nullptr }
-    , mapSize{ mapSize } {}
+    , mapSize{ mapWidth } {}
 
   Map::~Map() {
     deleteGrid();
@@ -77,7 +77,7 @@ Map::Map() : grid{ DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE, nullptr }
   }
 
   int Map::getMapSize() {
-    return this->mapSize();
+    return this->mapSize;
   }
 
   Node* Map::getNode(int xInd, int yInd) {
