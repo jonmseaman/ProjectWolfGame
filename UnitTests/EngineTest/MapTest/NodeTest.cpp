@@ -47,6 +47,8 @@ TEST_CLASS(NodeTest) {
     Actor* a = Create::newActor("TestableActor");
     saved.addActor(a);
     saved.save();
+    File::save("NodeTest_testNodeLoad");
+    File::load("NodeTest_testNodeLoad");
 
     Assert::IsTrue(n.canLoad("Node"));
     n.load();

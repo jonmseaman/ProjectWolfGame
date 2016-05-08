@@ -16,6 +16,7 @@ TEST_CLASS(MapTest) {
     Map m{};
     int mSize = m.getMapSize();
     Assert::IsTrue(m.grid.size() == mSize * mSize, (ToString(m.grid.size()) + L" == " + ToString(mSize * mSize)).c_str());
+    Assert::IsTrue(m.grid.size() > 0);
   }
 
   TEST_METHOD(mapSaveDefaultMap) {
@@ -36,11 +37,11 @@ TEST_CLASS(MapTest) {
 
   TEST_METHOD(mapLoad) {
     Map* m = Create::newMap("TestableMap");
-    Map* loadedM = new Map();
     m->save();
-
-    loadedM->load();
-    Assert::AreEqual(m->getID(), loadedM->getID(), L"Ids are not the same.");
+    File::save("mapLoadTest");
+    File::load("mapLoadTest");
+    
+    Map* loadedM = Create::loadNewMap();
     Assert::AreEqual(m->getMapSize(), m->getMapSize(), L"Maps are not the same size.");
 
     delete loadedM;
