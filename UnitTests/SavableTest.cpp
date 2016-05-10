@@ -78,7 +78,7 @@ namespace UnitTests
       }
 
       // Make sure nothing is left over from previous loading / saving
-      File::close();
+      File::clear();
 
       // Save
       for (auto i = 0; i < numSavs; i++) {

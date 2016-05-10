@@ -45,7 +45,6 @@ namespace Maps {
     // Node links and entrance dirs
     for (int i = 0; i < NUM_DIRS; i++) {
       nodeLinks[i] = nullptr;
-      entranceDirs[i] = false;
     }
     
     for (auto& actor : actorPtrs) {
@@ -227,9 +226,8 @@ namespace Maps {
      // Figure out how many actors were saved.
      int numActors = 0;
      LOAD(numActors);
-
      for (int i = 0; i < numActors; i++) {
-       actorPtrs.push_back(Creation::Create::loadNewActor());
+       this->addActor(Creation::Create::loadNewActor());
      }
      
      for (int i = 0; i < NUM_DIRS; i++) {

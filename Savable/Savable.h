@@ -36,7 +36,7 @@ namespace File {
   void SAVABLE_API load(const std::string &fileName);
 
   /** Clears a save in progress. */
-  void SAVABLE_API close();
+  void SAVABLE_API clear();
 
 class SAVABLE_API Savable
 {

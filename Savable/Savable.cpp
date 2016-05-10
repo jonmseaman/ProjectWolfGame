@@ -106,7 +106,7 @@ void load(const std::string& fileName)
   file.close();
 }
 
-void close() {
+void clear() {
   masterTree.clear();
 
   // Clear both stacks

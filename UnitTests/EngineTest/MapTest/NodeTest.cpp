@@ -42,6 +42,7 @@ TEST_CLASS(NodeTest) {
   }
 
   TEST_METHOD(testNodeLoad) {
+    File::clear(); // Clear progress from other saves.
     Node n;
     Node saved;
     Actor* a = Create::newActor("TestableActor");
@@ -52,7 +53,9 @@ TEST_CLASS(NodeTest) {
 
     Assert::IsTrue(n.canLoad("Node"));
     n.load();
-    Assert::IsTrue(n.getNumActors() == 1, L"Incorrect number of Actors in node.");
+    std::wstring errorNumActors = L"Incorrect number of Actors in node: ";
+    errorNumActors += std::to_wstring(n.getNumActors());
+    Assert::IsTrue(n.getNumActors() == 1, errorNumActors.c_str());
     Assert::IsTrue(n.getActorPtr(0) != nullptr, L"First actor is null");
   }
 };
