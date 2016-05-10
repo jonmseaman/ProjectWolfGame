@@ -4,9 +4,6 @@
     <ClCompile Include="src\Game\Maps\CenterTown.cpp">
       <Filter>Source\GMap</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game\Maps\House_2Story.cpp">
-      <Filter>Source\GMap</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game\Actors\Rat.cpp">
       <Filter>Source\GObjects</Filter>
     </ClCompile>

@@ -1,16 +1,28 @@
 #include "CppUnitTest.h"
 #include <string>
-#include "Objects/Stats.h"
+#include <Savable.h>
+#include <Entity/Stats.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace Engine::Entity;
 
 namespace UnitTests
 {
   TEST_CLASS(SavableTest)
   {
   public:
+    TEST_METHOD(testGetAndSetId) {
+      auto s = Stats{ 1,2,3 };
+      s.setID("Stats");
 
-    TEST_METHOD(save_string_string)
+      Assert::IsTrue("Stats" == s.getID());
+    }
+
+    TEST_METHOD(testNextId) {
+
+    }
+
+    TEST_METHOD(saveAndLoadStringString)
     {
       Stats s;
 
@@ -19,7 +31,7 @@ namespace UnitTests
       std::string varValueOriginal = varValue;
       s.Savable::save(varName, varValue);
       
-      std::string fname = "SavableTest_string_string";
+      std::string fname = "saveAndLoadStringString";
       File::save(fname);
       File::load(fname);
 
@@ -38,7 +50,6 @@ namespace UnitTests
       int varValue = 125;
       int varValueOriginal = varValue;
       s.Savable::save(varName, varValue);
-
       std::string fname = "SavableTest_string_int";
       File::save(fname);
       File::load(fname);
@@ -67,7 +78,7 @@ namespace UnitTests
       }
 
       // Make sure nothing is left over from previous loading / saving
-      File::close();
+      File::clear();
 
       // Save
       for (auto i = 0; i < numSavs; i++) {

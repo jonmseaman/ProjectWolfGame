@@ -3,9 +3,9 @@
 
 
 #ifdef SAVABLE_EXPORTS
-#define SAVABLE_EXPORTS_API __declspec(dllexport)
+#define SAVABLE_API __declspec(dllexport)
 #else
-#define SAVABLE_EXPORTS_API __declspec(dllimport)
+#define SAVABLE_API __declspec(dllimport)
 #endif
 
 #include <string>
@@ -15,6 +15,7 @@
 
 /** Makes it easier to declare necessary savable functions. */
 #define SAVABLE void save(); void load()
+#define SAVABLE_CLEAR void save(); void load(); void clearSavable()
 
 namespace File {
   /**
@@ -22,20 +23,22 @@ namespace File {
    * them to a file.
    * @param fileName The name of the file on disk. If fileName has
    * a relative path or extension, these are removed.
+   * @requires for char c in fileName, c is alphanumeric or c == '_'
    */
-  void SAVABLE_EXPORTS_API save(const std::string &fileName);
+  void SAVABLE_API save(const std::string &fileName);
   /**
    * Gets data of variables and objects from a file. These are ready to be
    * loaded after this function is called.
    * @param fileName The name of the file being loaded from disk.
    * If fileName has a relative path or extension, these are removed.
+   * @requires for char c in fileName, c is alphanumeric or c == '_'
    */
-  void SAVABLE_EXPORTS_API load(const std::string &fileName);
+  void SAVABLE_API load(const std::string &fileName);
 
   /** Clears a save in progress. */
-  void SAVABLE_EXPORTS_API close();
+  void SAVABLE_API clear();
 
-class SAVABLE_EXPORTS_API Savable
+class SAVABLE_API Savable
 {
 public:
   Savable();
@@ -47,14 +50,15 @@ public:
    * Used so that the save file has information on the actual type
    * of the Actor.
    */
-  int getID() { return id; }
-  void setID(int idNum) { this->id = idNum; }
+  idType getID() { return id; }
+  void setID(idType id) { this->id = id; }
 
   /**
    * Returns the id value of the first thing that can be loaded
    * which also has key matching the param.
    * Calling this method does not change any data.
    * @param the key of the item being loaded
+   * @requires A file is open.
    */
   static idType nextID(const std::string& key);
 
@@ -77,6 +81,7 @@ public:
    * @param varName A key for identifying the variable upon load.
    */
   void save(const std::string &varName, int var) const;
+  void save(const std::string &varName, const char* var) const;
   void save(const std::string &varName, const std::string &var) const;
 
   /**
@@ -84,7 +89,10 @@ public:
    * @param varName The key which the variable was saved with.
    */
   void load(const std::string &varName, int &var);
+  void load(const std::string &varName, char* &var);
   void load(const std::string &varName, std::string &var);
+
+  virtual void clearSavable();
 protected:
   /**
    * Creates a tree for the current savable.
@@ -107,7 +115,7 @@ private:
   * ID number for use by the factor.
   * @usage Set so that the factory knows what type of actor to make
   */
-  int id;
+  idType id;
 };
 } // namespace File
 

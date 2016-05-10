@@ -5,24 +5,36 @@
 #include "Map.h"
 #include "Node.h"
 #include "stdlib.h"
+
+using std::cout;
+using std::endl;
+
 namespace Engine {
 namespace Maps
 {
 using namespace Creation;
 
-  Map::Map(): Map(DEFAULT_MAP_SIZE) {
-    setID(0);
-    for (auto &i: grid) { i = new Node; }
+const int Map::DEFAULT_MAP_SIZE = 5;
+
+Map::Map() : grid{ DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE, nullptr }
+, mapSize{ DEFAULT_MAP_SIZE } {
+    for (Node*& i : grid) { i = new Node; }
     buildMoveData();
   }
 
-  Map::Map(int mapSize): grid{mapSize*mapSize, nullptr}
-  , mapSize{mapSize} {
-    setID(0);
-  }
+  Map::Map(int mapWidth) : grid{ mapWidth*mapWidth, nullptr }
+    , mapSize{ mapWidth } {}
 
   Map::~Map() {
     deleteGrid();
+  }
+
+  void Map::clearSavable() {
+    for (auto& node : grid) {
+      delete node;
+      node = nullptr;
+    }
+    grid.clear();
   }
 
   void Map::activate() {
@@ -64,7 +76,12 @@ using namespace Creation;
     }
   }
 
+  int Map::getMapSize() {
+    return this->mapSize;
+  }
+
   Node* Map::getNode(int xInd, int yInd) {
+    assert(0 <= xInd && 0 <= yInd);
     assert(xInd < mapSize && yInd < mapSize);
     assert(grid.at(yInd*mapSize + xInd) != nullptr);
     return grid.at(yInd*mapSize + xInd);
@@ -89,17 +106,18 @@ using namespace Creation;
   }
 
   void Map::load() {
-      startLoad("Map");
+    clearSavable();
+    startLoad("Map");
 
-      // Load the nodes
-      LOAD(mapSize);
-      grid = std::vector<Node*>(mapSize * mapSize, nullptr);
-      for (int i = 0; i < grid.size(); i++) {
-          grid.at(i) = Create::loadNewNode();
-      }
-      buildMoveData(); // Get map ready for use.
+    // Load the nodes
+    LOAD(mapSize);
+    grid = std::vector<Node*>(mapSize * mapSize, nullptr);
+    for (int i = 0; i < grid.size(); i++) {
+      grid.at(i) = Create::loadNewNode();
+    }
+    buildMoveData(); // Get map ready for use.
 
-      endLoad();
+    endLoad();
   }
 
 } // End namespace Maps

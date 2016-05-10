@@ -9,7 +9,7 @@ namespace Maps
   /**
    * Directions. Used by nodes and maps.
    */
-  ENGINE_API enum Dir
+  enum Dir
   {
     STOP = 0,
     NORTH,

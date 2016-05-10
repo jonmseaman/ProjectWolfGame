@@ -1,9 +1,10 @@
 #include <string>
 #include "CppUnitTest.h"
-#include "Objects/Item.h"
+#include <Entity/Item.h>
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace Engine::Entity;
 
 namespace UnitTests 
 {

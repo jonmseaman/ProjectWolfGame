@@ -14,7 +14,8 @@ public:
   Inventory();
   Inventory(std::string name, int inventorySize);
   virtual ~Inventory();
-  SAVABLE; // Load / save functions
+  SAVABLE_CLEAR;
+  
 
   /**
    * Tries to add item to the inventory.

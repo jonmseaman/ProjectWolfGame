@@ -33,9 +33,11 @@ void MapManager::play() {
     map->activate();
 
     if (tempMap != nullptr) {
+      std::cout << "Switching maps... ";
       std::swap(tempMap, map);
       delete tempMap;
       tempMap = nullptr;
+      std::cout << "Done.\n";
     }
   }
 

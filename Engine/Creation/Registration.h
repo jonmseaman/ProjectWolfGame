@@ -2,6 +2,7 @@
 #include <string>
 #include "CreatableClassDeclarations.h"
 #include <Engine.h>
+#include <Savable.h>
 
 namespace Creation {
 

@@ -47,7 +47,8 @@ void save(const std::string & fileName)
   using namespace boost::property_tree;
 
   for (size_t i = 0; i < fileName.length(); i++) {
-    if (!isalnum(fileName.at(i))) {
+    char c = fileName.at(i);
+    if (!(isalnum(c) || c == '_')){
       throw std::invalid_argument("File name can only contain alpha-numeric characters.");
     }
   }
@@ -105,7 +106,7 @@ void load(const std::string& fileName)
   file.close();
 }
 
-void close() {
+void clear() {
   masterTree.clear();
 
   // Clear both stacks
@@ -117,13 +118,9 @@ void close() {
 // Methods for Savable
 //////////////////////
 
-Savable::Savable(): id(0)
-{
-}
+Savable::Savable() {}
 
-Savable::~Savable()
-{
-}
+Savable::~Savable() {}
 
 Savable::idType Savable::nextID(const std::string& key) {
   // look in current working tree for pair with key @param key
@@ -209,6 +206,10 @@ void Savable::save(const std::string & varName, int var) const
   save(varName, std::to_string(var));
 }
 
+void Savable::save(const std::string & varName, const char* var) const {
+  save(varName, std::string(var));
+}
+
 void Savable::save(const std::string & varName, const std::string & var) const
 {
   pairType p{ varName, treeType(var) };
@@ -222,6 +223,12 @@ void Savable::load(const std::string & varName, int & var)
 
   // Convert value to int
   var = std::stoi(stringValue);
+}
+
+void Savable::load(const std::string &varName, char* &var) {
+  std::string stringValue;
+  load(varName, stringValue);
+  //var = stringValue.dat
 }
 
 void Savable::load(const std::string & varName, std::string & var)
@@ -246,6 +253,8 @@ void Savable::load(const std::string & varName, std::string & var)
     workingTree()->erase(it);
   }
 }
+
+void Savable::clearSavable() {}
 
 bool Savable::canLoad(const std::string &key)
 {

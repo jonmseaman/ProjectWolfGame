@@ -18,7 +18,7 @@ namespace Maps
     public:
       Node();
       virtual ~Node();
-      SAVABLE;
+      SAVABLE_CLEAR;
 
 
       // Data Access
@@ -100,19 +100,19 @@ namespace Maps
        * list.
        */
       void addActor(Engine::Entity::Actor *actor);
+      int getNumActors();
       /**
        * Moves all actors which have a move direction set.
        */
       void moveActors();
-      void removeActor(int index);
       void showActors(); // Shows a list of actors
+
+      std::list<Engine::Entity::Actor*> actorPtrs;
 
     protected:
       Node* nodeLinks[NUM_DIRS];
       /// The directions from which this node can be entered
       bool entranceDirs[NUM_DIRS];
-      std::list<Engine::Entity::Actor*> actorPtrList;
-      int getNumActors();
       std::string name;
       static int nodeCount;
   };

@@ -21,6 +21,13 @@ Inventory::~Inventory() {
   }
 }
 
+void Inventory::clearSavable() {
+  for (auto& item : slots) {
+    delete item;
+    item = nullptr;
+  }
+}
+
 void Inventory::save() {
   startSave("Inventory");
   SAVE(name);
@@ -35,6 +42,7 @@ void Inventory::save() {
 }
 
 void Inventory::load() {
+  clearSavable();
   startLoad("Inventory");
   LOAD(name);
   LOAD(size);

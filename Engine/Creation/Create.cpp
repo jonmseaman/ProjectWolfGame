@@ -7,7 +7,6 @@
 #include <Map/Node.h>
 #include <Map/Map.h>
 
-
 #pragma region Create
 
 using namespace File;
@@ -58,19 +57,27 @@ Map* Create::loadNewMap() {
 }
 
 Engine::Entity::Item * Create::newItem(const std::string &id) {
-  return CreateData::items.at(id)();
+  Item* i = CreateData::items.at(id)();
+  i->setID(id);
+  return i;
 }
 
 Engine::Entity::Actor * Create::newActor(const std::string &id) {
-  return CreateData::actors.at(id)();
+  Actor* a = CreateData::actors.at(id)();
+  a->setID(id);
+  return a;
 }
 
 Engine::Maps::Node * Create::newNode(const std::string &id) {
-  return CreateData::nodes.at(id)();
+  Node* n = CreateData::nodes.at(id)();
+  n->setID(id);
+  return n;
 }
 
 Engine::Maps::Map * Create::newMap(const std::string &id) {
-  return CreateData::maps.at(id)();
+  Map* m = CreateData::maps.at(id)();
+  m->setID(id);
+  return m;
 }
 
 } // End namespace Creation
