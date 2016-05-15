@@ -52,6 +52,10 @@ void Inventory::load() {
   endLoad();
 }
 
+/**
+* Tries to add item to the inventory.
+* @return True if the item was added. False otherwise.
+*/
 bool Inventory::addItem(Item* item) {
   if (hasOpenSlot()) {
     slots.at(firstEmpty()) = item;
@@ -61,6 +65,11 @@ bool Inventory::addItem(Item* item) {
   }
 }
 
+/**
+* Tries to add the item to the inventory
+* Deletes the item if there is not an open slot;
+* @return True if the item was added. False otherwise.
+*/
 bool Inventory::addNewItem(Item* item) {
   bool addedItem = false;
   if (hasOpenSlot()) {
@@ -95,6 +104,11 @@ bool Inventory::hasOpenSlot() {
   return false;
 }
 
+/**
+* Returns the index of the first empty slot.
+* @return The index of the first empty slot or -1 if the
+* an empty slot is not found.
+*/
 int Inventory::firstEmpty() {
   for (int i(0); i < slots.size(); i++) {
     if (slots.at(i) == nullptr) {
@@ -115,10 +129,20 @@ void Inventory::showListOfItems() {
   }
 }
 
+/**
+* Allows access to items in the inventory.
+* @pre 0 <= slotIndex <= inventory.size
+*/
 Item *& Inventory::at(int slotIndex) {
   return this->slots.at(slotIndex);
 }
 
+/**
+* Checks to see if a slot is empty.
+* @param slotIndex The index of the item slot being checked
+* @pre 0 <= slotIndex < size
+* @return Returns true if there is nothing in that item slot.
+*/
 bool Inventory::isSlotEmpty(int slotIndex) {
   assert(0 <= slotIndex && slotIndex < size);
   return slots.at(slotIndex) == nullptr;

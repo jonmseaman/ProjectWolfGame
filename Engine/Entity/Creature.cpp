@@ -13,6 +13,11 @@ Creature::Creature() : name("Creature")
 
 Creature::~Creature() {}
 
+/**
+* This function handles creatures being damaged
+* Kills the creature if the damage is sufficient
+* @param dmg The amount of damage that this creature
+*/
 void Creature::onDamage(int dmg) { // Should return damage taken
   // TODO: Update this for armor
   // modify dmg value based on armor
@@ -73,6 +78,12 @@ void Creature::kill() {
   onDamage(health);
 }
 
+/**
+* Uses an item. Applies effects to this if the item is 'defensive'
+* or applies the effects to the target if offensive
+* @param item The item being used.
+* @param usedOn The creature that the item is being used on.
+*/
 void Creature::useItem(Item &item, Creature &usedOn) {
   // TODO: Implement
   item.use(*this, usedOn);

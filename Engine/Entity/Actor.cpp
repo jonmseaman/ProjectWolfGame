@@ -28,6 +28,11 @@ void Actor::takeTurn() {
   }
 }
 
+/**
+* @usage Used by node to figure out which direction the
+* actor should be moved.
+* @return The direction that the actor should move
+*/
 int Actor::getMoveDir() {
   return moveDir;
 }
@@ -36,6 +41,13 @@ void Actor::setCurrentNode(Node *node) {
   this->currentNode = node;
 }
 
+/**
+* Tries to set movement for the actor.
+* If it is possible to move in direction dir, then the turn is used.
+* @pre 0 <= dir < NUM_DIRS
+* @post Turn is used if it is possible to move in direction
+* @post Actor will be set to move after turns
+*/
 void Actor::setMoveDir(int dir) {
   assert(currentNode != nullptr);
   assert(0 <= dir && dir < NUM_DIRS);
@@ -83,6 +95,11 @@ void Actor::endTurn() {
   setIsTurnUsed(true);
 }
 
+/**
+* Checks to make sure that this has a valid target.<br>
+* <b>Updates</b> targetPtr
+* @return true if target is valid
+*/
 bool Actor::hasValidTarget() {
   bool targetValid = targetPtr != nullptr && currentNode->containsActor(targetPtr);
   if (!targetValid) {
@@ -109,6 +126,10 @@ void Actor::setTarget(Actor* actor) {
   targetPtr = actor;
 }
 
+/**
+* Cycles through targets in the node. If there is not an actor != this in
+* the node, the target will be removed.
+*/
 void Actor::cycleTarget() {
   targetPtr = currentNode->getNextActor(targetPtr);
 }
