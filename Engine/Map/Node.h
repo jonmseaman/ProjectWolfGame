@@ -18,46 +18,44 @@ public:
   virtual ~Node();
   SAVABLE_CLEAR;
 
-
-  // Data Access
-  // Actors
-
-
-  bool containsActor(Engine::Entity::Actor* actor);
-
-  Engine::Entity::Actor* getActorPtr(int index);
-
-  Engine::Entity::Actor* getNextActor(Engine::Entity::Actor* actor);
-
-  std::string getName();
+  std::string getName() { return this->name; }
   void setName(std::string name) { this->name = name; }
-  void setNodeLink(int dir, Node* link);
 
-  void setEntranceDir(int dir, bool isEntrance);
-  /**
-   * The node's inventory. Contains items in the node.
-   */
+  // The node's inventory. Contains items in the node.
   Engine::Entity::Inventory inventory;
 
-  // Navigation
-  virtual bool isWall() { return false; }
-  bool canMoveInDir(int dir);
-  bool getEntranceDir(int dir);
-  void showNavigationInfo();
-  void showNavigationInfoForNode(int dir);
+#pragma region Actor
+  bool containsActor(Engine::Entity::Actor* actor);
+  Engine::Entity::Actor* getActorPtr(int index);
+  Engine::Entity::Actor* getNextActor(Engine::Entity::Actor* actor);
 
-  // Use
-
-
-  virtual void activate();
   void addActor(Engine::Entity::Actor *actor);
   int getNumActors();
   void moveActors();
   void showActors(); // Shows a list of actors
+#pragma endregion
 
-  std::list<Engine::Entity::Actor*> actorPtrs;
+#pragma region Navigation
+  bool canMoveInDir(int dir);
+
+  bool getEntranceDir(int dir);
+  void setEntranceDir(int dir, bool isEntrance);
+
+  void setNodeLink(int dir, Node* link);
+  void showNavigationInfo();
+  void showNavigationInfoForNode(int dir);
+#pragma endregion
+
+#pragma region Gameplay
+
+  virtual void activate();
+
+#pragma endregion
 
 protected:
+  // Actors contained in the node.
+  std::list<Engine::Entity::Actor*> actorPtrs;
+
   Node* nodeLinks[NUM_DIRS];
   /// The directions from which this node can be entered
   bool entranceDirs[NUM_DIRS];
