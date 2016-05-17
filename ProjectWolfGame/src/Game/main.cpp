@@ -10,8 +10,8 @@ int main() {
   MapManager &game = MapManager::getInstance();
   int choice;
 
-  mainMenu:
-  dispList("WolfGame", {"New Game", "Exit"});
+mainMenu:
+  dispList("WolfGame", { "New Game", "Exit" });
   choice = getDigit(1, 2);
   switch (choice) {
     case 1: // New Game

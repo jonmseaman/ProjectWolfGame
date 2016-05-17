@@ -19,7 +19,7 @@ enum Dir {
   NUM_DIRS,
 };
 
-// Returns the int value from enum Dir corresponding wasdqe directions. 
+// Returns the int value from enum Dir corresponding wasdqe directions.
 ENGINE_API int charToDir(char charDir);
 // Returns a string correspond to the value in enum Dir.
 ENGINE_API std::string dirName(int dir);

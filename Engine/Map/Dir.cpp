@@ -4,7 +4,6 @@
 
 namespace Engine {
 namespace Maps {
-
 /**
 * Converts a char of wasdqe to the corresponding travel direction
 * @param The char being converted to an int
@@ -91,7 +90,5 @@ int oppositeDir(int dir) {
   }
   return revDir;
 }
-
-
 } // End Maps
 } // End Engine

@@ -6,7 +6,6 @@
 
 namespace Engine {
 namespace Entity {
-
 using namespace Creation;
 
 Inventory::Inventory() :Inventory("Inventory", 2) {}
@@ -147,6 +146,5 @@ bool Inventory::isSlotEmpty(int slotIndex) {
   assert(0 <= slotIndex && slotIndex < size);
   return slots.at(slotIndex) == nullptr;
 }
-
 }
 }

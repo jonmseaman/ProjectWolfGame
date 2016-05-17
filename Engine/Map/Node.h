@@ -34,7 +34,11 @@ public:
   void moveActors();
   void showActors(); // Shows a list of actors
 #pragma endregion
+#pragma region Gameplay
 
+  virtual void activate();
+
+#pragma endregion
 #pragma region Navigation
   bool canMoveInDir(int dir);
 
@@ -44,12 +48,8 @@ public:
   void setNodeLink(int dir, Node* link);
   void showNavigationInfo();
   void showNavigationInfoForNode(int dir);
-#pragma endregion
-
-#pragma region Gameplay
-
-  virtual void activate();
-
+  // TODO: Make this return a data member bool. No virtual.
+  virtual bool isWall() { return false; }
 #pragma endregion
 
 protected:

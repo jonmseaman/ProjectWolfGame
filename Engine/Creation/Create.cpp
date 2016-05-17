@@ -14,7 +14,6 @@ using namespace Engine::Entity;
 using namespace Engine::Maps;
 
 namespace Creation {
-
 // Methods for new loading / saving system
 
 Item* Create::loadNewItem() {
@@ -47,7 +46,6 @@ Node* Create::loadNewNode() {
   return node;
 }
 
-
 Map* Create::loadNewMap() {
   Savable::idType id = Savable::nextID("Map");
   Map* map = Create::newMap(id);
@@ -79,7 +77,6 @@ Engine::Maps::Map * Create::newMap(const std::string &id) {
   m->setID(id);
   return m;
 }
-
 } // End namespace Creation
 
 #pragma endregion

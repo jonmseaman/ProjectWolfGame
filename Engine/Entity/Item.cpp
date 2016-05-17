@@ -5,8 +5,6 @@
 
 namespace Engine {
 namespace Entity {
-
-
 Item::Item() :Item("Item", Stats()) {}
 
 Item::Item(std::string name, Stats stats) : Item(name, "", stats) {}
@@ -84,6 +82,5 @@ bool Item::operator==(const Item & r) {
     && getHeal() == r.getHeal()
     && stats == r.stats;
 }
-
 }
 }

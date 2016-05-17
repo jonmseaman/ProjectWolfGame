@@ -138,6 +138,5 @@ void Map::load() {
 
   endLoad();
 }
-
 } // End namespace Maps
 }

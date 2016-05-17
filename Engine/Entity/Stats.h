@@ -5,7 +5,6 @@
 
 namespace Engine {
 namespace Entity {
-
 class Creature;
 
 class ENGINE_API Stats : public File::Savable {
@@ -30,14 +29,12 @@ public:
   Stats operator+(const Stats& r) const;
   bool operator==(const Stats& r) const;
 
-
 private:
   // Base stats
   int stamina; // Boosts max health points
   int strength; // boosts physical damage
   int intellect; // Boosts spell damage
 };
-
 }
 }
 

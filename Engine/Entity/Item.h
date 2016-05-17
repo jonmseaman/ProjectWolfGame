@@ -21,7 +21,6 @@ public:
   SAVABLE;
   CREATABLE_ITEM(Item)
 
-
     void showInfo() const;
 
   /**
@@ -49,7 +48,6 @@ protected:
   int baseDamage;
   int baseHeal;
 };
-
 }
 }
 

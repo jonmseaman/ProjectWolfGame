@@ -8,7 +8,6 @@ using namespace Engine::Maps;
 
 namespace Engine {
 namespace Entity {
-
 /**
  * The actor class is a creature which with behavior.
  * This should be generalized into Players, Mobs, Bosses etc
@@ -18,7 +17,6 @@ public:
   Actor();
   virtual ~Actor();
   SAVABLE;
-
 
   // Combat
   virtual void onAttack();
@@ -58,7 +56,6 @@ private:
   bool isTurnUsed; // Should stop allowing actions when this is true.
   int moveDir; // The direction that the map will move the player
 };
-
 }
 }
 #endif // ACTOR_H

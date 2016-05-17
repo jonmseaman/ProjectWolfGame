@@ -8,7 +8,6 @@
 
 namespace Engine {
 namespace Entity {
-
 class ENGINE_API Inventory : public File::Savable {
 public:
   Inventory();
@@ -35,7 +34,6 @@ protected:
   int size;
 private:
 };
-
 }
 }
 

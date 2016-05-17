@@ -4,20 +4,19 @@
 
 namespace Engine {
 namespace Entity {
-
 class Player : public Actor {
 public:
   Player();
   virtual ~Player();
   CREATABLE_ACTOR(Player)
 
-  /**
-   * Shows the player's HUD.
-   * Name, HP/MaxHP
-   * Target name, hp, MaxHP
-   * Current Location
-   */
-  void showHUD();
+    /**
+     * Shows the player's HUD.
+     * Name, HP/MaxHP
+     * Target name, hp, MaxHP
+     * Current Location
+     */
+    void showHUD();
   /**
    * Allows the actor to take a turn. Default behavior is defined
    * for derived classes which do not override takeTurn()
@@ -87,7 +86,6 @@ protected:
   void exitMenu();
 private:
 };
-
 }
 }
 

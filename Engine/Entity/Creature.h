@@ -9,7 +9,6 @@
 
 namespace Engine {
 namespace Entity {
-
 /**
  * This class should store all functions for defining what a creature is.
  */
@@ -55,7 +54,6 @@ public:
 
   // Stats
   Stats stats;
-
 
 protected:
   void flagInCombat(bool val); // sets combat status

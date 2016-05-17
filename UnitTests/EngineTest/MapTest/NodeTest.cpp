@@ -3,14 +3,12 @@
 #include <Map/Node.h>
 #include <Creation/Create.h>
 
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace Engine::Maps;
 using namespace Engine::Entity;
 using namespace Creation;
 
 namespace UnitTests {
-
 TEST_CLASS(NodeTest) {
   TEST_METHOD(testContainsActorWhenNotContained) {
     Node n;
@@ -59,5 +57,4 @@ TEST_CLASS(NodeTest) {
     Assert::IsTrue(n.getActorPtr(0) != nullptr, L"First actor is null");
   }
 };
-
 }

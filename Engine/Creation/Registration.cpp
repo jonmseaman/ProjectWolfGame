@@ -4,7 +4,6 @@
 #include "CreateData.h"
 
 namespace Creation {
-
 extern CreateData createData;
 
 Registration::Registration(const std::string & name, Engine::Entity::Item *(*c)()) {
@@ -22,7 +21,4 @@ Registration::Registration(const std::string & name, Engine::Maps::Node *(*c)())
 Registration::Registration(const std::string & name, Engine::Maps::Map *(*c)()) {
   createData.maps.insert(std::make_pair(name, c));
 }
-
-
-
 }

@@ -13,11 +13,9 @@
 using namespace Engine::Maps;
 using namespace Engine::Entity;
 
-
 int Node::nodeCount = 1;
 namespace Engine {
 namespace Maps {
-
 // Special registration for default node. Allows creation with empty string or 'Node'.
 Creation::Registration __registrationNodeEmptyString("", []() { return new Node; });
 Creation::Registration __registrationNode("Node", []() {return new Node; });
@@ -160,10 +158,6 @@ void Node::moveActors() {
   }
 }
 
-std::string Node::getName() {
-  return name;
-}
-
 void Node::showActors() {
   int i(0);
   for (auto it = actorPtrs.begin(); it != actorPtrs.end(); ++it) {
@@ -256,7 +250,6 @@ void Node::save() {
 
   // TODO: Entrance dirs
 
-
   endSave();
 }
 
@@ -275,7 +268,6 @@ void Node::load() {
     // LOAD(entranceDirs[i]);
     // TODO: Entrance dirs
   }
-
 
   endLoad();
 }

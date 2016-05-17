@@ -13,7 +13,7 @@ const int CENTER_TOWN_WIDTH{ 5 };
 class CenterTown : public Map {
 public:
   CREATABLE_MAP(CenterTown)
-  CenterTown() : Map(CENTER_TOWN_WIDTH) {
+    CenterTown() : Map(CENTER_TOWN_WIDTH) {
     for (auto &i : grid) { i = new Node; }
     buildMoveData();
     Actor* player = Create::newActor("Player");

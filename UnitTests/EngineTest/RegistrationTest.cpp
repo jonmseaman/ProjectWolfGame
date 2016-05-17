@@ -10,7 +10,6 @@ using namespace Engine::Entity;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTests {
-
 #pragma region TestClassesForRegistration
 
 // Class to test registration for;
@@ -72,5 +71,4 @@ public:
     Assert::IsTrue(map != nullptr);
   }
 };
-
 }

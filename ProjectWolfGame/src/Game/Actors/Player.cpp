@@ -7,10 +7,8 @@
 #include "Player.h"
 #include <UI/Input.h>
 
-
 namespace Engine {
 namespace Entity {
-
 CREATABLE_REGISTRATION(Player);
 
 Player::Player() {
@@ -285,8 +283,6 @@ void Player::saveMenu() {
   MapManager::getInstance().save(fileName);
   std::cout << " Done." << std::endl;
 }
-
-
 }
 }
 

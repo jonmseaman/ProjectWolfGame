@@ -6,7 +6,6 @@
 #include "CreatableClassDeclarations.h"
 
 namespace Creation {
-
 class ENGINE_API Create {
 public:
   // Creation functions
@@ -23,8 +22,6 @@ public:
   static Engine::Maps::Node* newNode(const std::string&);
   static Engine::Maps::Map* newMap(const std::string&);
 };
-
 }
 
 #endif CREATE_H
-

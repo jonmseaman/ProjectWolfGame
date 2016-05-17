@@ -9,7 +9,7 @@ using namespace Engine::Entity;
 class Rat : public Actor {
 public:
   CREATABLE_ACTOR(Rat)
-  Rat() {
+    Rat() {
     setName("Rat");
     setHealth(2);
     setMaxHealth(2);
@@ -18,4 +18,3 @@ public:
 };
 
 CREATABLE_REGISTRATION(Rat);
-

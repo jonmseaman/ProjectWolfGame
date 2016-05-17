@@ -6,7 +6,7 @@
 #include "Map.h"
 #include "MapManager.h"
 
-MapManager::MapManager(): map(nullptr) {}
+MapManager::MapManager() : map(nullptr) {}
 /**
 * Deletes the map. Sets map to nullptr.
 */
@@ -20,7 +20,7 @@ void MapManager::closeMap() {
 void MapManager::openMap(const std::string& map) {
   using namespace Maps;
   Map* loadMap = Creation::Create::newMap(map);
-  setMap( loadMap );
+  setMap(loadMap);
 }
 
 void MapManager::setMap(Maps::Map* map) {
@@ -35,8 +35,8 @@ void MapManager::setMap(Maps::Map* map) {
 * @post The game loop will be started.
 */
 void MapManager::play() {
-  assert( map != nullptr );
-  while ( true ) // TODO: Make variable for this
+  assert(map != nullptr);
+  while (true) // TODO: Make variable for this
   {
     map->activate();
 
@@ -48,7 +48,6 @@ void MapManager::play() {
       std::cout << "Done.\n";
     }
   }
-
 }
 /**
 * Saves your game in file fileName
@@ -64,9 +63,9 @@ void MapManager::save(const std::string &fileName) {
 * @pre fileName exists in File::savePath
 */
 void MapManager::load(const std::string &fileName) {
-    File::load(fileName);
+  File::load(fileName);
 
-    // tempMap and map are swapped automatically later.
-    delete tempMap;
-    tempMap = Creation::Create::loadNewMap();
+  // tempMap and map are swapped automatically later.
+  delete tempMap;
+  tempMap = Creation::Create::loadNewMap();
 }

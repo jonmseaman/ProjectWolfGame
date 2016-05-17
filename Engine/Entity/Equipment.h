@@ -5,9 +5,7 @@
 
 namespace Engine {
 namespace Entity {
-
 class ENGINE_API Equipment : public Inventory {};
-
 }
 }
 

@@ -8,7 +8,6 @@ using namespace Engine::Maps;
 
 namespace Engine {
 namespace Entity {
-
 Actor::Actor() : isPlayer(false)
 , isTurnUsed(false)
 , moveDir(STOP) {}
@@ -145,6 +144,5 @@ void Actor::load() {
   Creature::load();
   endLoad();
 }
-
 }
 }

@@ -6,7 +6,6 @@
 
 namespace Engine {
 namespace Entity {
-
 Creature::Creature() : name("Creature")
 , inventory(Inventory{ "Inv", 0 })
 , isLiving(false) {}
@@ -123,6 +122,5 @@ void Creature::load() {
   inventory.load();
   endLoad();
 }
-
 }
 }

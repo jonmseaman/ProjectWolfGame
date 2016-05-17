@@ -10,7 +10,6 @@ using namespace Engine::Entity;
 using namespace Creation;
 
 namespace UnitTests {
-
 TEST_CLASS(MapTest) {
   TEST_METHOD(mapDefaultConstructor) {
     Map m{};
@@ -40,7 +39,7 @@ TEST_CLASS(MapTest) {
     m->save();
     File::save("mapLoadTest");
     File::load("mapLoadTest");
-    
+
     Map* loadedM = Create::loadNewMap();
     Assert::AreEqual(m->getMapSize(), m->getMapSize(), L"Maps are not the same size.");
 
@@ -48,5 +47,4 @@ TEST_CLASS(MapTest) {
     delete m;
   }
 };
-
 }

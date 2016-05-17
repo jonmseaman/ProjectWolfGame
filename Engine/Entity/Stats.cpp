@@ -4,7 +4,6 @@
 
 namespace Engine {
 namespace Entity {
-
 Stats::Stats(int stamina, int strength, int intellect) {
   this->stamina = stamina;
   this->strength = strength;
@@ -49,6 +48,5 @@ bool Stats::operator==(const Stats& r) const {
     && getStrength() == r.getStrength()
     && getIntellect() == r.getIntellect();
 }
-
 }
 }

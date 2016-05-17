@@ -2,7 +2,7 @@
 #include "Registration.h"
 /// <summary>
 /// This macro is used to implement create method used by the Create class
-/// to produce 
+/// to produce
 /// </summary>
 #define CREATABLE_ITEM(ClassName)   static Engine::Entity::Item* create() { return new ClassName; }
 #define CREATABLE_ACTOR(ClassName)  static Engine::Entity::Actor* create() { return new ClassName; }

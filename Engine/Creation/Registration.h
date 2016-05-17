@@ -5,7 +5,6 @@
 #include <Savable.h>
 
 namespace Creation {
-
 class ENGINE_API Registration {
 public:
   Registration(const std::string& name, Engine::Entity::Item* (*c)());
@@ -13,7 +12,4 @@ public:
   Registration(const std::string& name, Engine::Maps::Node* (*c)());
   Registration(const std::string& name, Engine::Maps::Map* (*c)());
 };
-
 }
-
-
