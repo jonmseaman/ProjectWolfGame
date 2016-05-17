@@ -15,40 +15,38 @@ using namespace boost::property_tree;
 namespace fs = boost::filesystem;
 
 namespace File {
-
 // Data for File::
 
-  typedef ptree::value_type   pairType;
-  typedef ptree               treeType;
+typedef ptree::value_type   pairType;
+typedef ptree               treeType;
 
-  /** The folder in which saves will go. */
-  const fs::path savePath("./Saves");
-  fs::fstream file;
-  fs::path filePath;
-  treeType masterTree;
-  std::stack<treeType*, std::list<treeType*>> treeStack;
-  std::stack<ptree::iterator, std::list<ptree::iterator>> eraseStack;
+/** The folder in which saves will go. */
+const fs::path savePath("./Saves");
+fs::fstream file;
+fs::path filePath;
+treeType masterTree;
+std::stack<treeType*, std::list<treeType*>> treeStack;
+std::stack<ptree::iterator, std::list<ptree::iterator>> eraseStack;
 
-  /* For storage of information. */
-  treeType* workingTree() {
-    treeType* treePtr = &masterTree;
-    if (!treeStack.empty()) {
-      treePtr = treeStack.top();
-    }
-
-    return treePtr;
+/* For storage of information. */
+treeType* workingTree() {
+  treeType* treePtr = &masterTree;
+  if (!treeStack.empty()) {
+    treePtr = treeStack.top();
   }
+
+  return treePtr;
+}
 
 // Methods in File::
 
-void save(const std::string & fileName)
-{
+void save(const std::string & fileName) {
   using namespace File;
   using namespace boost::property_tree;
 
   for (size_t i = 0; i < fileName.length(); i++) {
     char c = fileName.at(i);
-    if (!(isalnum(c) || c == '_')){
+    if (!(isalnum(c) || c == '_')) {
       throw std::invalid_argument("File name can only contain alpha-numeric characters.");
     }
   }
@@ -74,8 +72,7 @@ void save(const std::string & fileName)
     // write to file, with formatting
     xml_writer_settings<std::string> settings(' ', 2);
     xml_parser::write_xml(file, masterTree, settings);
-  }
-  catch (std::exception &e) {
+  } catch (std::exception &e) {
     // TODO: Better catch
     std::cerr << e.what() << std::endl;
   }
@@ -84,8 +81,7 @@ void save(const std::string & fileName)
   file.close();
 }
 
-void load(const std::string& fileName)
-{
+void load(const std::string& fileName) {
   using namespace File;
   using namespace boost::property_tree;
 
@@ -96,10 +92,9 @@ void load(const std::string& fileName)
   if (file.is_open()) { file.close(); }
 
   try {
-    file.open( filePath, std::fstream::in );
+    file.open(filePath, std::fstream::in);
     xml_parser::read_xml(file, masterTree, xml_parser::trim_whitespace);
-  }
-  catch (std::exception &e) {
+  } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
   }
 
@@ -146,11 +141,9 @@ Savable::idType Savable::nextID(const std::string& key) {
     // TODO: fix this
     return "";
   }
-
 }
 
-void Savable::startSave(const std::string& key)
-{
+void Savable::startSave(const std::string& key) {
   // Make a new tree to add new vars to
   // Add the pair to the working tree
   workingTree()->push_back(pairType(key, ptree()));
@@ -164,15 +157,13 @@ void Savable::startSave(const std::string& key)
   SAVE(id);
 }
 
-void Savable::endSave()
-{
+void Savable::endSave() {
   assert(!treeStack.empty());
   // We no longer want to work with this tree, so remove from stack
   treeStack.pop();
 }
 
-void Savable::startLoad(const std::string & key)
-{
+void Savable::startLoad(const std::string & key) {
   // look in current working tree for pair with key @param key
   auto it = workingTree()->begin();
   bool foundVar = false;
@@ -191,8 +182,7 @@ void Savable::startLoad(const std::string & key)
   treeStack.push(&it->second);
 }
 
-void Savable::endLoad()
-{
+void Savable::endLoad() {
   // pop tree stack for loading
   treeStack.pop();
   // take iterator from 'erase' stack erase it from the working tree
@@ -201,8 +191,7 @@ void Savable::endLoad()
   eraseStack.pop();
 }
 
-void Savable::save(const std::string & varName, int var) const
-{
+void Savable::save(const std::string & varName, int var) const {
   save(varName, std::to_string(var));
 }
 
@@ -210,14 +199,12 @@ void Savable::save(const std::string & varName, const char* var) const {
   save(varName, std::string(var));
 }
 
-void Savable::save(const std::string & varName, const std::string & var) const
-{
+void Savable::save(const std::string & varName, const std::string & var) const {
   pairType p{ varName, treeType(var) };
   workingTree()->push_back(p);
 }
 
-void Savable::load(const std::string & varName, int & var)
-{
+void Savable::load(const std::string & varName, int & var) {
   std::string stringValue = "";
   load(varName, stringValue);
 
@@ -231,8 +218,7 @@ void Savable::load(const std::string &varName, char* &var) {
   //var = stringValue.dat
 }
 
-void Savable::load(const std::string & varName, std::string & var)
-{
+void Savable::load(const std::string & varName, std::string & var) {
   // Find var in tree
   auto it = workingTree()->begin();
 
@@ -256,21 +242,17 @@ void Savable::load(const std::string & varName, std::string & var)
 
 void Savable::clearSavable() {}
 
-bool Savable::canLoad(const std::string &key)
-{
+bool Savable::canLoad(const std::string &key) {
   bool foundSavable = false;
 
   auto it = workingTree()->begin();
-  while (!foundSavable && it != workingTree()->end())
-  {
+  while (!foundSavable && it != workingTree()->end()) {
     foundSavable = it->first == key;
-    if (!foundSavable)
-    {
+    if (!foundSavable) {
       it++;
     }
   }
 
   return foundSavable;
 }
-
 } // namespace File

@@ -1,7 +1,6 @@
 #ifndef SAVABLE_H
 #define SAVABLE_H
 
-
 #ifdef SAVABLE_EXPORTS
 #define SAVABLE_API __declspec(dllexport)
 #else
@@ -18,28 +17,27 @@
 #define SAVABLE_CLEAR void save(); void load(); void clearSavable()
 
 namespace File {
-  /**
-   * Takes the all variables and objects which have been saved and writes
-   * them to a file.
-   * @param fileName The name of the file on disk. If fileName has
-   * a relative path or extension, these are removed.
-   * @requires for char c in fileName, c is alphanumeric or c == '_'
-   */
-  void SAVABLE_API save(const std::string &fileName);
-  /**
-   * Gets data of variables and objects from a file. These are ready to be
-   * loaded after this function is called.
-   * @param fileName The name of the file being loaded from disk.
-   * If fileName has a relative path or extension, these are removed.
-   * @requires for char c in fileName, c is alphanumeric or c == '_'
-   */
-  void SAVABLE_API load(const std::string &fileName);
+/**
+ * Takes the all variables and objects which have been saved and writes
+ * them to a file.
+ * @param fileName The name of the file on disk. If fileName has
+ * a relative path or extension, these are removed.
+ * @requires for char c in fileName, c is alphanumeric or c == '_'
+ */
+void SAVABLE_API save(const std::string &fileName);
+/**
+ * Gets data of variables and objects from a file. These are ready to be
+ * loaded after this function is called.
+ * @param fileName The name of the file being loaded from disk.
+ * If fileName has a relative path or extension, these are removed.
+ * @requires for char c in fileName, c is alphanumeric or c == '_'
+ */
+void SAVABLE_API load(const std::string &fileName);
 
-  /** Clears a save in progress. */
-  void SAVABLE_API clear();
+/** Clears a save in progress. */
+void SAVABLE_API clear();
 
-class SAVABLE_API Savable
-{
+class SAVABLE_API Savable {
 public:
   Savable();
   ~Savable();
