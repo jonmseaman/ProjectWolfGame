@@ -1,3 +1,4 @@
+#include <assert.h>
 #include "Create.h"
 #include "CreateData.h"
 #include "Savable.h"
@@ -57,24 +58,28 @@ Map* Create::loadNewMap() {
 }
 
 Engine::Entity::Item * Create::newItem(const std::string &id) {
+  assert(CreateData::items.find(id) != CreateData::items.end());
   Item* i = CreateData::items.at(id)();
   i->setID(id);
   return i;
 }
 
 Engine::Entity::Actor * Create::newActor(const std::string &id) {
+  assert(CreateData::actors.find(id) != CreateData::actors.end());
   Actor* a = CreateData::actors.at(id)();
   a->setID(id);
   return a;
 }
 
 Engine::Maps::Node * Create::newNode(const std::string &id) {
+  assert(CreateData::nodes.find(id) != CreateData::nodes.end());
   Node* n = CreateData::nodes.at(id)();
   n->setID(id);
   return n;
 }
 
 Engine::Maps::Map * Create::newMap(const std::string &id) {
+  assert(CreateData::maps.find(id) != CreateData::maps.end());
   Map* m = CreateData::maps.at(id)();
   m->setID(id);
   return m;
