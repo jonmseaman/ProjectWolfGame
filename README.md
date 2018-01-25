@@ -18,3 +18,6 @@ A prototype for a terminal-based RPG.
 * t - Change target
 * F5 - Save
 * F9 - Load
+
+## Screenshot
+![Screenshot of UI](Documentation/ProjectWolfGame_UI.png)
