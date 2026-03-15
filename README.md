@@ -2,12 +2,16 @@
 A prototype for a terminal-based RPG.
 
 ## Tools
-* Boost Libraries 1.60 - http://www.boost.org/
-* Visual Studio 2015
+* CMAKE
 
 ## How to Build
-1. Add environment variables BOOST_ROOT and BOOST_LIBRARYDIR
-2. Open visual studio --> build solution
+```bash
+mkdir build
+cd build
+cmake ..
+# Build and run tests
+make all test
+```
 
 ## Controls
 
