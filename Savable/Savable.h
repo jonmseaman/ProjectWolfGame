@@ -2,10 +2,14 @@
 #define SAVABLE_H
 
 
-#ifdef SAVABLE_EXPORTS
-#define SAVABLE_API __declspec(dllexport)
+#if defined(_MSC_VER) || defined(__MINGW32__)
+#  ifdef SAVABLE_EXPORTS
+#    define SAVABLE_API __declspec(dllexport)
+#  else
+#    define SAVABLE_API __declspec(dllimport)
+#  endif
 #else
-#define SAVABLE_API __declspec(dllimport)
+#  define SAVABLE_API
 #endif
 
 #include <string>

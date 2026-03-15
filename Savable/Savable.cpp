@@ -1,8 +1,7 @@
 #include <assert.h>
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/fstream.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
+#include <filesystem>
+#include <fstream>
+#include <sstream>
 #include <iostream>
 #include <string>
 #include <stack>
@@ -10,24 +9,46 @@
 
 #include "Savable.h"
 
-using namespace boost;
-using namespace boost::property_tree;
-namespace fs = boost::filesystem;
+namespace fs = std::filesystem;
 
 namespace File {
 
+// XmlNode: drop-in replacement for boost::property_tree::ptree
+struct XmlNode {
+    std::string value;
+    std::vector<std::pair<std::string, XmlNode>> children;
+
+    using value_type = std::pair<std::string, XmlNode>;
+    using iterator   = std::vector<value_type>::iterator;
+
+    XmlNode() = default;
+    explicit XmlNode(std::string v) : value(std::move(v)) {}
+
+    void     push_back(value_type p)    { children.push_back(std::move(p)); }
+    iterator begin()                    { return children.begin(); }
+    iterator end()                      { return children.end(); }
+    iterator find(const std::string& k) {
+        return std::find_if(children.begin(), children.end(),
+                            [&](const value_type& p){ return p.first == k; });
+    }
+    iterator not_found()                { return children.end(); }
+    std::string data() const            { return value; }
+    void     erase(iterator it)         { children.erase(it); }
+    void     clear()                    { children.clear(); value.clear(); }
+};
+
 // Data for File::
 
-  typedef ptree::value_type   pairType;
-  typedef ptree               treeType;
+  typedef XmlNode::value_type   pairType;
+  typedef XmlNode               treeType;
 
   /** The folder in which saves will go. */
   const fs::path savePath("./Saves");
-  fs::fstream file;
+  std::fstream file;
   fs::path filePath;
   treeType masterTree;
   std::stack<treeType*, std::list<treeType*>> treeStack;
-  std::stack<ptree::iterator, std::list<ptree::iterator>> eraseStack;
+  std::stack<XmlNode::iterator, std::list<XmlNode::iterator>> eraseStack;
 
   /* For storage of information. */
   treeType* workingTree() {
@@ -39,12 +60,89 @@ namespace File {
     return treePtr;
   }
 
+// XML write helpers
+
+static void writeXmlNode(std::ostream& out, const XmlNode& node,
+                         const std::string& tag, int depth) {
+    std::string ind(depth * 2, ' ');
+    out << ind << "<" << tag << ">";
+    if (node.children.empty()) {
+        out << node.value;
+    } else {
+        out << "\n";
+        for (auto& [k, v] : node.children)
+            writeXmlNode(out, v, k, depth + 1);
+        out << ind;
+    }
+    out << "</" << tag << ">\n";
+}
+
+static void writeXml(std::ostream& out, const XmlNode& tree) {
+    out << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+    for (auto& [k, v] : tree.children)
+        writeXmlNode(out, v, k, 0);
+}
+
+// XML read helpers
+
+static std::string trimWs(const std::string& s) {
+    size_t b = s.find_first_not_of(" \t\r\n");
+    if (b == std::string::npos) return "";
+    return s.substr(b, s.find_last_not_of(" \t\r\n") - b + 1);
+}
+
+static void readXmlNode(std::istream& in, XmlNode& node);
+
+static void readXml(std::istream& in, XmlNode& root) {
+    std::string line;
+    while (std::getline(in, line)) {
+        std::string t = trimWs(line);
+        if (t.empty() || t.rfind("<?", 0) == 0) continue;
+        if (t[0] == '<' && t[1] != '/') {
+            size_t end = t.find_first_of("> \t");
+            std::string tag = t.substr(1, end - 1);
+            XmlNode child;
+            std::string closeTag = "</" + tag + ">";
+            size_t closePos = t.find(closeTag);
+            if (closePos != std::string::npos) {
+                size_t valStart = t.find('>') + 1;
+                child.value = t.substr(valStart, closePos - valStart);
+            } else {
+                readXmlNode(in, child);
+            }
+            root.children.push_back({tag, std::move(child)});
+        }
+    }
+}
+
+static void readXmlNode(std::istream& in, XmlNode& node) {
+    std::string line;
+    while (std::getline(in, line)) {
+        std::string t = trimWs(line);
+        if (t.empty()) continue;
+        if (t[0] == '<' && t[1] == '/') break; // closing tag
+        if (t[0] == '<') {
+            size_t end = t.find_first_of("> \t");
+            std::string tag = t.substr(1, end - 1);
+            XmlNode child;
+            std::string closeTag = "</" + tag + ">";
+            size_t closePos = t.find(closeTag);
+            if (closePos != std::string::npos) {
+                size_t valStart = t.find('>') + 1;
+                child.value = t.substr(valStart, closePos - valStart);
+            } else {
+                readXmlNode(in, child);
+            }
+            node.children.push_back({tag, std::move(child)});
+        }
+    }
+}
+
 // Methods in File::
 
 void save(const std::string & fileName)
 {
   using namespace File;
-  using namespace boost::property_tree;
 
   for (size_t i = 0; i < fileName.length(); i++) {
     char c = fileName.at(i);
@@ -72,8 +170,7 @@ void save(const std::string & fileName)
     file.open(filePath, std::fstream::out);
 
     // write to file, with formatting
-    xml_writer_settings<std::string> settings(' ', 2);
-    xml_parser::write_xml(file, masterTree, settings);
+    writeXml(file, masterTree);
   }
   catch (std::exception &e) {
     // TODO: Better catch
@@ -87,7 +184,6 @@ void save(const std::string & fileName)
 void load(const std::string& fileName)
 {
   using namespace File;
-  using namespace boost::property_tree;
 
   fs::path filePath = savePath;
   filePath /= fs::path{ fileName }.filename();
@@ -97,7 +193,7 @@ void load(const std::string& fileName)
 
   try {
     file.open( filePath, std::fstream::in );
-    xml_parser::read_xml(file, masterTree, xml_parser::trim_whitespace);
+    readXml(file, masterTree);
   }
   catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
@@ -111,7 +207,7 @@ void clear() {
 
   // Clear both stacks
   treeStack = std::stack<treeType*, std::list<treeType*>>();
-  eraseStack = std::stack<ptree::iterator, std::list<ptree::iterator>>();
+  eraseStack = std::stack<XmlNode::iterator, std::list<XmlNode::iterator>>();
 }
 
 //////////////////////
@@ -153,7 +249,7 @@ void Savable::startSave(const std::string& key)
 {
   // Make a new tree to add new vars to
   // Add the pair to the working tree
-  workingTree()->push_back(pairType(key, ptree()));
+  workingTree()->push_back(pairType(key, XmlNode()));
 
   // Get pointer to tree just added
   auto lastPairIt = --workingTree()->end();
@@ -212,7 +308,7 @@ void Savable::save(const std::string & varName, const char* var) const {
 
 void Savable::save(const std::string & varName, const std::string & var) const
 {
-  pairType p{ varName, treeType(var) };
+  pairType p{ varName, XmlNode(var) };
   workingTree()->push_back(p);
 }
 

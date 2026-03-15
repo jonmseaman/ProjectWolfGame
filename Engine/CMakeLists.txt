@@ -20,10 +20,5 @@ target_compile_definitions(Engine PRIVATE ENGINE_EXPORTS _WINDOWS _USRDLL)
 # PUBLIC so consumers get angle-bracket includes like <Entity/Actor.h>
 target_include_directories(Engine PUBLIC "${CMAKE_SOURCE_DIR}/Engine")
 
-# On non-Windows: expose compat/ so <conio.h> resolves to our POSIX stub
-if(NOT WIN32)
-    target_include_directories(Engine PRIVATE "${CMAKE_SOURCE_DIR}/compat")
-endif()
-
 # PUBLIC because Engine's own headers expose Savable types
 target_link_libraries(Engine PUBLIC Savable)
