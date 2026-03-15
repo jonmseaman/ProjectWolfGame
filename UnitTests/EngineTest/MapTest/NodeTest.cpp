@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <string>
+#include <Entity/Actor.h>
 #include <Map/Node.h>
 #include <Creation/Create.h>
 
@@ -11,18 +12,20 @@ namespace UnitTests {
 
 TEST(NodeTest, testContainsActorWhenNotContained) {
     Node n;
-    Actor* a = Creation::Create::newActor("TestableActor");
-    EXPECT_TRUE(a != nullptr);
-    n.addActor(a);
+    auto a = Creation::Create::newActor("TestableActor");
+    Actor* rawA = a.get();
+    EXPECT_TRUE(rawA != nullptr);
+    n.addActor(std::move(a));
 
-    EXPECT_TRUE(n.containsActor(a));
+    EXPECT_TRUE(n.containsActor(rawA));
 }
 
 TEST(NodeTest, testContainsActorWhenContained) {
     Node n;
-    Actor* a = Creation::Create::newActor("TestableActor");
-    EXPECT_FALSE(a == nullptr);
-    EXPECT_FALSE(n.containsActor(a));
+    auto a = Creation::Create::newActor("TestableActor");
+    Actor* rawA = a.get();
+    EXPECT_FALSE(rawA == nullptr);
+    EXPECT_FALSE(n.containsActor(rawA));
 }
 
 TEST(NodeTest, testNodeSave) {
@@ -42,8 +45,7 @@ TEST(NodeTest, testNodeLoad) {
     File::clear(); // Clear progress from other saves.
     Node n;
     Node saved;
-    Actor* a = Create::newActor("TestableActor");
-    saved.addActor(a);
+    saved.addActor(Create::newActor("TestableActor"));
     saved.save();
     File::save("NodeTest_testNodeLoad");
     File::load("NodeTest_testNodeLoad");

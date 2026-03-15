@@ -13,12 +13,12 @@ class CenterTown : public Map {
 public:
   CREATABLE_MAP(CenterTown)
   CenterTown() : Map(CENTER_TOWN_WIDTH) {
-    for (auto &i : grid) { i = new Node; }
+    for (auto& i : grid) { i = std::make_unique<Node>(); }
     buildMoveData();
-    Actor* player = Create::newActor("Player");
+    auto player = Create::newActor("Player");
     player->inventory.addItem(Create::newItem("BasicSword"));
     player->inventory.addItem(Create::newItem("HealingWand"));
-    getNode(0, 0)->addActor(player);
+    getNode(0, 0)->addActor(std::move(player));
     getNode(0, 1)->addActor(Create::newActor("Rat"));
     getNode(0, 1)->addActor(Create::newActor("Rat"));
     getNode(0, 2)->addActor(Create::newActor("Rat"));

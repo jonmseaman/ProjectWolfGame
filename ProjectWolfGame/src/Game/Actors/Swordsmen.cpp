@@ -14,7 +14,7 @@ public:
     stats = Stats{ 5, 3, 0 };
 
     inventory = Inventory{ "Backpack", 10 };
-    inventory.addNewItem(Creation::Create::newItem("BasicSword"));
+    inventory.addItem(Creation::Create::newItem("BasicSword"));
     auto strb = "Hello";
   }
 };

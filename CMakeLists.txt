@@ -1,20 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
 project(ProjectWolfGame CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# TODO(AI): What is this?
 set(CMAKE_CXX_EXTENSIONS OFF)
-
-# Mirror VS output layout: bin/<arch>/<config>/
-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    set(WG_ARCH "x64")
-else()
-    set(WG_ARCH "Win32")
-endif()
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/${WG_ARCH}/$<CONFIG>")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/${WG_ARCH}/$<CONFIG>")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/${WG_ARCH}/$<CONFIG>")
 
 # On non-MSVC, neutralize __declspec(dllexport/dllimport) so the project
 # compiles without modifying source files.

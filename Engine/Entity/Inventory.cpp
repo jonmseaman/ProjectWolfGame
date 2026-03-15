@@ -12,19 +12,14 @@ using namespace Creation;
 Inventory::Inventory() :Inventory("Inventory", 2) {}
 
 Inventory::Inventory(std::string name, int size) : name(name)
-, slots{ static_cast<size_t>(size), nullptr }
+, slots( static_cast<size_t>(size) )
 , size(size) {}
 
-Inventory::~Inventory() {
-  for (int i(0); i < slots.size(); ++i) {
-    delete slots.at(i);
-  }
-}
+Inventory::~Inventory() {}
 
 void Inventory::clearSavable() {
   for (auto& item : slots) {
-    delete item;
-    item = nullptr;
+    item.reset();
   }
 }
 
@@ -33,7 +28,7 @@ void Inventory::save() {
   SAVE(name);
   SAVE(size);
   // Save items
-  for (Item* i : slots) {
+  for (const auto& i : slots) {
     if (i != nullptr) {
       i->save();
     }
@@ -47,35 +42,21 @@ void Inventory::load() {
   LOAD(name);
   LOAD(size);
   while (Savable::canLoad("Item")) {
-    this->addNewItem(Create::loadNewItem());
+    this->addItem(Create::loadNewItem());
   }
   endLoad();
 }
 
-bool Inventory::addItem(Item* item) {
+bool Inventory::addItem(std::unique_ptr<Item> item) {
   if (hasOpenSlot()) {
-    slots.at(firstEmpty()) = item;
+    slots.at(firstEmpty()) = std::move(item);
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
-bool Inventory::addNewItem(Item* item) {
-  bool addedItem = false;
-  if (hasOpenSlot()) {
-    slots.at(firstEmpty()) = item;
-    addedItem = true;
-  } else {
-    delete item;
-  }
-  return addedItem;
-}
-
-Item* Inventory::removeItem(int slotIndex) {
-  Item* removed = slots.at(slotIndex);
-  slots.at(slotIndex) = nullptr;
-  return removed;
+std::unique_ptr<Item> Inventory::removeItem(int slotIndex) {
+  return std::move(slots.at(slotIndex));
 }
 
 std::string Inventory::getName() {
@@ -115,8 +96,8 @@ void Inventory::showListOfItems() {
   }
 }
 
-Item *& Inventory::at(int slotIndex) {
-  return this->slots.at(slotIndex);
+Item* Inventory::at(int slotIndex) {
+  return this->slots.at(slotIndex).get();
 }
 
 bool Inventory::isSlotEmpty(int slotIndex) {

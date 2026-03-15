@@ -191,13 +191,10 @@ ITEM_SELECT:
         std::cout << "That slot is empty. Could not pick up item." << std::endl;
       } else if (!inventory.hasOpenSlot()) {
         std::cout << "Your inventory is full." << std::endl;
-      } else
-        if (inventory.addItem(inv.at(itemIndex))) {
-          std::cout << "Trying to remove item. Choice: " << choice << std::endl;
-          inv.removeItem(itemIndex);
-        } else {
-          std::cout << "Could not pick up item.\n";
-        }
+      } else {
+        inventory.addItem(inv.removeItem(itemIndex));
+        std::cout << "Picked up item." << std::endl;
+      }
       break;
     case 2:
       // Show item stats, description

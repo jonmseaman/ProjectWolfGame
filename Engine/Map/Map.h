@@ -1,6 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 #include <Engine.h>
+#include <memory>
 #include <vector>
 #include "Savable.h"
 
@@ -34,10 +35,9 @@ namespace Maps
       Maps::Node* getNode(int xInd, int yInd);
       /**
        * Allows the nodes to be replaced.
-       * Deletes the node being replaced.
        * @post The node at xInd, yInd = #node
        */
-      void setNode(int xInd, int yInd, Node* node);
+      void setNode(int xInd, int yInd, std::unique_ptr<Node> node);
       /**
        * Activates all nodes in the map.
        */
@@ -46,7 +46,7 @@ namespace Maps
       * These are nodes that make up the base layer of the game world.
       * Other nodes may only exist if made by other nodes.
       */
-      std::vector<Node*> grid;
+      std::vector<std::unique_ptr<Node>> grid;
     protected:
       /**
        * Connects the nodes to each other.
@@ -55,11 +55,6 @@ namespace Maps
        */
       void buildMoveData();
     private:
-      /**
-       * Deletes all elements of the grid.
-       * @usage Used by the destructor
-       */
-      void deleteGrid();
       // Vars
       static const int DEFAULT_MAP_SIZE;
       /**

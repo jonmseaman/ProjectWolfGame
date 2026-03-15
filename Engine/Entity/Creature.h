@@ -27,8 +27,8 @@ public:
     void combatStop(); // Takes creature out of combat and removes targets
 
     // Data Access
-    char* getName() { return name; }
-    void setName(char* name); // sets that name of the creature
+    const std::string& getName() { return name; }
+    void setName(const std::string& name); // sets the name of the creature
     bool getIsInCombat() { return isInCombat; }
     bool getIsLiving() { return isLiving; }
     void setHealth(int health);
@@ -71,7 +71,7 @@ public:
 protected:
     void flagInCombat(bool val); // sets combat status
 private:
-    char* name;
+    std::string name;
     // Utility vars
     bool isLiving; // TODO: Remove this variable
     bool isInCombat;

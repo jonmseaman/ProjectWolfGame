@@ -1,6 +1,6 @@
 #include "CreateData.h"
 
-std::map<std::string, Engine::Entity::Item*   (*)()> CreateData::items;
-std::map<std::string, Engine::Entity::Actor*  (*)()> CreateData::actors;
-std::map<std::string, Engine::Maps::Node*     (*)()> CreateData::nodes;
-std::map<std::string, Engine::Maps::Map*      (*)()> CreateData::maps;
+std::map<std::string, std::unique_ptr<Engine::Entity::Item>  (*)()> CreateData::items;
+std::map<std::string, std::unique_ptr<Engine::Entity::Actor> (*)()> CreateData::actors;
+std::map<std::string, std::unique_ptr<Engine::Maps::Node>    (*)()> CreateData::nodes;
+std::map<std::string, std::unique_ptr<Engine::Maps::Map>     (*)()> CreateData::maps;

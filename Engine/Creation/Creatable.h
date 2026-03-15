@@ -1,13 +1,14 @@
 #pragma once
+#include <memory>
 #include "Registration.h"
 /// <summary>
 /// This macro is used to implement create method used by the Create class
-/// to produce 
+/// to produce
 /// </summary>
-#define CREATABLE_ITEM(ClassName)   static Engine::Entity::Item* create() { return new ClassName; }
-#define CREATABLE_ACTOR(ClassName)  static Engine::Entity::Actor* create() { return new ClassName; }
-#define CREATABLE_NODE(ClassName)   static Engine::Maps::Node* create() { return new ClassName; }
-#define CREATABLE_MAP(ClassName)    static Engine::Maps::Map* create() { return new ClassName; }
+#define CREATABLE_ITEM(ClassName)   static std::unique_ptr<Engine::Entity::Item> create() { return std::make_unique<ClassName>(); }
+#define CREATABLE_ACTOR(ClassName)  static std::unique_ptr<Engine::Entity::Actor> create() { return std::make_unique<ClassName>(); }
+#define CREATABLE_NODE(ClassName)   static std::unique_ptr<Engine::Maps::Node> create() { return std::make_unique<ClassName>(); }
+#define CREATABLE_MAP(ClassName)    static std::unique_ptr<Engine::Maps::Map> create() { return std::make_unique<ClassName>(); }
 
 /// <summary>
 /// A macro used to create a global variable which will auto-register

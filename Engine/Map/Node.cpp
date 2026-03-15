@@ -19,11 +19,11 @@ namespace Engine {
 namespace Maps {
 
   // Special registration for default node. Allows creation with empty string or 'Node'.
-  Creation::Registration __registrationNodeEmptyString("", []() { return new Node; });
-  Creation::Registration __registrationNode("Node", []() {return new Node; });
+  Creation::Registration __registrationNodeEmptyString("", []() -> std::unique_ptr<Node> { return std::make_unique<Node>(); });
+  Creation::Registration __registrationNode("Node", []() -> std::unique_ptr<Node> { return std::make_unique<Node>(); });
 
   Node::Node(): inventory(Inventory{ "Location Inventory", 8 })
-    , nodeLinks{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
+    , nodeLinks{}
     , actorPtrs{}
     , name("Node") {
     for (int i = 0; i < Maps::NUM_DIRS; i++) {
@@ -34,22 +34,11 @@ namespace Maps {
     nodeCount++;
   }
 
-  Node::~Node() {
-    // Delete all the actors
-    for (auto it = actorPtrs.begin(); it != actorPtrs.end(); ++it ) {
-      delete (*it);
-    }
-  }
+  Node::~Node() {}
 
   void Node::clearSavable() {
     // Node links and entrance dirs
-    for (int i = 0; i < NUM_DIRS; i++) {
-      nodeLinks[i] = nullptr;
-    }
-    
-    for (auto& actor : actorPtrs) {
-      delete actor;
-    }
+    nodeLinks.fill(nullptr);
     actorPtrs.clear();
     inventory.clearSavable();
   }
@@ -61,7 +50,7 @@ namespace Maps {
       index = actorPtrs.size();
     }
     std::advance(it, index);
-    return *it;
+    return it->get();
   }
 
   void Node::activate() {
@@ -111,9 +100,9 @@ namespace Maps {
     this->nodeLinks[dir] = link;
   }
 
-  void Node::addActor(Actor *actor) {
+  void Node::addActor(std::unique_ptr<Actor> actor) {
     actor->setCurrentNode(this);
-    actorPtrs.insert(actorPtrs.end(), actor);
+    actorPtrs.insert(actorPtrs.end(), std::move(actor));
   }
 
   void Node::moveActors() {
@@ -121,7 +110,7 @@ namespace Maps {
   while (it != actorPtrs.end()) {
       Actor &actor = **it;
       int dir = actor.getMoveDir();
-      std::list<Actor*> &otherList = nodeLinks[dir]->actorPtrs;
+      std::list<std::unique_ptr<Actor>> &otherList = nodeLinks[dir]->actorPtrs;
       // TODO: Make canMoveInDir(DIR) function
       if ((dir != Maps::STOP) && (nodeLinks[dir] != nullptr) && !nodeLinks[dir]->isWall()) {
         actor.onMove(); // Moving actor
@@ -178,12 +167,12 @@ namespace Maps {
    }
 
    bool Node::containsActor(Actor* actor) {
-     return std::find(actorPtrs.begin(), actorPtrs.end(), actor) != actorPtrs.end();
+     return std::find_if(actorPtrs.begin(), actorPtrs.end(),
+       [actor](const std::unique_ptr<Actor>& p) { return p.get() == actor; }) != actorPtrs.end();
    }
 
    Actor* Node::getNextActor(Actor* actor) {
      assert(actorPtrs.size() > 0);
-     Actor* nextActor = nullptr;
      bool actorFound = false;
 
      // If the actorPtrs is of size one, return actor
@@ -192,12 +181,10 @@ namespace Maps {
      // Iterate to actor
      auto i = actorPtrs.begin();
      while (i != actorPtrs.end() && !actorFound && (actor != nullptr)) {
-       actorFound = *i == actor;
+       actorFound = i->get() == actor;
        i++;
      }
-     nextActor = i == actorPtrs.end() ? *actorPtrs.begin() : *i;
-     
-     return nextActor;
+     return i == actorPtrs.end() ? actorPtrs.begin()->get() : i->get();
    }
 
    void Node::save()
@@ -208,7 +195,7 @@ namespace Maps {
      SAVE(name);
      int numActors = getNumActors();
      SAVE(numActors);
-     for (Actor* a : actorPtrs) {
+     for (const auto& a : actorPtrs) {
        a->save();
      }
 
@@ -227,7 +214,7 @@ namespace Maps {
      int numActors = 0;
      LOAD(numActors);
      for (int i = 0; i < numActors; i++) {
-       this->addActor(Creation::Create::loadNewActor());
+       this->addActor(Creation::Create::loadNewActor());  // unique_ptr passed directly
      }
      
      for (int i = 0; i < NUM_DIRS; i++) {

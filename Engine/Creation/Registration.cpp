@@ -7,19 +7,19 @@ namespace Creation {
 
 extern CreateData createData;
 
-Registration::Registration(const std::string & name, Engine::Entity::Item *(*c)()) {
+Registration::Registration(const std::string & name, std::unique_ptr<Engine::Entity::Item> (*c)()) {
   createData.items.insert(std::make_pair(name, c));
 }
 
-Registration::Registration(const std::string & name, Engine::Entity::Actor *(*c)()) {
+Registration::Registration(const std::string & name, std::unique_ptr<Engine::Entity::Actor> (*c)()) {
   createData.actors.insert(std::make_pair(name, c));
 }
 
-Registration::Registration(const std::string & name, Engine::Maps::Node *(*c)()) {
+Registration::Registration(const std::string & name, std::unique_ptr<Engine::Maps::Node> (*c)()) {
   createData.nodes.insert(std::make_pair(name, c));
 }
 
-Registration::Registration(const std::string & name, Engine::Maps::Map *(*c)()) {
+Registration::Registration(const std::string & name, std::unique_ptr<Engine::Maps::Map> (*c)()) {
   createData.maps.insert(std::make_pair(name, c));
 }
 

@@ -18,32 +18,25 @@ TEST(MapTest, mapDefaultConstructor) {
 }
 
 TEST(MapTest, mapSaveDefaultMap) {
-    Map* m = Create::newMap("TestableMap");
+    auto m = Create::newMap("TestableMap");
     m->save();
     File::save("MapTest_mapSaveDefaultMap");
-
-    delete m;
 }
 
 TEST(MapTest, mapSaveTestableMap) {
-    Map* m = Create::newMap("TestableMap");
+    auto m = Create::newMap("TestableMap");
     m->save();
     File::save("MapTest_mapSaveTestableMap");
-
-    delete m;
 }
 
 TEST(MapTest, mapLoad) {
-    Map* m = Create::newMap("TestableMap");
+    auto m = Create::newMap("TestableMap");
     m->save();
     File::save("mapLoadTest");
     File::load("mapLoadTest");
 
-    Map* loadedM = Create::loadNewMap();
+    auto loadedM = Create::loadNewMap();
     EXPECT_EQ(m->getMapSize(), m->getMapSize());
-
-    delete loadedM;
-    delete m;
 }
 
 } // namespace UnitTests

@@ -18,7 +18,6 @@ add_library(Engine SHARED
 target_compile_definitions(Engine PRIVATE ENGINE_EXPORTS _WINDOWS _USRDLL)
 
 # PUBLIC so consumers get angle-bracket includes like <Entity/Actor.h>
-# (mirrors Common.props which adds $(SolutionDir)Engine\ to include path)
 target_include_directories(Engine PUBLIC "${CMAKE_SOURCE_DIR}/Engine")
 
 # On non-Windows: expose compat/ so <conio.h> resolves to our POSIX stub

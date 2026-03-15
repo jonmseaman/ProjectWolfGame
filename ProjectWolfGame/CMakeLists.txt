@@ -8,9 +8,4 @@ add_executable(ProjectWolfGame
     src/Game/main.cpp
 )
 
-# Mirror VS naming: ProjectWolfGame_Debug.exe / ProjectWolfGame_Release.exe
-set_target_properties(ProjectWolfGame PROPERTIES
-    OUTPUT_NAME "ProjectWolfGame_$<CONFIG>"
-)
-
 target_link_libraries(ProjectWolfGame PRIVATE Engine Savable)

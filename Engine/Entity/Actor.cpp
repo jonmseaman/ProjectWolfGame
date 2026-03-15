@@ -65,7 +65,7 @@ void Actor::onMove() {
 bool Actor::dropItem(int slotIndex) {
   assert(slotIndex >= 0 && slotIndex <= inventory.getSlots());
   if (!currentNode->inventory.hasOpenSlot()) {
-    delete inventory.removeItem(slotIndex);
+    inventory.removeItem(slotIndex);  // unique_ptr out of scope, item destroyed
   } else {
     // Transfer item to node inventory.
     currentNode->inventory.addItem(inventory.removeItem(slotIndex));

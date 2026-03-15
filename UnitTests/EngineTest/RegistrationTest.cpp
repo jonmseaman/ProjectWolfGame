@@ -36,7 +36,7 @@ class TestableMap : public Engine::Maps::Map {
 public:
     TestableMap() : Map(5) {
         for (auto& n : this->grid) {
-            n = new Node;
+            n = std::make_unique<Node>();
         }
         buildMoveData();
     }
@@ -51,22 +51,22 @@ CREATABLE_REGISTRATION(TestableMap);
 /// Tests are also completed for Actors, Nodes, as well as Maps.
 ///</summary>
 TEST(RegistrationTest, testItemRegistration) {
-    void* ent = Creation::Create::newItem("TestableItem");
+    auto ent = Creation::Create::newItem("TestableItem");
     EXPECT_TRUE(ent != nullptr);
 }
 
 TEST(RegistrationTest, testActorRegistration) {
-    void* ent = Creation::Create::newActor("TestableActor");
+    auto ent = Creation::Create::newActor("TestableActor");
     EXPECT_TRUE(ent != nullptr);
 }
 
 TEST(RegistrationTest, testNodeRegistration) {
-    void* node = Creation::Create::newNode("TestableNode");
+    auto node = Creation::Create::newNode("TestableNode");
     EXPECT_TRUE(node != nullptr);
 }
 
 TEST(RegistrationTest, testMapRegisration) {
-    void* map = Creation::Create::newMap("TestableMap");
+    auto map = Creation::Create::newMap("TestableMap");
     EXPECT_TRUE(map != nullptr);
 }
 

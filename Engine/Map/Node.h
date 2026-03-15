@@ -1,7 +1,9 @@
 #ifndef NODE_H
 #define NODE_H
 #include <Engine.h>
+#include <array>
 #include <list>
+#include <memory>
 #include <string>
 #include "Entity/Inventory.h"
 #include "Dir.h"
@@ -99,7 +101,7 @@ namespace Maps
        * Adds an actor to the node. The actor is added to the end of the actor
        * list.
        */
-      void addActor(Engine::Entity::Actor *actor);
+      void addActor(std::unique_ptr<Engine::Entity::Actor> actor);
       int getNumActors();
       /**
        * Moves all actors which have a move direction set.
@@ -107,12 +109,12 @@ namespace Maps
       void moveActors();
       void showActors(); // Shows a list of actors
 
-      std::list<Engine::Entity::Actor*> actorPtrs;
+      std::list<std::unique_ptr<Engine::Entity::Actor>> actorPtrs;
 
     protected:
-      Node* nodeLinks[NUM_DIRS];
+      std::array<Node*, NUM_DIRS> nodeLinks;
       /// The directions from which this node can be entered
-      bool entranceDirs[NUM_DIRS];
+      std::array<bool, NUM_DIRS> entranceDirs;
       std::string name;
       static int nodeCount;
   };

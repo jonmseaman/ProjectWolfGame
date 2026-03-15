@@ -1,5 +1,6 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
+#include <memory>
 #include <string>
 #include <vector>
 #include <Engine.h>
@@ -14,27 +15,27 @@ public:
   Inventory();
   Inventory(std::string name, int inventorySize);
   virtual ~Inventory();
+  Inventory(Inventory&&) = default;
+  Inventory& operator=(Inventory&&) = default;
   SAVABLE_CLEAR;
   
 
   /**
    * Tries to add item to the inventory.
+   * Takes ownership. Destroys the item if there is no open slot.
    * @return True if the item was added. False otherwise.
    */
-  bool addItem(Item* item);
+  bool addItem(std::unique_ptr<Item> item);
   /**
-   * Tries to add the item to the inventory
-   * Deletes the item if there is not an open slot;
-   * @return True if the item was added. False otherwise.
+   * Removes item from slot, transferring ownership to the caller.
    */
-  bool addNewItem(Item* item);
-  Item* removeItem(int slotIndex); // Removes item from slot without freeing memory
+  std::unique_ptr<Item> removeItem(int slotIndex);
 
   /**
-   * Allows access to items in the inventory.
+   * Allows non-owning access to items in the inventory.
    * @pre 0 <= slotIndex <= inventory.size
    */
-  Item*& at(int slotIndex);
+  Item* at(int slotIndex);
   /**
    * Checks to see if a slot is empty.
    * @param slotIndex The index of the item slot being checked
@@ -54,7 +55,7 @@ public:
   void showListOfItems();
 protected:
   std::string name;
-  std::vector<Item*> slots;
+  std::vector<std::unique_ptr<Item>> slots;
   int size;
 private:
 };

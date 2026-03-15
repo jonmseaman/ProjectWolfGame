@@ -6,24 +6,18 @@
 #include "Map.h"
 #include "MapManager.h"
 
-MapManager::MapManager(): map(nullptr) {}
+MapManager::MapManager() {}
 
 void MapManager::closeMap() {
-  delete map;
-  map = nullptr;
+  map.reset();
 }
 
-void MapManager::openMap(const std::string& map) {
-  using namespace Maps;
-  Map* loadMap = Creation::Create::newMap(map);
-  setMap( loadMap );
+void MapManager::openMap(const std::string& mapName) {
+  setMap(Creation::Create::newMap(mapName));
 }
 
-void MapManager::setMap(Maps::Map* map) {
-  if (this->map != nullptr) {
-    delete map;
-  }
-  this->map = map;
+void MapManager::setMap(std::unique_ptr<Maps::Map> newMap) {
+  map = std::move(newMap);
 }
 
 void MapManager::play() {
@@ -34,9 +28,7 @@ void MapManager::play() {
 
     if (tempMap != nullptr) {
       std::cout << "Switching maps... ";
-      std::swap(tempMap, map);
-      delete tempMap;
-      tempMap = nullptr;
+      map = std::move(tempMap);  // old map destroyed, tempMap becomes null
       std::cout << "Done.\n";
     }
   }
@@ -53,6 +45,5 @@ void MapManager::load(const std::string &fileName) {
     File::load(fileName);
 
     // tempMap and map are swapped automatically later.
-    delete tempMap;
     tempMap = Creation::Create::loadNewMap();
 }

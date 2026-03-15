@@ -1,11 +1,10 @@
 #ifndef MAPMANAGER_H
 #define MAPMANAGER_H
 #include <Engine.h>
+#include <memory>
 #include <string>
+#include "Map.h"
 #include "Savable.h"
-namespace Engine {
-  namespace Maps { class Map; }
-}
 
 using namespace Engine;
 
@@ -51,9 +50,9 @@ class ENGINE_API MapManager
     MapManager(MapManager const&) = delete;
     void operator=(MapManager const&) = delete;
     MapManager();
-    Maps::Map* map;
-    Maps::Map* tempMap;
-    void setMap(Maps::Map* map);
+    std::unique_ptr<Maps::Map> map;
+    std::unique_ptr<Maps::Map> tempMap;
+    void setMap(std::unique_ptr<Maps::Map> map);
 };
 
 #endif // MAPMANAGER_H

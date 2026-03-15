@@ -7,7 +7,7 @@
 namespace Engine {
 namespace Entity {
 
-Creature::Creature() : name("Creature")
+Creature::Creature() : name{ "Creature" }
 , inventory(Inventory{ "Inv", 0 })
 , isLiving(false) {}
 
@@ -65,7 +65,7 @@ void Creature::flagInCombat(bool val) {
   isInCombat = val;
 }
 
-void Creature::setName(char* name) {
+void Creature::setName(const std::string& name) {
   this->name = name;
 }
 

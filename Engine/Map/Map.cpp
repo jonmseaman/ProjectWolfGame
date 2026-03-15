@@ -16,24 +16,18 @@ using namespace Creation;
 
 const int Map::DEFAULT_MAP_SIZE = 5;
 
-Map::Map() : grid{ static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE), nullptr }
+Map::Map() : grid( static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
 , mapSize{ DEFAULT_MAP_SIZE } {
-    for (Node*& i : grid) { i = new Node; }
+    for (auto& i : grid) { i = std::make_unique<Node>(); }
     buildMoveData();
   }
 
-  Map::Map(int mapWidth) : grid{ static_cast<size_t>(mapWidth*mapWidth), nullptr }
+  Map::Map(int mapWidth) : grid( static_cast<size_t>(mapWidth*mapWidth) )
     , mapSize{ mapWidth } {}
 
-  Map::~Map() {
-    deleteGrid();
-  }
+  Map::~Map() {}
 
   void Map::clearSavable() {
-    for (auto& node : grid) {
-      delete node;
-      node = nullptr;
-    }
     grid.clear();
   }
 
@@ -43,11 +37,8 @@ Map::Map() : grid{ static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE), nul
     }
   }
 
-  void Map::setNode(int xInd, int yInd, Node* node) {
-    // Reference to node ptr being replaced
-    Node *&alreadyThere = grid.at(yInd*mapSize + xInd);
-    delete alreadyThere; // Deletes the node that might be there
-    alreadyThere = node;
+  void Map::setNode(int xInd, int yInd, std::unique_ptr<Node> node) {
+    grid.at(yInd*mapSize + xInd) = std::move(node);
    }
 
 
@@ -84,13 +75,7 @@ Map::Map() : grid{ static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE), nul
     assert(0 <= xInd && 0 <= yInd);
     assert(xInd < mapSize && yInd < mapSize);
     assert(grid.at(yInd*mapSize + xInd) != nullptr);
-    return grid.at(yInd*mapSize + xInd);
-  }
-
-  void Map::deleteGrid() {
-    for (int i(0); i < grid.size(); ++i) {
-      delete grid.at(i);
-    }
+    return grid.at(yInd*mapSize + xInd).get();
   }
 
   void Map::save() {
@@ -111,9 +96,9 @@ Map::Map() : grid{ static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE), nul
 
     // Load the nodes
     LOAD(mapSize);
-    grid = std::vector<Node*>(mapSize * mapSize, nullptr);
-    for (int i = 0; i < grid.size(); i++) {
-      grid.at(i) = Create::loadNewNode();
+    grid.resize(static_cast<size_t>(mapSize * mapSize));
+    for (auto& slot : grid) {
+      slot = Create::loadNewNode();
     }
     buildMoveData(); // Get map ready for use.
 
