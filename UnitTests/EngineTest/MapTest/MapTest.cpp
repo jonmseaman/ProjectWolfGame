@@ -1,52 +1,49 @@
-#include <CppUnitTest.h>
+#include <gtest/gtest.h>
 #include <Map/Map.h>
 #include <Map/Node.h>
 #include <Entity/Actor.h>
 #include <Creation/Create.h>
 
-using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace Engine::Maps;
 using namespace Engine::Entity;
 using namespace Creation;
 
 namespace UnitTests {
 
-TEST_CLASS(MapTest) {
-  TEST_METHOD(mapDefaultConstructor) {
+TEST(MapTest, mapDefaultConstructor) {
     Map m{};
     int mSize = m.getMapSize();
-    Assert::IsTrue(m.grid.size() == mSize * mSize, (ToString(m.grid.size()) + L" == " + ToString(mSize * mSize)).c_str());
-    Assert::IsTrue(m.grid.size() > 0);
-  }
+    EXPECT_EQ(m.grid.size(), (size_t)(mSize * mSize));
+    EXPECT_TRUE(m.grid.size() > 0);
+}
 
-  TEST_METHOD(mapSaveDefaultMap) {
+TEST(MapTest, mapSaveDefaultMap) {
     Map* m = Create::newMap("TestableMap");
     m->save();
     File::save("MapTest_mapSaveDefaultMap");
 
     delete m;
-  }
+}
 
-  TEST_METHOD(mapSaveTestableMap) {
+TEST(MapTest, mapSaveTestableMap) {
     Map* m = Create::newMap("TestableMap");
     m->save();
     File::save("MapTest_mapSaveTestableMap");
 
     delete m;
-  }
+}
 
-  TEST_METHOD(mapLoad) {
+TEST(MapTest, mapLoad) {
     Map* m = Create::newMap("TestableMap");
     m->save();
     File::save("mapLoadTest");
     File::load("mapLoadTest");
-    
+
     Map* loadedM = Create::loadNewMap();
-    Assert::AreEqual(m->getMapSize(), m->getMapSize(), L"Maps are not the same size.");
+    EXPECT_EQ(m->getMapSize(), m->getMapSize());
 
     delete loadedM;
     delete m;
-  }
-};
-
 }
+
+} // namespace UnitTests

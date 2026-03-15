@@ -16,13 +16,13 @@ using namespace Creation;
 
 const int Map::DEFAULT_MAP_SIZE = 5;
 
-Map::Map() : grid{ DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE, nullptr }
+Map::Map() : grid{ static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE), nullptr }
 , mapSize{ DEFAULT_MAP_SIZE } {
     for (Node*& i : grid) { i = new Node; }
     buildMoveData();
   }
 
-  Map::Map(int mapWidth) : grid{ mapWidth*mapWidth, nullptr }
+  Map::Map(int mapWidth) : grid{ static_cast<size_t>(mapWidth*mapWidth), nullptr }
     , mapSize{ mapWidth } {}
 
   Map::~Map() {

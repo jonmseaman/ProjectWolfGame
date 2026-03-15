@@ -1,8 +1,7 @@
 #include <Map/Map.h>
+#include <Map/Node.h>
 #include <Creation/Create.h>
 #include <Entity/Actor.h>
-
-class Engine::Maps::Node;
 
 using namespace Engine::Maps;
 using namespace Engine::Entity;

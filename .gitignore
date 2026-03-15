@@ -228,3 +228,5 @@ pip-log.txt
 
 #Translations
 *.mo
+
+.idea/

@@ -12,7 +12,7 @@ using namespace Creation;
 Inventory::Inventory() :Inventory("Inventory", 2) {}
 
 Inventory::Inventory(std::string name, int size) : name(name)
-, slots{ size, nullptr }
+, slots{ static_cast<size_t>(size), nullptr }
 , size(size) {}
 
 Inventory::~Inventory() {
