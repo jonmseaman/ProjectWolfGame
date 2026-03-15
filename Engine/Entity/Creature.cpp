@@ -1,5 +1,5 @@
-#include <assert.h>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include "Creature.h"
 #include "Inventory.h"
@@ -32,8 +32,9 @@ void Creature::onDamage(int dmg) { // Should return damage taken
 }
 
 void Creature::onHeal(int heal) {
-  assert(heal >= 0);
-  // TODO: Modify heal with abilities/ items
+  if (heal < 0) {
+    throw std::invalid_argument("onHeal: heal amount cannot be negative");
+  }
   if (getIsLiving()) {
     health += heal;
     if (health > maxHealth) {
@@ -74,7 +75,6 @@ void Creature::kill() {
 }
 
 void Creature::useItem(Item &item, Creature &usedOn) {
-  // TODO: Implement
   item.use(*this, usedOn);
 }
 

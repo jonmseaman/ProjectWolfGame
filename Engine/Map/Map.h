@@ -26,7 +26,7 @@ namespace Maps
       /**
        * @return number of nodes in this map.
        */
-      int getMapSize();
+      int getMapSize() const;
       /**
        * Allows access to nodes in the map.
        * @pre xInd, yInd < mapSize

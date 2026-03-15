@@ -6,8 +6,6 @@
 #include "Map.h"
 #include "Savable.h"
 
-using namespace Engine;
-
 /**
  * The purpose of this class is to make it easier to manager maps.
  * Eventually, MapManager will be able to handle multiple open maps and
@@ -50,9 +48,9 @@ class ENGINE_API MapManager
     MapManager(MapManager const&) = delete;
     void operator=(MapManager const&) = delete;
     MapManager();
-    std::unique_ptr<Maps::Map> map;
-    std::unique_ptr<Maps::Map> tempMap;
-    void setMap(std::unique_ptr<Maps::Map> map);
+    std::unique_ptr<Engine::Maps::Map> map;
+    std::unique_ptr<Engine::Maps::Map> tempMap;
+    void setMap(std::unique_ptr<Engine::Maps::Map> map);
 };
 
 #endif // MAPMANAGER_H

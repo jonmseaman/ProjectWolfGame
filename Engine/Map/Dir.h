@@ -9,7 +9,7 @@ namespace Maps
   /**
    * Directions. Used by nodes and maps.
    */
-  enum Dir
+  enum class Dir
   {
     STOP = 0,
     NORTH,
@@ -18,8 +18,15 @@ namespace Maps
     SOUTH,
     UP,
     DOWN,
-    NUM_DIRS,
   };
+
+  /// Number of direction values (including STOP).
+  inline constexpr int NUM_DIRS = 7;
+
+  /// Converts a Dir to an array index.
+  inline constexpr std::size_t dir_idx(Dir d) noexcept {
+    return static_cast<std::size_t>(d);
+  }
 
   /**
    * Converts a char of wasdqe to the corresponding travel direction
@@ -27,21 +34,15 @@ namespace Maps
    * @post charToDir in enum Dir
    * @return An int corresponding to charDir
    */
-  ENGINE_API int charToDir(char charDir);
+  ENGINE_API Dir charToDir(char charDir);
   /**
-   * Converts an int in enum Dir to its name
-   * @param dir The int being converted to a string
-   * @pre dir is a valid element of enum Dir
-   * @return The name of the direction corresponding to dir
+   * Converts a Dir to its name.
    */
-  ENGINE_API std::string dirName(int dir);
+  ENGINE_API std::string dirName(Dir dir);
   /**
    * Converts a direction to its reverse direction (ie: N-->S)
-   * @param dir The dir being converted
-   * @pre 0 <= dir <= NUM_DIRS
-   * @return An int corresponding to the opposite direction
    */
-  ENGINE_API int oppositeDir(int dir);
+  ENGINE_API Dir oppositeDir(Dir dir);
 }
 }
 #endif // DIR_H

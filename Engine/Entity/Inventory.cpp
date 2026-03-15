@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <assert.h>
+#include <stdexcept>
 #include <Creation/Create.h>
 #include "Inventory.h"
 
@@ -59,26 +59,24 @@ std::unique_ptr<Item> Inventory::removeItem(int slotIndex) {
   return std::move(slots.at(slotIndex));
 }
 
-std::string Inventory::getName() {
+std::string Inventory::getName() const {
   return name;
 }
 
-int Inventory::getSlots() {
-  return slots.size();
+int Inventory::getSlots() const {
+  return static_cast<int>(slots.size());
 }
 
-bool Inventory::hasOpenSlot() {
-  for (int i(0); i < slots.size(); i++) {
-    if (slots.at(i) == nullptr) {
-      return true;
-    }
+bool Inventory::hasOpenSlot() const {
+  for (const auto& slot : slots) {
+    if (slot == nullptr) return true;
   }
   return false;
 }
 
 int Inventory::firstEmpty() {
-  for (int i(0); i < slots.size(); i++) {
-    if (slots.at(i) == nullptr) {
+  for (int i = 0; i < static_cast<int>(slots.size()); i++) {
+    if (slots.at(static_cast<std::size_t>(i)) == nullptr) {
       return i;
     }
   }
@@ -87,11 +85,12 @@ int Inventory::firstEmpty() {
 
 void Inventory::showListOfItems() {
   std::cout << getName() << std::endl;
-  for (int i(0); i < slots.size(); i++) {
-    if (slots.at(i) == nullptr) {
+  for (int i = 0; i < static_cast<int>(slots.size()); i++) {
+    std::size_t idx = static_cast<std::size_t>(i);
+    if (slots.at(idx) == nullptr) {
       std::cout << std::setw(3) << std::right << i + 1 << ": " << "Empty Slot\n";
     } else {
-      std::cout << std::setw(3) << std::right << i + 1 << ": " << slots.at(i)->getName() << std::endl;
+      std::cout << std::setw(3) << std::right << i + 1 << ": " << slots.at(idx)->getName() << std::endl;
     }
   }
 }
@@ -101,8 +100,10 @@ Item* Inventory::at(int slotIndex) {
 }
 
 bool Inventory::isSlotEmpty(int slotIndex) {
-  assert(0 <= slotIndex && slotIndex < size);
-  return slots.at(slotIndex) == nullptr;
+  if (slotIndex < 0 || slotIndex >= size) {
+    throw std::out_of_range("isSlotEmpty: slotIndex out of range");
+  }
+  return slots.at(static_cast<std::size_t>(slotIndex)) == nullptr;
 }
 
 }

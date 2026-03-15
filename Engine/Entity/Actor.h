@@ -3,8 +3,7 @@
 #include <Engine.h>
 #include "Creature.h"
 #include "Map/Node.h"
-
-using namespace Engine::Maps;
+#include "Map/Dir.h"
 
 namespace Engine {
 namespace Entity {
@@ -31,7 +30,7 @@ public:
    * the node, the target will be removed.
    */
   void cycleTarget();
-  Actor *getTarget() { return targetPtr; }
+  Actor* getTarget() const { return targetPtr; }
   void setTarget(Actor* actor);
   /**
    * Checks to make sure that this has a valid target.<br>
@@ -42,7 +41,7 @@ public:
   // Turns
   virtual void takeTurn(); // Allows the player to take actions. Uses turn
   virtual void endTurn(); // Whatever needs to be done at the end of a turn. Default is flagging the turn as used.
-  bool getIsTurnUsed();
+  bool getIsTurnUsed() const;
 
   // Movement
   virtual void onMove();
@@ -51,30 +50,29 @@ public:
    * actor should be moved.
    * @return The direction that the actor should move
    */
-  int getMoveDir();
-  void setCurrentNode(Node *node);
+  Maps::Dir getMoveDir() const;
+  void setCurrentNode(Maps::Node *node);
   // Special
-  bool getIsPlayer();
+  bool getIsPlayer() const;
 protected:
   /**
    * The node that the actor is currently in.
    * Used for movement, targetting, awareness...
    */
-  Node *currentNode;
+  Maps::Node *currentNode;
   Actor* targetPtr;
   /**
    * Tries to set movement for the actor.
    * If it is possible to move in direction dir, then the turn is used.
-   * @pre 0 <= dir < NUM_DIRS
    * @post Turn is used if it is possible to move in direction
    * @post Actor will be set to move after turns
    */
-  void setMoveDir(int dir);
+  void setMoveDir(Maps::Dir dir);
   void setIsTurnUsed(bool val = true);
   bool isPlayer = false;
 private:
   bool isTurnUsed; // Should stop allowing actions when this is true.
-  int moveDir; // The direction that the map will move the player
+  Maps::Dir moveDir; // The direction that the map will move the player
 };
 
 }

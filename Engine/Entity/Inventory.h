@@ -43,9 +43,9 @@ public:
    * @return Returns true if there is nothing in that item slot.
    */
   bool isSlotEmpty(int slotIndex);
-  std::string getName();
-  int getSlots();
-  bool hasOpenSlot();
+  std::string getName() const;
+  int getSlots() const;
+  bool hasOpenSlot() const;
   /**
    * Returns the index of the first empty slot.
    * @return The index of the first empty slot or -1 if the

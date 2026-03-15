@@ -27,10 +27,10 @@ public:
     void combatStop(); // Takes creature out of combat and removes targets
 
     // Data Access
-    const std::string& getName() { return name; }
+    const std::string& getName() const { return name; }
     void setName(const std::string& name); // sets the name of the creature
-    bool getIsInCombat() { return isInCombat; }
-    bool getIsLiving() { return isLiving; }
+    bool getIsInCombat() const { return isInCombat; }
+    bool getIsLiving() const { return isLiving; }
     void setHealth(int health);
     void setMaxHealth(int maxHealth); // Set max hp, also sets hp
     void setIsLiving(bool isLiving); // Can be used to kill a creature

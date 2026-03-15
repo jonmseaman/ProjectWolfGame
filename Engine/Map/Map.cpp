@@ -1,10 +1,9 @@
-#include <assert.h>
 #include <iostream>
+#include <stdexcept>
 #include <Creation/Create.h>
 #include <UI/Input.h>
 #include "Map.h"
 #include "Node.h"
-#include "stdlib.h"
 
 using std::cout;
 using std::endl;
@@ -13,6 +12,7 @@ namespace Engine {
 namespace Maps
 {
 using namespace Creation;
+using enum Dir;
 
 const int Map::DEFAULT_MAP_SIZE = 5;
 
@@ -67,15 +67,19 @@ Map::Map() : grid( static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
     }
   }
 
-  int Map::getMapSize() {
-    return this->mapSize;
+  int Map::getMapSize() const {
+    return mapSize;
   }
 
   Node* Map::getNode(int xInd, int yInd) {
-    assert(0 <= xInd && 0 <= yInd);
-    assert(xInd < mapSize && yInd < mapSize);
-    assert(grid.at(yInd*mapSize + xInd) != nullptr);
-    return grid.at(yInd*mapSize + xInd).get();
+    if (xInd < 0 || yInd < 0 || xInd >= mapSize || yInd >= mapSize) {
+      throw std::out_of_range("getNode: coordinates out of range");
+    }
+    auto& node = grid.at(static_cast<std::size_t>(yInd * mapSize + xInd));
+    if (node == nullptr) {
+      throw std::logic_error("getNode: node is null");
+    }
+    return node.get();
   }
 
   void Map::save() {
@@ -83,8 +87,8 @@ Map::Map() : grid( static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
 
       // Save the nodes
       SAVE(mapSize);
-      for (int i = 0; i < grid.size(); i++) {
-          grid.at(i)->save();
+      for (auto& node : grid) {
+          node->save();
       }
 
       endSave();

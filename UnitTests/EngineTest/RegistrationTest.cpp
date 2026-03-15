@@ -36,7 +36,7 @@ class TestableMap : public Engine::Maps::Map {
 public:
     TestableMap() : Map(5) {
         for (auto& n : this->grid) {
-            n = std::make_unique<Node>();
+            n = std::make_unique<Engine::Maps::Node>();
         }
         buildMoveData();
     }

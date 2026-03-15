@@ -4,28 +4,21 @@
 #include <iostream>
 #include <Map/MapManager.h>
 #include <UI/Input.h>
-using namespace std;
 
 int main() {
-  MapManager &game = MapManager::getInstance();
-  int choice;
+  MapManager& game = MapManager::getInstance();
 
-  mainMenu:
-  dispList("WolfGame", {"New Game", "Exit"});
-  choice = getDigit(1, 2);
-  switch (choice) {
-    case 1: // New Game
-      game.openMap("CenterTown"); // Opens town
-      game.play(); // starts playing
-      break;
-    case 2: // Exit
-      std::cout << "Exiting." << std::endl;
-      break;
-    default:
-      std::cout << "Input " << choice << " is not a menu item." << std::endl;
-      goto mainMenu;
-      break;
+  while (true) {
+    dispList("WolfGame", {"New Game", "Exit"});
+    int choice = getDigit(1, 2);
+    switch (choice) {
+      case 1: // New Game
+        game.openMap("CenterTown");
+        game.play();
+        break;
+      case 2: // Exit
+        std::cout << "Exiting.\n";
+        return 0;
+    }
   }
-
-  return 0;
 }

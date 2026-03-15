@@ -1,5 +1,5 @@
-#include <assert.h>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <Creation/Creatable.h>
 #include "Map/Dir.h"
@@ -77,7 +77,9 @@ void Player::takeTurnMenu() {
 }
 
 void Player::moveMenu(int dir) {
-  assert(currentNode != nullptr);
+  if (currentNode == nullptr) {
+    throw std::logic_error("moveMenu: player has no current node");
+  }
   if (dir == 0) {
     std::cout << "=====Move=====" << std::endl;
     // Show choices
@@ -86,12 +88,9 @@ void Player::moveMenu(int dir) {
     std::cout << "Enter direction: ";
     dir = getDigit(0, Maps::NUM_DIRS - 1);
   }
-  // TODO: Make sure that the player enters a possible direction
-
-  // set flags. Movedir && turnUsed
-  if (dir != 0 && currentNode->canMoveInDir(dir)) {
-    setMoveDir(dir);
-  } else {
+  if (dir != 0 && currentNode->canMoveInDir(static_cast<Maps::Dir>(dir))) {
+    setMoveDir(static_cast<Maps::Dir>(dir));
+  } else if (dir != 0) {
     std::cout << "Can't move in that direction." << std::endl;
   }
 }
@@ -143,7 +142,6 @@ void Player::inventoryMenu(Inventory &inv) {
     int actionNumber = getDigit(0, 3);
     switch (actionNumber) {
       case 1: // Use
-        //item->onUse(this); // TODO: fixme. onUse --> useOn
         if (hasValidTarget()) {
           item->use(*this, *targetPtr);
         } else {
@@ -175,34 +173,33 @@ void Player::loadMenu() {
 }
 
 void Player::searchMenu(Inventory &inv) {
-ITEM_SELECT:
-  inv.showListOfItems();
-  int choice = getInteger(0, inv.getSlots());
-  int itemIndex = choice - 1;
-  if (choice == 0) { return; } // Exit menu
-  dispList({ "Pick up", "Examine" });
-  choice = getInteger(0, 2);
-  switch (choice) {
-    case 0: // Cancel menu
-      goto ITEM_SELECT;
-      return;
-    case 1: // Add item to player's inventory
-      if (inv.isSlotEmpty(itemIndex)) {
-        std::cout << "That slot is empty. Could not pick up item." << std::endl;
-      } else if (!inventory.hasOpenSlot()) {
-        std::cout << "Your inventory is full." << std::endl;
-      } else {
-        inventory.addItem(inv.removeItem(itemIndex));
-        std::cout << "Picked up item." << std::endl;
-      }
-      break;
-    case 2:
-      // Show item stats, description
-      // TODO: Implement items stats, description
-      break;
-    default:
-      std::cout << "Invalid choice " << choice << std::endl;
-      break;
+  while (true) {
+    inv.showListOfItems();
+    int choice = getInteger(0, inv.getSlots());
+    int itemIndex = choice - 1;
+    if (choice == 0) { return; } // Exit menu
+    dispList({ "Pick up", "Examine" });
+    choice = getInteger(0, 2);
+    switch (choice) {
+      case 0: // Cancel — return to item select
+        break;
+      case 1: // Add item to player's inventory
+        if (inv.isSlotEmpty(itemIndex)) {
+          std::cout << "That slot is empty. Could not pick up item." << std::endl;
+        } else if (!inventory.hasOpenSlot()) {
+          std::cout << "Your inventory is full." << std::endl;
+        } else {
+          inventory.addItem(inv.removeItem(itemIndex));
+          std::cout << "Picked up item." << std::endl;
+        }
+        break;
+      case 2:
+        // Show item stats, description
+        break;
+      default:
+        std::cout << "Invalid choice " << choice << std::endl;
+        break;
+    }
   }
 }
 

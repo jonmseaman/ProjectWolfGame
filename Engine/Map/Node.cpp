@@ -1,7 +1,7 @@
 #include <algorithm>
-#include <assert.h>
 #include <iomanip>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <Creation/Create.h>
 #include <Creation/Creatable.h>
@@ -12,9 +12,10 @@
 
 using namespace Engine::Maps;
 using namespace Engine::Entity;
+using enum Engine::Maps::Dir;
 
 
-int Node::nodeCount = 1;
+std::atomic<int> Node::nodeCount = 1;
 namespace Engine {
 namespace Maps {
 
@@ -26,12 +27,9 @@ namespace Maps {
     , nodeLinks{}
     , actorPtrs{}
     , name("Node") {
-    for (int i = 0; i < Maps::NUM_DIRS; i++) {
-      entranceDirs[i] = true;
-    }
-    entranceDirs[Dir::DOWN] = false; // Entrances in all dirs != down
-    name += std::to_string(nodeCount);
-    nodeCount++;
+    entranceDirs.fill(true);
+    entranceDirs[dir_idx(DOWN)] = false; // Entrances in all dirs except DOWN
+    name += std::to_string(nodeCount++);
   }
 
   Node::~Node() {}
@@ -44,10 +42,12 @@ namespace Maps {
   }
 
   Actor* Node::getActorPtr( int index ) {
-    assert(0 <= index && index <= actorPtrs.size());
+    if (index < 0 || static_cast<std::size_t>(index) > actorPtrs.size()) {
+      throw std::out_of_range("getActorPtr: index out of range");
+    }
     auto it = actorPtrs.begin();
-    if ( index >= actorPtrs.size() ) {
-      index = actorPtrs.size();
+    if ( static_cast<std::size_t>(index) >= actorPtrs.size() ) {
+      index = static_cast<int>(actorPtrs.size());
     }
     std::advance(it, index);
     return it->get();
@@ -71,10 +71,10 @@ namespace Maps {
   void Node::showNavigationInfo() {
     bool noDirs{true};
 
-    // Show navigation info for all directions.
     for (int i = 1; i < NUM_DIRS; i++) {
-      if (entranceDirs[i] && nodeLinks[i] != nullptr) {
-        showNavigationInfoForNode(i);
+      Dir d = static_cast<Dir>(i);
+      if (entranceDirs[dir_idx(d)] && nodeLinks[dir_idx(d)] != nullptr) {
+        showNavigationInfoForNode(d);
         std::cout << std::endl;
         noDirs = false;
       }
@@ -85,19 +85,17 @@ namespace Maps {
     }
   }
 
-  void Node::showNavigationInfoForNode(int dir) {
-    assert(0 < dir && dir < NUM_DIRS);
-    std::cout << std::setw(COLUMN_PADDING) << std::right << dir << ": ";
-    std::cout << Maps::dirName(dir) << " to " << nodeLinks[dir]->getName();
-    // Check to see if the node can accept entry from this direction
-    bool canGoInDir = nodeLinks[dir]->getEntranceDir(oppositeDir(dir));
+  void Node::showNavigationInfoForNode(Dir dir) {
+    std::cout << std::setw(COLUMN_PADDING) << std::right << static_cast<int>(dir) << ": ";
+    std::cout << Maps::dirName(dir) << " to " << nodeLinks[dir_idx(dir)]->getName();
+    bool canGoInDir = nodeLinks[dir_idx(dir)]->getEntranceDir(oppositeDir(dir));
     if (!canGoInDir) {
       std::cout << " <Inaccessible>";
     }
   }
 
-  void Node::setNodeLink(int dir, Node* link) {
-    this->nodeLinks[dir] = link;
+  void Node::setNodeLink(Dir dir, Node* link) {
+    nodeLinks[dir_idx(dir)] = link;
   }
 
   void Node::addActor(std::unique_ptr<Actor> actor) {
@@ -106,26 +104,23 @@ namespace Maps {
   }
 
   void Node::moveActors() {
-  auto it = actorPtrs.begin();
-  while (it != actorPtrs.end()) {
-      Actor &actor = **it;
-      int dir = actor.getMoveDir();
-      std::list<std::unique_ptr<Actor>> &otherList = nodeLinks[dir]->actorPtrs;
-      // TODO: Make canMoveInDir(DIR) function
-      if ((dir != Maps::STOP) && (nodeLinks[dir] != nullptr) && !nodeLinks[dir]->isWall()) {
-        actor.onMove(); // Moving actor
-        actor.setCurrentNode(nodeLinks[dir]);
-      auto actorToMove = it;
-      it++;
-      // Moves
-      otherList.splice(otherList.begin(), actorPtrs, actorToMove);
+    auto it = actorPtrs.begin();
+    while (it != actorPtrs.end()) {
+      Actor& actor = **it;
+      Dir dir = actor.getMoveDir();
+      std::size_t idx = dir_idx(dir);
+      if ((dir != STOP) && (nodeLinks[idx] != nullptr) && !nodeLinks[idx]->isWall()) {
+        actor.onMove();
+        actor.setCurrentNode(nodeLinks[idx]);
+        auto actorToMove = it++;
+        nodeLinks[idx]->actorPtrs.splice(nodeLinks[idx]->actorPtrs.begin(), actorPtrs, actorToMove);
       } else {
-        it++;
+        ++it;
       }
-  }
+    }
   }
 
-  std::string Node::getName() {
+  std::string Node::getName() const {
     return name;
   }
 
@@ -140,31 +135,23 @@ namespace Maps {
     }
   }
 
-  int Node::getNumActors() {
-    return actorPtrs.size();
+  int Node::getNumActors() const {
+    return static_cast<int>(actorPtrs.size());
   }
 
-  void Node::setEntranceDir(int dir, bool isEntrance) {
-    assert(0 <= dir && dir < Maps::NUM_DIRS);
-    entranceDirs[dir] = isEntrance;
+  void Node::setEntranceDir(Dir dir, bool isEntrance) {
+    entranceDirs[dir_idx(dir)] = isEntrance;
   }
 
-  bool Node::canMoveInDir(int dir) {
-    assert(0 <= dir < NUM_DIRS);
-    bool nodeInDirExists = nodeLinks[dir] != nullptr;
-    bool entrancesExist = false;
-    if (nodeInDirExists) {
-      entrancesExist = getEntranceDir(dir) &&
-        nodeLinks[dir]->getEntranceDir(Maps::oppositeDir(dir));
-    }
-
-    return entrancesExist;
+  bool Node::canMoveInDir(Dir dir) const {
+    std::size_t idx = dir_idx(dir);
+    if (nodeLinks[idx] == nullptr) return false;
+    return getEntranceDir(dir) && nodeLinks[idx]->getEntranceDir(Maps::oppositeDir(dir));
   }
 
-   bool Node::getEntranceDir(int dir) {
-     assert(0 <= dir < NUM_DIRS);
-     return entranceDirs[dir];
-   }
+  bool Node::getEntranceDir(Dir dir) const {
+    return entranceDirs[dir_idx(dir)];
+  }
 
    bool Node::containsActor(Actor* actor) {
      return std::find_if(actorPtrs.begin(), actorPtrs.end(),
@@ -172,7 +159,9 @@ namespace Maps {
    }
 
    Actor* Node::getNextActor(Actor* actor) {
-     assert(actorPtrs.size() > 0);
+     if (actorPtrs.empty()) {
+       throw std::logic_error("getNextActor: node has no actors");
+     }
      bool actorFound = false;
 
      // If the actorPtrs is of size one, return actor

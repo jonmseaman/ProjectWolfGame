@@ -2,6 +2,7 @@
 #define NODE_H
 #include <Engine.h>
 #include <array>
+#include <atomic>
 #include <list>
 #include <memory>
 #include <string>
@@ -47,37 +48,28 @@ namespace Maps
        */
       Engine::Entity::Actor* getNextActor(Engine::Entity::Actor* actor);
 
-      std::string getName();
-      void setName(std::string name) { this->name = name; }
-      void setNodeLink(int dir, Node* link);
+      void setNodeLink(Dir dir, Node* link);
       /**
        * Allows setting entrance direction for nodes. Nodes can be entered and
        * exited from entrance directions.
-       * @pre 0 < dir < Maps::NUM_DIRS
        * @post The node will have an entrance in dir if(isEntrance)
        */
-      void setEntranceDir(int dir, bool isEntrance);
+      void setEntranceDir(Dir dir, bool isEntrance);
       /**
        * The node's inventory. Contains items in the node.
        */
       Engine::Entity::Inventory inventory;
 
       // Navigation
-      virtual bool isWall() { return false; }
+      virtual bool isWall() const { return false; }
       /**
-       * This function is to figure out if moving an actor in a specific
-       * direction is possible.
-       * @pre 0 <= dir < NUM_DIRS
-       * @return True if an actor could move from this int direction dir.
+       * Returns true if an actor can move from this node in direction dir.
        */
-      bool canMoveInDir(int dir);
+      bool canMoveInDir(Dir dir) const;
       /**
-       * Allows retrieval of entrance directions on nodes.
-       * @param dir The direction being checked.
-       * @pre 0 <= dir < NUM_DIRS
-       * @return True if the node has an entrance in direction dir.
+       * Returns true if the node has an entrance in direction dir.
        */
-      bool getEntranceDir(int dir);
+      bool getEntranceDir(Dir dir) const;
       /**
        * Displays a list of nodes that can be traveled to from this node.
        * Shows direction and name of node.
@@ -88,7 +80,7 @@ namespace Maps
        * @usage Used be showNavigationInfo() to display information for eac
        * direction that the player could move in.
        */
-      void showNavigationInfoForNode(int dir);
+      void showNavigationInfoForNode(Dir dir);
 
       // Use
 
@@ -102,12 +94,15 @@ namespace Maps
        * list.
        */
       void addActor(std::unique_ptr<Engine::Entity::Actor> actor);
-      int getNumActors();
+      int getNumActors() const;
       /**
        * Moves all actors which have a move direction set.
        */
       void moveActors();
       void showActors(); // Shows a list of actors
+
+      std::string getName() const;
+      void setName(std::string name) { this->name = name; }
 
       std::list<std::unique_ptr<Engine::Entity::Actor>> actorPtrs;
 
@@ -116,7 +111,7 @@ namespace Maps
       /// The directions from which this node can be entered
       std::array<bool, NUM_DIRS> entranceDirs;
       std::string name;
-      static int nodeCount;
+      static std::atomic<int> nodeCount;
   };
 }
 }

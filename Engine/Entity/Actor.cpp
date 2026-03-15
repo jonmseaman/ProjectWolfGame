@@ -1,17 +1,18 @@
 #include <iostream>
-#include <assert.h>
+#include <stdexcept>
 #include "Actor.h"
 #include "Map/Dir.h"
 #include "UI/Input.h"
 
 using namespace Engine::Maps;
+using enum Engine::Maps::Dir;
 
 namespace Engine {
 namespace Entity {
 
 Actor::Actor() : isPlayer(false)
 , isTurnUsed(false)
-, moveDir(STOP) {}
+, moveDir(Dir::STOP) {}
 
 Actor::~Actor() {}
 
@@ -28,7 +29,7 @@ void Actor::takeTurn() {
   }
 }
 
-int Actor::getMoveDir() {
+Dir Actor::getMoveDir() const {
   return moveDir;
 }
 
@@ -36,9 +37,10 @@ void Actor::setCurrentNode(Node *node) {
   this->currentNode = node;
 }
 
-void Actor::setMoveDir(int dir) {
-  assert(currentNode != nullptr);
-  assert(0 <= dir && dir < NUM_DIRS);
+void Actor::setMoveDir(Dir dir) {
+  if (currentNode == nullptr) {
+    throw std::logic_error("setMoveDir: actor is not in a node");
+  }
   moveDir = dir;
   if (currentNode->canMoveInDir(dir)) {
     setIsTurnUsed();
@@ -49,21 +51,23 @@ void Actor::setIsTurnUsed(bool val) {
   this->isTurnUsed = val;
 }
 
-bool Actor::getIsTurnUsed() {
+bool Actor::getIsTurnUsed() const {
   return isTurnUsed;
 }
 
-bool Actor::getIsPlayer() {
+bool Actor::getIsPlayer() const {
   return isPlayer;
 }
 
 void Actor::onMove() {
-  moveDir = 0; // Reset move dir.
+  moveDir = STOP;
   combatStop();
 }
 
 bool Actor::dropItem(int slotIndex) {
-  assert(slotIndex >= 0 && slotIndex <= inventory.getSlots());
+  if (slotIndex < 0 || slotIndex >= inventory.getSlots()) {
+    throw std::out_of_range("dropItem: slotIndex out of range");
+  }
   if (!currentNode->inventory.hasOpenSlot()) {
     inventory.removeItem(slotIndex);  // unique_ptr out of scope, item destroyed
   } else {
@@ -92,14 +96,11 @@ bool Actor::hasValidTarget() {
   return targetValid;
 }
 
-void Actor::onAttack() // TODO: Update for stats class
-{ // TODO: Update for weapons
-  assert(targetPtr != nullptr);
+void Actor::onAttack() {
+  if (targetPtr == nullptr) {
+    throw std::logic_error("onAttack: no target set");
+  }
   int damage = stats.getStrength();
-  // damage += damage from weapon
-  // TODO: Update this for items.
-  // TODO: Update combat text
-  // TODO: No weapon equipped --> fists
   std::cout << getName() << " swings for " << damage << ". " << std::endl;
   targetPtr->onDamage(damage);
   setIsTurnUsed();

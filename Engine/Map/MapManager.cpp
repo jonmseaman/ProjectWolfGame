@@ -1,10 +1,10 @@
-#include <algorithm>
-#include <assert.h>
-#include <exception>
 #include <iostream>
+#include <stdexcept>
 #include <Creation/Create.h>
 #include "Map.h"
 #include "MapManager.h"
+
+using namespace Engine;
 
 MapManager::MapManager() {}
 
@@ -21,22 +21,24 @@ void MapManager::setMap(std::unique_ptr<Maps::Map> newMap) {
 }
 
 void MapManager::play() {
-  assert( map != nullptr );
-  while ( true ) // TODO: Make variable for this
-  {
+  if (map == nullptr) {
+    throw std::logic_error("play: no map is open");
+  }
+  while (true) {
     map->activate();
 
     if (tempMap != nullptr) {
       std::cout << "Switching maps... ";
-      map = std::move(tempMap);  // old map destroyed, tempMap becomes null
+      map = std::move(tempMap);
       std::cout << "Done.\n";
     }
   }
-
 }
 
 void MapManager::save(const std::string &fileName) {
-  assert(map != nullptr);
+  if (map == nullptr) {
+    throw std::logic_error("save: no map is open");
+  }
   map->save();
   File::save(fileName);
 }
