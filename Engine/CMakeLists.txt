@@ -15,7 +15,6 @@ add_library(Engine SHARED
     UI/Input.cpp
 )
 
-pwg_configure_std(Engine)
 pwg_set_warnings(Engine)
 
 target_compile_definitions(Engine PRIVATE ENGINE_EXPORTS _WINDOWS _USRDLL)
