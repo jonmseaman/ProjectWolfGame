@@ -7,9 +7,9 @@ on:
 
 env:
   # `import std` is behind an experimental gate whose value is tied to a CMake
-  # release, and CMakeLists.txt carries the value 4.4 expects. Pin CMake here
-  # rather than tracking latest, or the gate stops opening and the configure
-  # step fails. Bump both together.
+  # release. CMakeLists.txt knows the values for 4.3 and 4.4, so CMake is
+  # pinned here rather than tracking latest -- a release outside that range
+  # cannot open the gate and fails the configure step. Bump both together.
   CMAKE_VERSION: 4.4.3
   LLVM_VERSION: 20
 
@@ -24,7 +24,7 @@ jobs:
         build_type: [Debug, Release]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install Ninja
         run: |
@@ -79,7 +79,7 @@ jobs:
     name: AddressSanitizer and UndefinedBehaviorSanitizer
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install Ninja
         run: |
