@@ -1,8 +1,11 @@
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+#include "Creation/Creatable.h"
+
+module Engine;
+
 import std;
-#include <Creation/Creatable.h>
-#include "Actor.h"
-#include "Map/Dir.h"
-#include "UI/Input.h"
 
 using namespace Engine::Maps;
 using enum Engine::Maps::Dir;

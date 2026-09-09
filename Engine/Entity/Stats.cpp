@@ -1,5 +1,10 @@
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
 import std;
-#include "Entity/Stats.h"
 
 namespace Engine {
 namespace Entity {

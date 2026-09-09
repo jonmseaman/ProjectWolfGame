@@ -1,13 +1,10 @@
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
 import std;
-
-#include "Create.h"
-#include "CreateData.h"
-#include "Savable.h"
-
-#include <Entity/Item.h>
-#include <Entity/Actor.h>
-#include <Map/Node.h>
-#include <Map/Map.h>
 
 #pragma region Create
 

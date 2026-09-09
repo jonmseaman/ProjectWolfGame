@@ -1,9 +1,9 @@
+import std;
+import Engine;
+
 /* rewrite 3 */
 /// ProjectReWolf
 /// A text-based RPG
-import std;
-#include <Map/MapManager.h>
-#include <UI/Input.h>
 
 int main() {
   MapManager& game = MapManager::getInstance();

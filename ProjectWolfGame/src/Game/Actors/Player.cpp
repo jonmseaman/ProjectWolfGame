@@ -1,11 +1,10 @@
-import std;
-#include <Savable.h>
+module;
 #include <Creation/Creatable.h>
-#include "Map/Dir.h"
-#include "Map/MapManager.h"
-#include "Player.h"
-#include <UI/Input.h>
 
+module Game.Player;
+
+import std;
+import Engine;
 
 namespace Engine {
 namespace Entity {

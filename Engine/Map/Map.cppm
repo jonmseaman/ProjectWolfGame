@@ -1,14 +1,16 @@
-#ifndef MAP_H
-#define MAP_H
-#include <Engine.h>
-#include <memory>
-#include <vector>
-#include "Savable.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
 
-namespace Engine {
+export module Engine:Map;
+
+import std;
+import Savable;
+import :Fwd;   // Node is only named here
+
+export namespace Engine {
 namespace Maps
 {
-  class Node;
   class ENGINE_API Map : public File::Savable
   {
     public:
@@ -17,15 +19,13 @@ namespace Maps
        * Makes a map of specific size. Does not make any nodes.
        * @usage Should be used by derived classes since nodes are not created.
        */
-      Map(int mapWidth); // Makes a map of specific size. Does not make any nodes
+      Map(int mapWidth);
       ~Map() override; // Deletes nodes.
       SAVABLE_CLEAR;
 
-      // Data Acess
+      // Data Access
 
-      /**
-       * @return number of nodes in this map.
-       */
+      /** @return number of nodes along one side of this map. */
       int getMapSize() const;
       /**
        * Allows access to nodes in the map.
@@ -38,9 +38,7 @@ namespace Maps
        * @post The node at xInd, yInd = #node
        */
       void setNode(int xInd, int yInd, std::unique_ptr<Node> node);
-      /**
-       * Activates all nodes in the map.
-       */
+      /** Activates all nodes in the map. */
       void activate();
       /**
       * These are nodes that make up the base layer of the game world.
@@ -57,11 +55,8 @@ namespace Maps
     private:
       // Vars
       static const int DEFAULT_MAP_SIZE;
-      /**
-       * The width, height of the map. mapSize^2 = number of nodes in grid
-       */
+      /** The width, height of the map. mapSize^2 = number of nodes in grid */
       int mapSize;
   };
 }
 }
-#endif

@@ -1,6 +1,10 @@
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
 import std;
-#include <Creation/Create.h>
-#include "Inventory.h"
 
 namespace Engine {
 namespace Entity {
@@ -10,7 +14,7 @@ using namespace Creation;
 Inventory::Inventory() :Inventory("Inventory", 2) {}
 
 Inventory::Inventory(std::string name, int size) : name(name)
-, slots( static_cast<size_t>(size) )
+, slots( static_cast<std::size_t>(size) )
 , size(size) {}
 
 Inventory::~Inventory() {}

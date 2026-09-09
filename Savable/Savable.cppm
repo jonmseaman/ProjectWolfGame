@@ -1,29 +1,11 @@
-#ifndef SAVABLE_H
-#define SAVABLE_H
+module;
+#include "SavableMacros.h"
 
+export module Savable;
 
-#if defined(_MSC_VER) || defined(__MINGW32__)
-#  ifdef SAVABLE_EXPORTS
-#    define SAVABLE_API __declspec(dllexport)
-#  else
-#    define SAVABLE_API __declspec(dllimport)
-#  endif
-#else
-#  define SAVABLE_API
-#endif
+import std;
 
-#include <stdexcept>
-#include <string>
-
-#define SAVE(var) Savable::save( #var, var )
-#define LOAD(var) Savable::load( #var, var )
-
-/** Makes it easier to declare necessary savable functions. */
-#define SAVABLE void save() override; void load() override
-#define SAVABLE_CLEAR void save() override; void load() override; \
-                      void clearSavable() override
-
-namespace File {
+export namespace File {
 
   /**
    * Thrown when a save file is missing, cannot be written, or does not
@@ -144,5 +126,3 @@ private:
   idType id;
 };
 } // namespace File
-
-#endif

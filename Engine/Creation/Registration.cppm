@@ -1,12 +1,12 @@
-#pragma once
-#include <functional>
-#include <memory>
-#include <string>
-#include "CreatableClassDeclarations.h"
-#include <Engine.h>
-#include <Savable.h>
+module;
+#include "EngineMacros.h"
 
-namespace Creation {
+export module Engine:Registration;
+
+import std;
+import :Fwd;
+
+export namespace Creation {
 
 class ENGINE_API Registration {
 public:
@@ -17,5 +17,3 @@ public:
 };
 
 }
-
-

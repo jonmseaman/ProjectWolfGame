@@ -1,10 +1,10 @@
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
 import std;
-#include <Creation/Create.h>
-#include <Creation/Creatable.h>
-#include <Entity/Actor.h>
-#include <UI/Input.h>
-#include "Dir.h"
-#include "Node.h"
 
 using namespace Engine::Maps;
 using namespace Engine::Entity;

@@ -1,9 +1,12 @@
-import std;
-
-// assert() is a macro, and macros never come from `import std`.
+module;
+// Macros never come from a module: assert() and the SAVE/LOAD helpers both
+// have to be included textually.
 #include <assert.h>
+#include "SavableMacros.h"
 
-#include "Savable.h"
+module Savable;
+
+import std;
 
 namespace fs = std::filesystem;
 
@@ -127,7 +130,7 @@ static void writeXml(std::ostream& out, const XmlNode& tree) {
 // XML read helpers
 
 static std::string trimWs(const std::string& s) {
-    size_t b = s.find_first_not_of(" \t\r\n");
+    std::size_t b = s.find_first_not_of(" \t\r\n");
     if (b == std::string::npos) return "";
     return s.substr(b, s.find_last_not_of(" \t\r\n") - b + 1);
 }
@@ -140,13 +143,13 @@ static void readXml(std::istream& in, XmlNode& root) {
         std::string t = trimWs(line);
         if (t.empty() || t.rfind("<?", 0) == 0) continue;
         if (t[0] == '<' && t[1] != '/') {
-            size_t end = t.find_first_of("> \t");
+            std::size_t end = t.find_first_of("> \t");
             std::string tag = t.substr(1, end - 1);
             XmlNode child;
             std::string closeTag = "</" + tag + ">";
-            size_t closePos = t.find(closeTag);
+            std::size_t closePos = t.find(closeTag);
             if (closePos != std::string::npos) {
-                size_t valStart = t.find('>') + 1;
+                std::size_t valStart = t.find('>') + 1;
                 child.value = unescapeXml(t.substr(valStart, closePos - valStart));
             } else {
                 readXmlNode(in, child);
@@ -163,13 +166,13 @@ static void readXmlNode(std::istream& in, XmlNode& node) {
         if (t.empty()) continue;
         if (t[0] == '<' && t[1] == '/') break; // closing tag
         if (t[0] == '<') {
-            size_t end = t.find_first_of("> \t");
+            std::size_t end = t.find_first_of("> \t");
             std::string tag = t.substr(1, end - 1);
             XmlNode child;
             std::string closeTag = "</" + tag + ">";
-            size_t closePos = t.find(closeTag);
+            std::size_t closePos = t.find(closeTag);
             if (closePos != std::string::npos) {
-                size_t valStart = t.find('>') + 1;
+                std::size_t valStart = t.find('>') + 1;
                 child.value = unescapeXml(t.substr(valStart, closePos - valStart));
             } else {
                 readXmlNode(in, child);

@@ -1,6 +1,10 @@
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
 import std;
-#include "Registration.h"
-#include "CreateData.h"
 
 namespace Creation {
 

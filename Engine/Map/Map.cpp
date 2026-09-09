@@ -1,9 +1,11 @@
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+#include "Creation/Creatable.h"
+
+module Engine;
+
 import std;
-#include <Creation/Create.h>
-#include <Creation/Creatable.h>
-#include <UI/Input.h>
-#include "Map.h"
-#include "Node.h"
 
 using std::cout;
 using std::endl;
@@ -21,13 +23,13 @@ const int Map::DEFAULT_MAP_SIZE = 5;
 Creation::Registration __registrationMapEmptyString("", []() -> std::unique_ptr<Map> { return std::make_unique<Map>(); });
 Creation::Registration __registrationMap("Map", []() -> std::unique_ptr<Map> { return std::make_unique<Map>(); });
 
-Map::Map() : grid( static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
+Map::Map() : grid( static_cast<std::size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
 , mapSize{ DEFAULT_MAP_SIZE } {
     for (auto& i : grid) { i = std::make_unique<Node>(); }
     buildMoveData();
   }
 
-  Map::Map(int mapWidth) : grid( static_cast<size_t>(mapWidth*mapWidth) )
+  Map::Map(int mapWidth) : grid( static_cast<std::size_t>(mapWidth*mapWidth) )
     , mapSize{ mapWidth } {}
 
   Map::~Map() {}
@@ -110,7 +112,7 @@ Map::Map() : grid( static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
 
     // Load the nodes
     LOAD(mapSize);
-    grid.resize(static_cast<size_t>(mapSize * mapSize));
+    grid.resize(static_cast<std::size_t>(mapSize * mapSize));
     for (auto& slot : grid) {
       slot = Create::loadNewNode();
     }

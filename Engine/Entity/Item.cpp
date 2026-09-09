@@ -1,8 +1,11 @@
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+#include "Creation/Creatable.h"
+
+module Engine;
+
 import std;
-#include <Creation/Creatable.h>
-#include "Creature.h"
-#include "Item.h"
-#include "Savable.h"
 
 namespace Engine {
 namespace Entity {

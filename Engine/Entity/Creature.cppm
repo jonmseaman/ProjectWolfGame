@@ -1,13 +1,17 @@
-#ifndef CREATURE_H
-#define CREATURE_H
-#include <string>
-#include <Engine.h>
-#include "Equipment.h"
-#include "Inventory.h"
-#include "Savable.h"
-#include "Stats.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
 
-namespace Engine {
+export module Engine:Creature;
+
+import std;
+import Savable;
+import :Equipment;
+import :Inventory;
+import :Item;
+import :Stats;
+
+export namespace Engine {
 namespace Entity {
 
 /**
@@ -15,8 +19,8 @@ namespace Entity {
  */
 class ENGINE_API Creature : public File::Savable {
     // The data structure for the creatures.
-    // This class should contain the data and tools for making functioning actors in the game world,
-    // but not actually include a way to _act_
+    // This class should contain the data and tools for making functioning
+    // actors in the game world, but not actually include a way to _act_
 
 public:
     Creature();
@@ -50,9 +54,9 @@ public:
       */
     void useItem(Item &item, Creature &usedOn);
     /**
-     * T  his function handles creatures being damaged
-     * Kills the creature if the damage is sufficient
-     * @param dmg The amount of damage that this creature
+     * This function handles creatures being damaged.
+     * Kills the creature if the damage is sufficient.
+     * @param dmg The amount of damage that this creature takes
      */
     void onDamage(int dmg);
     void onHeal(int heal);
@@ -66,7 +70,6 @@ public:
 
     // Stats
     Stats stats;
-
 
 protected:
     void flagInCombat(bool val); // sets combat status
@@ -86,5 +89,3 @@ private:
 };
 }
 }
-
-#endif // CREATURE_H

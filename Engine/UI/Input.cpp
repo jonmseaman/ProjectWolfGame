@@ -1,6 +1,5 @@
-#include "Input.h"
-
-import std;
+module;
+#include "EngineMacros.h"
 
 #ifdef _WIN32
 #  include <conio.h>
@@ -9,11 +8,18 @@ import std;
 #  include <unistd.h>
 #endif
 
+module Engine;
+
+import std;
+
 /**
  * Miscellaneous functions
  */
 
 namespace {
+
+// EOF is a macro from <cstdio>, and macros do not come from `import std`.
+constexpr int kEndOfFile = std::char_traits<char>::eof();
 
 #ifndef _WIN32
 /**
@@ -60,7 +66,7 @@ int readChar() {
   RawMode rawMode;
   int ch = std::cin.get();
 #endif
-  if (ch == EOF) {
+  if (ch == kEndOfFile) {
     throw InputClosed("input: no more input to read");
   }
   return ch;

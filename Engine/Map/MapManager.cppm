@@ -1,17 +1,17 @@
-#ifndef MAPMANAGER_H
-#define MAPMANAGER_H
-#include <Engine.h>
-#include <memory>
-#include <string>
-#include "Map.h"
-#include "Savable.h"
+module;
+#include "EngineMacros.h"
+
+export module Engine:MapManager;
+
+import std;
+import :Map;
 
 /**
- * The purpose of this class is to make it easier to manager maps.
+ * The purpose of this class is to make it easier to manage maps.
  * Eventually, MapManager will be able to handle multiple open maps and
  * connect them together to make a seamless larger map.
  */
-class ENGINE_API MapManager
+export class ENGINE_API MapManager
 {
   public:
     /** Singleton */
@@ -19,13 +19,9 @@ class ENGINE_API MapManager
       static MapManager instance;
       return instance;
     }
-    /**
-     * Deletes the map. Sets map to nullptr.
-     */
+    /** Deletes the map. Sets map to nullptr. */
     void closeMap();
-    /**
-     * Creates a new map corresponding to mapNum
-     */
+    /** Creates a new map corresponding to the given name. */
     void openMap(const std::string&);
     /**
      * Starts the game loop for the opened map.
@@ -43,7 +39,6 @@ class ENGINE_API MapManager
      * @pre fileName exists in File::savePath
      */
     void load(const std::string &fileName = "save1");
-  protected:
   private:
     MapManager(MapManager const&) = delete;
     void operator=(MapManager const&) = delete;
@@ -52,5 +47,3 @@ class ENGINE_API MapManager
     std::unique_ptr<Engine::Maps::Map> tempMap;
     void setMap(std::unique_ptr<Engine::Maps::Map> map);
 };
-
-#endif // MAPMANAGER_H

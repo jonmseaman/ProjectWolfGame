@@ -1,14 +1,8 @@
 #include <gtest/gtest.h>
-#include <stdexcept>
-#include <string>
-#include <Creation/Create.h>
 #include <Creation/Creatable.h>
-#include <Entity/Actor.h>
-#include <Entity/Item.h>
-#include <Entity/Inventory.h>
-#include <Map/Map.h>
-#include <Map/Node.h>
-#include <Savable.h>
+
+import std;
+import Engine;
 
 using namespace Engine::Entity;
 using namespace Engine::Maps;

@@ -1,8 +1,12 @@
-#ifndef PLAYER_H
-#define PLAYER_H
-#include <Entity/Actor.h>
+module;
+#include <Creation/Creatable.h>
 
-namespace Engine {
+export module Game.Player;
+
+import std;
+import Engine;
+
+export namespace Engine {
 namespace Entity {
 
 class Player : public Actor {
@@ -67,29 +71,20 @@ protected:
   void searchMenu(Inventory &inv);
   /**
    * The menu opened when the player takes a turn. Allows access to other
-   * menus. Alows keyboard input.
+   * menus. Allows keyboard input.
    */
   void takeTurnMenu();
-  /**
-   * This menu allows selection of targets.
-   */
+  /** This menu allows selection of targets. */
   void targetMenu();
   /**
    * This function runs a command corresponding to user input.
-   * If key is not a valid input
    * @param key The button that the user pressed.
-   * @return Returns true if key had a corresponding command that was runs,
-   * false if there was not a corresponding command.
+   * @return true if key had a corresponding command that was run.
    */
   bool processUserInput(char key);
-  /**
-   * Menu for exiting the game. Asks the user to press 0 to exit.
-   */
+  /** Menu for exiting the game. Asks the user to press 1 to exit. */
   void exitMenu();
-private:
 };
 
 }
 }
-
-#endif // PLAYER_H

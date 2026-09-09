@@ -1,6 +1,10 @@
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
 import std;
-#include "Creature.h"
-#include "Inventory.h"
 
 namespace Engine {
 namespace Entity {

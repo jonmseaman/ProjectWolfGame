@@ -1,8 +1,7 @@
 #include <gtest/gtest.h>
-#include <Map/Map.h>
-#include <Map/Node.h>
-#include <Entity/Actor.h>
-#include <Creation/Create.h>
+
+import std;
+import Engine;
 
 using namespace Engine::Maps;
 using namespace Engine::Entity;
@@ -13,7 +12,7 @@ namespace UnitTests {
 TEST(MapTest, mapDefaultConstructor) {
     Map m{};
     int mSize = m.getMapSize();
-    EXPECT_EQ(m.grid.size(), (size_t)(mSize * mSize));
+    EXPECT_EQ(m.grid.size(), (std::size_t)(mSize * mSize));
     EXPECT_TRUE(m.grid.size() > 0);
 }
 

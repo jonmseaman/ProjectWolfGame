@@ -1,9 +1,7 @@
 #include <gtest/gtest.h>
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include <UI/Input.h>
+
+import std;
+import Engine;
 
 namespace UnitTests {
 

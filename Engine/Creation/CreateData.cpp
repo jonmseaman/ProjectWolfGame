@@ -1,4 +1,10 @@
-#include "CreateData.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
+import std;
 
 std::map<std::string, std::function<std::unique_ptr<Engine::Entity::Item>()>>  CreateData::items;
 std::map<std::string, std::function<std::unique_ptr<Engine::Entity::Actor>()>> CreateData::actors;

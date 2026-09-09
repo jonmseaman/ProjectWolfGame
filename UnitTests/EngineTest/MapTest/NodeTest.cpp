@@ -1,8 +1,7 @@
 #include <gtest/gtest.h>
-#include <string>
-#include <Entity/Actor.h>
-#include <Map/Node.h>
-#include <Creation/Create.h>
+
+import std;
+import Engine;
 
 using namespace Engine::Maps;
 using namespace Engine::Entity;

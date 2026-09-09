@@ -1,11 +1,14 @@
-#ifndef ACTOR_H
-#define ACTOR_H
-#include <Engine.h>
-#include "Creature.h"
-#include "Map/Node.h"
-#include "Map/Dir.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
 
-namespace Engine {
+export module Engine:Actor;
+
+import :Creature;
+import :Dir;
+import :Node;
+
+export namespace Engine {
 namespace Entity {
 
 /**
@@ -18,11 +21,10 @@ public:
   ~Actor() override;
   SAVABLE;
 
-
   // Combat
   virtual void onAttack();
   // Inventory
-  bool dropItem(int slotNumber); // Drops item to node inventory. slotNumber is index+1 in inventory
+  bool dropItem(int slotNumber); // Drops item to node inventory
   void dropAllItems(); // Drops all items in inventory to node inventory.
   // Targeting
   /**
@@ -40,7 +42,7 @@ public:
   bool hasValidTarget();
   // Turns
   virtual void takeTurn(); // Allows the player to take actions. Uses turn
-  virtual void endTurn(); // Whatever needs to be done at the end of a turn. Default is flagging the turn as used.
+  virtual void endTurn(); // Default is flagging the turn as used.
   bool getIsTurnUsed() const;
 
   // Movement
@@ -72,9 +74,8 @@ protected:
   bool isPlayer = false;
 private:
   bool isTurnUsed = false; // Should stop allowing actions when this is true.
-  Maps::Dir moveDir = Maps::Dir::STOP; // The direction that the map will move the player
+  Maps::Dir moveDir = Maps::Dir::STOP; // Direction the map will move the player
 };
 
 }
 }
-#endif // ACTOR_H

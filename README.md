@@ -63,12 +63,61 @@ is tied to a CMake release. `CMakeLists.txt` carries the value CMake **4.4**
 expects; on a CMake that wants a different one the gate stays shut and
 configuring fails, so that value has to be kept current.
 
-## Headers
+## Modules
 
-Project headers still include the standard headers they need, rather than
-relying on `import std` from whatever includes them: a header has to be
-self-contained, and keeping them textual leaves the door open to turning the
-project's own headers into modules later.
+The project's own code is modules too, not just `import std`. There are no
+public headers: game code and tests write
+
+```cpp
+import Engine;
+```
+
+`Savable` and `Engine` are named modules matching the two libraries. `Engine`
+is split into partitions, one per type, so each file maps to what used to be a
+header:
+
+```
+Engine.cppm          the primary interface unit; re-exports the partitions
+                     and Savable, so `import Engine;` is enough
+Fwd.cppm             Engine:Fwd -- forward declarations shared by partitions
+                     that only need to name a type
+Entity/Actor.cppm    Engine:Actor,  Entity/Actor.cpp  -- implementation unit
+Map/Node.cppm        Engine:Node,   ...
+```
+
+`:Node` names `Actor` through `:Fwd` rather than importing `:Actor`, because
+`:Actor` imports `:Node` for the complete type and a partition dependency
+cycle is not allowed.
+
+Three headers survive, and all three exist only because **macros are not
+exported by modules**:
+
+| Header | Holds |
+| --- | --- |
+| `Engine/Creation/Creatable.h` | `CREATABLE_ITEM`, `CREATABLE_REGISTRATION`, ... |
+| `Engine/EngineMacros.h` | `ENGINE_API` |
+| `Savable/SavableMacros.h` | `SAVABLE_API`, `SAVE`, `LOAD`, `SAVABLE` |
+
+Game code that registers a class with the factory therefore includes one
+header alongside the import:
+
+```cpp
+#include <Creation/Creatable.h>
+
+import std;
+import Engine;
+
+class Rat : public Actor {
+public:
+  CREATABLE_ACTOR(Rat)
+  Rat() { setName("Rat"); setMaxHealth(2); }
+};
+
+CREATABLE_REGISTRATION(Rat);
+```
+
+A macro that a module unit needs for its own declarations is included in that
+unit's global module fragment, before `export module`.
 
 ## Controls
 

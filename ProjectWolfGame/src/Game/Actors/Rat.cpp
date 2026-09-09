@@ -1,5 +1,8 @@
-#include <Entity/Actor.h>
 #include <Creation/Creatable.h>
+
+import std;
+import Engine;
+
 using namespace Engine::Entity;
 
 /**
