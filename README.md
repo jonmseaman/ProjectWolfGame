@@ -57,13 +57,14 @@ configure step with an explanation if the toolchain cannot provide it.
 
 ## Controls
 
-* `12345 - Menu access
-* wasdqe - Movement
-* i - inventory
-* Space - Attack
-* t - Change target
-* F5 - Save
-* F9 - Load
+* `12345` - Menu access
+* `wasdqe` - Movement
+* `i` - Inventory
+* `Space` - Attack
+* `t` - Change target
+* `Enter` - End turn
+* `S` - Save
+* `L` - Load
 
 ## Screenshot
 ![Screenshot of UI](Documentation/ProjectWolfGame_UI.png)

@@ -261,10 +261,14 @@ bool Player::processUserInput(char key) {
     case '\r':
       setIsTurnUsed();
       break;
-    case '\x3f': // F5
+    // These used to be \x3f and \x43, described as F5 and F9. Those are
+    // Windows conio scan codes, which only mean F5/F9 after a 0 or 0xE0
+    // prefix byte; a terminal sends an escape sequence for a function key and
+    // never these values. What they did do was save on '?' and load on 'C'.
+    case 'S':
       saveMenu();
       break;
-    case '\x43': // F9
+    case 'L':
       loadMenu();
       break;
     default:
