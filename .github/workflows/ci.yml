@@ -38,9 +38,11 @@ jobs:
           sudo ./llvm.sh ${{ matrix.llvm }}
           sudo apt-get install -y \
             libc++-${{ matrix.llvm }}-dev \
-            libc++abi-${{ matrix.llvm }}-dev
-          # The build needs these; fail loudly here rather than in CMake.
+            libc++abi-${{ matrix.llvm }}-dev \
+            clang-tools-${{ matrix.llvm }}
+          # The build needs all three; fail loudly here rather than inside CMake.
           ls /usr/lib/llvm-${{ matrix.llvm }}/share/libc++/v1/std.cppm
+          ls /usr/lib/llvm-${{ matrix.llvm }}/lib/libc++.modules.json
           ls /usr/lib/llvm-${{ matrix.llvm }}/bin/clang-scan-deps
 
       - uses: lukka/get-cmake@latest
@@ -79,7 +81,8 @@ jobs:
           sudo ./llvm.sh ${{ env.LLVM_VERSION }}
           sudo apt-get install -y \
             libc++-${{ env.LLVM_VERSION }}-dev \
-            libc++abi-${{ env.LLVM_VERSION }}-dev
+            libc++abi-${{ env.LLVM_VERSION }}-dev \
+            clang-tools-${{ env.LLVM_VERSION }}
 
       - uses: lukka/get-cmake@latest
         with:
