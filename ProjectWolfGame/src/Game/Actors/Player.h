@@ -8,7 +8,7 @@ namespace Entity {
 class Player : public Actor {
 public:
   Player();
-  virtual ~Player();
+  ~Player() override;
   CREATABLE_ACTOR(Player)
 
   /**
@@ -22,7 +22,7 @@ public:
    * Allows the actor to take a turn. Default behavior is defined
    * for derived classes which do not override takeTurn()
    */
-  void takeTurn();
+  void takeTurn() override;
 
   const std::string PROCESSABLE_INPUT = "wasdqe it012345`\rSL"; // \r is return, S saves, L loads
 protected:
@@ -43,7 +43,7 @@ protected:
    * Also, see Actor::onMove()
    * @pre currentNode != nullptr
    */
-  void onMove();
+  void onMove() override;
   /**
    * Allows management of this player's own inventory: using, showing
    * information about, and dropping an item. Other inventories are handled

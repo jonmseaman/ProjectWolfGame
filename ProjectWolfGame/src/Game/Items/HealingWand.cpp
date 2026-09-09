@@ -10,9 +10,7 @@ public:
     setDamage(0);
     setHeal(10);
   }
-  virtual ~HealingWand() {
-
-  }
+  ~HealingWand() override = default;
 protected:
 private:
 };

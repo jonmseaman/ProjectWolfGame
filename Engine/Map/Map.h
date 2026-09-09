@@ -18,7 +18,7 @@ namespace Maps
        * @usage Should be used by derived classes since nodes are not created.
        */
       Map(int mapWidth); // Makes a map of specific size. Does not make any nodes
-      virtual ~Map(); // Deletes nodes.
+      ~Map() override; // Deletes nodes.
       SAVABLE_CLEAR;
 
       // Data Acess

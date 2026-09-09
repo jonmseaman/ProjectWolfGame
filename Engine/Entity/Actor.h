@@ -15,7 +15,7 @@ namespace Entity {
 class ENGINE_API Actor : public Creature {
 public:
   Actor();
-  virtual ~Actor();
+  ~Actor() override;
   SAVABLE;
 
 

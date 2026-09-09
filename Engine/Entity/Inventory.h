@@ -14,7 +14,7 @@ class ENGINE_API Inventory : public File::Savable {
 public:
   Inventory();
   Inventory(std::string name, int inventorySize);
-  virtual ~Inventory();
+  ~Inventory() override;
   Inventory(Inventory&&) = default;
   Inventory& operator=(Inventory&&) = default;
   SAVABLE_CLEAR;

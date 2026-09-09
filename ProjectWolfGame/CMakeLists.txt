@@ -9,5 +9,6 @@ add_executable(ProjectWolfGame
 )
 
 pwg_configure_std(ProjectWolfGame)
+pwg_set_warnings(ProjectWolfGame)
 
 target_link_libraries(ProjectWolfGame PRIVATE Engine Savable)

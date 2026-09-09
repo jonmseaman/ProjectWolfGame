@@ -19,8 +19,9 @@
 #define LOAD(var) Savable::load( #var, var )
 
 /** Makes it easier to declare necessary savable functions. */
-#define SAVABLE void save(); void load()
-#define SAVABLE_CLEAR void save(); void load(); void clearSavable()
+#define SAVABLE void save() override; void load() override
+#define SAVABLE_CLEAR void save() override; void load() override; \
+                      void clearSavable() override
 
 namespace File {
 
@@ -73,7 +74,7 @@ public:
    * of the Actor.
    */
   idType getID() { return id; }
-  void setID(idType id) { this->id = id; }
+  void setID(idType newID) { id = newID; }
 
   /**
    * Returns the id value of the first thing that can be loaded

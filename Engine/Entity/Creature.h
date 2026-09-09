@@ -20,7 +20,7 @@ class ENGINE_API Creature : public File::Savable {
 
 public:
     Creature();
-    virtual ~Creature();
+    ~Creature() override;
 
     SAVABLE; // load / save
 
@@ -28,12 +28,12 @@ public:
 
     // Data Access
     const std::string& getName() const { return name; }
-    void setName(const std::string& name); // sets the name of the creature
+    void setName(const std::string& newName); // sets the name of the creature
     bool getIsInCombat() const { return isInCombat; }
     bool getIsLiving() const { return isLiving; }
-    void setHealth(int health);
-    void setMaxHealth(int maxHealth); // Set max hp, also sets hp
-    void setIsLiving(bool isLiving); // Can be used to kill a creature
+    void setHealth(int newHealth);
+    void setMaxHealth(int newMaxHealth); // Set max hp, also sets hp
+    void setIsLiving(bool living); // Can be used to kill a creature
 
     // Experience
     void levelUp();

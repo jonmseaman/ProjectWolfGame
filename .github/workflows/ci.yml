@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+env:
+  # `import std` is behind an experimental gate whose value is tied to a CMake
+  # release, and CMakeLists.txt carries the value 4.4 expects. Pin CMake here
+  # rather than tracking latest, or the gate stops opening and the configure
+  # step fails. Bump both together.
+  CMAKE_VERSION: 4.4.3
+  LLVM_VERSION: 20
+
+jobs:
+  build:
+    name: Build and test (clang-${{ matrix.llvm }}, ${{ matrix.build_type }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        llvm: [20]
+        build_type: [Debug, Release]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Ninja
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+
+      - name: Install LLVM ${{ matrix.llvm }} with libc++ module sources
+        run: |
+          wget -qO llvm.sh https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh ${{ matrix.llvm }}
+          sudo apt-get install -y \
+            libc++-${{ matrix.llvm }}-dev \
+            libc++abi-${{ matrix.llvm }}-dev
+          # The build needs these; fail loudly here rather than in CMake.
+          ls /usr/lib/llvm-${{ matrix.llvm }}/share/libc++/v1/std.cppm
+          ls /usr/lib/llvm-${{ matrix.llvm }}/bin/clang-scan-deps
+
+      - uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: ${{ env.CMAKE_VERSION }}
+
+      - name: Configure
+        run: |
+          cmake -S . -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DCMAKE_CXX_COMPILER=/usr/lib/llvm-${{ matrix.llvm }}/bin/clang++ \
+            -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
+            -DPWG_WERROR=ON
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+  sanitizers:
+    name: AddressSanitizer and UndefinedBehaviorSanitizer
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Ninja
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+
+      - name: Install LLVM ${{ env.LLVM_VERSION }} with libc++ module sources
+        run: |
+          wget -qO llvm.sh https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh ${{ env.LLVM_VERSION }}
+          sudo apt-get install -y \
+            libc++-${{ env.LLVM_VERSION }}-dev \
+            libc++abi-${{ env.LLVM_VERSION }}-dev
+
+      - uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: ${{ env.CMAKE_VERSION }}
+
+      - name: Configure
+        run: |
+          cmake -S . -B build-san -G Ninja \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_CXX_COMPILER=/usr/lib/llvm-${{ env.LLVM_VERSION }}/bin/clang++ \
+            -DCMAKE_CXX_FLAGS="-stdlib=libc++ -fsanitize=address,undefined -fno-omit-frame-pointer" \
+            -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined" \
+            -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=address,undefined"
+
+      - name: Build
+        run: cmake --build build-san
+
+      - name: Test
+        env:
+          UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
+        run: ctest --test-dir build-san --output-on-failure

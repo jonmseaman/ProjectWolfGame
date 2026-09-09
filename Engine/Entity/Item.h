@@ -18,7 +18,7 @@ class ENGINE_API Item : public File::Savable
     Item();
     Item(std::string name, std::string description, Stats stats);
     Item(std::string name, Stats stats);
-    virtual ~Item();
+    ~Item() override;
     SAVABLE;
     CREATABLE_ITEM(Item)
 
@@ -37,7 +37,7 @@ class ENGINE_API Item : public File::Savable
      */
     std::string getDescription() const { return description; }
 
-    void setDescription(const std::string &description) { this->description = description; }
+    void setDescription(const std::string &newDescription) { description = newDescription; }
 
     int getDamage() const { return baseDamage; }
     int getHeal() const { return baseHeal; }

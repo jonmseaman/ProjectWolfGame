@@ -20,8 +20,8 @@ namespace Maps {
   Creation::Registration __registrationNode("Node", []() -> std::unique_ptr<Node> { return std::make_unique<Node>(); });
 
   Node::Node(): inventory(Inventory{ "Location Inventory", 8 })
-    , nodeLinks{}
     , actorPtrs{}
+    , nodeLinks{}
     , name("Node") {
     entranceDirs.fill(true);
     entranceDirs[dir_idx(DOWN)] = false; // Entrances in all dirs except DOWN

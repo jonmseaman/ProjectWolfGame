@@ -41,7 +41,6 @@ struct XmlNode {
   /** The folder in which saves will go. */
   const fs::path savePath("./Saves");
   std::fstream file;
-  fs::path filePath;
   treeType masterTree;
   std::stack<treeType*, std::list<treeType*>> treeStack;
   std::stack<XmlNode::iterator, std::list<XmlNode::iterator>> eraseStack;

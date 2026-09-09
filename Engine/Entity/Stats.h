@@ -17,9 +17,9 @@ public:
   int getStamina() const { return stamina; }
   int getStrength() const { return strength; }
   int getIntellect() const { return intellect; }
-  void setStamina(int stam) { stamina = stam; }
-  void setStrength(int strength) { this->strength = strength; }
-  void setIntellect(int intellect) { this->intellect = intellect; }
+  void setStamina(int newStamina) { stamina = newStamina; }
+  void setStrength(int newStrength) { strength = newStrength; }
+  void setIntellect(int newIntellect) { intellect = newIntellect; }
 
   /**
    * Shows a list of stats and their values

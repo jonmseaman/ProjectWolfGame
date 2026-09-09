@@ -98,6 +98,25 @@ function(pwg_configure_std target)
   set_target_properties(${target} PROPERTIES CXX_MODULE_STD ON)
 endfunction()
 
+option(PWG_WERROR "Treat compiler warnings as errors" OFF)
+
+# Applied per target rather than globally, so that googletest -- which this
+# project does not control and which does not build clean -- is left alone.
+function(pwg_set_warnings target)
+  if(MSVC)
+    target_compile_options(${target} PRIVATE /W4)
+    if(PWG_WERROR)
+      target_compile_options(${target} PRIVATE /WX)
+    endif()
+  else()
+    target_compile_options(${target} PRIVATE
+      -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wpedantic)
+    if(PWG_WERROR)
+      target_compile_options(${target} PRIVATE -Werror)
+    endif()
+  endif()
+endfunction()
+
 message(STATUS "import std: using ${CMAKE_CXX_STDLIB_MODULES_JSON}")
 
 enable_testing()

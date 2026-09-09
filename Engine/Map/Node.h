@@ -20,7 +20,7 @@ namespace Maps
   {
     public:
       Node();
-      virtual ~Node();
+      ~Node() override;
       SAVABLE_CLEAR;
 
 
@@ -102,7 +102,7 @@ namespace Maps
       void showActors(); // Shows a list of actors
 
       std::string getName() const;
-      void setName(std::string name) { this->name = name; }
+      void setName(std::string newName) { name = std::move(newName); }
 
       std::list<std::unique_ptr<Engine::Entity::Actor>> actorPtrs;
 
