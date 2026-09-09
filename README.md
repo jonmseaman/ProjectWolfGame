@@ -2,7 +2,7 @@
 A prototype for a terminal-based RPG.
 
 ## Tools
-* CMake 3.15 or newer
+* CMake 4.4 or newer
 * A C++23 compiler
 
 ## How to Build
@@ -20,10 +20,15 @@ Both configurations are expected to build and pass the tests.
 
 Turning it on needs all three of:
 
-* CMake 3.30 or newer (`import std` is still behind an experimental gate)
 * A generator that can scan module dependencies -- Ninja 1.11+ or Visual Studio
-* A standard library that ships module sources. Apple's clang does **not**,
-  so the default macOS build uses headers.
+* A standard library that ships module sources, and a compiler that ships
+  `clang-scan-deps`. Apple's clang ships **neither**, so the default macOS
+  build uses headers.
+
+`import std` is still behind an experimental gate in CMake, and the gate value
+is tied to a CMake release. `CMakeLists.txt` carries the value CMake 4.4
+expects; on a newer CMake the gate does not open and the build falls back to
+headers until that value is updated.
 
 With Homebrew LLVM on macOS:
 
