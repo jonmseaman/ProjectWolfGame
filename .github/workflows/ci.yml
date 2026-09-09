@@ -45,9 +45,21 @@ jobs:
           ls /usr/lib/llvm-${{ matrix.llvm }}/lib/libc++.modules.json
           ls /usr/lib/llvm-${{ matrix.llvm }}/bin/clang-scan-deps
 
-      - uses: lukka/get-cmake@latest
-        with:
-          cmakeVersion: ${{ env.CMAKE_VERSION }}
+      - name: Install CMake ${{ env.CMAKE_VERSION }}
+        run: |
+          # Downloaded straight from Kitware rather than through an action:
+          # the version has to be exact, because the `import std` gate value in
+          # CMakeLists.txt is tied to a CMake release, and the action's catalog
+          # does not carry every release.
+          curl -fsSL -o /tmp/cmake.tar.gz \
+            "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz"
+          sudo tar -xzf /tmp/cmake.tar.gz -C /opt
+          echo "/opt/cmake-${CMAKE_VERSION}-linux-x86_64/bin" >> "$GITHUB_PATH"
+
+      - name: Report toolchain versions
+        run: |
+          cmake --version
+          ninja --version
 
       - name: Configure
         run: |
@@ -84,9 +96,21 @@ jobs:
             libc++abi-${{ env.LLVM_VERSION }}-dev \
             clang-tools-${{ env.LLVM_VERSION }}
 
-      - uses: lukka/get-cmake@latest
-        with:
-          cmakeVersion: ${{ env.CMAKE_VERSION }}
+      - name: Install CMake ${{ env.CMAKE_VERSION }}
+        run: |
+          # Downloaded straight from Kitware rather than through an action:
+          # the version has to be exact, because the `import std` gate value in
+          # CMakeLists.txt is tied to a CMake release, and the action's catalog
+          # does not carry every release.
+          curl -fsSL -o /tmp/cmake.tar.gz \
+            "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz"
+          sudo tar -xzf /tmp/cmake.tar.gz -C /opt
+          echo "/opt/cmake-${CMAKE_VERSION}-linux-x86_64/bin" >> "$GITHUB_PATH"
+
+      - name: Report toolchain versions
+        run: |
+          cmake --version
+          ninja --version
 
       - name: Configure
         run: |
