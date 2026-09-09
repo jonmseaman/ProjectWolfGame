@@ -1,8 +1,12 @@
+#if PWG_IMPORT_STD
+import std;
+#else
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#endif
 #include <Creation/Create.h>
 #include <Creation/Creatable.h>
 #include <Entity/Actor.h>

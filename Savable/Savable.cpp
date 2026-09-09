@@ -1,5 +1,7 @@
+#if PWG_IMPORT_STD
+import std;
+#else
 #include <algorithm>
-#include <assert.h>
 #include <cctype>
 #include <filesystem>
 #include <fstream>
@@ -10,6 +12,10 @@
 #include <stack>
 #include <list>
 #include <vector>
+#endif
+
+// assert() is a macro, and macros never come from `import std`.
+#include <assert.h>
 
 #include "Savable.h"
 

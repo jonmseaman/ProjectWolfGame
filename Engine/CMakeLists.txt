@@ -15,6 +15,8 @@ add_library(Engine SHARED
     UI/Input.cpp
 )
 
+pwg_configure_std(Engine)
+
 target_compile_definitions(Engine PRIVATE ENGINE_EXPORTS _WINDOWS _USRDLL)
 
 # PUBLIC so consumers get angle-bracket includes like <Entity/Actor.h>

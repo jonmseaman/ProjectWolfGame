@@ -1,6 +1,10 @@
+#if PWG_IMPORT_STD
+import std;
+#else
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#endif
 #include <Savable.h>
 #include <Creation/Creatable.h>
 #include "Map/Dir.h"

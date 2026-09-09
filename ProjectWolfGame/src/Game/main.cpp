@@ -1,7 +1,11 @@
 /* rewrite 3 */
 /// ProjectReWolf
 /// A text-based RPG
+#if PWG_IMPORT_STD
+import std;
+#else
 #include <iostream>
+#endif
 #include <Map/MapManager.h>
 #include <UI/Input.h>
 

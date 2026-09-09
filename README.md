@@ -2,16 +2,53 @@
 A prototype for a terminal-based RPG.
 
 ## Tools
-* CMAKE
+* CMake 3.15 or newer
+* A C++23 compiler
 
 ## How to Build
 ```bash
-mkdir build
-cd build
-cmake ..
-# Build and run tests
-make all test
+cmake -S . -B build
+cmake --build build
+ctest --test-dir build
 ```
+
+## Building with `import std`
+
+The sources use `import std;` in place of standard library headers when the
+toolchain can support it, and fall back to including headers when it cannot.
+Both configurations are expected to build and pass the tests.
+
+Turning it on needs all three of:
+
+* CMake 3.30 or newer (`import std` is still behind an experimental gate)
+* A generator that can scan module dependencies -- Ninja 1.11+ or Visual Studio
+* A standard library that ships module sources. Apple's clang does **not**,
+  so the default macOS build uses headers.
+
+With Homebrew LLVM on macOS:
+
+```bash
+LLVM=$(brew --prefix llvm)
+cmake -S . -B build-modules -G Ninja \
+  -DCMAKE_CXX_COMPILER=$LLVM/bin/clang++ \
+  -DCMAKE_CXX_STDLIB_MODULES_JSON=$LLVM/lib/c++/libc++.modules.json \
+  -DCMAKE_CXX_FLAGS="-nostdinc++ -isystem $LLVM/include/c++/v1" \
+  -DCMAKE_SHARED_LINKER_FLAGS="-L$LLVM/lib/c++ -Wl,-rpath,$LLVM/lib/c++" \
+  -DCMAKE_EXE_LINKER_FLAGS="-L$LLVM/lib/c++ -Wl,-rpath,$LLVM/lib/c++"
+cmake --build build-modules
+ctest --test-dir build-modules
+```
+
+Configuring prints which mode is in use:
+
+```
+-- import std: ON
+```
+
+`CMAKE_CXX_STDLIB_MODULES_JSON` is needed because CMake locates the module
+metadata by asking the compiler, without the flags that would point it at
+Homebrew's libc++. `-DPWG_IMPORT_STD=ON` forces the mode on and fails the
+configure step with an explanation if the toolchain cannot provide it.
 
 ## Controls
 

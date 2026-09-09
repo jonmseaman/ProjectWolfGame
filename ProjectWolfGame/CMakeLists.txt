@@ -8,4 +8,6 @@ add_executable(ProjectWolfGame
     src/Game/main.cpp
 )
 
+pwg_configure_std(ProjectWolfGame)
+
 target_link_libraries(ProjectWolfGame PRIVATE Engine Savable)

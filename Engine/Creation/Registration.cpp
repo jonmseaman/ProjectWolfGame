@@ -1,5 +1,9 @@
+#if PWG_IMPORT_STD
+import std;
+#else
 #include <map>
 #include <utility>
+#endif
 #include "Registration.h"
 #include "CreateData.h"
 

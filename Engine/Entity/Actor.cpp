@@ -1,6 +1,10 @@
+#if PWG_IMPORT_STD
+import std;
+#else
 #include <iostream>
 #include <memory>
 #include <stdexcept>
+#endif
 #include <Creation/Creatable.h>
 #include "Actor.h"
 #include "Map/Dir.h"

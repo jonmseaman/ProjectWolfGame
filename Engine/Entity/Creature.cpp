@@ -1,6 +1,10 @@
+#if PWG_IMPORT_STD
+import std;
+#else
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#endif
 #include "Creature.h"
 #include "Inventory.h"
 
