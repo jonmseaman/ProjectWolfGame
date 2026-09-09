@@ -1,15 +1,18 @@
-#include <iostream>
-#include <iomanip>
-#include "Entity/Stats.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
+import std;
 
 namespace Engine {
 namespace Entity {
 
-Stats::Stats(int stamina, int strength, int intellect) {
-  this->stamina = stamina;
-  this->strength = strength;
-  this->intellect = intellect;
-}
+Stats::Stats(int newStamina, int newStrength, int newIntellect)
+  : stamina(newStamina)
+  , strength(newStrength)
+  , intellect(newIntellect) {}
 
 void Stats::save() {
   startSave("Stats");
@@ -36,12 +39,9 @@ void Stats::showStats() const {
 }
 
 Stats Stats::operator+(const Stats& r) const {
-  int stam, strength, intellect;
-  stam = getStamina() + r.getStamina();
-  strength = getStrength() + r.getStrength();
-  intellect = getIntellect() + r.getIntellect();
-
-  return Stats{ stam, strength, intellect };
+  return Stats{ getStamina()   + r.getStamina(),
+                getStrength()  + r.getStrength(),
+                getIntellect() + r.getIntellect() };
 }
 
 bool Stats::operator==(const Stats& r) const {

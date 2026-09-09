@@ -1,8 +1,10 @@
-#include <iostream>
-#include <stdexcept>
-#include <Creation/Create.h>
-#include "Map.h"
-#include "MapManager.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
+import std;
 
 using namespace Engine;
 

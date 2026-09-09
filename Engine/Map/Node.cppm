@@ -1,28 +1,24 @@
-#ifndef NODE_H
-#define NODE_H
-#include <Engine.h>
-#include <array>
-#include <atomic>
-#include <list>
-#include <memory>
-#include <string>
-#include "Entity/Inventory.h"
-#include "Dir.h"
-#include "Savable.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
 
-namespace Engine {
-namespace Entity {
-class Actor;
-}
+export module Engine:Node;
+
+import std;
+import Savable;
+import :Dir;
+import :Fwd;        // Actor is only named here, never completed
+import :Inventory;
+
+export namespace Engine {
 namespace Maps
 {
   class ENGINE_API Node : public File::Savable
   {
     public:
       Node();
-      virtual ~Node();
+      ~Node() override;
       SAVABLE_CLEAR;
-
 
       // Data Access
       // Actors
@@ -35,7 +31,7 @@ namespace Maps
       bool containsActor(Engine::Entity::Actor* actor);
       /**
        * Returns a pointer to an actor in this.
-       * @pre 0 <= index && index <= number of actors in this.
+       * @pre 0 <= index < number of actors in this.
        * @param index The index of the actor being returned.
        * @return A pointer to the actor at position index.
        */
@@ -62,13 +58,9 @@ namespace Maps
 
       // Navigation
       virtual bool isWall() const { return false; }
-      /**
-       * Returns true if an actor can move from this node in direction dir.
-       */
+      /** Returns true if an actor can move from this node in direction dir. */
       bool canMoveInDir(Dir dir) const;
-      /**
-       * Returns true if the node has an entrance in direction dir.
-       */
+      /** Returns true if the node has an entrance in direction dir. */
       bool getEntranceDir(Dir dir) const;
       /**
        * Displays a list of nodes that can be traveled to from this node.
@@ -77,7 +69,7 @@ namespace Maps
       void showNavigationInfo();
       /**
        * Shows a line of information for a node in a specific direction
-       * @usage Used be showNavigationInfo() to display information for eac
+       * @usage Used by showNavigationInfo() to display information for each
        * direction that the player could move in.
        */
       void showNavigationInfoForNode(Dir dir);
@@ -95,14 +87,12 @@ namespace Maps
        */
       void addActor(std::unique_ptr<Engine::Entity::Actor> actor);
       int getNumActors() const;
-      /**
-       * Moves all actors which have a move direction set.
-       */
+      /** Moves all actors which have a move direction set. */
       void moveActors();
       void showActors(); // Shows a list of actors
 
       std::string getName() const;
-      void setName(std::string name) { this->name = name; }
+      void setName(std::string newName) { name = std::move(newName); }
 
       std::list<std::unique_ptr<Engine::Entity::Actor>> actorPtrs;
 
@@ -115,4 +105,3 @@ namespace Maps
   };
 }
 }
-#endif

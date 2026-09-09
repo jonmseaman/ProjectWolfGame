@@ -10,7 +10,10 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(UnitTests
     SavableTest.cpp
+    SavableErrorTest.cpp
+    InputTest.cpp
     EngineTest/CreateTest.cpp
+    EngineTest/MemorySafetyTest.cpp
     EngineTest/ItemTest.cpp
     EngineTest/RegistrationTest.cpp
     EngineTest/StatsTest.cpp
@@ -19,6 +22,15 @@ add_executable(UnitTests
 )
 
 target_link_libraries(UnitTests PRIVATE Engine Savable GTest::gtest_main)
+
+pwg_set_warnings(UnitTests)
+
+# googletest's headers are not warning clean under this project's flags, and
+# they are not this project's to fix.
+get_target_property(_gtest_includes gtest INTERFACE_INCLUDE_DIRECTORIES)
+if(_gtest_includes)
+  target_include_directories(UnitTests SYSTEM PRIVATE ${_gtest_includes})
+endif()
 
 # On macOS, embed @loader_path so the test binary finds Savable/Engine dylibs
 # in the same output directory without needing DYLD_LIBRARY_PATH at runtime.

@@ -1,12 +1,13 @@
-#ifndef STATS_H
-#define STATS_H
-#include "Savable.h"
-#include <Engine.h>
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
 
-namespace Engine {
+export module Engine:Stats;
+
+import Savable;
+
+export namespace Engine {
 namespace Entity {
-
-class Creature;
 
 class ENGINE_API Stats : public File::Savable {
 public:
@@ -17,9 +18,9 @@ public:
   int getStamina() const { return stamina; }
   int getStrength() const { return strength; }
   int getIntellect() const { return intellect; }
-  void setStamina(int stam) { stamina = stam; }
-  void setStrength(int strength) { this->strength = strength; }
-  void setIntellect(int intellect) { this->intellect = intellect; }
+  void setStamina(int newStamina) { stamina = newStamina; }
+  void setStrength(int newStrength) { strength = newStrength; }
+  void setIntellect(int newIntellect) { intellect = newIntellect; }
 
   /**
    * Shows a list of stats and their values
@@ -30,7 +31,6 @@ public:
   Stats operator+(const Stats& r) const;
   bool operator==(const Stats& r) const;
 
-
 private:
   // Base stats
   int stamina; // Boosts max health points
@@ -40,5 +40,3 @@ private:
 
 }
 }
-
-#endif /* end of include guard: STATS_H */

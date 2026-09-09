@@ -1,11 +1,10 @@
-#include "Create.h"
-#include "CreateData.h"
-#include "Savable.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
 
-#include <Entity/Item.h>
-#include <Entity/Actor.h>
-#include <Map/Node.h>
-#include <Map/Map.h>
+module Engine;
+
+import std;
 
 #pragma region Create
 
@@ -14,6 +13,25 @@ using namespace Engine::Entity;
 using namespace Engine::Maps;
 
 namespace Creation {
+
+namespace {
+/**
+ * Looks a creation function up by id. Reports which id was missing instead of
+ * letting std::map::at throw a bare "key not found", which gave no clue as to
+ * which save file entry was unloadable.
+ */
+template <typename FactoryMap>
+const typename FactoryMap::mapped_type& factoryFor(const FactoryMap &table,
+                                                   const std::string &id,
+                                                   const char* caller) {
+  auto it = table.find(id);
+  if (it == table.end()) {
+    throw std::runtime_error(std::string(caller) + ": no class is registered with id '"
+      + id + "'.");
+  }
+  return it->second;
+}
+} // namespace
 
 // Methods for new loading / saving system
 
@@ -56,25 +74,25 @@ std::unique_ptr<Map> Create::loadNewMap() {
 }
 
 std::unique_ptr<Engine::Entity::Item> Create::newItem(const std::string &id) {
-  auto i = CreateData::items.at(id)();
+  auto i = factoryFor(CreateData::items, id, "Create::newItem")();
   i->setID(id);
   return i;
 }
 
 std::unique_ptr<Engine::Entity::Actor> Create::newActor(const std::string &id) {
-  auto a = CreateData::actors.at(id)();
+  auto a = factoryFor(CreateData::actors, id, "Create::newActor")();
   a->setID(id);
   return a;
 }
 
 std::unique_ptr<Engine::Maps::Node> Create::newNode(const std::string &id) {
-  auto n = CreateData::nodes.at(id)();
+  auto n = factoryFor(CreateData::nodes, id, "Create::newNode")();
   n->setID(id);
   return n;
 }
 
 std::unique_ptr<Engine::Maps::Map> Create::newMap(const std::string &id) {
-  auto m = CreateData::maps.at(id)();
+  auto m = factoryFor(CreateData::maps, id, "Create::newMap")();
   m->setID(id);
   return m;
 }

@@ -1,5 +1,7 @@
-#include <Entity/Item.h>
 #include <Creation/Creatable.h>
+
+import std;
+import Engine;
 
 using namespace Engine::Entity;
 
@@ -10,9 +12,7 @@ public:
     setDamage(0);
     setHeal(10);
   }
-  virtual ~HealingWand() {
-
-  }
+  ~HealingWand() override = default;
 protected:
 private:
 };

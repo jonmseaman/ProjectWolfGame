@@ -1,8 +1,11 @@
-#include <iostream>
-#include <stdexcept>
-#include "Actor.h"
-#include "Map/Dir.h"
-#include "UI/Input.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+#include "Creation/Creatable.h"
+
+module Engine;
+
+import std;
 
 using namespace Engine::Maps;
 using enum Engine::Maps::Dir;
@@ -10,9 +13,15 @@ using enum Engine::Maps::Dir;
 namespace Engine {
 namespace Entity {
 
-Actor::Actor() : isPlayer(false)
-, isTurnUsed(false)
-, moveDir(Dir::STOP) {}
+// Registration for the base Actor. See the note in Item.cpp for why the empty
+// id is registered too.
+Creation::Registration __registrationActorEmptyString("", []() -> std::unique_ptr<Actor> { return std::make_unique<Actor>(); });
+Creation::Registration __registrationActor("Actor", []() -> std::unique_ptr<Actor> { return std::make_unique<Actor>(); });
+
+// currentNode and targetPtr used to be left indeterminate here, and
+// takeTurn() reads both on its first call. The members carry their defaults
+// in the header now.
+Actor::Actor() = default;
 
 Actor::~Actor() {}
 
@@ -68,12 +77,18 @@ bool Actor::dropItem(int slotIndex) {
   if (slotIndex < 0 || slotIndex >= inventory.getSlots()) {
     throw std::out_of_range("dropItem: slotIndex out of range");
   }
+  if (currentNode == nullptr) {
+    throw std::logic_error("dropItem: actor is not in a node");
+  }
+  if (inventory.isSlotEmpty(slotIndex)) {
+    return false; // nothing in that slot to drop
+  }
   if (!currentNode->inventory.hasOpenSlot()) {
     inventory.removeItem(slotIndex);  // unique_ptr out of scope, item destroyed
-  } else {
-    // Transfer item to node inventory.
-    currentNode->inventory.addItem(inventory.removeItem(slotIndex));
+    return false;
   }
+  // Transfer item to node inventory.
+  currentNode->inventory.addItem(inventory.removeItem(slotIndex));
   return true;
 }
 

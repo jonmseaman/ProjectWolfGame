@@ -1,14 +1,10 @@
-#include <algorithm>
-#include <iomanip>
-#include <iostream>
-#include <stdexcept>
-#include <string>
-#include <Creation/Create.h>
-#include <Creation/Creatable.h>
-#include <Entity/Actor.h>
-#include <UI/Input.h>
-#include "Dir.h"
-#include "Node.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
+import std;
 
 using namespace Engine::Maps;
 using namespace Engine::Entity;
@@ -24,8 +20,8 @@ namespace Maps {
   Creation::Registration __registrationNode("Node", []() -> std::unique_ptr<Node> { return std::make_unique<Node>(); });
 
   Node::Node(): inventory(Inventory{ "Location Inventory", 8 })
-    , nodeLinks{}
     , actorPtrs{}
+    , nodeLinks{}
     , name("Node") {
     entranceDirs.fill(true);
     entranceDirs[dir_idx(DOWN)] = false; // Entrances in all dirs except DOWN
@@ -42,13 +38,13 @@ namespace Maps {
   }
 
   Actor* Node::getActorPtr( int index ) {
-    if (index < 0 || static_cast<std::size_t>(index) > actorPtrs.size()) {
+    // The bound used to be `> size`, and the clamp below then advanced the
+    // iterator to end() and dereferenced it, so getActorPtr(getNumActors())
+    // returned a garbage pointer instead of reporting the mistake.
+    if (index < 0 || static_cast<std::size_t>(index) >= actorPtrs.size()) {
       throw std::out_of_range("getActorPtr: index out of range");
     }
     auto it = actorPtrs.begin();
-    if ( static_cast<std::size_t>(index) >= actorPtrs.size() ) {
-      index = static_cast<int>(actorPtrs.size());
-    }
     std::advance(it, index);
     return it->get();
   }

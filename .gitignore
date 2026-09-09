@@ -230,3 +230,9 @@ pip-log.txt
 *.mo
 
 .idea/
+
+# CMake build trees
+build/
+build-*/
+cmake-build-*/
+CMakeUserPresets.json

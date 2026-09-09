@@ -1,13 +1,17 @@
-#ifndef CREATURE_H
-#define CREATURE_H
-#include <string>
-#include <Engine.h>
-#include "Equipment.h"
-#include "Inventory.h"
-#include "Savable.h"
-#include "Stats.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
 
-namespace Engine {
+export module Engine:Creature;
+
+import std;
+import Savable;
+import :Equipment;
+import :Inventory;
+import :Item;
+import :Stats;
+
+export namespace Engine {
 namespace Entity {
 
 /**
@@ -15,12 +19,12 @@ namespace Entity {
  */
 class ENGINE_API Creature : public File::Savable {
     // The data structure for the creatures.
-    // This class should contain the data and tools for making functioning actors in the game world,
-    // but not actually include a way to _act_
+    // This class should contain the data and tools for making functioning
+    // actors in the game world, but not actually include a way to _act_
 
 public:
     Creature();
-    virtual ~Creature();
+    ~Creature() override;
 
     SAVABLE; // load / save
 
@@ -28,12 +32,12 @@ public:
 
     // Data Access
     const std::string& getName() const { return name; }
-    void setName(const std::string& name); // sets the name of the creature
+    void setName(const std::string& newName); // sets the name of the creature
     bool getIsInCombat() const { return isInCombat; }
     bool getIsLiving() const { return isLiving; }
-    void setHealth(int health);
-    void setMaxHealth(int maxHealth); // Set max hp, also sets hp
-    void setIsLiving(bool isLiving); // Can be used to kill a creature
+    void setHealth(int newHealth);
+    void setMaxHealth(int newMaxHealth); // Set max hp, also sets hp
+    void setIsLiving(bool living); // Can be used to kill a creature
 
     // Experience
     void levelUp();
@@ -50,9 +54,9 @@ public:
       */
     void useItem(Item &item, Creature &usedOn);
     /**
-     * T  his function handles creatures being damaged
-     * Kills the creature if the damage is sufficient
-     * @param dmg The amount of damage that this creature
+     * This function handles creatures being damaged.
+     * Kills the creature if the damage is sufficient.
+     * @param dmg The amount of damage that this creature takes
      */
     void onDamage(int dmg);
     void onHeal(int heal);
@@ -67,24 +71,21 @@ public:
     // Stats
     Stats stats;
 
-
 protected:
     void flagInCombat(bool val); // sets combat status
 private:
-    std::string name;
+    std::string name = "Creature";
     // Utility vars
-    bool isLiving; // TODO: Remove this variable
-    bool isInCombat;
+    bool isLiving = false; // TODO: Remove this variable
+    bool isInCombat = false;
 
     // XP Variables
-    int level; // Creatures level
-    int experience; // Experience earned this level
+    int level = 1; // Creatures level
+    int experience = 0; // Experience earned this level
 
     // Derived stats
-    int health;
-    int maxHealth; // This should be calculated.
+    int health = 0;
+    int maxHealth = 0; // This should be calculated.
 };
 }
 }
-
-#endif // CREATURE_H

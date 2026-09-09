@@ -1,12 +1,10 @@
-#include <iostream>
-#include <stdexcept>
-#include <string>
+module;
 #include <Creation/Creatable.h>
-#include "Map/Dir.h"
-#include "Map/MapManager.h"
-#include "Player.h"
-#include <UI/Input.h>
 
+module Game.Player;
+
+import std;
+import Engine;
 
 namespace Engine {
 namespace Entity {
@@ -39,7 +37,7 @@ void Player::combatMenu(int choice) {
       targetMenu();
       break;
     case 3:
-      inventoryMenu(inventory);
+      inventoryMenu();
       break;
     default:
       std::cout << "No menu item " << choice << ".\n";
@@ -102,7 +100,9 @@ void Player::onMove() {
 
 void Player::targetMenu() {
   currentNode->showActors();
-  int choice = getInteger();
+  // Unbounded before, so any number past the end of the list went straight
+  // into getActorPtr().
+  int choice = getInteger(0, currentNode->getNumActors());
   if (choice == 0) {
     setTarget(nullptr);
   } else {
@@ -126,39 +126,47 @@ void Player::showHUD() {
   std::cout << "Location: " << currentNode->getName() << std::endl;
 }
 
-void Player::inventoryMenu(Inventory &inv) {
+void Player::inventoryMenu() {
   // Show inventory
-  inv.showListOfItems();
+  inventory.showListOfItems();
   // Let player choose item
   std::cout << "Select an item: ";
-  int itemIndex = getInteger(0, inv.getSlots());
+  int itemIndex = getInteger(0, inventory.getSlots());
   itemIndex--;
 
-  if (itemIndex >= 0) {
-    // Get the item,
-    Item *item = inventory.at(itemIndex);
-    // Show them menu for that item.
-    dispList({ "Use","Examine", "Drop" });
-    int actionNumber = getDigit(0, 3);
-    switch (actionNumber) {
-      case 1: // Use
-        if (hasValidTarget()) {
-          item->use(*this, *targetPtr);
-        } else {
-          std::cout << "You don't have a target." << std::endl;
-        }
-        endTurn();
-        break;
-      case 2: // Examine
-        item->showInfo();
-        break;
-      case 3:
-        std::cout << "Dropping item.\n";
-        dropItem(itemIndex);
-        break;
-      default:
-        break;
-    }
+  if (itemIndex < 0) {
+    return;
+  }
+
+  // Get the item. An empty slot reads back as nullptr, and using or
+  // examining it dereferenced that.
+  Item *item = inventory.at(itemIndex);
+  if (item == nullptr) {
+    std::cout << "That slot is empty." << std::endl;
+    return;
+  }
+
+  // Show them menu for that item.
+  dispList({ "Use","Examine", "Drop" });
+  int actionNumber = getDigit(0, 3);
+  switch (actionNumber) {
+    case 1: // Use
+      if (hasValidTarget()) {
+        item->use(*this, *targetPtr);
+      } else {
+        std::cout << "You don't have a target." << std::endl;
+      }
+      endTurn();
+      break;
+    case 2: // Examine
+      item->showInfo();
+      break;
+    case 3:
+      std::cout << "Dropping item.\n";
+      dropItem(itemIndex);
+      break;
+    default:
+      break;
   }
 }
 
@@ -167,7 +175,14 @@ void Player::loadMenu() {
   std::cout << "Load file name: ";
   std::cin >> fileName;
   std::cout << "Loading...";
-  MapManager::getInstance().load(fileName);
+  try {
+    MapManager::getInstance().load(fileName);
+  } catch (const std::exception &e) {
+    // A missing or unreadable save is something the player can recover from
+    // by picking another file; it should not end the game.
+    std::cout << " Could not load: " << e.what() << std::endl;
+    return;
+  }
   setIsTurnUsed();
   std::cout << " Done." << std::endl;
 }
@@ -221,7 +236,7 @@ bool Player::processUserInput(char key) {
       break;
     case '4':
     case 'i':
-      inventoryMenu(inventory);
+      inventoryMenu();
       break;
     case '5':
       searchMenu(currentNode->inventory);
@@ -249,10 +264,14 @@ bool Player::processUserInput(char key) {
     case '\r':
       setIsTurnUsed();
       break;
-    case '\x3f': // F5
+    // These used to be \x3f and \x43, described as F5 and F9. Those are
+    // Windows conio scan codes, which only mean F5/F9 after a 0 or 0xE0
+    // prefix byte; a terminal sends an escape sequence for a function key and
+    // never these values. What they did do was save on '?' and load on 'C'.
+    case 'S':
       saveMenu();
       break;
-    case '\x43': // F9
+    case 'L':
       loadMenu();
       break;
     default:
@@ -276,7 +295,12 @@ void Player::saveMenu() {
   std::cout << "Save file name: ";
   std::cin >> fileName;
   std::cout << "Saving...";
-  MapManager::getInstance().save(fileName);
+  try {
+    MapManager::getInstance().save(fileName);
+  } catch (const std::exception &e) {
+    std::cout << " Could not save: " << e.what() << std::endl;
+    return;
+  }
   std::cout << " Done." << std::endl;
 }
 

@@ -1,7 +1,7 @@
-#include <Map/Map.h>
-#include <Map/Node.h>
-#include <Creation/Create.h>
-#include <Entity/Actor.h>
+#include <Creation/Creatable.h>
+
+import std;
+import Engine;
 
 using namespace Engine::Maps;
 using namespace Engine::Entity;

@@ -1,15 +1,19 @@
-#include <iostream>
-#include <stdexcept>
-#include <string>
-#include "Creature.h"
-#include "Inventory.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
+import std;
 
 namespace Engine {
 namespace Entity {
 
-Creature::Creature() : name{ "Creature" }
-, inventory(Inventory{ "Inv", 0 })
-, isLiving(false) {}
+// health, maxHealth, level, experience and isInCombat were all left
+// indeterminate here; displayHUDLine() and onDamage() read them straight
+// away. They carry their defaults in the header now, which also puts this
+// constructor's initialiser list back in declaration order.
+Creature::Creature() : inventory(Inventory{ "Inv", 0 }) {}
 
 Creature::~Creature() {}
 
@@ -44,18 +48,18 @@ void Creature::onHeal(int heal) {
   std::cout << getName() << " is healed for " << heal << ". " << std::endl;
 }
 
-void Creature::setHealth(int health) {
-  this->health = health;
+void Creature::setHealth(int newHealth) {
+  health = newHealth;
   isLiving = health > 0;
 }
 
-void Creature::setMaxHealth(int maxHealth) {
-  this->maxHealth = maxHealth;
+void Creature::setMaxHealth(int newMaxHealth) {
+  maxHealth = newMaxHealth;
   setHealth(maxHealth);
 }
 
-void Creature::setIsLiving(bool isLiving) {
-  this->isLiving = isLiving;
+void Creature::setIsLiving(bool living) {
+  isLiving = living;
 }
 
 void Creature::combatStop() {
@@ -66,8 +70,8 @@ void Creature::flagInCombat(bool val) {
   isInCombat = val;
 }
 
-void Creature::setName(const std::string& name) {
-  this->name = name;
+void Creature::setName(const std::string& newName) {
+  name = newName;
 }
 
 void Creature::kill() {

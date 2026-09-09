@@ -1,0 +1,130 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+env:
+  # `import std` is behind an experimental gate whose value is tied to a CMake
+  # release. CMakeLists.txt knows the values for 4.3 and 4.4, so CMake is
+  # pinned here rather than tracking latest -- a release outside that range
+  # cannot open the gate and fails the configure step. Bump both together.
+  CMAKE_VERSION: 4.4.3
+  LLVM_VERSION: 20
+
+jobs:
+  build:
+    name: Build and test (clang-${{ matrix.llvm }}, ${{ matrix.build_type }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        llvm: [20]
+        build_type: [Debug, Release]
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install Ninja
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+
+      - name: Install LLVM ${{ matrix.llvm }} with libc++ module sources
+        run: |
+          wget -qO llvm.sh https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh ${{ matrix.llvm }}
+          sudo apt-get install -y \
+            libc++-${{ matrix.llvm }}-dev \
+            libc++abi-${{ matrix.llvm }}-dev \
+            clang-tools-${{ matrix.llvm }}
+          # The build needs all three; fail loudly here rather than inside CMake.
+          ls /usr/lib/llvm-${{ matrix.llvm }}/share/libc++/v1/std.cppm
+          ls /usr/lib/llvm-${{ matrix.llvm }}/lib/libc++.modules.json
+          ls /usr/lib/llvm-${{ matrix.llvm }}/bin/clang-scan-deps
+
+      - name: Install CMake ${{ env.CMAKE_VERSION }}
+        run: |
+          # Downloaded straight from Kitware rather than through an action:
+          # the version has to be exact, because the `import std` gate value in
+          # CMakeLists.txt is tied to a CMake release, and the action's catalog
+          # does not carry every release.
+          curl -fsSL -o /tmp/cmake.tar.gz \
+            "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz"
+          sudo tar -xzf /tmp/cmake.tar.gz -C /opt
+          echo "/opt/cmake-${CMAKE_VERSION}-linux-x86_64/bin" >> "$GITHUB_PATH"
+
+      - name: Report toolchain versions
+        run: |
+          cmake --version
+          ninja --version
+
+      - name: Configure
+        run: |
+          cmake -S . -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DCMAKE_CXX_COMPILER=/usr/lib/llvm-${{ matrix.llvm }}/bin/clang++ \
+            -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
+            -DPWG_WERROR=ON
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+  sanitizers:
+    name: AddressSanitizer and UndefinedBehaviorSanitizer
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install Ninja
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+
+      - name: Install LLVM ${{ env.LLVM_VERSION }} with libc++ module sources
+        run: |
+          wget -qO llvm.sh https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh ${{ env.LLVM_VERSION }}
+          sudo apt-get install -y \
+            libc++-${{ env.LLVM_VERSION }}-dev \
+            libc++abi-${{ env.LLVM_VERSION }}-dev \
+            clang-tools-${{ env.LLVM_VERSION }}
+
+      - name: Install CMake ${{ env.CMAKE_VERSION }}
+        run: |
+          # Downloaded straight from Kitware rather than through an action:
+          # the version has to be exact, because the `import std` gate value in
+          # CMakeLists.txt is tied to a CMake release, and the action's catalog
+          # does not carry every release.
+          curl -fsSL -o /tmp/cmake.tar.gz \
+            "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz"
+          sudo tar -xzf /tmp/cmake.tar.gz -C /opt
+          echo "/opt/cmake-${CMAKE_VERSION}-linux-x86_64/bin" >> "$GITHUB_PATH"
+
+      - name: Report toolchain versions
+        run: |
+          cmake --version
+          ninja --version
+
+      - name: Configure
+        run: |
+          cmake -S . -B build-san -G Ninja \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_CXX_COMPILER=/usr/lib/llvm-${{ env.LLVM_VERSION }}/bin/clang++ \
+            -DCMAKE_CXX_FLAGS="-stdlib=libc++ -fsanitize=address,undefined -fno-omit-frame-pointer" \
+            -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined" \
+            -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=address,undefined"
+
+      - name: Build
+        run: cmake --build build-san
+
+      - name: Test
+        env:
+          UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
+        run: ctest --test-dir build-san --output-on-failure

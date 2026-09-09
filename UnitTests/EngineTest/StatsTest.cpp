@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
-#include <Entity/Stats.h>
+
+import std;
+import Engine;
 
 using namespace Engine::Entity;
 

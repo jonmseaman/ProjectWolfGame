@@ -1,11 +1,15 @@
-#ifndef ITEM_H
-#define ITEM_H
-#include <Engine.h>
-#include <string>
-#include <Entity/Stats.h>
-#include <Creation/Creatable.h>
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+#include "Creation/Creatable.h"
 
-namespace Engine {
+export module Engine:Item;
+
+import std;
+import Savable;
+import :Stats;
+
+export namespace Engine {
 namespace Entity {
 class Creature;
 
@@ -18,7 +22,7 @@ class ENGINE_API Item : public File::Savable
     Item();
     Item(std::string name, std::string description, Stats stats);
     Item(std::string name, Stats stats);
-    virtual ~Item();
+    ~Item() override;
     SAVABLE;
     CREATABLE_ITEM(Item)
 
@@ -28,16 +32,12 @@ class ENGINE_API Item : public File::Savable
      */
     void showInfo() const;
 
-    /**
-     * Returns the name of the item.
-     */
+    /** Returns the name of the item. */
     std::string getName() const { return name; }
-    /**
-     * Returns the description of the item.
-     */
+    /** Returns the description of the item. */
     std::string getDescription() const { return description; }
 
-    void setDescription(const std::string &description) { this->description = description; }
+    void setDescription(const std::string &newDescription) { description = newDescription; }
 
     int getDamage() const { return baseDamage; }
     int getHeal() const { return baseHeal; }
@@ -56,7 +56,7 @@ class ENGINE_API Item : public File::Savable
      */
      virtual void use(const Creature &usedBy, Creature &usedOn);
      Stats stats;
-    bool operator==(const Item& r);
+    bool operator==(const Item& r) const;
   protected:
     std::string name;
     std::string description;
@@ -66,5 +66,3 @@ class ENGINE_API Item : public File::Savable
 
 }
 }
-
-#endif // ITEM_H

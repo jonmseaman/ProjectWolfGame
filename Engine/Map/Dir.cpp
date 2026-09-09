@@ -1,6 +1,10 @@
-#include <stdexcept>
-#include <string>
-#include "Dir.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+
+module Engine;
+
+import std;
 
 namespace Engine {
 namespace Maps {

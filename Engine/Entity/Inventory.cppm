@@ -1,24 +1,24 @@
-#ifndef INVENTORY_H
-#define INVENTORY_H
-#include <memory>
-#include <string>
-#include <vector>
-#include <Engine.h>
-#include "Item.h"
-#include "Savable.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
 
-namespace Engine {
+export module Engine:Inventory;
+
+import std;
+import Savable;
+import :Item;
+
+export namespace Engine {
 namespace Entity {
 
 class ENGINE_API Inventory : public File::Savable {
 public:
   Inventory();
   Inventory(std::string name, int inventorySize);
-  virtual ~Inventory();
+  ~Inventory() override;
   Inventory(Inventory&&) = default;
   Inventory& operator=(Inventory&&) = default;
   SAVABLE_CLEAR;
-  
 
   /**
    * Tries to add item to the inventory.
@@ -48,8 +48,8 @@ public:
   bool hasOpenSlot() const;
   /**
    * Returns the index of the first empty slot.
-   * @return The index of the first empty slot or -1 if the
-   * an empty slot is not found.
+   * @return The index of the first empty slot or -1 if an empty slot is not
+   * found.
    */
   int firstEmpty();
   void showListOfItems();
@@ -57,10 +57,7 @@ protected:
   std::string name;
   std::vector<std::unique_ptr<Item>> slots;
   int size;
-private:
 };
 
 }
 }
-
-#endif // INVENTORY_H

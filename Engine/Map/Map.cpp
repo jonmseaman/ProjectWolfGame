@@ -1,9 +1,11 @@
-#include <iostream>
-#include <stdexcept>
-#include <Creation/Create.h>
-#include <UI/Input.h>
-#include "Map.h"
-#include "Node.h"
+module;
+#include "EngineMacros.h"
+#include "SavableMacros.h"
+#include "Creation/Creatable.h"
+
+module Engine;
+
+import std;
 
 using std::cout;
 using std::endl;
@@ -16,13 +18,18 @@ using enum Dir;
 
 const int Map::DEFAULT_MAP_SIZE = 5;
 
-Map::Map() : grid( static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
+// Registration for the base Map. See the note in Item.cpp for why the empty
+// id is registered too.
+Creation::Registration __registrationMapEmptyString("", []() -> std::unique_ptr<Map> { return std::make_unique<Map>(); });
+Creation::Registration __registrationMap("Map", []() -> std::unique_ptr<Map> { return std::make_unique<Map>(); });
+
+Map::Map() : grid( static_cast<std::size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
 , mapSize{ DEFAULT_MAP_SIZE } {
     for (auto& i : grid) { i = std::make_unique<Node>(); }
     buildMoveData();
   }
 
-  Map::Map(int mapWidth) : grid( static_cast<size_t>(mapWidth*mapWidth) )
+  Map::Map(int mapWidth) : grid( static_cast<std::size_t>(mapWidth*mapWidth) )
     , mapSize{ mapWidth } {}
 
   Map::~Map() {}
@@ -88,6 +95,11 @@ Map::Map() : grid( static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
       // Save the nodes
       SAVE(mapSize);
       for (auto& node : grid) {
+          // Map(int) leaves the grid empty for derived maps to fill, so a
+          // half built map would dereference a null slot here.
+          if (node == nullptr) {
+            throw std::logic_error("Map::save: the map has an empty node slot");
+          }
           node->save();
       }
 
@@ -100,7 +112,7 @@ Map::Map() : grid( static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
 
     // Load the nodes
     LOAD(mapSize);
-    grid.resize(static_cast<size_t>(mapSize * mapSize));
+    grid.resize(static_cast<std::size_t>(mapSize * mapSize));
     for (auto& slot : grid) {
       slot = Create::loadNewNode();
     }

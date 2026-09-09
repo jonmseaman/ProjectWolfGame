@@ -1,10 +1,12 @@
-#pragma once
-#include <functional>
-#include <map>
-#include <memory>
-#include "CreatableClassDeclarations.h"
+module;
+#include "EngineMacros.h"
 
-class CreateData {
+export module Engine:CreateData;
+
+import std;
+import :Fwd;
+
+export class ENGINE_API CreateData {
 public:
   // Map of Item names to item creation functions.
   static std::map<std::string, std::function<std::unique_ptr<Engine::Entity::Item>()>> items;

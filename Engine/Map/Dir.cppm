@@ -1,11 +1,13 @@
-#ifndef DIR_H
-#define DIR_H
-#include <string>
-#include <Engine.h>
-namespace Engine {
+module;
+#include "EngineMacros.h"
+
+export module Engine:Dir;
+
+import std;
+
+export namespace Engine {
 namespace Maps
 {
-  //static const int NUM_DIRS = 7; // Stopped == 0, and 6 dirs
   /**
    * Directions. Used by nodes and maps.
    */
@@ -30,9 +32,8 @@ namespace Maps
 
   /**
    * Converts a char of wasdqe to the corresponding travel direction
-   * @param The char being converted to an int
-   * @post charToDir in enum Dir
-   * @return An int corresponding to charDir
+   * @param charDir The char being converted
+   * @return The Dir corresponding to charDir, or Dir::STOP
    */
   ENGINE_API Dir charToDir(char charDir);
   /**
@@ -45,4 +46,3 @@ namespace Maps
   ENGINE_API Dir oppositeDir(Dir dir);
 }
 }
-#endif // DIR_H

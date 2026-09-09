@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
-#include <string>
-#include <Creation/Create.h>
+
+import std;
+import Engine;
 
 using namespace Engine::Entity;
 
