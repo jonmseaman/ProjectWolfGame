@@ -13,6 +13,7 @@ add_executable(UnitTests
     SavableErrorTest.cpp
     InputTest.cpp
     EngineTest/CreateTest.cpp
+    EngineTest/MemorySafetyTest.cpp
     EngineTest/ItemTest.cpp
     EngineTest/RegistrationTest.cpp
     EngineTest/StatsTest.cpp

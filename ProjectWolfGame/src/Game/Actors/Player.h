@@ -45,10 +45,11 @@ protected:
    */
   void onMove();
   /**
-   * Allows inventory management. Allows using, showing information about
-   * and dropping the item.
+   * Allows management of this player's own inventory: using, showing
+   * information about, and dropping an item. Other inventories are handled
+   * by searchMenu().
    */
-  void inventoryMenu(Inventory &inv);
+  void inventoryMenu();
   /**
    * Allows the player to load a game. Asks the player to enter
    * a file name, then loads from that file.

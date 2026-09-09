@@ -71,18 +71,18 @@ public:
 protected:
     void flagInCombat(bool val); // sets combat status
 private:
-    std::string name;
+    std::string name = "Creature";
     // Utility vars
-    bool isLiving; // TODO: Remove this variable
-    bool isInCombat;
+    bool isLiving = false; // TODO: Remove this variable
+    bool isInCombat = false;
 
     // XP Variables
-    int level; // Creatures level
-    int experience; // Experience earned this level
+    int level = 1; // Creatures level
+    int experience = 0; // Experience earned this level
 
     // Derived stats
-    int health;
-    int maxHealth; // This should be calculated.
+    int health = 0;
+    int maxHealth = 0; // This should be calculated.
 };
 }
 }

@@ -44,7 +44,7 @@ void Player::combatMenu(int choice) {
       targetMenu();
       break;
     case 3:
-      inventoryMenu(inventory);
+      inventoryMenu();
       break;
     default:
       std::cout << "No menu item " << choice << ".\n";
@@ -107,7 +107,9 @@ void Player::onMove() {
 
 void Player::targetMenu() {
   currentNode->showActors();
-  int choice = getInteger();
+  // Unbounded before, so any number past the end of the list went straight
+  // into getActorPtr().
+  int choice = getInteger(0, currentNode->getNumActors());
   if (choice == 0) {
     setTarget(nullptr);
   } else {
@@ -131,39 +133,47 @@ void Player::showHUD() {
   std::cout << "Location: " << currentNode->getName() << std::endl;
 }
 
-void Player::inventoryMenu(Inventory &inv) {
+void Player::inventoryMenu() {
   // Show inventory
-  inv.showListOfItems();
+  inventory.showListOfItems();
   // Let player choose item
   std::cout << "Select an item: ";
-  int itemIndex = getInteger(0, inv.getSlots());
+  int itemIndex = getInteger(0, inventory.getSlots());
   itemIndex--;
 
-  if (itemIndex >= 0) {
-    // Get the item,
-    Item *item = inventory.at(itemIndex);
-    // Show them menu for that item.
-    dispList({ "Use","Examine", "Drop" });
-    int actionNumber = getDigit(0, 3);
-    switch (actionNumber) {
-      case 1: // Use
-        if (hasValidTarget()) {
-          item->use(*this, *targetPtr);
-        } else {
-          std::cout << "You don't have a target." << std::endl;
-        }
-        endTurn();
-        break;
-      case 2: // Examine
-        item->showInfo();
-        break;
-      case 3:
-        std::cout << "Dropping item.\n";
-        dropItem(itemIndex);
-        break;
-      default:
-        break;
-    }
+  if (itemIndex < 0) {
+    return;
+  }
+
+  // Get the item. An empty slot reads back as nullptr, and using or
+  // examining it dereferenced that.
+  Item *item = inventory.at(itemIndex);
+  if (item == nullptr) {
+    std::cout << "That slot is empty." << std::endl;
+    return;
+  }
+
+  // Show them menu for that item.
+  dispList({ "Use","Examine", "Drop" });
+  int actionNumber = getDigit(0, 3);
+  switch (actionNumber) {
+    case 1: // Use
+      if (hasValidTarget()) {
+        item->use(*this, *targetPtr);
+      } else {
+        std::cout << "You don't have a target." << std::endl;
+      }
+      endTurn();
+      break;
+    case 2: // Examine
+      item->showInfo();
+      break;
+    case 3:
+      std::cout << "Dropping item.\n";
+      dropItem(itemIndex);
+      break;
+    default:
+      break;
   }
 }
 
@@ -233,7 +243,7 @@ bool Player::processUserInput(char key) {
       break;
     case '4':
     case 'i':
-      inventoryMenu(inventory);
+      inventoryMenu();
       break;
     case '5':
       searchMenu(currentNode->inventory);

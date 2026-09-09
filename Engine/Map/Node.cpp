@@ -46,13 +46,13 @@ namespace Maps {
   }
 
   Actor* Node::getActorPtr( int index ) {
-    if (index < 0 || static_cast<std::size_t>(index) > actorPtrs.size()) {
+    // The bound used to be `> size`, and the clamp below then advanced the
+    // iterator to end() and dereferenced it, so getActorPtr(getNumActors())
+    // returned a garbage pointer instead of reporting the mistake.
+    if (index < 0 || static_cast<std::size_t>(index) >= actorPtrs.size()) {
       throw std::out_of_range("getActorPtr: index out of range");
     }
     auto it = actorPtrs.begin();
-    if ( static_cast<std::size_t>(index) >= actorPtrs.size() ) {
-      index = static_cast<int>(actorPtrs.size());
-    }
     std::advance(it, index);
     return it->get();
   }

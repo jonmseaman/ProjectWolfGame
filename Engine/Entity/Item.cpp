@@ -76,7 +76,7 @@ void Item::showInfo() const {
   stats.showStats();
 }
 
-bool Item::operator==(const Item & r)
+bool Item::operator==(const Item & r) const
 {
   return getName() == r.getName()
     && getDescription() == r.getDescription()

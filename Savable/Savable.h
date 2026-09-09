@@ -63,7 +63,8 @@ class SAVABLE_API Savable
 {
 public:
   Savable();
-  ~Savable();
+  /** Virtual because Savable is a base class with virtual functions. */
+  virtual ~Savable();
 
   typedef std::string idType;
 

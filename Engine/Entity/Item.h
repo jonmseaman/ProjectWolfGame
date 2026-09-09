@@ -56,7 +56,7 @@ class ENGINE_API Item : public File::Savable
      */
      virtual void use(const Creature &usedBy, Creature &usedOn);
      Stats stats;
-    bool operator==(const Item& r);
+    bool operator==(const Item& r) const;
   protected:
     std::string name;
     std::string description;

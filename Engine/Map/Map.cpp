@@ -99,6 +99,11 @@ Map::Map() : grid( static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
       // Save the nodes
       SAVE(mapSize);
       for (auto& node : grid) {
+          // Map(int) leaves the grid empty for derived maps to fill, so a
+          // half built map would dereference a null slot here.
+          if (node == nullptr) {
+            throw std::logic_error("Map::save: the map has an empty node slot");
+          }
           node->save();
       }
 

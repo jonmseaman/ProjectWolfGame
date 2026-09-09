@@ -59,8 +59,8 @@ protected:
    * The node that the actor is currently in.
    * Used for movement, targetting, awareness...
    */
-  Maps::Node *currentNode;
-  Actor* targetPtr;
+  Maps::Node *currentNode = nullptr;
+  Actor* targetPtr = nullptr;
   /**
    * Tries to set movement for the actor.
    * If it is possible to move in direction dir, then the turn is used.
@@ -71,8 +71,8 @@ protected:
   void setIsTurnUsed(bool val = true);
   bool isPlayer = false;
 private:
-  bool isTurnUsed; // Should stop allowing actions when this is true.
-  Maps::Dir moveDir; // The direction that the map will move the player
+  bool isTurnUsed = false; // Should stop allowing actions when this is true.
+  Maps::Dir moveDir = Maps::Dir::STOP; // The direction that the map will move the player
 };
 
 }

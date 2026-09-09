@@ -11,9 +11,11 @@ import std;
 namespace Engine {
 namespace Entity {
 
-Creature::Creature() : name{ "Creature" }
-, inventory(Inventory{ "Inv", 0 })
-, isLiving(false) {}
+// health, maxHealth, level, experience and isInCombat were all left
+// indeterminate here; displayHUDLine() and onDamage() read them straight
+// away. They carry their defaults in the header now, which also puts this
+// constructor's initialiser list back in declaration order.
+Creature::Creature() : inventory(Inventory{ "Inv", 0 }) {}
 
 Creature::~Creature() {}
 

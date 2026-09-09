@@ -45,6 +45,14 @@ void Inventory::load() {
   startLoad("Inventory");
   LOAD(name);
   LOAD(size);
+  if (size < 0) {
+    throw File::SaveError("Inventory::load: saved inventory size is negative");
+  }
+  // The slot vector used to keep whatever size it already had, so `size` and
+  // slots.size() disagreed after loading -- getSlots() read one and
+  // isSlotEmpty() the other, and items past the old end were dropped.
+  slots.clear();
+  slots.resize(static_cast<std::size_t>(size));
   while (Savable::canLoad("Item")) {
     this->addItem(Create::loadNewItem());
   }
@@ -104,7 +112,7 @@ Item* Inventory::at(int slotIndex) {
 }
 
 bool Inventory::isSlotEmpty(int slotIndex) {
-  if (slotIndex < 0 || slotIndex >= size) {
+  if (slotIndex < 0 || slotIndex >= getSlots()) {
     throw std::out_of_range("isSlotEmpty: slotIndex out of range");
   }
   return slots.at(static_cast<std::size_t>(slotIndex)) == nullptr;
