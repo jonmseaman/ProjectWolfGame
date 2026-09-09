@@ -1,4 +1,5 @@
 #include <iostream>
+#include <Creation/Creatable.h>
 #include "Creature.h"
 #include "Item.h"
 #include "Savable.h"
@@ -6,6 +7,12 @@
 namespace Engine {
 namespace Entity {
 
+// Registration for the base Item, so that a plain Item can be loaded back out
+// of a save file. The empty id covers items that were constructed directly
+// rather than through the factory and so never had an id set on them.
+// (Node does the same thing for the same reason.)
+Creation::Registration __registrationItemEmptyString("", &Item::create);
+CREATABLE_REGISTRATION(Item);
 
 Item::Item() :Item("Item", Stats()) {}
 

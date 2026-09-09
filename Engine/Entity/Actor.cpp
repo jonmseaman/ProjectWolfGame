@@ -1,5 +1,7 @@
 #include <iostream>
+#include <memory>
 #include <stdexcept>
+#include <Creation/Creatable.h>
 #include "Actor.h"
 #include "Map/Dir.h"
 #include "UI/Input.h"
@@ -9,6 +11,11 @@ using enum Engine::Maps::Dir;
 
 namespace Engine {
 namespace Entity {
+
+// Registration for the base Actor. See the note in Item.cpp for why the empty
+// id is registered too.
+Creation::Registration __registrationActorEmptyString("", []() -> std::unique_ptr<Actor> { return std::make_unique<Actor>(); });
+Creation::Registration __registrationActor("Actor", []() -> std::unique_ptr<Actor> { return std::make_unique<Actor>(); });
 
 Actor::Actor() : isPlayer(false)
 , isTurnUsed(false)

@@ -10,6 +10,7 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(UnitTests
     SavableTest.cpp
+    SavableErrorTest.cpp
     EngineTest/CreateTest.cpp
     EngineTest/ItemTest.cpp
     EngineTest/RegistrationTest.cpp

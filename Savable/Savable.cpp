@@ -1,8 +1,10 @@
 #include <assert.h>
+#include <cctype>
 #include <filesystem>
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <stack>
 #include <list>
@@ -60,6 +62,52 @@ struct XmlNode {
     return treePtr;
   }
 
+// XML escaping
+//
+// Values come from the game (item names, descriptions, creature names), so
+// they can contain characters that are markup in XML. They are escaped on the
+// way out and put back on the way in. Newlines are escaped as well: the reader
+// below is line based, so a raw newline inside a value would split it in two.
+
+static std::string escapeXml(const std::string& s) {
+    std::string out;
+    out.reserve(s.size());
+    for (char c : s) {
+        switch (c) {
+            case '&':  out += "&amp;";  break;
+            case '<':  out += "&lt;";   break;
+            case '>':  out += "&gt;";   break;
+            case '\n': out += "&#10;";  break;
+            case '\r': out += "&#13;";  break;
+            default:   out += c;        break;
+        }
+    }
+    return out;
+}
+
+static std::string unescapeXml(const std::string& s) {
+    std::string out;
+    out.reserve(s.size());
+    // Single pass, so that an escaped entity such as "&amp;lt;" comes back as
+    // the literal text "&lt;" instead of being unescaped a second time.
+    for (std::size_t i = 0; i < s.size(); ) {
+        if (s[i] != '&') { out += s[i++]; continue; }
+        std::size_t semi = s.find(';', i);
+        if (semi == std::string::npos) { out += s[i++]; continue; }
+        std::string entity = s.substr(i, semi - i + 1);
+        if      (entity == "&amp;")  { out += '&';  }
+        else if (entity == "&lt;")   { out += '<';  }
+        else if (entity == "&gt;")   { out += '>';  }
+        else if (entity == "&quot;") { out += '"';  }
+        else if (entity == "&apos;") { out += '\''; }
+        else if (entity == "&#10;")  { out += '\n'; }
+        else if (entity == "&#13;")  { out += '\r'; }
+        else { out += s[i++]; continue; } // not an entity we know; keep as-is
+        i = semi + 1;
+    }
+    return out;
+}
+
 // XML write helpers
 
 static void writeXmlNode(std::ostream& out, const XmlNode& node,
@@ -67,7 +115,7 @@ static void writeXmlNode(std::ostream& out, const XmlNode& node,
     std::string ind(depth * 2, ' ');
     out << ind << "<" << tag << ">";
     if (node.children.empty()) {
-        out << node.value;
+        out << escapeXml(node.value);
     } else {
         out << "\n";
         for (auto& [k, v] : node.children)
@@ -106,7 +154,7 @@ static void readXml(std::istream& in, XmlNode& root) {
             size_t closePos = t.find(closeTag);
             if (closePos != std::string::npos) {
                 size_t valStart = t.find('>') + 1;
-                child.value = t.substr(valStart, closePos - valStart);
+                child.value = unescapeXml(t.substr(valStart, closePos - valStart));
             } else {
                 readXmlNode(in, child);
             }
@@ -129,7 +177,7 @@ static void readXmlNode(std::istream& in, XmlNode& node) {
             size_t closePos = t.find(closeTag);
             if (closePos != std::string::npos) {
                 size_t valStart = t.find('>') + 1;
-                child.value = t.substr(valStart, closePos - valStart);
+                child.value = unescapeXml(t.substr(valStart, closePos - valStart));
             } else {
                 readXmlNode(in, child);
             }
@@ -140,65 +188,92 @@ static void readXmlNode(std::istream& in, XmlNode& node) {
 
 // Methods in File::
 
+/**
+ * Save names become file names, so they are restricted to characters that are
+ * safe in a path and cannot escape the save directory.
+ */
+static void validateFileName(const std::string &fileName, const char* caller) {
+  if (fileName.empty()) {
+    throw std::invalid_argument(std::string(caller) + ": file name cannot be empty.");
+  }
+  for (unsigned char c : fileName) {
+    if (!(std::isalnum(c) || c == '_')) {
+      throw std::invalid_argument(std::string(caller) +
+        ": file name can only contain alpha-numeric characters and '_'.");
+    }
+  }
+}
+
+static fs::path saveFilePath(const std::string &fileName) {
+  fs::path path = savePath;
+  path /= fs::path{ fileName }.filename();
+  path += ".xml";
+  return path;
+}
+
 void save(const std::string & fileName)
 {
   using namespace File;
 
-  for (size_t i = 0; i < fileName.length(); i++) {
-    char c = fileName.at(i);
-    if (!(isalnum(c) || c == '_')){
-      throw std::invalid_argument("File name can only contain alpha-numeric characters.");
-    }
-  }
-
-  // Path to file
-  fs::path filePath = savePath;
-  filePath /= fs::path{ fileName }.filename();
-  filePath += ".xml";
+  validateFileName(fileName, "File::save");
+  fs::path filePath = saveFilePath(fileName);
 
   if (file.is_open()) {
     file.close();
   }
 
   // Make sure the directory exists
-  if (!exists(savePath)) {
-    fs::create_directory(savePath);
+  std::error_code ec;
+  fs::create_directories(savePath, ec);
+  if (ec) {
+    throw SaveError("File::save: could not create save directory '"
+      + savePath.string() + "': " + ec.message());
   }
 
-  // Try to open and save the file
-  try {
-    file.open(filePath, std::fstream::out);
-
-    // write to file, with formatting
-    writeXml(file, masterTree);
-  }
-  catch (std::exception &e) {
-    // TODO: Better catch
-    std::cerr << e.what() << std::endl;
+  file.open(filePath, std::fstream::out | std::fstream::trunc);
+  if (!file.is_open()) {
+    // The stream has no exception mask, so a failed open has to be checked
+    // for; wrapping it in try/catch never reported anything.
+    throw SaveError("File::save: could not open '" + filePath.string()
+      + "' for writing.");
   }
 
-  masterTree.clear();
+  // write to file, with formatting
+  writeXml(file, masterTree);
+  file.flush();
+  const bool written = file.good();
   file.close();
+
+  // The save has been consumed either way; do not leave a half written tree
+  // behind for the next save to pick up.
+  masterTree.clear();
+
+  if (!written) {
+    throw SaveError("File::save: failed while writing '" + filePath.string() + "'.");
+  }
 }
 
 void load(const std::string& fileName)
 {
   using namespace File;
 
-  fs::path filePath = savePath;
-  filePath /= fs::path{ fileName }.filename();
-  filePath += ".xml";
+  validateFileName(fileName, "File::load");
+  fs::path filePath = saveFilePath(fileName);
 
   if (file.is_open()) { file.close(); }
 
-  try {
-    file.open( filePath, std::fstream::in );
-    readXml(file, masterTree);
-  }
-  catch (std::exception &e) {
-    std::cerr << e.what() << std::endl;
+  // Discard anything already in the tree. Without this, loading a file twice
+  // leaves two copies of every entry in it, and a half finished save leaks
+  // into the loaded data.
+  clear();
+
+  file.open( filePath, std::fstream::in );
+  if (!file.is_open()) {
+    throw SaveError("File::load: save file '" + filePath.string()
+      + "' does not exist or could not be opened.");
   }
 
+  readXml(file, masterTree);
   file.close();
 }
 
@@ -220,29 +295,23 @@ Savable::~Savable() {}
 
 Savable::idType Savable::nextID(const std::string& key) {
   // look in current working tree for pair with key @param key
-  auto it = workingTree()->begin();
-  bool foundVar = false;
-  while (it != workingTree()->end() && !foundVar) {
-    // If found var data
-    foundVar = it->first == key;
-    if (!foundVar) {
-      it++;
-    }
+  auto it = workingTree()->find(key);
+  if (it == workingTree()->not_found()) {
+    // Previously this walked off the end of the tree and dereferenced it,
+    // which crashed on any save file that was missing, truncated, or simply
+    // did not contain what the caller expected. (GitHub issue #20)
+    throw SaveError("Savable::nextID: no '" + key
+      + "' entry is available to load.");
   }
 
   // tree should have a child with key "id", find the child
   auto &tree = it->second;
-  // find it
   auto idIterator = tree.find("id"); // TODO: Remove hardcoding
-  if (idIterator != tree.not_found()) {
-    auto idData = idIterator->second.data();
-    return idData;
-  } else {
-    // throw an exception?
-    // TODO: fix this
-    return "";
+  if (idIterator == tree.not_found()) {
+    throw SaveError("Savable::nextID: the '" + key
+      + "' entry being loaded has no 'id'.");
   }
-
+  return idIterator->second.data();
 }
 
 void Savable::startSave(const std::string& key)
@@ -270,14 +339,12 @@ void Savable::endSave()
 void Savable::startLoad(const std::string & key)
 {
   // look in current working tree for pair with key @param key
-  auto it = workingTree()->begin();
-  bool foundVar = false;
-  while (it != workingTree()->end() && !foundVar) {
-    // If found var data
-    foundVar = it->first == key;
-    if (!foundVar) {
-      it++;
-    }
+  auto it = workingTree()->find(key);
+  if (it == workingTree()->not_found()) {
+    // Nothing is pushed onto either stack on this path, so the stacks stay
+    // balanced and the caller's endLoad() is simply never reached.
+    throw SaveError("Savable::startLoad: no '" + key
+      + "' entry is available to load.");
   }
 
   // Add iterator to 'erase' stack so that it can be erased later
@@ -318,36 +385,35 @@ void Savable::load(const std::string & varName, int & var)
   load(varName, stringValue);
 
   // Convert value to int
-  var = std::stoi(stringValue);
-}
-
-void Savable::load(const std::string &varName, char* &var) {
-  std::string stringValue;
-  load(varName, stringValue);
-  //var = stringValue.dat
+  std::size_t charsUsed = 0;
+  int parsed = 0;
+  try {
+    parsed = std::stoi(stringValue, &charsUsed);
+  } catch (const std::exception &) {
+    throw SaveError("Savable::load: '" + varName + "' is not a valid integer (saved as \""
+      + stringValue + "\").");
+  }
+  if (charsUsed != stringValue.size()) {
+    throw SaveError("Savable::load: '" + varName + "' is not a valid integer (saved as \""
+      + stringValue + "\").");
+  }
+  var = parsed;
 }
 
 void Savable::load(const std::string & varName, std::string & var)
 {
   // Find var in tree
-  auto it = workingTree()->begin();
-
-  bool foundVar = false;
-  while (it != workingTree()->end() && !foundVar) {
-    // If found var data
-    foundVar = it->first == varName;
-    if (!foundVar) {
-      it++;
-    }
+  auto it = workingTree()->find(varName);
+  if (it == workingTree()->not_found()) {
+    // Leaving var untouched here hid truncated and mismatched save files,
+    // and left the caller reading whatever the variable happened to hold.
+    throw SaveError("Savable::load: no value was saved for '" + varName + "'.");
   }
 
-  if (it != workingTree()->end()) {
-    // TODO: Throw an exception? if we are at end
-    // Get and assign value
-    var = it->second.data();
-    // Clear node in tree
-    workingTree()->erase(it);
-  }
+  // Get and assign value
+  var = it->second.data();
+  // Clear node in tree
+  workingTree()->erase(it);
 }
 
 void Savable::clearSavable() {}

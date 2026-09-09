@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <Savable.h>
 #include <Creation/Creatable.h>
 #include "Map/Dir.h"
 #include "Map/MapManager.h"
@@ -167,7 +168,14 @@ void Player::loadMenu() {
   std::cout << "Load file name: ";
   std::cin >> fileName;
   std::cout << "Loading...";
-  MapManager::getInstance().load(fileName);
+  try {
+    MapManager::getInstance().load(fileName);
+  } catch (const std::exception &e) {
+    // A missing or unreadable save is something the player can recover from
+    // by picking another file; it should not end the game.
+    std::cout << " Could not load: " << e.what() << std::endl;
+    return;
+  }
   setIsTurnUsed();
   std::cout << " Done." << std::endl;
 }
@@ -276,7 +284,12 @@ void Player::saveMenu() {
   std::cout << "Save file name: ";
   std::cin >> fileName;
   std::cout << "Saving...";
-  MapManager::getInstance().save(fileName);
+  try {
+    MapManager::getInstance().save(fileName);
+  } catch (const std::exception &e) {
+    std::cout << " Could not save: " << e.what() << std::endl;
+    return;
+  }
   std::cout << " Done." << std::endl;
 }
 

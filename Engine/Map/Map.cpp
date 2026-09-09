@@ -1,6 +1,8 @@
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 #include <Creation/Create.h>
+#include <Creation/Creatable.h>
 #include <UI/Input.h>
 #include "Map.h"
 #include "Node.h"
@@ -15,6 +17,11 @@ using namespace Creation;
 using enum Dir;
 
 const int Map::DEFAULT_MAP_SIZE = 5;
+
+// Registration for the base Map. See the note in Item.cpp for why the empty
+// id is registered too.
+Creation::Registration __registrationMapEmptyString("", []() -> std::unique_ptr<Map> { return std::make_unique<Map>(); });
+Creation::Registration __registrationMap("Map", []() -> std::unique_ptr<Map> { return std::make_unique<Map>(); });
 
 Map::Map() : grid( static_cast<size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
 , mapSize{ DEFAULT_MAP_SIZE } {
