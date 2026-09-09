@@ -1,10 +1,12 @@
-cmake_minimum_required(VERSION 4.4 FATAL_ERROR)
+cmake_minimum_required(VERSION 4.3.1 FATAL_ERROR)
 
 # `import std;` is behind an experimental gate in CMake, and the gate has to be
-# set before the compiler is probed. The value is tied to a CMake release: 4.4
-# expects this one. A CMake expecting a different value ignores this and the
-# build falls back to including standard headers, so setting it is always safe,
-# but the value needs updating to keep `import std` working on a newer CMake.
+# set before the compiler is probed. The value is tied to a CMake release; this
+# is the one CMake 4.4 expects. A CMake that expects a different value -- older
+# or newer -- ignores this, and the build quietly falls back to including
+# standard headers. That is safe, but it means `import std` only actually turns
+# on under 4.4 until this value is updated. The configure step prints which
+# mode it picked.
 set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "f35a9ac6-8463-4d38-8eec-5d6008153e7d")
 
 project(ProjectWolfGame CXX)

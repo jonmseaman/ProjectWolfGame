@@ -2,7 +2,7 @@
 A prototype for a terminal-based RPG.
 
 ## Tools
-* CMake 4.4 or newer
+* CMake 4.3.1 or newer
 * A C++23 compiler
 
 ## How to Build
@@ -26,9 +26,10 @@ Turning it on needs all three of:
   build uses headers.
 
 `import std` is still behind an experimental gate in CMake, and the gate value
-is tied to a CMake release. `CMakeLists.txt` carries the value CMake 4.4
-expects; on a newer CMake the gate does not open and the build falls back to
-headers until that value is updated.
+is tied to a CMake release. `CMakeLists.txt` carries the value CMake **4.4**
+expects. On any other CMake -- older or newer -- the gate does not open and the
+build falls back to headers until that value is updated. Configuring prints
+which mode is in use, so check that line rather than assuming.
 
 With Homebrew LLVM on macOS:
 
