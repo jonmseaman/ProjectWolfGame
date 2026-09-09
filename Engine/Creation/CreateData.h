@@ -2,6 +2,7 @@
 #include <functional>
 #include <map>
 #include <memory>
+#include <string>
 #include "CreatableClassDeclarations.h"
 
 class CreateData {

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <assert.h>
 #include <cctype>
 #include <filesystem>
@@ -8,6 +9,7 @@
 #include <string>
 #include <stack>
 #include <list>
+#include <vector>
 
 #include "Savable.h"
 
