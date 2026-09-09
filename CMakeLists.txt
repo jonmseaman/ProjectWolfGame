@@ -4,11 +4,18 @@ cmake_minimum_required(VERSION 4.3.1 FATAL_ERROR)
 # requires a toolchain that can provide the standard library as a module.
 #
 # `import std;` is behind an experimental gate in CMake, and the gate has to be
-# set before the compiler is probed. The value is tied to a CMake release; this
-# is the one CMake 4.4 expects. On a CMake that expects a different value the
-# gate stays shut and the configure step below fails with an explanation, so
-# this value has to be kept current.
-set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "f35a9ac6-8463-4d38-8eec-5d6008153e7d")
+# set before the compiler is probed. The value identifies a CMake release, and
+# changes between them, so it has to be picked per version. A value CMake does
+# not recognise is ignored silently -- the gate simply stays shut -- which is
+# why an unknown version is called out below rather than left to fail
+# confusingly further down.
+if(CMAKE_VERSION VERSION_GREATER_EQUAL 4.4 AND CMAKE_VERSION VERSION_LESS 4.5)
+  set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "f35a9ac6-8463-4d38-8eec-5d6008153e7d")
+elseif(CMAKE_VERSION VERSION_GREATER_EQUAL 4.3 AND CMAKE_VERSION VERSION_LESS 4.4)
+  set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "451f2fe2-a8a2-47c3-bc32-94786d8fc91b")
+else()
+  set(PWG_UNKNOWN_CMAKE_GATE TRUE)
+endif()
 
 # CMake finds the standard library's module metadata by running the compiler
 # with -print-file-name, without any of this project's flags, so it does not
@@ -16,6 +23,10 @@ set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "f35a9ac6-8463-4d38-8eec-5d6008153e7d")
 # for a Homebrew or self-built LLVM on macOS. Look next to the compiler for it,
 # before project() probes the compiler. Passing
 # -DCMAKE_CXX_STDLIB_MODULES_JSON=... overrides this.
+#
+# This only works when the compiler is known this early, which means it has to
+# be passed in -- see CMakePresets.json. An IDE that lets CMake pick the
+# compiler itself gets no help from this, and is caught by the checks below.
 if(NOT CMAKE_CXX_STDLIB_MODULES_JSON AND CMAKE_CXX_COMPILER)
   cmake_path(GET CMAKE_CXX_COMPILER PARENT_PATH _pwg_bin)
   foreach(_pwg_dir "${_pwg_bin}/../lib/c++" "${_pwg_bin}/../lib")
@@ -43,17 +54,27 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 if(NOT CMAKE_GENERATOR MATCHES "Ninja|Visual Studio")
   set(_pwg_problem "the generator cannot scan C++ module dependencies -- use "
                    "-G Ninja (1.11 or newer) or a Visual Studio generator")
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS)
+  # Checked before the general one below, because a missing scanner is what
+  # empties CMAKE_CXX_COMPILER_IMPORT_STD for Apple's clang -- which does ship
+  # libc++'s module sources, in /usr/share/libc++/v1. Reporting "no module
+  # sources" there would send you looking for the wrong thing.
+  set(_pwg_problem "this compiler ships no clang-scan-deps, so CMake cannot "
+                   "work out the import graph. Apple's clang is the usual "
+                   "case -- including when an IDE picks the compiler for you. "
+                   "Install an upstream LLVM (brew install llvm) and point "
+                   "CMAKE_CXX_COMPILER at its clang++, or configure with one "
+                   "of the presets in CMakePresets.json")
+elseif(PWG_UNKNOWN_CMAKE_GATE)
+  set(_pwg_problem "`import std` is behind an experimental gate whose value "
+                   "changes between CMake releases, and this project does not "
+                   "know the value for CMake ${CMAKE_VERSION}. Look for "
+                   "CMAKE_EXPERIMENTAL_CXX_IMPORT_STD in that version's "
+                   "Help/dev/experimental.rst and add it to CMakeLists.txt")
 elseif(NOT CMAKE_CXX_COMPILER_IMPORT_STD)
   set(_pwg_problem "the standard library ships no module sources: a std.cppm "
                    "and a libc++.modules.json, or the libstdc++ equivalent. "
                    "${CMAKE_CXX_COMPILER_IMPORT_STD_ERROR_MESSAGE}")
-elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS)
-  # Apple's clang does ship libc++'s module sources, in /usr/share/libc++/v1,
-  # so the check above passes for it. What it lacks is clang-scan-deps.
-  set(_pwg_problem "the compiler ships no clang-scan-deps, so CMake cannot "
-                   "work out the import graph. Apple's clang is the usual "
-                   "case: install an upstream LLVM (brew install llvm) and "
-                   "point CMAKE_CXX_COMPILER at its clang++")
 endif()
 
 if(_pwg_problem)

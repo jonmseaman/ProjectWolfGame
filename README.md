@@ -23,14 +23,30 @@ CMake fails at configure time with an explanation if any piece is missing.
 
 ## How to Build
 
-On macOS with Homebrew LLVM:
-
 ```bash
 brew install llvm ninja
+cmake --preset homebrew-llvm
+cmake --build --preset homebrew-llvm
+ctest --preset homebrew-llvm
+```
+
+`CMakePresets.json` carries the presets: `homebrew-llvm`, `clang` (for an
+upstream LLVM already on PATH), and `strict` (warnings as errors). Without a
+preset:
+
+```bash
 cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=$(brew --prefix llvm)/bin/clang++
 cmake --build build
 ctest --test-dir build
 ```
+
+### In an IDE
+
+CLion and other IDEs default to the system compiler, which on macOS is Apple's
+clang -- and that cannot build this project. Select one of the presets above in
+the IDE's CMake settings, or set the toolchain's C++ compiler to
+`$(brew --prefix llvm)/bin/clang++` by hand. Configuring with the wrong
+compiler fails with a message saying so.
 
 Elsewhere, any Ninja plus a module-capable compiler will do:
 
@@ -59,9 +75,11 @@ Two things are handled for you, and both can be overridden on the command line:
   matching `-L` and `-rpath` so both come from one place.
 
 `import std` is still behind an experimental gate in CMake, and the gate value
-is tied to a CMake release. `CMakeLists.txt` carries the value CMake **4.4**
-expects; on a CMake that wants a different one the gate stays shut and
-configuring fails, so that value has to be kept current.
+changes between CMake releases. `CMakeLists.txt` knows the values for **4.3**
+and **4.4** and picks by version. On any other release the gate cannot open, and
+configuring stops with a message pointing at
+`CMAKE_EXPERIMENTAL_CXX_IMPORT_STD` in that version's
+`Help/dev/experimental.rst`, whose value needs adding there.
 
 ## Modules
 

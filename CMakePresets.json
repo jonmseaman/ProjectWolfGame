@@ -1,0 +1,63 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": { "major": 4, "minor": 3, "patch": 1 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "homebrew-llvm",
+      "displayName": "macOS - Homebrew LLVM",
+      "description": "Uses Homebrew's clang++, which ships libc++ module sources and clang-scan-deps. Apple's clang cannot build this project.",
+      "inherits": "base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      },
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "/opt/homebrew/opt/llvm/bin/clang++"
+      }
+    },
+    {
+      "name": "clang",
+      "displayName": "clang++ from PATH",
+      "description": "For an upstream LLVM that is already on PATH.",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang++"
+      }
+    },
+    {
+      "name": "strict",
+      "displayName": "Homebrew LLVM, warnings as errors",
+      "inherits": "homebrew-llvm",
+      "cacheVariables": {
+        "PWG_WERROR": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "homebrew-llvm", "configurePreset": "homebrew-llvm" },
+    { "name": "clang", "configurePreset": "clang" },
+    { "name": "strict", "configurePreset": "strict" }
+  ],
+  "testPresets": [
+    {
+      "name": "homebrew-llvm",
+      "configurePreset": "homebrew-llvm",
+      "output": { "outputOnFailure": true }
+    },
+    {
+      "name": "clang",
+      "configurePreset": "clang",
+      "output": { "outputOnFailure": true }
+    }
+  ]
+}
