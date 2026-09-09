@@ -1,10 +1,4 @@
-#if PWG_IMPORT_STD
 import std;
-#else
-#include <iostream>
-#include <memory>
-#include <stdexcept>
-#endif
 #include <Creation/Create.h>
 #include <Creation/Creatable.h>
 #include <UI/Input.h>

@@ -1,10 +1,4 @@
-#if PWG_IMPORT_STD
 import std;
-#else
-#include <iostream>
-#include <iomanip>
-#include <stdexcept>
-#endif
 #include <Creation/Create.h>
 #include "Inventory.h"
 

@@ -1,18 +1,4 @@
-#if PWG_IMPORT_STD
 import std;
-#else
-#include <algorithm>
-#include <cctype>
-#include <filesystem>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <stdexcept>
-#include <string>
-#include <stack>
-#include <list>
-#include <vector>
-#endif
 
 // assert() is a macro, and macros never come from `import std`.
 #include <assert.h>

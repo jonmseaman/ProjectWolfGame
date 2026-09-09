@@ -1,9 +1,4 @@
-#if PWG_IMPORT_STD
 import std;
-#else
-#include <stdexcept>
-#include <string>
-#endif
 #include "Dir.h"
 
 namespace Engine {

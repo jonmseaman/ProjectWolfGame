@@ -1,13 +1,6 @@
 #include "Input.h"
 
-#if PWG_IMPORT_STD
 import std;
-#else
-#include <iomanip>
-#include <iostream>
-#include <limits>
-#include <string>
-#endif
 
 #ifdef _WIN32
 #  include <conio.h>

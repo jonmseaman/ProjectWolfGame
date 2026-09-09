@@ -1,9 +1,4 @@
-#if PWG_IMPORT_STD
 import std;
-#else
-#include <iostream>
-#include <stdexcept>
-#endif
 #include <Creation/Create.h>
 #include "Map.h"
 #include "MapManager.h"

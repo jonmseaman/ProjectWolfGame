@@ -1,9 +1,4 @@
-#if PWG_IMPORT_STD
 import std;
-#else
-#include <iostream>
-#include <iomanip>
-#endif
 #include "Entity/Stats.h"
 
 namespace Engine {

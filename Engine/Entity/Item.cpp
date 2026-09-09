@@ -1,8 +1,4 @@
-#if PWG_IMPORT_STD
 import std;
-#else
-#include <iostream>
-#endif
 #include <Creation/Creatable.h>
 #include "Creature.h"
 #include "Item.h"
