@@ -1,5 +1,4 @@
 module;
-#include "EngineMacros.h"
 #include "SavableMacros.h"
 #include "Creation/Creatable.h"
 
@@ -11,115 +10,122 @@ using std::cout;
 using std::endl;
 
 namespace Engine {
-namespace Maps
-{
-using namespace Creation;
-using enum Dir;
+    namespace Maps {
+        using namespace Creation;
+        using enum Dir;
 
-const int Map::DEFAULT_MAP_SIZE = 5;
+        const int Map::DEFAULT_MAP_SIZE = 5;
 
-// Registration for the base Map. See the note in Item.cpp for why the empty
-// id is registered too.
-Creation::Registration __registrationMapEmptyString("", []() -> std::unique_ptr<Map> { return std::make_unique<Map>(); });
-Creation::Registration __registrationMap("Map", []() -> std::unique_ptr<Map> { return std::make_unique<Map>(); });
+        // Registration for the base Map. See the note in Item.cpp for why the empty
+        // id is registered too.
+        Creation::Registration __registrationMapEmptyString("", []() -> std::unique_ptr<Map> {
+            return std::make_unique<Map>();
+        });
+        Creation::Registration __registrationMap(
+            "Map", []() -> std::unique_ptr<Map> { return std::make_unique<Map>(); });
 
-Map::Map() : grid( static_cast<std::size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE) )
-, mapSize{ DEFAULT_MAP_SIZE } {
-    for (auto& i : grid) { i = std::make_unique<Node>(); }
-    buildMoveData();
-  }
-
-  Map::Map(int mapWidth) : grid( static_cast<std::size_t>(mapWidth*mapWidth) )
-    , mapSize{ mapWidth } {}
-
-  Map::~Map() {}
-
-  void Map::clearSavable() {
-    grid.clear();
-  }
-
-  void Map::activate() {
-    for ( auto &node : grid ) {
-      node->activate();
-    }
-  }
-
-  void Map::setNode(int xInd, int yInd, std::unique_ptr<Node> node) {
-    grid.at(yInd*mapSize + xInd) = std::move(node);
-   }
-
-
-  void Map::buildMoveData() {
-    for ( int yIndex( 0 ); yIndex < mapSize; yIndex++ ) {
-      for ( int xIndex( 0 ); xIndex < mapSize; xIndex++ ) {
-        // Add node links to the current node
-        Node &currentNode = *getNode(xIndex, yIndex);
-        if ( yIndex < mapSize-1 ) { // Build north
-          Node *north = getNode(xIndex, yIndex+1);
-          currentNode.setNodeLink(Dir::NORTH, north);
+        Map::Map() : grid(static_cast<std::size_t>(DEFAULT_MAP_SIZE * DEFAULT_MAP_SIZE))
+                     , mapSize{DEFAULT_MAP_SIZE} {
+            for (auto &i: grid) { i = std::make_unique<Node>(); }
+            buildMoveData();
         }
-        if ( xIndex < mapSize-1 ) { // build east
-          Node *east = getNode(xIndex+1, yIndex);
-          currentNode.setNodeLink(Dir::EAST, east);
+
+        Map::Map(int mapWidth) : grid(static_cast<std::size_t>(mapWidth * mapWidth))
+                                 , mapSize{mapWidth} {
         }
-        if ( xIndex > 0 ) { // build west
-          Node *west = getNode(xIndex-1, yIndex);
-          currentNode.setNodeLink(Dir::WEST, west);
+
+        Map::~Map() {
         }
-        if ( yIndex > 0 ) { // build south
-          Node *south = getNode(xIndex, yIndex-1);
-          currentNode.setNodeLink(Dir::SOUTH, south);
+
+        void Map::clearSavable() {
+            grid.clear();
         }
-      }
-    }
-  }
 
-  int Map::getMapSize() const {
-    return mapSize;
-  }
+        void Map::activate() {
+            for (auto &node: grid) {
+                node->activate();
+            }
+        }
 
-  Node* Map::getNode(int xInd, int yInd) {
-    if (xInd < 0 || yInd < 0 || xInd >= mapSize || yInd >= mapSize) {
-      throw std::out_of_range("getNode: coordinates out of range");
-    }
-    auto& node = grid.at(static_cast<std::size_t>(yInd * mapSize + xInd));
-    if (node == nullptr) {
-      throw std::logic_error("getNode: node is null");
-    }
-    return node.get();
-  }
+        void Map::setNode(int xInd, int yInd, std::unique_ptr<Node> node) {
+            grid.at(yInd * mapSize + xInd) = std::move(node);
+        }
 
-  void Map::save() {
-      startSave("Map");
 
-      // Save the nodes
-      SAVE(mapSize);
-      for (auto& node : grid) {
-          // Map(int) leaves the grid empty for derived maps to fill, so a
-          // half built map would dereference a null slot here.
-          if (node == nullptr) {
-            throw std::logic_error("Map::save: the map has an empty node slot");
-          }
-          node->save();
-      }
+        void Map::buildMoveData() {
+            for (int yIndex(0); yIndex < mapSize; yIndex++) {
+                for (int xIndex(0); xIndex < mapSize; xIndex++) {
+                    // Add node links to the current node
+                    Node &currentNode = *getNode(xIndex, yIndex);
+                    if (yIndex < mapSize - 1) {
+                        // Build north
+                        Node *north = getNode(xIndex, yIndex + 1);
+                        currentNode.setNodeLink(Dir::NORTH, north);
+                    }
+                    if (xIndex < mapSize - 1) {
+                        // build east
+                        Node *east = getNode(xIndex + 1, yIndex);
+                        currentNode.setNodeLink(Dir::EAST, east);
+                    }
+                    if (xIndex > 0) {
+                        // build west
+                        Node *west = getNode(xIndex - 1, yIndex);
+                        currentNode.setNodeLink(Dir::WEST, west);
+                    }
+                    if (yIndex > 0) {
+                        // build south
+                        Node *south = getNode(xIndex, yIndex - 1);
+                        currentNode.setNodeLink(Dir::SOUTH, south);
+                    }
+                }
+            }
+        }
 
-      endSave();
-  }
+        int Map::getMapSize() const {
+            return mapSize;
+        }
 
-  void Map::load() {
-    clearSavable();
-    startLoad("Map");
+        Node *Map::getNode(int xInd, int yInd) {
+            if (xInd < 0 || yInd < 0 || xInd >= mapSize || yInd >= mapSize) {
+                throw std::out_of_range("getNode: coordinates out of range");
+            }
+            auto &node = grid.at(static_cast<std::size_t>(yInd * mapSize + xInd));
+            if (node == nullptr) {
+                throw std::logic_error("getNode: node is null");
+            }
+            return node.get();
+        }
 
-    // Load the nodes
-    LOAD(mapSize);
-    grid.resize(static_cast<std::size_t>(mapSize * mapSize));
-    for (auto& slot : grid) {
-      slot = Create::loadNewNode();
-    }
-    buildMoveData(); // Get map ready for use.
+        void Map::save() {
+            startSave("Map");
 
-    endLoad();
-  }
+            // Save the nodes
+            SAVE(mapSize);
+            for (auto &node: grid) {
+                // Map(int) leaves the grid empty for derived maps to fill, so a
+                // half built map would dereference a null slot here.
+                if (node == nullptr) {
+                    throw std::logic_error("Map::save: the map has an empty node slot");
+                }
+                node->save();
+            }
 
-} // End namespace Maps
+            endSave();
+        }
+
+        void Map::load() {
+            clearSavable();
+            startLoad("Map");
+
+            // Load the nodes
+            LOAD(mapSize);
+            grid.resize(static_cast<std::size_t>(mapSize * mapSize));
+            for (auto &slot: grid) {
+                slot = Create::loadNewNode();
+            }
+            buildMoveData(); // Get map ready for use.
+
+            endLoad();
+        }
+    } // End namespace Maps
 }

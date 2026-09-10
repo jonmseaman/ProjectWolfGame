@@ -1,5 +1,4 @@
 module;
-#include "EngineMacros.h"
 #include "SavableMacros.h"
 
 export module Engine:Map;
@@ -9,54 +8,59 @@ import Savable;
 import :Fwd;   // Node is only named here
 
 export namespace Engine {
-namespace Maps
-{
-  class ENGINE_API Map : public File::Savable
-  {
-    public:
-      Map(); // Default constructor. Creates empty map with blank nodes
-      /**
-       * Makes a map of specific size. Does not make any nodes.
-       * @usage Should be used by derived classes since nodes are not created.
-       */
-      Map(int mapWidth);
-      ~Map() override; // Deletes nodes.
-      SAVABLE_CLEAR;
+    namespace Maps {
+        class Map : public File::Savable {
+        public:
+            Map(); // Default constructor. Creates empty map with blank nodes
+            /**
+             * Makes a map of specific size. Does not make any nodes.
+             * @usage Should be used by derived classes since nodes are not created.
+             */
+            Map(int mapWidth);
 
-      // Data Access
+            ~Map() override; // Deletes nodes.
+            SAVABLE_CLEAR;
 
-      /** @return number of nodes along one side of this map. */
-      int getMapSize() const;
-      /**
-       * Allows access to nodes in the map.
-       * @pre xInd, yInd < mapSize
-       * @return Pointer to node at xInd, yInd
-       */
-      Maps::Node* getNode(int xInd, int yInd);
-      /**
-       * Allows the nodes to be replaced.
-       * @post The node at xInd, yInd = #node
-       */
-      void setNode(int xInd, int yInd, std::unique_ptr<Node> node);
-      /** Activates all nodes in the map. */
-      void activate();
-      /**
-      * These are nodes that make up the base layer of the game world.
-      * Other nodes may only exist if made by other nodes.
-      */
-      std::vector<std::unique_ptr<Node>> grid;
-    protected:
-      /**
-       * Connects the nodes to each other.
-       * @pre Elements of grid are not nullptrs
-       * @post Nodes will be linked together
-       */
-      void buildMoveData();
-    private:
-      // Vars
-      static const int DEFAULT_MAP_SIZE;
-      /** The width, height of the map. mapSize^2 = number of nodes in grid */
-      int mapSize;
-  };
-}
+            // Data Access
+
+            /** @return number of nodes along one side of this map. */
+            int getMapSize() const;
+
+            /**
+             * Allows access to nodes in the map.
+             * @pre xInd, yInd < mapSize
+             * @return Pointer to node at xInd, yInd
+             */
+            Maps::Node *getNode(int xInd, int yInd);
+
+            /**
+             * Allows the nodes to be replaced.
+             * @post The node at xInd, yInd = #node
+             */
+            void setNode(int xInd, int yInd, std::unique_ptr<Node> node);
+
+            /** Activates all nodes in the map. */
+            void activate();
+
+            /**
+            * These are nodes that make up the base layer of the game world.
+            * Other nodes may only exist if made by other nodes.
+            */
+            std::vector<std::unique_ptr<Node> > grid;
+
+        protected:
+            /**
+             * Connects the nodes to each other.
+             * @pre Elements of grid are not nullptrs
+             * @post Nodes will be linked together
+             */
+            void buildMoveData();
+
+        private:
+            // Vars
+            static const int DEFAULT_MAP_SIZE;
+            /** The width, height of the map. mapSize^2 = number of nodes in grid */
+            int mapSize;
+        };
+    }
 }

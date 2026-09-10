@@ -6,8 +6,6 @@ import Engine;
 using namespace Engine::Entity;
 
 namespace UnitTests {
-
-TEST(CreatableTests, loadNewItem) {
-}
-
+    TEST(CreatableTests, loadNewItem) {
+    }
 } // namespace UnitTests

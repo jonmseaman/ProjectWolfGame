@@ -5,12 +5,13 @@ export module Engine:Fwd;
 // partition dependency graph cyclic. The definitions live in :Item, :Actor,
 // :Node and :Map, and attach to this same module.
 export namespace Engine {
-namespace Entity {
-class Item;
-class Actor;
-}
-namespace Maps {
-class Node;
-class Map;
-}
+    namespace Entity {
+        class Item;
+        class Actor;
+    }
+
+    namespace Maps {
+        class Node;
+        class Map;
+    }
 }

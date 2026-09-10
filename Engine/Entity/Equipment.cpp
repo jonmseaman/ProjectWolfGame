@@ -1,5 +1,4 @@
 module;
-#include "EngineMacros.h"
 #include "SavableMacros.h"
 
 module Engine;
@@ -7,7 +6,6 @@ module Engine;
 import std;
 
 namespace Engine {
-namespace Entity {
-
-}
+    namespace Entity {
+    }
 }

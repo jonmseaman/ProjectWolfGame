@@ -1,12 +1,25 @@
 module;
-#include "EngineMacros.h"
-#include "SavableMacros.h"
 
 module Engine;
 
 import std;
 
-std::map<std::string, std::function<std::unique_ptr<Engine::Entity::Item>()>>  CreateData::items;
-std::map<std::string, std::function<std::unique_ptr<Engine::Entity::Actor>()>> CreateData::actors;
-std::map<std::string, std::function<std::unique_ptr<Engine::Maps::Node>()>>    CreateData::nodes;
-std::map<std::string, std::function<std::unique_ptr<Engine::Maps::Map>()>>     CreateData::maps;
+std::map<std::string, CreateData::ItemFactory> &CreateData::items() {
+    static std::map<std::string, ItemFactory> factories;
+    return factories;
+}
+
+std::map<std::string, CreateData::ActorFactory> &CreateData::actors() {
+    static std::map<std::string, ActorFactory> factories;
+    return factories;
+}
+
+std::map<std::string, CreateData::NodeFactory> &CreateData::nodes() {
+    static std::map<std::string, NodeFactory> factories;
+    return factories;
+}
+
+std::map<std::string, CreateData::MapFactory> &CreateData::maps() {
+    static std::map<std::string, MapFactory> factories;
+    return factories;
+}

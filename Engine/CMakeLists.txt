@@ -1,4 +1,4 @@
-add_library(Engine SHARED)
+add_library(Engine STATIC)
 
 target_sources(Engine
   PUBLIC
@@ -22,6 +22,10 @@ target_sources(Engine
       # Primary interface unit, which re-exports the partitions.
       Engine.cppm
   PRIVATE
+    # Listed so that an IDE associates it with this target. CMake does not
+    # compile headers; without this it belongs to no target and shows up as
+    # "does not belong to any project target".
+    Creation/Creatable.h
     Creation/Create.cpp
     Creation/CreateData.cpp
     Creation/Registration.cpp
@@ -39,8 +43,6 @@ target_sources(Engine
 )
 
 pwg_set_warnings(Engine)
-
-target_compile_definitions(Engine PRIVATE ENGINE_EXPORTS _WINDOWS _USRDLL)
 
 # Consumers get the declarations from `import Engine;`. This is only so they
 # can include <Creation/Creatable.h>, which holds the CREATABLE_* macros --
