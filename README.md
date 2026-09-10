@@ -136,6 +136,18 @@ CREATABLE_REGISTRATION(Rat);
 A macro that a module unit needs for its own declarations is included in that
 unit's global module fragment, before `export module`.
 
+`Savable` and `Engine` build as **static** libraries. Nothing here is consumed
+as a shared library, and static linking means no `__declspec(dllexport)`
+annotation is needed for a Windows build to work -- which is why the project
+carries no export macros.
+
+Static linking does make global initialisation order matter more, and it caught
+a real bug: the factory tables in `CreateData` are function-local statics, not
+static data members, because the `Registration` globals that fill them live in
+other translation units. As static data members they could be inserted into
+before being constructed. That happened to work when the libraries were shared
+and segfaulted on start-up the moment they were made static.
+
 ## Controls
 
 * `12345` - Menu access

@@ -11,7 +11,9 @@ FetchContent_Declare(
     SYSTEM
     EXCLUDE_FROM_ALL
 )
-# Use shared CRT to match the rest of the project on Windows
+# MSVC's default runtime is the DLL CRT, so match it. This is about the C
+# runtime, not about how this project's own libraries are linked -- those are
+# static.
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
@@ -31,17 +33,6 @@ add_executable(UnitTests
 target_link_libraries(UnitTests PRIVATE Engine Savable GTest::gtest_main)
 
 pwg_set_warnings(UnitTests)
-
-# On macOS, embed @loader_path so the test binary finds Savable/Engine dylibs
-# in the same output directory without needing DYLD_LIBRARY_PATH at runtime.
-if(APPLE)
-    set_target_properties(UnitTests PROPERTIES
-        BUILD_RPATH "@loader_path"
-    )
-    set_target_properties(Engine PROPERTIES
-        BUILD_RPATH "@loader_path"
-    )
-endif()
 
 include(GoogleTest)
 gtest_discover_tests(UnitTests)

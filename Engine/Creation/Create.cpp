@@ -71,25 +71,25 @@ namespace Creation {
     }
 
     std::unique_ptr<Engine::Entity::Item> Create::newItem(const std::string &id) {
-        auto i = factoryFor(CreateData::items, id, "Create::newItem")();
+        auto i = factoryFor(CreateData::items(), id, "Create::newItem")();
         i->setID(id);
         return i;
     }
 
     std::unique_ptr<Engine::Entity::Actor> Create::newActor(const std::string &id) {
-        auto a = factoryFor(CreateData::actors, id, "Create::newActor")();
+        auto a = factoryFor(CreateData::actors(), id, "Create::newActor")();
         a->setID(id);
         return a;
     }
 
     std::unique_ptr<Engine::Maps::Node> Create::newNode(const std::string &id) {
-        auto n = factoryFor(CreateData::nodes, id, "Create::newNode")();
+        auto n = factoryFor(CreateData::nodes(), id, "Create::newNode")();
         n->setID(id);
         return n;
     }
 
     std::unique_ptr<Engine::Maps::Map> Create::newMap(const std::string &id) {
-        auto m = factoryFor(CreateData::maps, id, "Create::newMap")();
+        auto m = factoryFor(CreateData::maps(), id, "Create::newMap")();
         m->setID(id);
         return m;
     }

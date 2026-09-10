@@ -1,4 +1,4 @@
-add_library(Engine SHARED)
+add_library(Engine STATIC)
 
 target_sources(Engine
   PUBLIC

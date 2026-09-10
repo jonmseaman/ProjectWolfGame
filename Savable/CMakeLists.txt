@@ -1,4 +1,4 @@
-add_library(Savable SHARED)
+add_library(Savable STATIC)
 
 target_sources(Savable
   PUBLIC
