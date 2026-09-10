@@ -44,8 +44,6 @@ target_sources(Engine
 
 pwg_set_warnings(Engine)
 
-target_compile_definitions(Engine PRIVATE ENGINE_EXPORTS _WINDOWS _USRDLL)
-
 # Consumers get the declarations from `import Engine;`. This is only so they
 # can include <Creation/Creatable.h>, which holds the CREATABLE_* macros --
 # macros are not exported by modules.

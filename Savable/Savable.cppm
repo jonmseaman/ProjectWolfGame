@@ -11,7 +11,7 @@ export namespace File {
    * Thrown when a save file is missing, cannot be written, or does not
    * contain the data that is being asked for.
    */
-  class SAVABLE_API SaveError : public std::runtime_error {
+  class SaveError : public std::runtime_error {
   public:
     explicit SaveError(const std::string &what) : std::runtime_error(what) {}
   };
@@ -25,7 +25,7 @@ export namespace File {
    * not alphanumeric and not '_', or if it is empty.
    * @throws SaveError if the file could not be written.
    */
-  void SAVABLE_API save(const std::string &fileName);
+  void save(const std::string &fileName);
   /**
    * Gets data of variables and objects from a file. These are ready to be
    * loaded after this function is called. Any save in progress and any
@@ -37,12 +37,12 @@ export namespace File {
    * not alphanumeric and not '_', or if it is empty.
    * @throws SaveError if the file does not exist or could not be read.
    */
-  void SAVABLE_API load(const std::string &fileName);
+  void load(const std::string &fileName);
 
   /** Clears a save in progress. */
-  void SAVABLE_API clear();
+  void clear();
 
-class SAVABLE_API Savable
+class Savable
 {
 public:
   Savable();

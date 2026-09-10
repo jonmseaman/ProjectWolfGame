@@ -5,16 +5,6 @@
 // live in this header and are included textually by whoever needs them --
 // including Savable's own module interface unit, in its global module fragment.
 
-#if defined(_MSC_VER) || defined(__MINGW32__)
-#  ifdef SAVABLE_EXPORTS
-#    define SAVABLE_API __declspec(dllexport)
-#  else
-#    define SAVABLE_API __declspec(dllimport)
-#  endif
-#else
-#  define SAVABLE_API
-#endif
-
 #define SAVE(var) Savable::save( #var, var )
 #define LOAD(var) Savable::load( #var, var )
 
