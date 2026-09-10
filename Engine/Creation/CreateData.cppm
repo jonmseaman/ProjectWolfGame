@@ -1,12 +1,9 @@
-module;
-#include "EngineMacros.h"
-
 export module Engine:CreateData;
 
 import std;
 import :Fwd;
 
-export class ENGINE_API CreateData {
+export class CreateData {
 public:
   // Map of Item names to item creation functions.
   static std::map<std::string, std::function<std::unique_ptr<Engine::Entity::Item>()>> items;

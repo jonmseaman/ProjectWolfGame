@@ -1,6 +1,3 @@
-module;
-#include "EngineMacros.h"
-
 export module Engine:Dir;
 
 import std;
@@ -35,14 +32,14 @@ namespace Maps
    * @param charDir The char being converted
    * @return The Dir corresponding to charDir, or Dir::STOP
    */
-  ENGINE_API Dir charToDir(char charDir);
+  Dir charToDir(char charDir);
   /**
    * Converts a Dir to its name.
    */
-  ENGINE_API std::string dirName(Dir dir);
+  std::string dirName(Dir dir);
   /**
    * Converts a direction to its reverse direction (ie: N-->S)
    */
-  ENGINE_API Dir oppositeDir(Dir dir);
+  Dir oppositeDir(Dir dir);
 }
 }

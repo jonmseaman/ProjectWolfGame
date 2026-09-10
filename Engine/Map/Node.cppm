@@ -1,5 +1,4 @@
 module;
-#include "EngineMacros.h"
 #include "SavableMacros.h"
 
 export module Engine:Node;
@@ -13,7 +12,7 @@ import :Inventory;
 export namespace Engine {
 namespace Maps
 {
-  class ENGINE_API Node : public File::Savable
+  class Node : public File::Savable
   {
     public:
       Node();

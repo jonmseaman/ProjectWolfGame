@@ -113,7 +113,6 @@ exported by modules**:
 | Header | Holds |
 | --- | --- |
 | `Engine/Creation/Creatable.h` | `CREATABLE_ITEM`, `CREATABLE_REGISTRATION`, ... |
-| `Engine/EngineMacros.h` | `ENGINE_API` |
 | `Savable/SavableMacros.h` | `SAVABLE_API`, `SAVE`, `LOAD`, `SAVABLE` |
 
 Game code that registers a class with the factory therefore includes one

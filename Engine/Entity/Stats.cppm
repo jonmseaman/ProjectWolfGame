@@ -1,5 +1,4 @@
 module;
-#include "EngineMacros.h"
 #include "SavableMacros.h"
 
 export module Engine:Stats;
@@ -9,7 +8,7 @@ import Savable;
 export namespace Engine {
 namespace Entity {
 
-class ENGINE_API Stats : public File::Savable {
+class Stats : public File::Savable {
 public:
   Stats(int stamina = 0, int strength = 0, int intellect = 0);
   SAVABLE;

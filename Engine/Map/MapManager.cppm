@@ -1,6 +1,3 @@
-module;
-#include "EngineMacros.h"
-
 export module Engine:MapManager;
 
 import std;
@@ -11,7 +8,7 @@ import :Map;
  * Eventually, MapManager will be able to handle multiple open maps and
  * connect them together to make a seamless larger map.
  */
-export class ENGINE_API MapManager
+export class MapManager
 {
   public:
     /** Singleton */

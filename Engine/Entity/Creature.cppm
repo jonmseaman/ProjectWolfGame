@@ -1,5 +1,4 @@
 module;
-#include "EngineMacros.h"
 #include "SavableMacros.h"
 
 export module Engine:Creature;
@@ -17,7 +16,7 @@ namespace Entity {
 /**
  * This class should store all functions for defining what a creature is.
  */
-class ENGINE_API Creature : public File::Savable {
+class Creature : public File::Savable {
     // The data structure for the creatures.
     // This class should contain the data and tools for making functioning
     // actors in the game world, but not actually include a way to _act_

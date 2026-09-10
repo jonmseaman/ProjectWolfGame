@@ -1,5 +1,4 @@
 module;
-#include "EngineMacros.h"
 #include "SavableMacros.h"
 
 export module Engine:Map;
@@ -11,7 +10,7 @@ import :Fwd;   // Node is only named here
 export namespace Engine {
 namespace Maps
 {
-  class ENGINE_API Map : public File::Savable
+  class Map : public File::Savable
   {
     public:
       Map(); // Default constructor. Creates empty map with blank nodes

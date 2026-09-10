@@ -1,6 +1,3 @@
-module;
-#include "EngineMacros.h"
-
 export module Engine:Create;
 
 import std;
@@ -8,7 +5,7 @@ import :Fwd;
 
 export namespace Creation {
 
-class ENGINE_API Create {
+class Create {
 public:
   // Methods for the loading / saving system
   static std::unique_ptr<Engine::Entity::Item> loadNewItem();

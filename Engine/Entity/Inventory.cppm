@@ -1,5 +1,4 @@
 module;
-#include "EngineMacros.h"
 #include "SavableMacros.h"
 
 export module Engine:Inventory;
@@ -11,7 +10,7 @@ import :Item;
 export namespace Engine {
 namespace Entity {
 
-class ENGINE_API Inventory : public File::Savable {
+class Inventory : public File::Savable {
 public:
   Inventory();
   Inventory(std::string name, int inventorySize);

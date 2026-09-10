@@ -1,5 +1,4 @@
 module;
-#include "EngineMacros.h"
 #include "SavableMacros.h"
 
 export module Engine:Actor;
@@ -15,7 +14,7 @@ namespace Entity {
  * The actor class is a creature which with behavior.
  * This should be generalized into Players, Mobs, Bosses etc
  */
-class ENGINE_API Actor : public Creature {
+class Actor : public Creature {
 public:
   Actor();
   ~Actor() override;

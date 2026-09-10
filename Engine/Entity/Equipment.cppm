@@ -1,6 +1,3 @@
-module;
-#include "EngineMacros.h"
-
 export module Engine:Equipment;
 
 import :Inventory;
@@ -8,7 +5,7 @@ import :Inventory;
 export namespace Engine {
 namespace Entity {
 
-class ENGINE_API Equipment : public Inventory {};
+class Equipment : public Inventory {};
 
 }
 }

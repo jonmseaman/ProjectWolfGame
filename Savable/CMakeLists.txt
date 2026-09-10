@@ -5,6 +5,9 @@ target_sources(Savable
     FILE_SET CXX_MODULES FILES
       Savable.cppm
   PRIVATE
+    # Listed so that an IDE associates it with this target; CMake does not
+    # compile headers.
+    SavableMacros.h
     Savable.cpp)
 
 pwg_set_warnings(Savable)

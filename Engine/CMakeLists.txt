@@ -22,6 +22,10 @@ target_sources(Engine
       # Primary interface unit, which re-exports the partitions.
       Engine.cppm
   PRIVATE
+    # Listed so that an IDE associates it with this target. CMake does not
+    # compile headers; without this it belongs to no target and shows up as
+    # "does not belong to any project target".
+    Creation/Creatable.h
     Creation/Create.cpp
     Creation/CreateData.cpp
     Creation/Registration.cpp

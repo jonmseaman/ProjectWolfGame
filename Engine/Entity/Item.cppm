@@ -1,5 +1,4 @@
 module;
-#include "EngineMacros.h"
 #include "SavableMacros.h"
 #include "Creation/Creatable.h"
 
@@ -16,7 +15,7 @@ class Creature;
 /**
  * This is an item.
  */
-class ENGINE_API Item : public File::Savable
+class Item : public File::Savable
 {
   public:
     Item();
