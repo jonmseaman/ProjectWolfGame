@@ -7,305 +7,303 @@ import std;
 import Engine;
 
 namespace Engine {
-namespace Entity {
+    namespace Entity {
+        CREATABLE_REGISTRATION(Player);
 
-CREATABLE_REGISTRATION(Player);
-
-Player::Player() {
-  setMaxHealth(100);
-  setName("Jon");
-  stats = Stats{ 5,5,5 };
-  inventory = Inventory{ "Jon's Inventory", 8 };
-  isPlayer = true;
-}
-
-Player::~Player() {}
-
-void Player::combatMenu(int choice) {
-  if (choice == 0) {
-    dispList("====Combat====", { "Attack", "Targets", "Inventory" });
-    choice = getDigit(0, 3);
-  }
-  switch (choice) {
-    case 0:
-      flagInCombat(false);
-      break;
-    case 1:
-      processUserInput(' '); // Attack key
-      break;
-    case 2:
-      targetMenu();
-      break;
-    case 3:
-      inventoryMenu();
-      break;
-    default:
-      std::cout << "No menu item " << choice << ".\n";
-      break;
-  }
-}
-
-void Player::takeTurn() {
-  setIsTurnUsed(false);
-  if (getIsLiving()) {
-    while (!getIsTurnUsed() && getIsLiving()) {
-      takeTurnMenu();
-    }
-    if (getIsTurnUsed()) {
-      std::cout << getName() << " has ended their turn." << std::endl;
-    }
-  } else {
-    std::cout << getName() << " is dead. Continue?\n";
-    char choice = getInput();
-    if (choice == '0' || choice == 'n' || choice == 'N') {
-      std::exit(0); // TODO: Make a global variable wanting to quit
-    }
-  }
-}
-
-void Player::takeTurnMenu() {
-  showHUD();
-  //int choice(0);
-  char choice = '0';
-  dispList("==============", { "Move", "Combat", "Targets", "Inventory", "Search" });
-  choice = getInput(PROCESSABLE_INPUT);
-  if (!processUserInput(choice)) {
-    exitMenu();
-  }
-}
-
-void Player::moveMenu(int dir) {
-  if (currentNode == nullptr) {
-    throw std::logic_error("moveMenu: player has no current node");
-  }
-  if (dir == 0) {
-    std::cout << "=====Move=====" << std::endl;
-    // Show choices
-    currentNode->showNavigationInfo();
-    // Get direction
-    std::cout << "Enter direction: ";
-    dir = getDigit(0, Maps::NUM_DIRS - 1);
-  }
-  if (dir != 0 && currentNode->canMoveInDir(static_cast<Maps::Dir>(dir))) {
-    setMoveDir(static_cast<Maps::Dir>(dir));
-  } else if (dir != 0) {
-    std::cout << "Can't move in that direction." << std::endl;
-  }
-}
-
-void Player::onMove() {
-  Actor::onMove();
-  std::cout << "You leave" << std::endl;
-}
-
-void Player::targetMenu() {
-  currentNode->showActors();
-  // Unbounded before, so any number past the end of the list went straight
-  // into getActorPtr().
-  int choice = getInteger(0, currentNode->getNumActors());
-  if (choice == 0) {
-    setTarget(nullptr);
-  } else {
-    setTarget(currentNode->getActorPtr(--choice));
-  }
-}
-
-void Player::showHUD() {
-  //TODO: Update this to show equipped weapons
-  // Information on player
-  displayHUDLine();
-  std::cout << std::endl;
-  // Information on target
-  if (hasValidTarget()) {
-    targetPtr->displayHUDLine();
-    std::cout << std::endl;
-  } else {
-    std::cout << "No target" << std::endl;
-  }
-  // Location
-  std::cout << "Location: " << currentNode->getName() << std::endl;
-}
-
-void Player::inventoryMenu() {
-  // Show inventory
-  inventory.showListOfItems();
-  // Let player choose item
-  std::cout << "Select an item: ";
-  int itemIndex = getInteger(0, inventory.getSlots());
-  itemIndex--;
-
-  if (itemIndex < 0) {
-    return;
-  }
-
-  // Get the item. An empty slot reads back as nullptr, and using or
-  // examining it dereferenced that.
-  Item *item = inventory.at(itemIndex);
-  if (item == nullptr) {
-    std::cout << "That slot is empty." << std::endl;
-    return;
-  }
-
-  // Show them menu for that item.
-  dispList({ "Use","Examine", "Drop" });
-  int actionNumber = getDigit(0, 3);
-  switch (actionNumber) {
-    case 1: // Use
-      if (hasValidTarget()) {
-        item->use(*this, *targetPtr);
-      } else {
-        std::cout << "You don't have a target." << std::endl;
-      }
-      endTurn();
-      break;
-    case 2: // Examine
-      item->showInfo();
-      break;
-    case 3:
-      std::cout << "Dropping item.\n";
-      dropItem(itemIndex);
-      break;
-    default:
-      break;
-  }
-}
-
-void Player::loadMenu() {
-  std::string fileName;
-  std::cout << "Load file name: ";
-  std::cin >> fileName;
-  std::cout << "Loading...";
-  try {
-    MapManager::getInstance().load(fileName);
-  } catch (const std::exception &e) {
-    // A missing or unreadable save is something the player can recover from
-    // by picking another file; it should not end the game.
-    std::cout << " Could not load: " << e.what() << std::endl;
-    return;
-  }
-  setIsTurnUsed();
-  std::cout << " Done." << std::endl;
-}
-
-void Player::searchMenu(Inventory &inv) {
-  while (true) {
-    inv.showListOfItems();
-    int choice = getInteger(0, inv.getSlots());
-    int itemIndex = choice - 1;
-    if (choice == 0) { return; } // Exit menu
-    dispList({ "Pick up", "Examine" });
-    choice = getInteger(0, 2);
-    switch (choice) {
-      case 0: // Cancel — return to item select
-        break;
-      case 1: // Add item to player's inventory
-        if (inv.isSlotEmpty(itemIndex)) {
-          std::cout << "That slot is empty. Could not pick up item." << std::endl;
-        } else if (!inventory.hasOpenSlot()) {
-          std::cout << "Your inventory is full." << std::endl;
-        } else {
-          inventory.addItem(inv.removeItem(itemIndex));
-          std::cout << "Picked up item." << std::endl;
+        Player::Player() {
+            setMaxHealth(100);
+            setName("Jon");
+            stats = Stats{5, 5, 5};
+            inventory = Inventory{"Jon's Inventory", 8};
+            isPlayer = true;
         }
-        break;
-      case 2:
-        // Show item stats, description
-        break;
-      default:
-        std::cout << "Invalid choice " << choice << std::endl;
-        break;
+
+        Player::~Player() {
+        }
+
+        void Player::combatMenu(int choice) {
+            if (choice == 0) {
+                dispList("====Combat====", {"Attack", "Targets", "Inventory"});
+                choice = getDigit(0, 3);
+            }
+            switch (choice) {
+                case 0:
+                    flagInCombat(false);
+                    break;
+                case 1:
+                    processUserInput(' '); // Attack key
+                    break;
+                case 2:
+                    targetMenu();
+                    break;
+                case 3:
+                    inventoryMenu();
+                    break;
+                default:
+                    std::cout << "No menu item " << choice << ".\n";
+                    break;
+            }
+        }
+
+        void Player::takeTurn() {
+            setIsTurnUsed(false);
+            if (getIsLiving()) {
+                while (!getIsTurnUsed() && getIsLiving()) {
+                    takeTurnMenu();
+                }
+                if (getIsTurnUsed()) {
+                    std::cout << getName() << " has ended their turn." << std::endl;
+                }
+            } else {
+                std::cout << getName() << " is dead. Continue?\n";
+                char choice = getInput();
+                if (choice == '0' || choice == 'n' || choice == 'N') {
+                    std::exit(0); // TODO: Make a global variable wanting to quit
+                }
+            }
+        }
+
+        void Player::takeTurnMenu() {
+            showHUD();
+            //int choice(0);
+            char choice = '0';
+            dispList("==============", {"Move", "Combat", "Targets", "Inventory", "Search"});
+            choice = getInput(PROCESSABLE_INPUT);
+            if (!processUserInput(choice)) {
+                exitMenu();
+            }
+        }
+
+        void Player::moveMenu(int dir) {
+            if (currentNode == nullptr) {
+                throw std::logic_error("moveMenu: player has no current node");
+            }
+            if (dir == 0) {
+                std::cout << "=====Move=====" << std::endl;
+                // Show choices
+                currentNode->showNavigationInfo();
+                // Get direction
+                std::cout << "Enter direction: ";
+                dir = getDigit(0, Maps::NUM_DIRS - 1);
+            }
+            if (dir != 0 && currentNode->canMoveInDir(static_cast<Maps::Dir>(dir))) {
+                setMoveDir(static_cast<Maps::Dir>(dir));
+            } else if (dir != 0) {
+                std::cout << "Can't move in that direction." << std::endl;
+            }
+        }
+
+        void Player::onMove() {
+            Actor::onMove();
+            std::cout << "You leave" << std::endl;
+        }
+
+        void Player::targetMenu() {
+            currentNode->showActors();
+            // Unbounded before, so any number past the end of the list went straight
+            // into getActorPtr().
+            int choice = getInteger(0, currentNode->getNumActors());
+            if (choice == 0) {
+                setTarget(nullptr);
+            } else {
+                setTarget(currentNode->getActorPtr(--choice));
+            }
+        }
+
+        void Player::showHUD() {
+            //TODO: Update this to show equipped weapons
+            // Information on player
+            displayHUDLine();
+            std::cout << std::endl;
+            // Information on target
+            if (hasValidTarget()) {
+                targetPtr->displayHUDLine();
+                std::cout << std::endl;
+            } else {
+                std::cout << "No target" << std::endl;
+            }
+            // Location
+            std::cout << "Location: " << currentNode->getName() << std::endl;
+        }
+
+        void Player::inventoryMenu() {
+            // Show inventory
+            inventory.showListOfItems();
+            // Let player choose item
+            std::cout << "Select an item: ";
+            int itemIndex = getInteger(0, inventory.getSlots());
+            itemIndex--;
+
+            if (itemIndex < 0) {
+                return;
+            }
+
+            // Get the item. An empty slot reads back as nullptr, and using or
+            // examining it dereferenced that.
+            Item *item = inventory.at(itemIndex);
+            if (item == nullptr) {
+                std::cout << "That slot is empty." << std::endl;
+                return;
+            }
+
+            // Show them menu for that item.
+            dispList({"Use", "Examine", "Drop"});
+            int actionNumber = getDigit(0, 3);
+            switch (actionNumber) {
+                case 1: // Use
+                    if (hasValidTarget()) {
+                        item->use(*this, *targetPtr);
+                    } else {
+                        std::cout << "You don't have a target." << std::endl;
+                    }
+                    endTurn();
+                    break;
+                case 2: // Examine
+                    item->showInfo();
+                    break;
+                case 3:
+                    std::cout << "Dropping item.\n";
+                    dropItem(itemIndex);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void Player::loadMenu() {
+            std::string fileName;
+            std::cout << "Load file name: ";
+            std::cin >> fileName;
+            std::cout << "Loading...";
+            try {
+                MapManager::getInstance().load(fileName);
+            } catch (const std::exception &e) {
+                // A missing or unreadable save is something the player can recover from
+                // by picking another file; it should not end the game.
+                std::cout << " Could not load: " << e.what() << std::endl;
+                return;
+            }
+            setIsTurnUsed();
+            std::cout << " Done." << std::endl;
+        }
+
+        void Player::searchMenu(Inventory &inv) {
+            while (true) {
+                inv.showListOfItems();
+                int choice = getInteger(0, inv.getSlots());
+                int itemIndex = choice - 1;
+                if (choice == 0) { return; } // Exit menu
+                dispList({"Pick up", "Examine"});
+                choice = getInteger(0, 2);
+                switch (choice) {
+                    case 0: // Cancel — return to item select
+                        break;
+                    case 1: // Add item to player's inventory
+                        if (inv.isSlotEmpty(itemIndex)) {
+                            std::cout << "That slot is empty. Could not pick up item." << std::endl;
+                        } else if (!inventory.hasOpenSlot()) {
+                            std::cout << "Your inventory is full." << std::endl;
+                        } else {
+                            inventory.addItem(inv.removeItem(itemIndex));
+                            std::cout << "Picked up item." << std::endl;
+                        }
+                        break;
+                    case 2:
+                        // Show item stats, description
+                        break;
+                    default:
+                        std::cout << "Invalid choice " << choice << std::endl;
+                        break;
+                }
+            }
+        }
+
+        bool Player::processUserInput(char key) {
+            bool inputProcessed = true;
+            switch (key) {
+                // Menus
+                case '`':
+                    takeTurnMenu();
+                    break;
+                case '1':
+                    moveMenu();
+                    break;
+                case '2':
+                    combatMenu();
+                    break;
+                case '3':
+                    targetMenu();
+                    break;
+                case '4':
+                case 'i':
+                    inventoryMenu();
+                    break;
+                case '5':
+                    searchMenu(currentNode->inventory);
+                    break;
+                // Movement
+                case 'w':
+                case 'a':
+                case 's':
+                case 'd':
+                case 'q':
+                case 'e':
+                    setMoveDir(Maps::charToDir(key));
+                    break;
+                // Attack
+                case ' ':
+                    if (hasValidTarget()) {
+                        onAttack();
+                    } else {
+                        std::cout << "You don't have a target." << std::endl;
+                    }
+                    break;
+                case 't':
+                    cycleTarget();
+                    break;
+                case '\r':
+                    setIsTurnUsed();
+                    break;
+                // These used to be \x3f and \x43, described as F5 and F9. Those are
+                // Windows conio scan codes, which only mean F5/F9 after a 0 or 0xE0
+                // prefix byte; a terminal sends an escape sequence for a function key and
+                // never these values. What they did do was save on '?' and load on 'C'.
+                case 'S':
+                    saveMenu();
+                    break;
+                case 'L':
+                    loadMenu();
+                    break;
+                default:
+                    inputProcessed = false;
+                    break;
+            } // End switch for input processing
+            return inputProcessed;
+        }
+
+        void Player::exitMenu() {
+            std::cout << "Press 1 to exit, or something else to continue." << std::endl;
+            char choice = getInput();
+            if (choice == '1') {
+                kill();
+                std::exit(0);
+            }
+        }
+
+        void Player::saveMenu() {
+            std::string fileName;
+            std::cout << "Save file name: ";
+            std::cin >> fileName;
+            std::cout << "Saving...";
+            try {
+                MapManager::getInstance().save(fileName);
+            } catch (const std::exception &e) {
+                std::cout << " Could not save: " << e.what() << std::endl;
+                return;
+            }
+            std::cout << " Done." << std::endl;
+        }
     }
-  }
-}
-
-bool Player::processUserInput(char key) {
-  bool inputProcessed = true;
-  switch (key) {
-    // Menus
-    case '`':
-      takeTurnMenu();
-      break;
-    case '1':
-      moveMenu();
-      break;
-    case '2':
-      combatMenu();
-      break;
-    case '3':
-      targetMenu();
-      break;
-    case '4':
-    case 'i':
-      inventoryMenu();
-      break;
-    case '5':
-      searchMenu(currentNode->inventory);
-      break;
-      // Movement
-    case 'w':
-    case 'a':
-    case 's':
-    case 'd':
-    case 'q':
-    case 'e':
-      setMoveDir(Maps::charToDir(key));
-      break;
-      // Attack
-    case ' ':
-      if (hasValidTarget()) {
-        onAttack();
-      } else {
-        std::cout << "You don't have a target." << std::endl;
-      }
-      break;
-    case 't':
-      cycleTarget();
-      break;
-    case '\r':
-      setIsTurnUsed();
-      break;
-    // These used to be \x3f and \x43, described as F5 and F9. Those are
-    // Windows conio scan codes, which only mean F5/F9 after a 0 or 0xE0
-    // prefix byte; a terminal sends an escape sequence for a function key and
-    // never these values. What they did do was save on '?' and load on 'C'.
-    case 'S':
-      saveMenu();
-      break;
-    case 'L':
-      loadMenu();
-      break;
-    default:
-      inputProcessed = false;
-      break;
-  } // End switch for input processing
-  return inputProcessed;
-}
-
-void Player::exitMenu() {
-  std::cout << "Press 1 to exit, or something else to continue." << std::endl;
-  char choice = getInput();
-  if (choice == '1') {
-    kill();
-    std::exit(0);
-  }
-}
-
-void Player::saveMenu() {
-  std::string fileName;
-  std::cout << "Save file name: ";
-  std::cin >> fileName;
-  std::cout << "Saving...";
-  try {
-    MapManager::getInstance().save(fileName);
-  } catch (const std::exception &e) {
-    std::cout << " Could not save: " << e.what() << std::endl;
-    return;
-  }
-  std::cout << " Done." << std::endl;
-}
-
-
-}
 }
 
 //TODO: Equipment menu

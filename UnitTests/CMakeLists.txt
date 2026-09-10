@@ -3,6 +3,13 @@ FetchContent_Declare(
     googletest
     GIT_REPOSITORY https://github.com/google/googletest.git
     GIT_TAG        v1.14.0
+    # SYSTEM marks googletest's include directories as system headers for
+    # everything that consumes it, so neither the compiler nor an IDE reports
+    # problems in code this project does not maintain. EXCLUDE_FROM_ALL keeps
+    # its targets out of the default build, so they are built only because
+    # UnitTests links them.
+    SYSTEM
+    EXCLUDE_FROM_ALL
 )
 # Use shared CRT to match the rest of the project on Windows
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -24,13 +31,6 @@ add_executable(UnitTests
 target_link_libraries(UnitTests PRIVATE Engine Savable GTest::gtest_main)
 
 pwg_set_warnings(UnitTests)
-
-# googletest's headers are not warning clean under this project's flags, and
-# they are not this project's to fix.
-get_target_property(_gtest_includes gtest INTERFACE_INCLUDE_DIRECTORIES)
-if(_gtest_includes)
-  target_include_directories(UnitTests SYSTEM PRIVATE ${_gtest_includes})
-endif()
 
 # On macOS, embed @loader_path so the test binary finds Savable/Engine dylibs
 # in the same output directory without needing DYLD_LIBRARY_PATH at runtime.

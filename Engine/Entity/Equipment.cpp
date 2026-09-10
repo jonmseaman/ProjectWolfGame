@@ -6,7 +6,6 @@ module Engine;
 import std;
 
 namespace Engine {
-namespace Entity {
-
-}
+    namespace Entity {
+    }
 }

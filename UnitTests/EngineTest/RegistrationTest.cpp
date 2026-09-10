@@ -7,64 +7,67 @@ import Engine;
 using namespace Engine::Entity;
 
 namespace UnitTests {
-
 #pragma region TestClassesForRegistration
 
-// Class to test registration for;
-class TestableItem : public Engine::Entity::Item {
-public:
-    CREATABLE_ITEM(TestableItem);
-};
-CREATABLE_REGISTRATION(TestableItem);
+    // Class to test registration for;
+    class TestableItem : public Engine::Entity::Item {
+    public:
+        CREATABLE_ITEM(TestableItem);
+    };
 
-class TestableActor : public Engine::Entity::Actor {
-public:
-    CREATABLE_ACTOR(TestableActor);
-};
-CREATABLE_REGISTRATION(TestableActor);
+    CREATABLE_REGISTRATION(TestableItem);
 
-class TestableNode : public Engine::Maps::Node {
-public:
-    CREATABLE_NODE(TestableNode);
-};
-CREATABLE_REGISTRATION(TestableNode);
+    class TestableActor : public Engine::Entity::Actor {
+    public:
+        CREATABLE_ACTOR(TestableActor);
+    };
 
-class TestableMap : public Engine::Maps::Map {
-public:
-    TestableMap() : Map(5) {
-        for (auto& n : this->grid) {
-            n = std::make_unique<Engine::Maps::Node>();
+    CREATABLE_REGISTRATION(TestableActor);
+
+    class TestableNode : public Engine::Maps::Node {
+    public:
+        CREATABLE_NODE(TestableNode);
+    };
+
+    CREATABLE_REGISTRATION(TestableNode);
+
+    class TestableMap : public Engine::Maps::Map {
+    public:
+        TestableMap() : Map(5) {
+            for (auto &n: this->grid) {
+                n = std::make_unique<Engine::Maps::Node>();
+            }
+            buildMoveData();
         }
-        buildMoveData();
-    }
-    CREATABLE_MAP(TestableMap);
-};
-CREATABLE_REGISTRATION(TestableMap);
+
+        CREATABLE_MAP(TestableMap);
+    };
+
+    CREATABLE_REGISTRATION(TestableMap);
 
 #pragma endregion
 
-///<summary>
-/// Tests that registration works for items.
-/// Tests are also completed for Actors, Nodes, as well as Maps.
-///</summary>
-TEST(RegistrationTest, testItemRegistration) {
-    auto ent = Creation::Create::newItem("TestableItem");
-    EXPECT_TRUE(ent != nullptr);
-}
+    ///<summary>
+    /// Tests that registration works for items.
+    /// Tests are also completed for Actors, Nodes, as well as Maps.
+    ///</summary>
+    TEST(RegistrationTest, testItemRegistration) {
+        auto ent = Creation::Create::newItem("TestableItem");
+        EXPECT_TRUE(ent != nullptr);
+    }
 
-TEST(RegistrationTest, testActorRegistration) {
-    auto ent = Creation::Create::newActor("TestableActor");
-    EXPECT_TRUE(ent != nullptr);
-}
+    TEST(RegistrationTest, testActorRegistration) {
+        auto ent = Creation::Create::newActor("TestableActor");
+        EXPECT_TRUE(ent != nullptr);
+    }
 
-TEST(RegistrationTest, testNodeRegistration) {
-    auto node = Creation::Create::newNode("TestableNode");
-    EXPECT_TRUE(node != nullptr);
-}
+    TEST(RegistrationTest, testNodeRegistration) {
+        auto node = Creation::Create::newNode("TestableNode");
+        EXPECT_TRUE(node != nullptr);
+    }
 
-TEST(RegistrationTest, testMapRegisration) {
-    auto map = Creation::Create::newMap("TestableMap");
-    EXPECT_TRUE(map != nullptr);
-}
-
+    TEST(RegistrationTest, testMapRegisration) {
+        auto map = Creation::Create::newMap("TestableMap");
+        EXPECT_TRUE(map != nullptr);
+    }
 } // namespace UnitTests

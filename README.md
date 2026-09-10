@@ -110,10 +110,10 @@ cycle is not allowed.
 Three headers survive, and all three exist only because **macros are not
 exported by modules**:
 
-| Header | Holds |
-| --- | --- |
+| Header                        | Holds                                           |
+|-------------------------------|-------------------------------------------------|
 | `Engine/Creation/Creatable.h` | `CREATABLE_ITEM`, `CREATABLE_REGISTRATION`, ... |
-| `Savable/SavableMacros.h` | `SAVE`, `LOAD`, `SAVABLE`, `SAVABLE_CLEAR` |
+| `Savable/SavableMacros.h`     | `SAVE`, `LOAD`, `SAVABLE`, `SAVABLE_CLEAR`      |
 
 Game code that registers a class with the factory therefore includes one
 header alongside the import:

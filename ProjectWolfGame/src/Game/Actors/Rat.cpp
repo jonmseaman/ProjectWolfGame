@@ -11,14 +11,14 @@ using namespace Engine::Entity;
 */
 class Rat : public Actor {
 public:
-  CREATABLE_ACTOR(Rat)
-  Rat() {
-    setName("Rat");
-    setHealth(2);
-    setMaxHealth(2);
-    stats = Stats{ 2, 1, 1 };
-  }
+    CREATABLE_ACTOR(Rat)
+
+    Rat() {
+        setName("Rat");
+        setHealth(2);
+        setMaxHealth(2);
+        stats = Stats{2, 1, 1};
+    }
 };
 
 CREATABLE_REGISTRATION(Rat);
-
